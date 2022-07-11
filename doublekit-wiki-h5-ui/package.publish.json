@@ -1,7 +1,7 @@
 {
-    "name": "doublekit-slate-ui",
+    "name": "doublekit-project-ui",
     "version": "1.0.0",
-    "description": "门户模块",
+    "description": "知识库管理",
     "main": "dist.js",
     "scripts": {
         "build:publish": "rimraf publish/* && ./node_modules/.bin/babel src/modules --copy-files  --extensions .js --out-dir publish/modules && ncp src/common/ publish/common && ncp index.js publish/index.js && ncp package.json publish/package.json && ncp README.md publish/README.md && ncp LICENSE publish/LICENSE && ./node_modules/.bin/babel src/common --copy-files  --extensions .js --out-dir publish/common && ./node_modules/.bin/babel src/stores.js --copy-files  --extensions .js --out-dir publish/",
@@ -31,14 +31,16 @@
         "react-i18next": "^11.7.3",
         "react-router": "^5.2.0",
         "react-router-dom": "^5.2.0",
+        "rimraf": "^3.0.2",
+        "echarts": "^5.0.1",
+        "echarts-stat": "^1.2.0"
+    },
+    "dependencies": {
+        "i18next": "^19.8.4",
+        "i18next-browser-languagedetector": "^6.0.1",
         "mobx": "^5.15.4",
         "mobx-react": "^6.2.2",
         "is-class": "^0.0.9"
-    },
-    "dependencies": {
-        "slate": "^0.65.3",
-        "slate-history": "^0.65.3",
-        "slate-react": "^0.65.3"
     },
     "gitHead": "b73304b18b1f66d2e3328df9f0963e76efa67ced"
 }
