@@ -78,7 +78,7 @@ const ShareCategoryDetail = (props) => {
                                             </svg>
                                         }
                                         {
-                                            item.formatType && item.formatType === "document" && item.typeId === "mindMap" &&
+                                            item.formatType && item.formatType === "document" && item.typeId === "markdown" &&
                                             <svg className="log-icon" aria-hidden="true">
                                                 <use xlinkHref="#icon-minmap"></use>
                                             </svg>

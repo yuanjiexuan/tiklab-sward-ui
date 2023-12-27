@@ -27,7 +27,7 @@ const ShareDocument = (props) => {
     const { shareStore, relationWorkStore } = props;
     const { documentView, commentView, judgeAuthCode } = shareStore;
     const [showComment, setShowComment] = useState(false);
-    const [value, setValue] = useState("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+    const [value, setValue] = useState()
     const [docInfo, setDocInfo] = useState({ name: "", likenumInt: "", commentNumber: "" })
     const tenant = getUser().tenant;
     useEffect(() => {
@@ -40,7 +40,7 @@ const ShareDocument = (props) => {
                 if (data.data.details) {
                     setValue(data.data.details)
                 } else {
-                    setValue("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+                    setValue()
                 }
                 setDocInfo(data.data)
             }
@@ -59,8 +59,11 @@ const ShareDocument = (props) => {
                 <Row style={{ flex: 1, overflow: "auto" }}>
                     <Col className="repositorydetail-content-col" xl={{ span: 18, offset: 3 }} lg={{ span: 20, offset: 2 }}>
                         <div style={{paddingTop: "10px"}}>
-                            <PreviewEditor value={value} relationWorkStore = {relationWorkStore} base_url = {upload_url} tenant = {tenant}/>
-                        </div>
+                            {
+                                value && <PreviewEditor value={value} relationWorkStore = {relationWorkStore} base_url = {upload_url} tenant = {tenant}/>
+                    
+                            }
+                            </div>
 
                     </Col>
                 </Row>

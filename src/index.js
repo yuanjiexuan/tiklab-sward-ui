@@ -15,7 +15,6 @@ import { Provider } from 'mobx-react';
 import { store } from "./stores"
 import { orgStores } from "thoughtware-user-ui/es/store";
 import { getUser, enableAxiosCE } from 'thoughtware-core-ui'
-import { messageModuleStores } from 'thoughtware-message-ui/es/store'
 import { pluginLoader, PluginProvider } from "thoughtware-plugin-core-ui";
 import './common/language/i18n';
 import "./index.scss";
@@ -34,7 +33,6 @@ const Index = observer(() => {
     const allStore = {
         ...privilegeStores,
         ...orgStores,
-        ...messageModuleStores,
         ...store
     }
 

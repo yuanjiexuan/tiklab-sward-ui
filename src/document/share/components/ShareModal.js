@@ -174,10 +174,10 @@ const ShareModal = (props) => {
             {
                 value === "public" ? <div className="share-link link-box" ref={link} id="link">
                     <div className="share-text">链接地址:</div><div className="share-content">{shareUrl}</div>
-                </div> : <div ref={link} id="link" className = "link-box">
+                </div> : <div ref={link}  className = "link-box">
                     <div className="share-link" >
                         <div className="share-text">链接地址：</div>
-                        <div className="share-content">{shareUrl}</div>
+                        <div className="share-content" id="link">{shareUrl}</div>
                     </div>
                     {
                         authCode && <div className="share-link"><div className="share-text">密码：</div><div className="share-content">{authCode}</div></div>

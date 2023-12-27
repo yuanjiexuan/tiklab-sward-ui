@@ -53,12 +53,13 @@ const PassWord = AsyncComponent(() => import('./document/share/components/PassWo
 const LoadData = AsyncComponent(() => import('./setting/loadData/LoadData'))
 
 // 消息
-const ProjectMessageSendType = AsyncComponent(() => import('./setting/message/ProjectMessageSendType'))
-const ProjectMessageType = AsyncComponent(() => import('./setting/message/ProjectMessageType'))
-const ProjectMessageTemplate = AsyncComponent(() => import('./setting/message/ProjectMessageTemplate'))
-const ProjectMessageManagement = AsyncComponent(() => import('./setting/message/ProjectMessageManagement'))
-const ProjectMessageNotice = AsyncComponent(() => import('./setting/message/ProjectMessageNotice'))
-const ProjectMessageNoticeSystem = AsyncComponent(() => import('./setting/message/ProjectMessageNoticeSystem'))
+const SystemMessageSendType = AsyncComponent(() => import('./setting/message/SystemMessageSendType.js'))
+const SystemMessageType = AsyncComponent(() => import('./setting/message/SystemMessageType.js'))
+const SystemMessageTemplate = AsyncComponent(() => import('./setting/message/SystemMessageTemplate.js'))
+const SystemMessageNotice = AsyncComponent(() => import('./setting/message/SystemMessageNotice.js'))
+const SystemMessageNoticeBase = AsyncComponent(() => import('./setting/message/SystemMessageNoticeBase.js'))
+const ProjectMessageNoticeContent = AsyncComponent(() => import("./setting/message/ProjectMessageNoticeContent"))
+const DomainMessageNoticeContent = AsyncComponent(() => import("./repository/setting/projectMessage/DomainMessageNoticeContent.js"))
 
 const Setting = AsyncComponent(() => import('./setting/common/Setting'))
 const ProjectPlugin = AsyncComponent(() => import('./setting/plugins/ProjectPlugin'))
@@ -129,6 +130,10 @@ const Routes = [
                 },
                 {
                     path: "/share/:shareId/markdown/:id",
+                    component: ShareMarkdown,
+                },
+                {
+                    path: "/share/:shareId/markdownView/:id",
                     component: ShareMarkdown,
                 },
                 
@@ -236,6 +241,10 @@ const Routes = [
                             {
                                 path: "/repositorydetail/:repositoryId/repositorySet/domainRole",
                                 component: RepositoryDomainRole
+                            },
+                            {
+                                path: "/repositorydetail/:repositoryId/repositorySet/messagenotice",
+                                component: DomainMessageNoticeContent,
                             }
                         ]
                     },
@@ -258,6 +267,10 @@ const Routes = [
                     {
                         path: "/repositorySet/:repositoryId/domainRole",
                         component: RepositoryDomainRole
+                    },
+                    {
+                        path: "/repositorySet/:repositoryId/messagenotice",
+                        component: DomainMessageNoticeContent,
                     }
                 ]
             },
@@ -348,33 +361,40 @@ const Routes = [
                         exact: true
                     },
                     {
-                        path: "/setting/messageManagement",
-                        component: ProjectMessageManagement,
-                        exact: true
-                    },
-                    {
                         path: "/setting/messageNotice",
-                        component: ProjectMessageNotice,
+                        component: SystemMessageNotice,
+                        row: true,
                         exact: true
                     },
                     {
                         path: "/setting/messageNoticeSystem",
-                        component: ProjectMessageNoticeSystem,
+                        component: SystemMessageNoticeBase,
+                        row: true,
                         exact: true
                     },
                     {
+                        path: "/setting/projectMessageNotice",
+                        component: ProjectMessageNoticeContent,
+                        row: true,
+                        exact: true
+                    },
+                    
+                    {
                         path: "/setting/messageTemplate",
-                        component: ProjectMessageTemplate,
+                        component: SystemMessageTemplate,
+                        row: true,
                         exact: true
                     },
                     {
                         path: "/setting/messageType",
-                        component: ProjectMessageType,
+                        component: SystemMessageType,
+                        row: true,
                         exact: true
                     },
                     {
                         path: "/setting/messageSendType",
-                        component: ProjectMessageSendType,
+                        component: SystemMessageSendType,
+                        row: true,
                         exact: true
                     },
 

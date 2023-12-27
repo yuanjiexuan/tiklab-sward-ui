@@ -33,13 +33,13 @@ const ShareListModal = (props) => {
 
     };
     const onFinish = () => {
-        if(documentIds.length > 0 || categoryIds.length > 0){
-            setShareVisible(true) 
-            console.log(documentIds,categoryIds )
-        }else {
+        if (documentIds.length > 0 || categoryIds.length > 0) {
+            setShareVisible(true)
+            console.log(documentIds, categoryIds)
+        } else {
             message.warn("请选择要分享的目录或文档")
         }
-        
+
     }
     const renderTreeNodes = data =>
         data?.map(item => {
@@ -51,9 +51,24 @@ const ShareListModal = (props) => {
                         dataRef={item}
                         formatType={item.formatType}
                         icon={({ formatType }) => {
-                            return <svg className="share-icon" aria-hidden="true">
-                                <use xlinkHref={formatType === "document" ? "#icon-file" : "#icon-folder"} ></use>
-                            </svg>
+                            return <>
+                                {
+                                    item.formatType === "category" && <svg className="share-icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-folder" ></use>
+                                    </svg>
+                                }
+
+                                {
+                                    item.typeId === "document" && <svg className="share-icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-file"></use>
+                                    </svg>
+                                }
+                                {
+                                    item.typeId === "markdown" && <svg className="share-icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-minmap"></use>
+                                    </svg>
+                                }
+                            </>
                         }}
                     >
                         {renderTreeNodes(item.children)}
@@ -63,9 +78,24 @@ const ShareListModal = (props) => {
             return <TreeNode
                 title={item.name}
                 icon={({ formatType }) => {
-                    return <svg className="share-icon" aria-hidden="true">
-                        <use xlinkHref={formatType === "document" ? "#icon-file" : "#icon-folder"} ></use>
-                    </svg>
+                    return <>
+                        {
+                            item.formatType === "category" && <svg className="share-icon" aria-hidden="true">
+                                <use xlinkHref="#icon-folder" ></use>
+                            </svg>
+                        }
+
+                        {
+                            item.typeId === "document" && <svg className="share-icon" aria-hidden="true">
+                                <use xlinkHref="#icon-file"></use>
+                            </svg>
+                        }
+                        {
+                            item.typeId === "markdown" && <svg className="share-icon" aria-hidden="true">
+                                <use xlinkHref="#icon-minmap"></use>
+                            </svg>
+                        }
+                    </>
                 }}
                 formatType={item.formatType}
                 key={item.id}

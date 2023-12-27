@@ -36,6 +36,12 @@ const RepositorySetAside = (props) => {
             icon: 'survey',
             key: `/repositorySet/${repositoryId}/domainRole`,
             encoded: "Privilege",
+        },
+        {
+            title: '消息',
+            icon: 'survey',
+            key: `/repositorySet/${repositoryId}/messagenotice`,
+            encoded: "message",
         }
     ];
     // 当前选中路由

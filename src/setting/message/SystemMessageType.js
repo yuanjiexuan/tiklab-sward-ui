@@ -1,9 +1,9 @@
 import React from "react";
 import {MessageType} from 'thoughtware-message-ui';
 
-const ProjectMessageType = (props) => {
+const SystemMessageType = (props) => {
     return (
         <MessageType bgroup = "sward"/>
     )
 }
-export default ProjectMessageType;
+export default SystemMessageType;
