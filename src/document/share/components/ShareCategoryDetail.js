@@ -22,7 +22,7 @@ const ShareCategoryDetail = (props) => {
     useEffect(() => {
         findCategory({ id: categoryId }).then(data => {
             if (data.code === 0) {
-                setLogDetail(data)
+                setLogDetail(data.data)
             }
         })
         findCategoryDocument(categoryId).then(data => {
@@ -49,6 +49,9 @@ const ShareCategoryDetail = (props) => {
         <Row className="log-detail">
             <Col lg={{ span: "18", offset: "3" }} xxl={{ span: "18", offset: "3" }}>
                 <div className="log-detail-content">
+                    {
+                        console.log(logDetail)
+                    }
                     {
                         logDetail && <Fragment>
                             <div className="log-title">

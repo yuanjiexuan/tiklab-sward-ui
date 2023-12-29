@@ -55,7 +55,7 @@ class ShareStore {
         const params = new FormData()
         params.append("id", value.id)
         const data = await ServiceShare("/category/findCategory", params);
-        return data.data;
+        return data;
     }
 
     @action

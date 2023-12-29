@@ -35,8 +35,10 @@ const ShareDocument = (props) => {
             console.log(data)
             
         })
+        
         documentView({ documentId: props.match.params.id }).then((data) => {
             if (data.code === 0) {
+                setValue()
                 if (data.data.details) {
                     setValue(data.data.details)
                 } else {

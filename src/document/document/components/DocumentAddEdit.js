@@ -120,7 +120,8 @@ const DocumentAddEdit = (props) => {
                                 templateList && templateList.map((item, index) => {
                                     return <div className="template-box" key = {index} onClick = {() => selectTemplate(item.details)}>
                                         <img
-                                            src={setImageUrl(item.iconUrl)}
+                                            // src={setImageUrl(item.iconUrl)}
+                                            src={('/images/' + imageNames[index])}
                                             alt=""
                                             className="template-image"
                                         />
