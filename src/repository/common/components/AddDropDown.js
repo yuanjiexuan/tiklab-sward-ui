@@ -84,20 +84,15 @@ const AddDropDown = (props) => {
         }
         if (value.key === "markdown") {
             params.typeId = "markdown";
-            params.details = JSON.stringify([
+            params.details = JSON.stringify( [
                 {
-                    type: "code",
+                    type: 'paragraph',
                     children: [
                         {
-                            type: 'paragraph',
-                            children: [
-                                {
-                                    text: '',
-                                },
-                            ],
+                            text: '',
                         },
-                    ]
-                }
+                    ],
+                },
             ])
         }
         if (value.key !== "category") {

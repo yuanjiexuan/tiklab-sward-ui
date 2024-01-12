@@ -31,20 +31,17 @@ const MarkdownEdit = (props) => {
                     const value = data.data.details;
                     setValue(JSON.parse(value))
                 } else {
-                    setValue( [{
-                        type: 'code',
-                        children: [
-                            {
-                                type: 'paragraph',
-                                children: [
-                                    {
-                                        text:
-                                            '**make** **decorations** to  it _dead_ simple .',
-                                    },
-                                ],
-                            }
-                        ]
-                    }])
+                    setValue( [
+                        {
+                            type: 'paragraph',
+                            children: [
+                                {
+                                    text:
+                                        '**make** **decorations** to  it _dead_ simple .',
+                                },
+                            ],
+                        }
+                    ])
                 }
                 setDocInfo(data.data)
             }
