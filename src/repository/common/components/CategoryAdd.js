@@ -36,12 +36,12 @@ const CategoryAdd = (props) => {
                 data = {
                     ...values,
                     wikiRepository: { id: repositoryId },
-                    parentWikiCategory: { id: category.id },
-                    dimension: category.dimension + 1,
                     master: { id: values.master },
                     typeId: "category",
                     formatType: "category",
-                    treePath: treePath
+                    treePath: treePath,
+                    parentWikiCategory: { id: category.id },
+                    dimension: category.dimension + 1,
                 }
             } else {
                 data = {
