@@ -130,13 +130,11 @@ const setDevRouter= [
             {
                 title: '版本与许可证',
                 id: "/setting/version",
-                purviewCode: "SysVersion",
                 code: 11-1,
             },
             {
                 title: '应用访问权限',
                 id: "/setting/productAuth",
-                purviewCode: "SysVersion",
                 code: 11-2,
             }
         ]
@@ -366,18 +364,15 @@ const setPrdRouter= [
             {
                 title: '版本与许可证',
                 id: "/setting/version",
-                purviewCode: "SysVersion",
                 code: 11-1,
             },
             {
                 title: '应用访问权限',
                 id: "/setting/productAuth",
-                purviewCode: "SysVersion",
                 code: 11-2,
             }
         ]
     }
-   
 ];
 
 export  {setDevRouter, setPrdRouter};
