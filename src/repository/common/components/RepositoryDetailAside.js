@@ -261,6 +261,7 @@ const RepositorydeAside = (props) => {
 
     const onDrop = (info) => {
         const { event, node, dragNode, dragNodesKeys } = info;
+        console.log(node)
         const dropToGap = info.dropToGap;
         const dropType = node.type;
         if (dropType === "document" && dropToGap === false) {
@@ -436,7 +437,7 @@ const RepositorydeAside = (props) => {
                 id={"file-" + item.id}
                 title={item.name}
             >
-                {item.name}
+                {item.name} -  {(item.sort)} - {(item.id)}
             </span>
             <div className={`${isHover === item.id ? "icon-show" : "icon-hidden"}`}>
                 <Dropdown overlay={() => editMenu(item, index)} placement="bottomLeft">
@@ -465,7 +466,7 @@ const RepositorydeAside = (props) => {
                 onBlur={(value) => reName(value, item.id, item.formatType)}
                 ref={isRename === item.id ? inputRef : null}
                 onKeyDownCapture={(value) => enterKeyRename(value, item.id, item.formatType)}
-            > {item.name} </div>
+            > {item.name} -  {(item.sort)}- {(item.id)} </div>
             <div className={`${isHover === item.id ? "icon-show" : "icon-hidden"} icon-action`}>
                 {/* <div className="icon-action"> */}
                 <AddDropDown category={item} />

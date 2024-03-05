@@ -102,9 +102,6 @@ const AddDropDown = (props) => {
                         const list = appendNodeInTree(category?.id, repositoryCatalogueList, [res.data])
                         setRepositoryCatalogueList([...list])
                     })
-                    // if (!isExpandedTree(id)) {
-                    //     setExpandedTree(expandedTree.concat(id));
-                    // }
                     if (value.key === "document") {
                         props.history.push(`/repositorydetail/${repositoryId}/doc/${data.data}`)
                     }
@@ -112,8 +109,6 @@ const AddDropDown = (props) => {
                         props.history.push(`/repositorydetail/${repositoryId}/markdownEdit/${data.data}`)
                     }
 
-                    // 左侧导航
-                    // setSelectKey(data.data)
                 }
             })
         }

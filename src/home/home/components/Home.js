@@ -70,8 +70,7 @@ const Home = (props) => {
                                 <div className="repository-box">
                                     {
                                         recentRepositoryDocumentList.map(item => {
-                                            return <Fragment>
-                                                <div className="repository-item" key={item.id} onClick={() => goRepositoryDetail(item)} >
+                                            return <div className="repository-item" key={item.id} onClick={() => goRepositoryDetail(item)} >
                                                     <div className="item-title">
                                                         {
                                                             item.iconUrl ?
@@ -95,8 +94,6 @@ const Home = (props) => {
                                                         <div className="end-work"><span style={{ color: "#999" }}>目录</span><span>{item.categoryNum}个</span></div>
                                                     </div>
                                                 </div>
-
-                                            </Fragment>
                                         })
                                     }
                                 </div>

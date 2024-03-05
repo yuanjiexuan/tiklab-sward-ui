@@ -126,7 +126,7 @@ const Survey = (props) => {
                                             {
                                                 userList && userList.length > 0 && userList.map((item, index) => {
                                                     if (index < 5) {
-                                                        return <div ><UserIcon size="big" name={item.user.nickname}></UserIcon></div>
+                                                        return <div key = {item.id}><UserIcon size="big" name={item.user.nickname}></UserIcon></div>
                                                     }
 
                                                 })
