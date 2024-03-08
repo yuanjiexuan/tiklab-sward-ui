@@ -42,8 +42,8 @@ export class CategoryStore {
      * @param {*} id 
      */
     @action
-    findRepositoryCatalogue= async(value)=> {
-        const data = await Service("/category/findCategoryListTree", value)
+    findNodePageTree= async(value)=> {
+        const data = await Service("/node/findNodePageTree", value)
         return data;
     }
 
@@ -103,10 +103,8 @@ export class CategoryStore {
     // 获取文档
 
     @action
-    findCategoryDocument= async(id)=> {
-        const params = new FormData()
-        params.append("id", id)
-        const data = await Service("/category/findCategoryDocument", params);
+    findNodeList= async(param)=> {
+        const data = await Service("/node/findNodeList", param);
         return data;
     }
 
@@ -127,8 +125,10 @@ export class CategoryStore {
         return data.data;
     }
     @action
-    deleteDocument= async(params)=> {
-        const data = await Service("/document/deleteDocumentAndSort", params);
+    deleteDocument= async(id)=> {
+        const params = new FormData()
+        params.append("id", id)
+        const data = await Service("/document/deleteDocument", params);
         return data;
     }
 }

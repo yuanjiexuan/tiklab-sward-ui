@@ -31,7 +31,7 @@ const RepositorydeAside = (props) => {
     const { searchrepository, repository, repositorylist, categoryStore } = props;
     //语言包
     const { t } = useTranslation();
-    const { findRepositoryCatalogue, updateRepositoryCatalogue, deleteRepositoryLog, updateDocument, deleteDocument,
+    const { findNodePageTree, updateRepositoryCatalogue, deleteRepositoryLog, updateDocument, deleteDocument,
         repositoryCatalogueList, setRepositoryCatalogueList, createRecent,
         expandedTree, setExpandedTree } = categoryStore;
 
@@ -51,7 +51,7 @@ const RepositorydeAside = (props) => {
     const [isRename, setIsRename] = useState()
     const [deleteVisible, setDeleteVisible] = useState(false)
     useEffect(() => {
-        findRepositoryCatalogue({ repositoryId: repositoryId, dimensions: [1, 2] }).then((data) => {
+        findNodePageTree({ repositoryId: repositoryId, dimensions: [1, 2] }).then((data) => {
             setRepositoryCatalogueList(data.data)
         })
         return () => {
@@ -76,7 +76,7 @@ const RepositorydeAside = (props) => {
         event.nativeEvent.stopImmediatePropagation()
         const params = {
             name: item.name,
-            model: item.formatType,
+            model: item.type,
             modelId: item.id,
             master: { id: userId },
             wikiRepository: { id: repositoryId }
@@ -84,16 +84,16 @@ const RepositorydeAside = (props) => {
         createRecent(params)
 
         findCategoryChildren(item.id, item.dimension)
-        if (item.formatType === "category") {
+        if (item.type === "category") {
             localStorage.setItem("categoryId", item.id);
             setOpenClickCategory(item.id)
 
             props.history.push(`/repositorydetail/${repositoryId}/folder/${item.id}`)
         }
-        if (item.typeId === "document") {
+        if (item.documentType === "document") {
             props.history.push(`/repositorydetail/${repositoryId}/doc/${item.id}`)
         }
-        if (item.typeId === "markdown") {
+        if (item.documentType === "markdown") {
             props.history.push(`/repositorydetail/${repositoryId}/markdownView/${item.id}`)
         }
     }
@@ -102,7 +102,7 @@ const RepositorydeAside = (props) => {
         setSelectKey(id)
         const isRequested = requsetedCategory.some(category => category === id);
         if (!isRequested) {
-            findRepositoryCatalogue({ repositoryId: repositoryId, parentWikiCategory: id, dimensions: [dimension + 1, dimension + 2] }).then(data => {
+            findNodePageTree({ repositoryId: repositoryId, treePath: id, dimensions: [dimension + 1, dimension + 2] }).then(data => {
                 if (data.code === 0) {
                     const list = appendNodeInTree(id, repositoryCatalogueList, data.data, "overview")
                     setRepositoryCatalogueList([...list])
@@ -132,7 +132,7 @@ const RepositorydeAside = (props) => {
 
     //更新目录
     const editCatelogue = (value, item, index) => {
-        const { id, formatType, sort } = item;
+        const { id, type, sort } = item;
         value.domEvent.stopPropagation()
         if (value.key === "edit") {
             setIsRename(id)
@@ -142,7 +142,7 @@ const RepositorydeAside = (props) => {
                 title: '确定删除?',
                 className: "delete-modal",
                 centered: true,
-                onOk() { deleteDocumentOrCategory(item,formatType, sort) },
+                onOk() { deleteDocumentOrCategory(item,type, sort) },
                 onCancel() { },
             });
         }
@@ -155,37 +155,38 @@ const RepositorydeAside = (props) => {
         }
     }
 
-    const deleteDocumentOrCategory = (item,formatType, sort) => {
-        if (formatType === "category") {
+    const deleteDocumentOrCategory = (item,type, sort) => {
+        if (type === "category") {
             deleteRepositoryLog(item).then(res => {
                 if (res.code === 0) {
                     const node = removeNodeAndSort(repositoryCatalogueList, item.parentWikiCategory ? item.parentWikiCategory.id : "nullString", sort)
                     console.log(node)
 
-                    if (node.formatType === "category") {
+                    if (node.type === "category") {
                         props.history.push(`/repositorydetail/${repositoryId}/folder/${node.id}`)
                     }
-                    if (node.formatType === "document") {
+                    if (node.type === "document") {
                         props.history.push(`/repositorydetail/${repositoryId}/doc/${node.id}`)
                     }
                 }
             })
         }
-        if (formatType === "document") {
-            deleteDocument(item).then(res => {
+        if (type === "document") {
+            deleteDocument(item.id).then(res => {
                 if (res.code === 0) {
                     const node = removeNodeAndSort(repositoryCatalogueList, item.wikiCategory ? item.wikiCategory.id : "nullString", sort)
                     console.log(node)
-                    if (node.formatType === "category") {
+                    if (node.type === "category") {
                         props.history.push(`/repositorydetail/${repositoryId}/folder/${node.id}`)
                     }
-                    if (node.formatType === "document") {
+                    if (node.type === "document") {
                         props.history.push(`/repositorydetail/${repositoryId}/doc/${node.id}`)
                     }
                 }
             })
         }
     }
+
     useEffect(() => {
         if (inputRef.current) {
             inputRef.current.autofocus = true;
@@ -196,13 +197,16 @@ const RepositorydeAside = (props) => {
         return;
     }, [inputRef.current])
 
-    const reName = (value, id, formatType) => {
+    const reName = (value, id, type) => {
         const name = value.target.innerText;
         const params = {
-            name: name,
-            id: id
+            id: id,
+            node: {
+                id: id,
+                name: name,
+            }
         }
-        if (formatType === "category") {
+        if (type === "category") {
             updateRepositoryCatalogue(params).then(data => {
                 if (data.code === 0) {
                     setIsRename(null)
@@ -212,7 +216,7 @@ const RepositorydeAside = (props) => {
                 }
             })
         }
-        if (formatType === "document") {
+        if (type === "document") {
             updateDocument(params).then(data => {
                 if (data.code === 0) {
                     setIsRename(null)
@@ -225,11 +229,11 @@ const RepositorydeAside = (props) => {
         setIsRename(null)
     }
 
-    const enterKeyRename = (value, id, formatType) => {
+    const enterKeyRename = (value, id, type) => {
         if (value.keyCode === 13) {
             event.stopPropagation();
             event.preventDefault()
-            reName(value, id, formatType)
+            reName(value, id, type)
         }
     }
 
@@ -261,7 +265,10 @@ const RepositorydeAside = (props) => {
 
     const onDrop = (info) => {
         const { event, node, dragNode, dragNodesKeys } = info;
-        console.log(node)
+        // node放置， dragNode被移动节点
+        console.log(node, dragNode)
+
+        // return
         const dropToGap = info.dropToGap;
         const dropType = node.type;
         if (dropType === "document" && dropToGap === false) {
@@ -269,114 +276,40 @@ const RepositorydeAside = (props) => {
         }
 
         const dropId = node.key;
-        const dropParentId = node.parentWikiCategory;
-        const dropSort = node.sort;
-        const dropDimension = node.dimension;
-        const dropTreePath = node.treePath;
-
 
         const dragId = dragNode.key;
-        const dragParentId = dragNode.parentWikiCategory;
-        const dragSort = dragNode.sort;
-        const dragDimension = dragNode.dimension;
         const type = dragNode.type;
-        const dragTreePath = dragNode.treePath;
 
         const dropPos = info.node.pos.split('-');
         const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1]);
 
-        let params = {}
-        console.log(dropToGap, dropPosition, node, dragNode)
-        if (dropToGap === false && dropPosition !== -1) {
-
-            params = {
-                id: dragId,
-                sort: 0,
-                oldParentId: dragParentId,
-                dimension: dropDimension + 1,
-                oldDimension: dragDimension,
-                oldSort: dragSort,
-                treePath: dropTreePath ? dropTreePath + dropId + ";" : dropId + ";",
-                wikiRepository: {
-                    id: repositoryId
-                }
-            }
-            if (type === "document") {
-                params.wikiCategory = {
-                    id: dropId
-                }
-            }
-            if (type === "category") {
-                params.parentWikiCategory = {
-                    id: dropId
-                }
-            }
-
+        let params = {
+            moveToId: dropId,
+            moveToType: dropType,
+            moveType: "1",
+            id: dragId
         }
+
         if (dropToGap === true && dropPosition !== -1) {
-            //放在drop的同级
-            params = {
-                id: dragId,
-                oldParentId: dragParentId,
-                oldSort: dragSort,
-                oldDimension: dragDimension,
-                dimension: dropDimension,
-                treePath: dropTreePath,
-                wikiRepository: {
-                    id: repositoryId
-                }
-            }
-
-            // 同级移动
-            if (dropParentId === dragParentId) {
-                if (dragSort > dropSort) {
-                    params.sort = dropSort + 1
-                }
-                if (dragSort < dropSort) {
-                    params.sort = dropSort
-                }
-                if (dragSort === dropSort) return;
-            } else {
-                params.sort = dropSort + 1
-            }
-
-
-            if (type === "document") {
-                params.wikiCategory = {
-                    id: dropParentId
-                }
-            }
-            if (type === "category") {
-                params.parentWikiCategory = {
-                    id: dropParentId
-                }
-            }
-
-
+            // 移动到某个目录的顶部
+            params.moveType = "1"
         }
+
+        if (dropToGap === false && dropPosition !== -1) {
+            // 移动到某个目录的顶部
+            params.moveType = "2"
+        }
+
+       
         if (dropPosition === -1) {
-            params = {
-                id: dragId,
-                sort: 0,
-                oldParentId: dragParentId,
-                oldSort: dragSort,
-                oldDimension: dragDimension,
-                dimension: 1,
-                treePath: null,
-                wikiRepository: {
-                    id: repositoryId
-                }
-            }
-            if (type === "document") {
-                params.wikiCategory = {
-                    id: "nullString"
-                }
-            }
-            if (type === "category") {
-                params.parentWikiCategory = {
-                    id: "nullString"
-                }
-            }
+            // 移动到此知识库的最顶部
+            console.log(node, dragNode, 3)
+            params.moveType = "3"
+            
+        }
+        params = {
+            id: params.id,
+            node: params
         }
         if (type === "category") {
             updateCategorySort(params)
@@ -385,14 +318,12 @@ const RepositorydeAside = (props) => {
             updateDocumentSort(params)
         }
     }
-
+    
     const updateDocumentSort = (params) => {
         updateDocument(params).then(res => {
             if (res.code === 0) {
-                const node = findNodeById(repositoryCatalogueList, params);
-                console.log(node)
-                params.parentId = params.wikiCategory.id
-                updataTreeSort(repositoryCatalogueList, params, node)
+                updataTreeSort(repositoryCatalogueList, params.node)
+                setMoveLogListVisible(false)
             }
         })
 
@@ -401,10 +332,8 @@ const RepositorydeAside = (props) => {
     const updateCategorySort = (params) => {
         updateRepositoryCatalogue(params).then(res => {
             if (res.code === 0) {
-                const node = findNodeById(repositoryCatalogueList, params);
-                console.log(node)
-                params.parentId = params.parentWikiCategory.id
-                updataTreeSort(repositoryCatalogueList, params, node)
+                updataTreeSort(repositoryCatalogueList, params.node)
+                setMoveLogListVisible(false)
             }
         })
     }
@@ -417,12 +346,12 @@ const RepositorydeAside = (props) => {
             onMouseLeave={(event) => { event.stopPropagation(), setIsHover(null) }}
         >
             {
-                item.typeId === "document" && <svg className="img-icon" aria-hidden="true">
+                item.documentType === "document" && <svg className="img-icon" aria-hidden="true">
                     <use xlinkHref="#icon-file"></use>
                 </svg>
             }
             {
-                item.typeId === "markdown" && <svg className="img-icon" aria-hidden="true">
+                item.documentType === "markdown" && <svg className="img-icon" aria-hidden="true">
                     <use xlinkHref="#icon-minmap"></use>
                 </svg>
             }
@@ -430,14 +359,14 @@ const RepositorydeAside = (props) => {
                 className={`${isRename === item.id ? "repository-input" : "repository-view"}`}
                 contentEditable={isRename === item.id ? true : false}
                 suppressContentEditableWarning
-                onBlur={(value) => reName(value, item.id, item.formatType)}
-                onKeyDownCapture={(value) => enterKeyRename(value, item.id, item.formatType)}
+                onBlur={(value) => reName(value, item.id, item.type)}
+                onKeyDownCapture={(value) => enterKeyRename(value, item.id, item.type)}
 
 
                 id={"file-" + item.id}
                 title={item.name}
             >
-                {item.name} -  {(item.sort)} - {(item.id)}
+                {item.name}
             </span>
             <div className={`${isHover === item.id ? "icon-show" : "icon-hidden"}`}>
                 <Dropdown overlay={() => editMenu(item, index)} placement="bottomLeft">
@@ -463,10 +392,10 @@ const RepositorydeAside = (props) => {
             <div className={`${isRename === item.id ? "repository-input" : "repository-view"}`}
                 contentEditable={isRename === item.id ? true : false}
                 suppressContentEditableWarning
-                onBlur={(value) => reName(value, item.id, item.formatType)}
+                onBlur={(value) => reName(value, item.id, item.type)}
                 ref={isRename === item.id ? inputRef : null}
-                onKeyDownCapture={(value) => enterKeyRename(value, item.id, item.formatType)}
-            > {item.name} -  {(item.sort)}- {(item.id)} </div>
+                onKeyDownCapture={(value) => enterKeyRename(value, item.id, item.type)}
+            > {item.name}</div>
             <div className={`${isHover === item.id ? "icon-show" : "icon-hidden"} icon-action`}>
                 {/* <div className="icon-action"> */}
                 <AddDropDown category={item} />
@@ -480,14 +409,14 @@ const RepositorydeAside = (props) => {
     }
     const categoryTree = (data) => {
         return data?.map((item, index) => {
-            if (item.formatType === "category") {
+            if (item.type === "category") {
                 return <Tree.TreeNode
                     title={logTree(item, index)}
                     key={item.id}
                     dimension={item.dimension}
                     sort={item.sort}
                     treePath={item.treePath}
-                    type={item.formatType}
+                    type={item.type}
                     parentWikiCategory={item.dimension !== 1 ? item.parentWikiCategory?.id : "nullString"}
                     disableCheckbox
                     className={`repository-menu-node ${item.id === selectKey ? "repository-menu-select" : ""}`}
@@ -495,11 +424,11 @@ const RepositorydeAside = (props) => {
                     {categoryTree(item.children)}
                 </Tree.TreeNode>
             }
-            if (item.formatType === "document") {
+            if (item.type === "document") {
                 return <Tree.TreeNode
                     title={fileTree(item, index)}
                     disableCheckbox
-                    type={item.formatType}
+                    type={item.type}
                     dimension={item.dimension}
                     treePath={item.treePath}
                     parentWikiCategory={item.dimension !== 1 ? item.wikiCategory?.id : "nullString"}
@@ -596,6 +525,9 @@ const RepositorydeAside = (props) => {
                 moveLogListVisible={moveLogListVisible}
                 setMoveLogListVisible={setMoveLogListVisible}
                 moveItem={moveItem}
+                findCategoryChildren = {findCategoryChildren}
+                updateDocumentSort = {updateDocumentSort}
+                updateCategorySort = {updateCategorySort}
             />
             <ShareListModal
                 repositoryCatalogueList={repositoryCatalogueList}

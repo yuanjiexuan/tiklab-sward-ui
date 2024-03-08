@@ -46,7 +46,11 @@ const DocumentAddEdit = (props) => {
         
         const data = {
             id: documentId,
-            name: value.target.value
+            node: {
+                id: documentId,
+                name: value.target.value
+            }
+            
         }
         updateDocument(data).then(res => {
             if(res.code === 0){
@@ -75,6 +79,9 @@ const DocumentAddEdit = (props) => {
     }
     const selectTemplate = (content) => {
         console.log(documentId)
+        /**
+         * detailText 没更新到
+         */
         const data = {
             id: documentId,
             details: content
@@ -120,8 +127,8 @@ const DocumentAddEdit = (props) => {
                                 templateList && templateList.map((item, index) => {
                                     return <div className="template-box" key = {index} onClick = {() => selectTemplate(item.details)}>
                                         <img
-                                            // src={setImageUrl(item.iconUrl)}
-                                            src={('/images/' + imageNames[index])}
+                                            src={setImageUrl(item.iconUrl)}
+                                            // src={('/images/' + imageNames[index])}
                                             alt=""
                                             className="template-image"
                                         />

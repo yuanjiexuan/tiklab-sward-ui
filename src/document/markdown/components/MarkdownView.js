@@ -53,11 +53,12 @@ const DocumentExamine = (props) => {
                 } else {
                     setValue()
                 }
-                setDocInfo(data.data)
-                seTitle(data.data.name)
-                setLike(data.data.like)
-                setLikeNum(data.data.likenumInt)
-                setCommentNum(data.data.commentNumber)
+                const node = data.data.node;
+                setDocInfo(node)
+                seTitle(node.name)
+                setLike(node.like)
+                setLikeNum(node.likenumInt)
+                setCommentNum(node.commentNumber)
             }
         })
         return;

@@ -19,9 +19,7 @@ const CategoryDetail = (props) => {
     const store = {
         categoryStore: CategoryStore
     }
-    const { findCategory, findCategoryDocument, setRepositoryCatalogueList,
-        repositoryCatalogueList, createRecent, createDocument, expandedTree, setExpandedTree,
-        findRepositoryCatalogue, findDmUserList } = CategoryStore
+    const { findCategory, findNodeList, setRepositoryCatalogueList, createRecent} = CategoryStore
     const categoryId = props.match.params.id;
     const [logList, setLogList] = useState();
     const [logDetail, setLogDetail] = useState();
@@ -32,11 +30,11 @@ const CategoryDetail = (props) => {
     useEffect(() => {
         findCategory({ id: categoryId }).then(data => {
             if (data.code === 0) {
-                setLogDetail(data.data)
+                setLogDetail(data.data?.node)
             }
 
         })
-        findCategoryDocument(categoryId).then(data => {
+        findNodeList({parentId: categoryId}).then(data => {
             setLogList(data.data)
         })
         return;
@@ -65,21 +63,21 @@ const CategoryDetail = (props) => {
     const goToDocument = (item) => {
         const params = {
             name: item.name,
-            model: item.typeId,
+            model: item.documentType,
             modelId: item.id,
             master: { id: userId },
             wikiRepository: { id: repositoryId }
         }
         createRecent(params)
         setSelectKey(item.id)
-        if (item.formatType === "category") {
+        if (item.type === "category") {
             localStorage.setItem("categoryId", item.id);
             props.history.push(`/repositorydetail/${repositoryId}/folder/${item.id}`)
         }
-        if (item.typeId === "document") {
+        if (item.documentType === "document") {
             props.history.push(`/repositorydetail/${repositoryId}/doc/${item.id}`)
         }
-        if (item.typeId === "markdown") {
+        if (item.documentType === "markdown") {
             props.history.push(`/repositorydetail/${repositoryId}/markdownView/${item.id}`)
 
         }
@@ -114,19 +112,19 @@ const CategoryDetail = (props) => {
                                 return <div className="log-child-list" key={item.id} onClick={() => goToDocument(item)}>
                                     <div className="log-child-title" style={{ flex: 1 }}>
                                         {
-                                            item.formatType && item.formatType === "category" &&
+                                            item.type && item.type === "category" &&
                                             <svg className="list-img" aria-hidden="true">
                                                 <use xlinkHref="#icon-folder"></use>
                                             </svg>
                                         }
                                         {
-                                            item.formatType && item.formatType === "document" && item.typeId === "markdown" &&
+                                            item.type && item.type === "document" && item.documentType === "markdown" &&
                                             <svg className="list-img" aria-hidden="true">
                                                 <use xlinkHref="#icon-minmap"></use>
                                             </svg>
                                         }
                                         {
-                                            item.formatType && item.formatType === "document" && item.typeId === "document" &&
+                                            item.type && item.type === "document" && item.documentType === "document" &&
                                             <svg className="list-img" aria-hidden="true">
                                                 <use xlinkHref="#icon-file"></use>
                                             </svg>
@@ -138,7 +136,7 @@ const CategoryDetail = (props) => {
 
                                     </div>
 
-                                    <div >{item.updateTime}</div>
+                                    <div >{item.createTime}</div>
                                 </div>
                             })
                                 :

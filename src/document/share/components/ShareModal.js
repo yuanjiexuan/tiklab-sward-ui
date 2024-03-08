@@ -12,7 +12,7 @@ import "./shareModal.scss";
 import {getUser} from "thoughtware-core-ui"
 const ShareModal = (props) => {
     const origin = location.origin;
-    const { shareVisible, setShareVisible, docInfo,createShare,updateShare, documentIds, categoryIds, type } = props;
+    const { shareVisible, setShareVisible, docInfo,createShare,updateShare, nodeIds, type } = props;
     
     const [value, setValue] = React.useState("publish");
     const [shareLink,setShareLink] = useState()
@@ -45,7 +45,7 @@ const ShareModal = (props) => {
     const onFinish = () => { }
     useEffect(()=> {
         if(shareVisible === true) {
-            createShare({documentIds: documentIds,categoryIds: categoryIds,limits: value, type: type}).then(data=> {
+            createShare({nodeIds: nodeIds,limits: value, type: type}).then(data=> {
                 console.log(data)
                 if(data.code === 0) {
                     setShareLink(data.data.id)
@@ -60,7 +60,7 @@ const ShareModal = (props) => {
             })
         }
         return;
-    },[shareVisible,documentIds])
+    },[shareVisible,nodeIds])
     // 分享qq空间
     const shareToQZon = (pic) => {
         console.log(window.location.href)

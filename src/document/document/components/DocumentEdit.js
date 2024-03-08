@@ -34,14 +34,14 @@ const DocumentEdit = (props) => {
         setValue()
         findDocument(documentId).then((data) => {
             if (data.code === 0) {
-                if (data.data.details) {
-                    setTitleValue(data.data.name)
-                    setValue(data.data.details)
+                const detailDocument = data?.data?.node;
+                setTitleValue(detailDocument.name)
+                if (data?.data?.details) {
+                    setValue(data?.data?.details);
                 } else {
-                    console.log("9090")
                     setValue("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
                 }
-                setDocInfo(data.data)
+                setDocInfo(detailDocument)
             }
         })
         return;
@@ -55,7 +55,6 @@ const DocumentEdit = (props) => {
 
     const saveDocument = (value) => {
         setValue(value)
-        const serialize = JSON.stringify(value)
         const data = {
             id: documentId,
             details: value,
@@ -73,13 +72,18 @@ const DocumentEdit = (props) => {
             detailText:  editRef.current.innerText
         }
         updateDocument(data)
+
     }, [500])
 
     const changeTitle = (value) => {
         setTitleValue(value.target.value)
         const data = {
             id: documentId,
-            name: value.target.value
+            node: {
+                id: documentId,
+                name: value.target.value
+            }
+            
         }
         updateDocument(data).then(res => {
             if (res.code === 0) {

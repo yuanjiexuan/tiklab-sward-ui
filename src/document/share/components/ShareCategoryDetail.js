@@ -22,7 +22,7 @@ const ShareCategoryDetail = (props) => {
     useEffect(() => {
         findCategory({ id: categoryId }).then(data => {
             if (data.code === 0) {
-                setLogDetail(data.data)
+                setLogDetail(data.data?.node)
             }
         })
         findCategoryDocument(categoryId).then(data => {
@@ -37,10 +37,10 @@ const ShareCategoryDetail = (props) => {
 
     const goToDocument = (item) => {
         setSelectKey(item.id)
-        if (item.formatType === "category") {
+        if (item.type === "category") {
             props.history.push(`/share/${shareId}/category/${item.id}`)
         }
-        if (item.typeId === "document") {
+        if (item.documentType === "document") {
             props.history.push(`/share/${shareId}/doc/${item.id}`)
         }
     }
@@ -75,19 +75,19 @@ const ShareCategoryDetail = (props) => {
                                 return <div className="log-child-list" key={item.id} onClick={() => goToDocument(item)}>
                                     <div className="log-child-title" style={{ flex: 1 }}>
                                         {
-                                            item.formatType && item.formatType === "category" &&
+                                            item.type && item.type === "category" &&
                                             <svg className="log-icon" aria-hidden="true">
                                                 <use xlinkHref="#icon-folder"></use>
                                             </svg>
                                         }
                                         {
-                                            item.formatType && item.formatType === "document" && item.typeId === "markdown" &&
+                                            item.type && item.type === "document" && item.documentType === "markdown" &&
                                             <svg className="log-icon" aria-hidden="true">
                                                 <use xlinkHref="#icon-minmap"></use>
                                             </svg>
                                         }
                                         {
-                                            item.formatType && item.formatType === "document" && item.typeId === "document" &&
+                                            item.type && item.type === "document" && item.documentType === "document" &&
                                             <svg className="log-icon" aria-hidden="true">
                                                 <use xlinkHref="#icon-file"></use>
                                             </svg>

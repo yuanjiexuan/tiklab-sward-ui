@@ -37,10 +37,9 @@ const CategoryAdd = (props) => {
                     ...values,
                     wikiRepository: { id: repositoryId },
                     master: { id: values.master },
-                    typeId: "category",
-                    formatType: "category",
+                    type: "category",
                     treePath: treePath,
-                    parentWikiCategory: { id: category.id },
+                    parent: { id: category.id },
                     dimension: category.dimension + 1,
                 }
             } else {
@@ -49,15 +48,14 @@ const CategoryAdd = (props) => {
                     wikiRepository: { id: repositoryId },
                     master: { id: values.master },
                     dimension: 1,
-                    typeId: "category",
-                    formatType: "category"
+                    type: "category"
                 }
             }
-            addRepositoryCatalogue(data).then((data) => {
+            addRepositoryCatalogue({node: data}).then((data) => {
                 if (data.code === 0) {
                     findCategory({ id: data.data }).then(res => {
                         if (res.code === 0) {
-                            const list = appendNodeInTree(category?.id, repositoryCatalogueList, [res.data]);
+                            const list = appendNodeInTree(category?.id, repositoryCatalogueList, [res.data.node]);
                             setRepositoryCatalogueList([...list])
                         }
                     })

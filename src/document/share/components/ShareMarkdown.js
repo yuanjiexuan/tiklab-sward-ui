@@ -50,14 +50,14 @@ const ShareMarkdown = (props) => {
         })
         documentView({ documentId: props.match.params.id }).then((data) => {
             if (data.code === 0) {
-                if (data.data.details) {
-                    const value = data.data.details
+                if (data.data?.details) {
+                    const value = data.data?.details
                     setValue(JSON.parse(value))
                     console.log(JSON.parse(value))
                 } else {
                     setValue(initValue)
                 }
-                setDocInfo(data.data)
+                setDocInfo(data.data?.node)
             }
         })
         return

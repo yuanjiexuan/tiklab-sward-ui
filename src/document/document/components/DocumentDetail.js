@@ -43,6 +43,8 @@ const DocumentDetail = (props)=>{
     const saveDocument = (value) => {
         setValue(value)
         const serialize = JSON.stringify(value)
+
+        /** deatailText 没更新到 */
 		const data = {
 			id: documentId,
 			details: serialize

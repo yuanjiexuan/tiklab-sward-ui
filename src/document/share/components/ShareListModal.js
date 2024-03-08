@@ -7,8 +7,7 @@ import CommentStore from "../../document/store/CommentStore";
 const { TreeNode } = Tree;
 const ShareListModal = (props) => {
     const { shareListVisible, setShareListVisible, repositoryCatalogueList } = props;
-    const [documentIds, setDocumentIds] = useState([])
-    const [categoryIds, setCateGoryIds] = useState([])
+    const [nodeIds, setNodeIds] = useState([])
     const [shareVisible, setShareVisible] = useState(false)
     const { createShare, updateShare } = CommentStore;
 
@@ -18,22 +17,15 @@ const ShareListModal = (props) => {
     const onCheck = (checkedKeys, info) => {
         console.log('onCheck', checkedKeys, info);
         const list = info.checkedNodes;
-        let documents = [];
-        let categorys = []
+        let nodeIds = []
         list.map(item => {
-            if (item?.formatType === "document") {
-                documents.push(item.key)
-            } else {
-                categorys.push(item.key)
-            }
+            nodeIds.push(item.key)
         })
-        setDocumentIds(documents)
-        setCateGoryIds(categorys)
-        // console.log(documentIds,categoryIds )
+        setNodeIds(nodeIds)
 
     };
     const onFinish = () => {
-        if (documentIds.length > 0 || categoryIds.length > 0) {
+        if (nodeIds.length > 0) {
             setShareVisible(true)
             console.log(documentIds, categoryIds)
         } else {
@@ -49,22 +41,22 @@ const ShareListModal = (props) => {
                         title={item.name}
                         key={item.id}
                         dataRef={item}
-                        formatType={item.formatType}
-                        icon={({ formatType }) => {
+                        type={item.type}
+                        icon={({ type }) => {
                             return <>
                                 {
-                                    item.formatType === "category" && <svg className="share-icon" aria-hidden="true">
+                                    item.type === "category" && <svg className="share-icon" aria-hidden="true">
                                         <use xlinkHref="#icon-folder" ></use>
                                     </svg>
                                 }
 
                                 {
-                                    item.typeId === "document" && <svg className="share-icon" aria-hidden="true">
+                                    item.documentType === "document" && <svg className="share-icon" aria-hidden="true">
                                         <use xlinkHref="#icon-file"></use>
                                     </svg>
                                 }
                                 {
-                                    item.typeId === "markdown" && <svg className="share-icon" aria-hidden="true">
+                                    item.documentType === "markdown" && <svg className="share-icon" aria-hidden="true">
                                         <use xlinkHref="#icon-minmap"></use>
                                     </svg>
                                 }
@@ -77,27 +69,27 @@ const ShareListModal = (props) => {
             }
             return <TreeNode
                 title={item.name}
-                icon={({ formatType }) => {
+                icon={({ type }) => {
                     return <>
                         {
-                            item.formatType === "category" && <svg className="share-icon" aria-hidden="true">
+                            item.type === "category" && <svg className="share-icon" aria-hidden="true">
                                 <use xlinkHref="#icon-folder" ></use>
                             </svg>
                         }
 
                         {
-                            item.typeId === "document" && <svg className="share-icon" aria-hidden="true">
+                            item.documentType === "document" && <svg className="share-icon" aria-hidden="true">
                                 <use xlinkHref="#icon-file"></use>
                             </svg>
                         }
                         {
-                            item.typeId === "markdown" && <svg className="share-icon" aria-hidden="true">
+                            item.documentType === "markdown" && <svg className="share-icon" aria-hidden="true">
                                 <use xlinkHref="#icon-minmap"></use>
                             </svg>
                         }
                     </>
                 }}
-                formatType={item.formatType}
+                type={item.type}
                 key={item.id}
                 dataRef={item}
             />;
@@ -121,7 +113,7 @@ const ShareListModal = (props) => {
 
 
             </Modal>
-            <ShareModal documentIds={documentIds} categoryIds={categoryIds} shareVisible={shareVisible} setShareVisible={setShareVisible} createShare={createShare} updateShare={updateShare} />
+            <ShareModal nodeIds={nodeIds} shareVisible={shareVisible} setShareVisible={setShareVisible} createShare={createShare} updateShare={updateShare} />
         </div>
 
 

@@ -67,23 +67,26 @@ const AddDropDown = (props) => {
         }
 
         let params = {
-            name: "未命名文档",
-            wikiRepository: { id: repositoryId },
-            master: { id: userId },
-            typeId: "document",
-            formatType: "document",
-            dimension: category ? category.dimension + 1 : 1,
-            wikiCategory: {
-                id: category ? category.id : null,
-                treePath: category ? category.treepath : null
-            },
-            treePath: treePath
+            node: {
+                name: "未命名文档",
+                wikiRepository: { id: repositoryId },
+                master: { id: userId },
+                type: "document",
+                dimension: category ? category.dimension + 1 : 1,
+                parent: category ? {
+                    id: category ? category.id : null,
+                    treePath: category ? category.treepath : null
+                }: null,
+                treePath: treePath
+            }
+           
+           
         }
         if (value.key === "document") {
-            params.typeId = "document"
+            params.node.documentType = "document"
         }
         if (value.key === "markdown") {
-            params.typeId = "markdown";
+            params.node.documentType = "markdown";
             params.details = JSON.stringify( [
                 {
                     type: 'paragraph',
@@ -99,7 +102,7 @@ const AddDropDown = (props) => {
             createDocument(params).then((data) => {
                 if (data.code === 0) {
                     findDocument(data.data).then(res => {
-                        const list = appendNodeInTree(category?.id, repositoryCatalogueList, [res.data])
+                        const list = appendNodeInTree(category?.id, repositoryCatalogueList, [res.data.node])
                         setRepositoryCatalogueList([...list])
                     })
                     if (value.key === "document") {

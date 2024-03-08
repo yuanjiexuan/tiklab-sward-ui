@@ -39,6 +39,10 @@ const ShareAside = (props) => {
     useEffect(() => {
         const params = new FormData();
         params.append("shareLink", shareLink)
+        const paramsData = {
+            shareId: shareLink,
+            dimensions: [1, 2]
+        }
         judgeAuthCode(params).then(data => {
             if (data.data === "true") {
                 if (!props.location.state) {
@@ -48,9 +52,8 @@ const ShareAside = (props) => {
                     if(version === "cloud"){
                         window.location.href = `${origin}/#/passWord/${shareLink}?tenant=${tenant}`
                     }
-                    
                 } else {
-                    findShareCategory(params).then((data) => {
+                    findShareCategory(paramsData).then((data) => {
                         if (data.code === 0) {
                             setRepositoryCatalogueList(data.data)
                             const item = data.data[0]
@@ -62,7 +65,7 @@ const ShareAside = (props) => {
             }
 
             if (data.data === "false") {
-                findShareCategory(params).then((data) => {
+                findShareCategory(paramsData).then((data) => {
                     if (data.code === 0) {
                         setRepositoryCatalogueList(data.data)
                         const item = data.data[0]
@@ -78,24 +81,24 @@ const ShareAside = (props) => {
 
     const setUrl = (item) => {
         if (version !== "cloud") {
-            if (item.formatType === "category") {
+            if (item.type === "category") {
                 props.history.push(`/share/${shareLink}/category/${item.id}`)
             }
-            if (item.typeId === "document") {
+            if (item.documentType === "document") {
                 props.history.push(`/share/${shareLink}/doc/${item.id}`)
             }
-            if (item.typeId === "markdown") {
+            if (item.documentType === "markdown") {
                 props.history.push(`/share/${shareLink}/markdownView/${item.id}`)
             }
         }
         if (version === "cloud") {
-            if (item.formatType === "category") {
+            if (item.type === "category") {
                 props.history.push(`/share/${shareLink}/category/${item.id}?tenant=${tenant}`)
             }
-            if (item.typeId === "document") {
+            if (item.documentType === "document") {
                 props.history.push(`/share/${shareLink}/doc/${item.id}?tenant=${tenant}`)
             }
-            if (item.typeId === "markdown") {
+            if (item.documentType === "markdown") {
                 props.history.push(`/share/${shareLink}/markdownView/${item.id}?tenant=${tenant}`)
             }
         }
@@ -170,10 +173,10 @@ const ShareAside = (props) => {
             {
                 item.children && item.children.length > 0 && (newLevels = levels + 1) &&
                 item.children.map((childItem, index) => {
-                    if (childItem.formatType === "document") {
+                    if (childItem.type === "document") {
                         return fileTree(item.children, childItem, newLevels, item.id, index)
                     }
-                    if (childItem.formatType === "category") {
+                    if (childItem.type === "category") {
                         return logTree(item.children, childItem, newLevels, item.id, index)
                     }
 
@@ -195,12 +198,12 @@ const ShareAside = (props) => {
                         <use xlinkHref="#icon-circle"></use>
                     </svg>
                     {
-                        item.typeId === "document" && <svg className="img-icon" aria-hidden="true">
+                        item.documentType === "document" && <svg className="img-icon" aria-hidden="true">
                             <use xlinkHref="#icon-file"></use>
                         </svg>
                     }
                     {
-                        item.typeId === "markdown" && <svg className="img-icon" aria-hidden="true">
+                        item.documentType === "markdown" && <svg className="img-icon" aria-hidden="true">
                             <use xlinkHref="#icon-minmap"></use>
                         </svg>
                     }
@@ -222,10 +225,10 @@ const ShareAside = (props) => {
                     <div className="repository-menu">
                         {
                             repositoryCatalogueList && repositoryCatalogueList.map((item, index) => {
-                                if (item.formatType === "document") {
+                                if (item.type === "document") {
                                     return fileTree(repositoryCatalogueList, item, 0, 0, index)
                                 }
-                                if (item.formatType === "category") {
+                                if (item.type === "category") {
                                     return logTree(repositoryCatalogueList, item, 0, 0, index)
                                 }
                             })

@@ -5,7 +5,7 @@ export class SurveyStore {
 
     @action
     findDocumentRecentList= async(value)=> {
-        const data = await Service("/document/findRecentDocumentList",value);
+        const data = await Service("/node/findNodeRecentList",value);
         return data;
     }
     

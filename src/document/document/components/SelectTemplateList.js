@@ -32,6 +32,7 @@ const SelectTemplateList = (props) => {
 
    
     const selectTemplate = (content) => {
+        /** detailText 没更新到 */
         const data = {
             id: documentId,
             details: content

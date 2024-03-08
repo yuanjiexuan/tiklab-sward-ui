@@ -43,7 +43,7 @@ const MarkdownEdit = (props) => {
                         }
                     ])
                 }
-                setDocInfo(data.data)
+                setDocInfo(data.data.node)
             }
         })
         return;

@@ -35,7 +35,7 @@ const removeNodeInTree = (tree, id, sort) => { // 通过id从数组（树结构�
         if (tree[i].id === id) {
             tree.splice(i, 1);
         }
-        
+
         removeNodeInTree(tree[i].children, id)
     }
 }
@@ -50,13 +50,13 @@ const removeNodeAndSort = (tree, id, sort) => {
         tree.splice(sort, 1)
         // 为了删除之后方便重新进入新文档
         // 如果当前顺序大于1
-        if(tree.length > 0) {
-            if(sort <= tree.length -1){
+        if (tree.length > 0) {
+            if (sort <= tree.length - 1) {
                 node = tree[sort]
-            }else {
+            } else {
                 node = tree[sort - 1]
             }
-        }else {
+        } else {
             node = null
         }
         tree.map((item) => {
@@ -67,17 +67,17 @@ const removeNodeAndSort = (tree, id, sort) => {
         })
     } else {
         tree.forEach(ele => {
-            
+
             if (ele.id === id) {
-                
+
                 ele.children.splice(sort, 1)
-                if(ele.children.length > 0) {
-                    if(sort <= ele.children.length -1){
+                if (ele.children.length > 0) {
+                    if (sort <= ele.children.length - 1) {
                         node = ele.children[sort]
-                    }else {
+                    } else {
                         node = ele.children[sort - 1]
                     }
-                }else {
+                } else {
                     node = ele;
                 }
                 ele.children.map((item) => {
@@ -100,96 +100,105 @@ const removeNodeAndSort = (tree, id, sort) => {
 
 
 
-const updataTreeSort = (tree, params, node) => { // 通过id从数组（树结构）中移除元素
-    const { oldParentId, oldSort, parentId, sort } = params;
-    const tree1 = removeNodeForUpdate(tree, oldParentId, oldSort, node.id)
-    // const tree2 = insertNodeAndSort(tree1, parentId, sort, node)
-    console.log(tree1)
+const updataTreeSort = (tree, params) => { // 通过id从数组（树结构）中移除元素
+    const { id } = params;
+    const deleteNode = removeNodeForUpdate(tree, id)
+    tree = insertNodeAndSort(tree, params, deleteNode)
+    console.log(deleteNode)
+    return tree;
 }
 
-const removeNodeForUpdate = (tree, parentId, sort, nodeId) => {
 
-    if (!tree || !tree.length) {
-        return
+const removeNodeForUpdate = (tree, id) => {
+    // 遍历数组中的每个节点
+    for (let i = 0; i < tree.length; i++) {
+        const node = tree[i];
+
+        // 如果当前节点的ID匹配要删除的ID，则从数组中删除该节点
+        if (node.id === id) {
+            tree.splice(i, 1);
+            return node; // 结束函数，因为已经删除了节点
+        }
+
+        // 递归调用，处理当前节点的子节点
+        if (node.children) {
+            const deletedNode = removeNodeForUpdate(node.children, id);
+            if (deletedNode) {
+                return deletedNode; // 如果子节点中找到了要删除的节点，则返回该节点
+            }
+        }
     }
-    if (parentId === "nullString") {
-        tree = tree.filter(item => {
-            if (item.sort > sort && item.id != nodeId) {
-                item.sort = item.sort - 1
-            }
-            return item.id !== nodeId
-        })
-    } else {
-        tree.forEach(ele => {
-            if (ele.id === parentId) {
-                ele.children = ele.children.filter(item => {
-                    if (item.sort > sort && item.id != nodeId) {
-                        item.sort = item.sort - 1
-                    }
-                    return item.id !== nodeId
-                })
-            } else {
-                if (ele.children) {
-                    removeNodeForUpdate(ele.children, parentId, sort, nodeId)
-                }
-            }
-        })
+}
+
+const insertNodeAndSort = (tree, params, node) => { // 通过id从数组（树结构）中移除元素
+    const { moveToId, moveType } = params;
+    switch (moveType) {
+        case "1":
+            insertNode(tree, moveToId, node);
+            break;
+        case "2":
+            insertNodeInCategary(tree, moveToId, node)
+            break;
+        case "3":
+            insertNodeInRepository(tree, node)
+            break;
+        default:
+            break
     }
     return tree;
 }
 
-const insertNodeAndSort = (tree, parentId, sort, node) => { // 通过id从数组（树结构）中移除元素
-    if (!tree || !tree.length) {
-        return
-    }
-    if (parentId === "nullString") {
-        //  先把老的数组加一，之后再插入新数据，不然新数据也会被加一
-        let moveIndex = null
-        tree.forEach((item, index) => {
-            if(item.sort === sort  && item.id != node.id){
-                moveIndex = index
-            }
-            if (item.sort >= sort && item.id != node.id) {
-                item.sort = item.sort + 1
-            }
-            
-        })
-        tree.splice(moveIndex, 0, node)
-    } else {
-        tree.forEach(ele => {
-            if (ele.id === parentId) {
-                let moveIndex = null
-                console.log(ele.children)
-                ele.children.map((item, index) => {
-                    if (item.sort >= sort&& item.id != node.id) {
-                        item.sort = item.sort + 1
-                    }
-                    if(item.id === node.id  && item.id != node.id){
-                        moveIndex = index
-                    }
-                })
-                ele.children.splice(moveIndex, 0, node)
-            } else {
-                if (ele.children) {
-                    insertNodeAndSort(ele.children, id, sort, node)
+const insertNode = (tree, moveToId, node) => {
+    for (let i = 0; i < tree.length; i++) {
+        if (tree[i].id === moveToId) {
+            tree = tree.splice(i + 1, 0, node)
+            return true; // 插入成功后返回true
+        } else {
+            if (tree[i].children != null) {
+                if (insertNode(tree[i].children, moveToId, node)) {
+                    return true; // 如果在子节点中成功插入了新节点，则返回true
                 }
             }
-        })
+        }
     }
-    return tree;
+    return false; // 如果未找到匹配的节点，则返回false
+}
+// 拖动的第二种情况， 拖动到某个目录的最上面
+const insertNodeInCategary = (tree, moveToId, node) => {
+    for (let i = 0; i < tree.length; i++) {
+        if (tree[i].id === moveToId) {
+            if (tree[i].children != null) {
+                tree[i].children.unshift(node)
+            } else {
+                tree[i].children = []
+                tree[i].children.unshift(node)
+            }
+            return true; // 插入成功后返回true
+        } else {
+            if (tree[i].children != null) {
+                if (insertNode(tree[i].children, moveToId, node)) {
+                    return true; // 如果在子节点中成功插入了新节点，则返回true
+                }
+            }
+        }
+    }
+}
+
+const insertNodeInRepository = (tree, node) => {
+    tree.unshift(node)
 }
 
 const findNodeById = (tree, params) => {
     console.log("findNodeById", params)
-    const { id, sort, dimension, oldDimension } = params;
+    const { id } = params;
     let node = null;
     let state = false;
     const readTree = (_tree, id) => {
         if (state) return;
         console.log(_tree)
-        if(!_tree) return
+        if (!_tree) return
         for (let i = 0; i < _tree.length; i++) {
-            
+
             if (_tree[i].id === id) {
                 state = true;
                 node = _tree[i];
@@ -199,18 +208,7 @@ const findNodeById = (tree, params) => {
         }
     };
     readTree(tree, id);
-    if (node) {
-        node.sort = sort;
-        node.dimension = dimension;
-        if (node.formatType === "category") {
-            node.parentWikiCategory = params.parentWikiCategory;
-        } else {
-            node.wikiCategory = params.wikiCategory;
-        }
-        const distence = dimension - oldDimension;
-        console.log(dimension, oldDimension)
-        updateNode(node.children, distence)
-    }
+
     return node;
 };
 
@@ -221,19 +219,19 @@ const updateNode = (node, distence) => {
     }
     node.forEach(item => {
         item.dimension = item.dimension + distence;
-        if(item.children != null){
+        if (item.children != null) {
             updateNode(item.children)
         }
-        
+
         return item;
     })
 }
 
 const replaceTree = (tree, node) => {
     tree.forEach((item, index) => {
-        if(item.id === node.id){
+        if (item.id === node.id) {
             tree[index] = node;
-        }else {
+        } else {
             if (item.children) {
                 replaceTree(item.children, node)
             }
@@ -244,9 +242,9 @@ const replaceTree = (tree, node) => {
 
 const updateNodeName = (tree, id, name) => {
     tree.forEach((item, index) => {
-        if(item.id === id){
+        if (item.id === id) {
             tree[index].name = name;
-        }else {
+        } else {
             if (item.children) {
                 updateNodeName(item.children, id, name)
             }
@@ -254,4 +252,4 @@ const updateNodeName = (tree, id, name) => {
         return item;
     })
 }
-export { appendNodeInTree, removeNodeInTree,removeNodeAndSort,  updataTreeSort, findNodeById, replaceTree, updateNodeName };
+export { appendNodeInTree, removeNodeInTree, removeNodeAndSort, updataTreeSort, findNodeById, replaceTree, updateNodeName };
