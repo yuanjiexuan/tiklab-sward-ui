@@ -121,9 +121,9 @@ const MarkdownEdit = (props) => {
                 <div className="edit-right">
                     <Button type="primary" onClick={() => save()}>保存</Button>
                     <Button onClick={() => props.history.replace(`/repositorydetail/${repositoryId}/markdownView/${documentId}`)}>退出编辑</Button>
-                    <svg className="right-icon" aria-hidden="true">
+                    {/* <svg className="right-icon" aria-hidden="true">
                         <use xlinkHref="#icon-point"></use>
-                    </svg>
+                    </svg> */}
                 </div>
             </div>
             {

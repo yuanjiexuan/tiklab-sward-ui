@@ -19,7 +19,7 @@ import { getUser } from 'thoughtware-core-ui';
 import "./RepositoryDetailAside.scss"
 import {
     appendNodeInTree, removeNodeAndSort,
-    updataTreeSort, findNodeById, updateNodeName
+    updataTreeSort, findNodeById, updateNodeName, removeNodeInTree
 } from '../../../common/utils/treeDataAction';
 import AddDropDown from './AddDropDown';
 import { DownOutlined } from '@ant-design/icons';
@@ -142,7 +142,7 @@ const RepositorydeAside = (props) => {
                 title: '确定删除?',
                 className: "delete-modal",
                 centered: true,
-                onOk() { deleteDocumentOrCategory(item,type, sort) },
+                onOk() { deleteDocumentOrCategory(item, type, id) },
                 onCancel() { },
             });
         }
@@ -155,33 +155,36 @@ const RepositorydeAside = (props) => {
         }
     }
 
-    const deleteDocumentOrCategory = (item,type, sort) => {
+    const deleteDocumentOrCategory = (item, type, id) => {
         if (type === "category") {
             deleteRepositoryLog(item).then(res => {
-                if (res.code === 0) {
-                    const node = removeNodeAndSort(repositoryCatalogueList, item.parentWikiCategory ? item.parentWikiCategory.id : "nullString", sort)
-                    console.log(node)
-
+                const node = removeNodeInTree(repositoryCatalogueList, null, id)
+                console.log(node)
+                if (node) {
                     if (node.type === "category") {
                         props.history.push(`/repositorydetail/${repositoryId}/folder/${node.id}`)
                     }
                     if (node.type === "document") {
                         props.history.push(`/repositorydetail/${repositoryId}/doc/${node.id}`)
                     }
+                } else {
+                    props.history.push(`/repositorydetail/${repositoryId}/survey`)
                 }
             })
         }
         if (type === "document") {
             deleteDocument(item.id).then(res => {
-                if (res.code === 0) {
-                    const node = removeNodeAndSort(repositoryCatalogueList, item.wikiCategory ? item.wikiCategory.id : "nullString", sort)
-                    console.log(node)
+                const node = removeNodeInTree(repositoryCatalogueList, null, id)
+                console.log(node)
+                if (node) {
                     if (node.type === "category") {
                         props.history.push(`/repositorydetail/${repositoryId}/folder/${node.id}`)
                     }
                     if (node.type === "document") {
                         props.history.push(`/repositorydetail/${repositoryId}/doc/${node.id}`)
                     }
+                } else {
+                    props.history.push(`/repositorydetail/${repositoryId}/survey`)
                 }
             })
         }
@@ -296,16 +299,16 @@ const RepositorydeAside = (props) => {
         }
 
         if (dropToGap === false && dropPosition !== -1) {
-            // 移动到某个目录的顶部
+            // 移动到某个目录的或者知识库的中间
             params.moveType = "2"
         }
 
-       
+
         if (dropPosition === -1) {
             // 移动到此知识库的最顶部
             console.log(node, dragNode, 3)
             params.moveType = "3"
-            
+
         }
         params = {
             id: params.id,
@@ -318,7 +321,7 @@ const RepositorydeAside = (props) => {
             updateDocumentSort(params)
         }
     }
-    
+
     const updateDocumentSort = (params) => {
         updateDocument(params).then(res => {
             if (res.code === 0) {
@@ -453,13 +456,13 @@ const RepositorydeAside = (props) => {
                                     <img
                                         src={version === "cloud" ? (upload_url + repository.iconUrl + "?tenant=" + tenant) : (upload_url + repository.iconUrl)}
                                         alt=""
-                                        className="list-img"
+                                        className="img-icon"
                                     />
                                     :
                                     <img
                                         src={('images/repository1.png')}
                                         alt=""
-                                        className="list-img"
+                                        className="img-icon"
                                     />
                             }
                             <span>{repository?.name}</span>
@@ -525,9 +528,9 @@ const RepositorydeAside = (props) => {
                 moveLogListVisible={moveLogListVisible}
                 setMoveLogListVisible={setMoveLogListVisible}
                 moveItem={moveItem}
-                findCategoryChildren = {findCategoryChildren}
-                updateDocumentSort = {updateDocumentSort}
-                updateCategorySort = {updateCategorySort}
+                findCategoryChildren={findCategoryChildren}
+                updateDocumentSort={updateDocumentSort}
+                updateCategorySort={updateCategorySort}
             />
             <ShareListModal
                 repositoryCatalogueList={repositoryCatalogueList}
@@ -536,7 +539,7 @@ const RepositorydeAside = (props) => {
             />
             <Modal
                 title="确定删除"
-                centered = {true}
+                centered={true}
                 visible={deleteVisible}
                 width={400}
             >

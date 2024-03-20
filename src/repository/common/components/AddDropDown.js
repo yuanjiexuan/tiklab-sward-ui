@@ -76,8 +76,7 @@ const AddDropDown = (props) => {
                 parent: category ? {
                     id: category ? category.id : null,
                     treePath: category ? category.treepath : null
-                }: null,
-                treePath: treePath
+                }: null
             }
            
            

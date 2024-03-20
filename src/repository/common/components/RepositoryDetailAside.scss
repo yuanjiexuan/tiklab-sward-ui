@@ -8,7 +8,7 @@
         width: 250px;
 
         .repository-aside {
-            background-color: var(--thoughtware-gray-600);
+            background-color: #fff;
             border-right: 1px solid #f0f2f5;
             height: calc(100vh - 48px);
             width: 270px;
@@ -104,7 +104,7 @@
                     align-items: center;
                     justify-content: space-between;
                     padding: 10px 10px 10px 24px;
-                    background-color: var(--thoughtware-gray-600);
+                    // background-color: var(--thoughtware-gray-600);
                     .repository-menu-firstmenu-left {
                         display: flex;
                         align-items: center;

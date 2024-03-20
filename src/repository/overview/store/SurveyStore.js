@@ -46,8 +46,8 @@ export class SurveyStore {
     findCategoryListTreeById = async(value) => {
         const params = new FormData()
         params.append("id", value.id)
-        params.append("treePath", value.treePath)
-        const data = await Service("/category/findCategoryListTreeById",params);
+        // params.append("treePath", value.treePath)
+        const data = await Service("/node/findAllHigherNode",params);
         return data;
     }
 

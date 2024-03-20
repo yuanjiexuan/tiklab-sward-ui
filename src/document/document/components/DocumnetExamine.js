@@ -141,9 +141,9 @@ const DocumentExamine = (props) => {
                     <svg className="right-icon" aria-hidden="true" onClick={() => setShareVisible(true)}>
                         <use xlinkHref="#icon-share"></use>
                     </svg>
-                    <svg className="right-icon" aria-hidden="true">
+                    {/* <svg className="right-icon" aria-hidden="true">
                         <use xlinkHref="#icon-point"></use>
-                    </svg>
+                    </svg> */}
                 </div>
             </div>
             {

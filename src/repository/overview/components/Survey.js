@@ -56,13 +56,13 @@ const Survey = (props) => {
     }, [repositoryId])
 
     const goDocumentDetail = document => {
-        if (document.typeId === "document") {
+        if (document.documentType === "document") {
             props.history.push(`/repositorydetail/${document.wikiRepository.id}/doc/${document.id}`)
         }
-        if (document.typeId === "markdown") {
+        if (document.documentType === "markdown") {
             props.history.push(`/repositorydetail/${document.wikiRepository.id}/markdownView/${document.id}`)
         }
-        if (document.typeId === "category") {
+        if (document.type === "category") {
             props.history.push(`/repositorydetail/${document.wikiRepository.id}/folder/${document.id}`)
         }
         const params = {
@@ -170,13 +170,13 @@ const Survey = (props) => {
                                             <div className='document-item-left'>
                                                 <div>
                                                     {
-                                                        item.typeId === "markdown" &&
+                                                        item.documentType === "markdown" &&
                                                         <svg className="document-icon" aria-hidden="true">
                                                             <use xlinkHref="#icon-minmap"></use>
                                                         </svg>
                                                     }
                                                     {
-                                                        item.typeId === "document" &&
+                                                        item.documentType === "document" &&
                                                         <svg className="document-icon" aria-hidden="true">
                                                             <use xlinkHref="#icon-file"></use>
                                                         </svg>

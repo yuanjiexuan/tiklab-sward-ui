@@ -26,22 +26,55 @@ const appendNodeInTree = (id, tree, obj, setType) => {
     return tree
 }
 
-const removeNodeInTree = (tree, id, sort) => { // 通过id从数组（树结构）中移除元素
-    if (!tree || !tree.length) {
-        return
-    }
+// const removeNodeInTree = (tree, parentNode, id) => { // 通过id从数组（树结构）中移除元素
+//     if (!tree || !tree.length) {
+//         return
+//     }
 
+//     for (let i = 0; i < tree.length; i++) {
+//         if (tree[i].id === id) {
+//             tree.splice(i, 1);
+//             if(tree.length === i + 1){
+//                 return parentNode;
+//             }
+//         }
+        
+
+//         removeNodeInTree(tree[i].children, id)
+//     }
+// }
+
+const removeNodeInTree = (tree, parentNode, id) => {
+    // 遍历数组中的每个节点
+    let jumpNode = null;
     for (let i = 0; i < tree.length; i++) {
-        if (tree[i].id === id) {
+        const node = tree[i];
+
+        // 如果当前节点的ID匹配要删除的ID，则从数组中删除该节点
+        if (node.id === id) {
             tree.splice(i, 1);
+            if(tree.length === 0){
+                jumpNode = parentNode;
+            } else if(tree.length === i){
+                jumpNode = tree[i - 1]
+            } else {
+                jumpNode = tree[i];
+            }
         }
 
-        removeNodeInTree(tree[i].children, id)
+        // 递归调用，处理当前节点的子节点
+        if (node.children) {
+            const jumpNode1 = removeNodeInTree(node.children, node, id);
+            if (jumpNode1) {
+                jumpNode =  jumpNode1; // 如果子节点中找到了要删除的节点，则返回该节点
+            }
+        }
     }
+    return jumpNode;
 }
 
 
-const removeNodeAndSort = (tree, id, sort) => {
+const removeNodeAndSort = (tree, id) => {
     if (!tree || !tree.length) {
         return null;
     }
@@ -176,7 +209,7 @@ const insertNodeInCategary = (tree, moveToId, node) => {
             return true; // 插入成功后返回true
         } else {
             if (tree[i].children != null) {
-                if (insertNode(tree[i].children, moveToId, node)) {
+                if (insertNodeInCategary(tree[i].children, moveToId, node)) {
                     return true; // 如果在子节点中成功插入了新节点，则返回true
                 }
             }
