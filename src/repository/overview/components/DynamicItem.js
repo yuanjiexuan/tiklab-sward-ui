@@ -2,33 +2,63 @@ import React from "react";
 import "./DynamicItem.scss"
 import { withRouter } from "react-router";
 const DynamicListItem = (props) => {
-    const { content, type,id } = props;
+    const { content, actionType, key } = props;
     const data = JSON.parse(content)
     const repositoryId = props.match.params.repositoryId;
-    
+    const { createUserIcon, createUser, updateTime, documentId, createUserName, createTime,
+        documentName, oldValue, newValue, documentType } = data;
     const goDynamicDetail = () => {
-        props.history.push(`/repositorydetail/${repositoryId}/doc/${data.documentId}`);
+        if (documentType === "document") {
+            props.history.push(`/repositorydetail/${repositoryId}/doc/${documentId}`)
+        }
+        if (documentType === "markdown") {
+            props.history.push(`/repositorydetail/${repositoryId}/markdownView/${documentId}`)
+        }
     }
     const setDom = () => {
         let dom = null;
-        switch (type) {
+        
+        switch (actionType) {
             case "SWARD_LOGTYPE_DOCUMENTADD":
-                const { createUserIcon, createUser, updateTime, documentId,
-                    documentName } = data;
                 dom = (
-                    <div className="dynamic-list-item">
-                        <div className="dynamic-list-item-left">
+                    <div className="dynamic-list-item" key={key}>
+                        <div className="dynamic-list-item-content">
                             <div className="dynamic-user-icon">{createUserIcon}</div>
                             <div className="dynamic-content">
-                                <div className="dynamic-work-action">{createUser.nickname}添加了文档</div>
-                                <div className="dynamic-work-item">
-                                    <div className="dynamic-work-title" onClick={() => goDynamicDetail()}>{documentName}</div>
+                                <div className="dynamic-document-action">{createUser.nickname}添加了文档</div>
+                                <div className="dynamic-document-item">
+                                    <div className="dynamic-document-title" onClick={() => goDynamicDetail()}>{documentName}</div>
                                 </div>
                             </div>
                         </div>
                         <div>{updateTime}</div>
                     </div>
                 )
+                break;
+            case "SWARD_LOGTYPE_DOCUMENTUPDATENAME":
+                dom = <div className="dynamic-list-item" key={key}>
+                    <div className="dynamic-list-item-content">
+                        <div className="dynamic-user-icon">{createUserIcon}</div>
+                        <div className="dynamic-content">
+                            <div className="dynamic-document-action">{createUserName}修改了文档名称</div>
+                            <div className="dynamic-document-update">
+                                <div
+                                    className="dynamic-document-oldvalue"
+                                >
+                                    {oldValue}
+                                </div>
+                                ———
+                                <div
+                                    className="dynamic-document-newValue" 
+                                    onClick={() => goDynamicDetail()}
+                                >
+                                    {newValue}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>{createTime}</div>
+                </div>
                 break;
             default:
                 break;

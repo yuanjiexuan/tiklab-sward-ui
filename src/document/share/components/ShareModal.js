@@ -42,7 +42,6 @@ const ShareModal = (props) => {
             }
         })
     };
-    const onFinish = () => { }
     useEffect(()=> {
         if(shareVisible === true) {
             createShare({nodeIds: nodeIds,limits: value, type: type}).then(data=> {

@@ -12,14 +12,15 @@ import "./categoryDetail.scss"
 import { observer, inject, Provider } from "mobx-react";
 import CategoryAdd from "../common/components/CategoryAdd"
 import { getUser } from "thoughtware-core-ui";
-import CategoryStore from "../common/store/CategoryStore"
-import { appendNodeInTree } from "../../common/utils/treeDataAction";
+import CategoryStore from "../common/store/CategoryStore";
 import AddDropDown from "../common/components/AddDropDown";
 const CategoryDetail = (props) => {
     const store = {
         categoryStore: CategoryStore
     }
-    const { findCategory, findNodeList, setRepositoryCatalogueList, createRecent} = CategoryStore
+    const { findCategory, findNodeList, setRepositoryCatalogueList, createRecent,
+        setCategoryTitle, categoryTitle
+    } = CategoryStore
     const categoryId = props.match.params.id;
     const [logList, setLogList] = useState();
     const [logDetail, setLogDetail] = useState();
@@ -31,6 +32,7 @@ const CategoryDetail = (props) => {
         findCategory({ id: categoryId }).then(data => {
             if (data.code === 0) {
                 setLogDetail(data.data?.node)
+                setCategoryTitle(data.data?.node.name)
             }
 
         })
@@ -96,7 +98,7 @@ const CategoryDetail = (props) => {
                                         <use xlinkHref="#icon-folder"></use>
                                     </svg>
                                     <div className="title-name">
-                                        <div className="name">{logDetail.name}</div>
+                                        <div className="name">{categoryTitle}</div>
                                         <div className="master">{logDetail.master.name}</div>
                                     </div>
 

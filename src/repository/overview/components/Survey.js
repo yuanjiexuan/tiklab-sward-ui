@@ -37,7 +37,7 @@ const Survey = (props) => {
             repositoryId: repositoryId,
             orderParams: [{
                 name: "recentTime",
-                orderType: "asc"
+                orderType: "desc"
             }]
         }
         findDocumentRecentList(recentParams).then(res => {
@@ -213,7 +213,13 @@ const Survey = (props) => {
                         <div className="dynamic-list">
                             {
                                 opLogList.length > 0 ? opLogList.map(item => {
-                                    return <DynamicListItem content = {item.data} type = {item.actionType.id}/>
+                                    return <DynamicListItem 
+                                    key = {item.id} 
+                                    user = {item.user} 
+                                    time = {item.createTime} 
+                                    content = {item.data} 
+                                    actionType = {item.actionType.id}
+                                    />
                                 })
                                     :
                                     <Empty image="/images/nodata.png" description="暂时没有动态~" />

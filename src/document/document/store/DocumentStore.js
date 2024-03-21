@@ -33,10 +33,6 @@ class DocumentStore {
         this.repositoryCatalogueList = value
     }
     
-    @action
-    setDocDetail = (data) => {
-        this.docDetail = {...this.docDetail,...data}
-    }
 
     // 创建文档
     @action

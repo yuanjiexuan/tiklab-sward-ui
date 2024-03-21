@@ -19,12 +19,13 @@ const TemplatePreview = (props) => {
     const { relationWorkStore } = props;
     const templateId = props.match.params.templateId;
     const { findDocumentTemplate } = TemplateStore;
-    const [value, setValue] = useState("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+    const [value, setValue] = useState()
     const ticket = getUser().ticket;
     const tenant = getUser().tenant;
     const [titleValue, setTitleValue] = useState();
     useEffect(() => {
         if (templateId) {
+            setValue()
             findDocumentTemplate(templateId).then(data => {
                 const value = data.data
                 if (data.code === 0) {
@@ -49,7 +50,10 @@ const TemplatePreview = (props) => {
                             <span>{titleValue}</span>
                         </div>
                     </div>
-                    <PreviewEditor value={value} relationWorkStore={relationWorkStore} base_url={upload_url} tenant={tenant} />
+                    {
+                        value && <PreviewEditor value={value} relationWorkStore={relationWorkStore} base_url={upload_url} tenant={tenant} />
+                    }
+                    
                 </div>
             </Col>
         </Row>

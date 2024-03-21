@@ -33,7 +33,7 @@ const RepositorydeAside = (props) => {
     const { t } = useTranslation();
     const { findNodePageTree, updateRepositoryCatalogue, deleteRepositoryLog, updateDocument, deleteDocument,
         repositoryCatalogueList, setRepositoryCatalogueList, createRecent,
-        expandedTree, setExpandedTree } = categoryStore;
+        expandedTree, setExpandedTree, setDocumentTitle, setCategoryTitle, findCategory } = categoryStore;
 
     // 当前选中目录id
     const id = props.location.pathname.split("/")[4];
@@ -82,12 +82,13 @@ const RepositorydeAside = (props) => {
             wikiRepository: { id: repositoryId }
         }
         createRecent(params)
+        if (item.type === "categpry") {
+            findCategoryChildren(item.id, item.type)
+        }
 
-        findCategoryChildren(item.id, item.dimension)
         if (item.type === "category") {
             localStorage.setItem("categoryId", item.id);
             setOpenClickCategory(item.id)
-
             props.history.push(`/repositorydetail/${repositoryId}/folder/${item.id}`)
         }
         if (item.documentType === "document") {
@@ -98,16 +99,27 @@ const RepositorydeAside = (props) => {
         }
     }
 
-    const findCategoryChildren = (id, dimension) => {
+    const findCategoryChildren = (id, type) => {
         setSelectKey(id)
         const isRequested = requsetedCategory.some(category => category === id);
         if (!isRequested) {
-            findNodePageTree({ repositoryId: repositoryId, treePath: id, dimensions: [dimension + 1, dimension + 2] }).then(data => {
-                if (data.code === 0) {
-                    const list = appendNodeInTree(id, repositoryCatalogueList, data.data, "overview")
-                    setRepositoryCatalogueList([...list])
-                    setRequsetedCategory(requsetedCategory.concat(id))
+            findCategory({ id: id }).then(res => {
+                if (res.code === 0) {
+                    const node = res.data.node;
+                    const params = {
+                        repositoryId: repositoryId,
+                        treePath: id,
+                        dimensions: [node.dimension + 1, node.dimension + 2]
+                    }
+                    findNodePageTree(params).then(data => {
+                        if (data.code === 0) {
+                            const list = appendNodeInTree(id, repositoryCatalogueList, data.data, "overview")
+                            setRepositoryCatalogueList([...list])
+                            setRequsetedCategory(requsetedCategory.concat(id))
+                        }
+                    })
                 }
+
             })
         }
     }
@@ -200,12 +212,12 @@ const RepositorydeAside = (props) => {
         return;
     }, [inputRef.current])
 
-    const reName = (value, id, type) => {
+    const reName = (value, reNameId, type) => {
         const name = value.target.innerText;
         const params = {
-            id: id,
+            id: reNameId,
             node: {
-                id: id,
+                id: reNameId,
                 name: name,
             }
         }
@@ -213,7 +225,12 @@ const RepositorydeAside = (props) => {
             updateRepositoryCatalogue(params).then(data => {
                 if (data.code === 0) {
                     setIsRename(null)
-                    updateNodeName(repositoryCatalogueList, id, name)
+                    updateNodeName(repositoryCatalogueList, reNameId, name)
+                    // 为了使右侧的标题与目录的一致
+                    if (reNameId === id) {
+                        setCategoryTitle(name)
+                    }
+
                 } else {
                     message.info("重命名失败")
                 }
@@ -223,7 +240,11 @@ const RepositorydeAside = (props) => {
             updateDocument(params).then(data => {
                 if (data.code === 0) {
                     setIsRename(null)
-                    updateNodeName(repositoryCatalogueList, id, name)
+                    updateNodeName(repositoryCatalogueList, reNameId, name)
+                    if (reNameId === id) {
+                        setDocumentTitle(name)
+                    }
+
                 } else {
                     message.info("重命名失败")
                 }
@@ -365,7 +386,7 @@ const RepositorydeAside = (props) => {
                 onBlur={(value) => reName(value, item.id, item.type)}
                 onKeyDownCapture={(value) => enterKeyRename(value, item.id, item.type)}
 
-
+                ref={isRename === item.id ? inputRef : null}
                 id={"file-" + item.id}
                 title={item.name}
             >
@@ -536,6 +557,8 @@ const RepositorydeAside = (props) => {
                 repositoryCatalogueList={repositoryCatalogueList}
                 shareListVisible={shareListVisible}
                 setShareListVisible={setShareListVisible}
+                findCategoryChildren={findCategoryChildren}
+                setOpenOrClose={setOpenOrClose}
             />
             <Modal
                 title="确定删除"

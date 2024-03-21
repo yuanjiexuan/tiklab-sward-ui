@@ -13,21 +13,20 @@ import { Markdown } from "thoughtware-markdown-ui";
 import Button from "../../../common/button/button";
 import MarkdownStore from "../store/MarkdownStore";
 import "thoughtware-markdown-ui/es/thoughtware-markdown.css";
+import Categorystore from "../../../repository/common/store/CategoryStore";
 import { Node } from "slate";
 const MarkdownEdit = (props) => {
     const { findDocument, updateDocument } = MarkdownStore;
+    const { documentTitle, setDocumentTitle} = Categorystore;
     const documentId = props.match.params.id;
-    const [docInfo, setDocInfo] = useState({ name: "", likenumInt: "", commentNumber: "", master: { name: "" } });
     const repositoryId = props.match.params.repositoryId;
-    const [value, setValue] = useState()
-    const [titleValue, setTitleValue] = useState();
-    const editRef = useRef(); 
+    const [value, setValue] = useState();
     useEffect(() => {
         setValue()
         findDocument(documentId).then((data) => {
             if (data.code === 0) {
                 if (data.data.details) {
-                    setTitleValue(data.data.name)
+                    
                     const value = data.data.details;
                     setValue(JSON.parse(value))
                 } else {
@@ -43,7 +42,8 @@ const MarkdownEdit = (props) => {
                         }
                     ])
                 }
-                setDocInfo(data.data.node)
+                const node = data.data.node;
+                setDocumentTitle(node.name)
             }
         })
         return;
@@ -117,13 +117,11 @@ const MarkdownEdit = (props) => {
                     onBlur={(event)=> changeTitle(event)}
                     onKeyDown={(event => keyDown(event))}
                     onClick={() => focus() }
-                >{docInfo.name}</div>
+                >{documentTitle}</div>
                 <div className="edit-right">
                     <Button type="primary" onClick={() => save()}>保存</Button>
                     <Button onClick={() => props.history.replace(`/repositorydetail/${repositoryId}/markdownView/${documentId}`)}>退出编辑</Button>
-                    {/* <svg className="right-icon" aria-hidden="true">
-                        <use xlinkHref="#icon-point"></use>
-                    </svg> */}
+
                 </div>
             </div>
             {

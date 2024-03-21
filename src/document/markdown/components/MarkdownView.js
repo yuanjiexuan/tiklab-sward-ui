@@ -8,7 +8,7 @@
  */
 import React, { useEffect, useState } from "react";
 import { Provider, inject, observer } from "mobx-react";
-import { Button, Row, Col, Dropdown } from 'antd';
+import { Button, Row, Col, Dropdown, message } from 'antd';
 import { MarkdownView } from "thoughtware-markdown-ui";
 import "thoughtware-markdown-ui/es/thoughtware-markdown.css";
 import "./markdownView.scss"
@@ -17,31 +17,31 @@ import { getUser } from "thoughtware-core-ui";
 import Comment from "../../document/components/Comment";
 import CommentStore from "../../document/store/CommentStore";
 import MarkdownStore from "../store/MarkdownStore";
+import Categorystore from "../../../repository/common/store/CategoryStore";
 const DocumentExamine = (props) => {
-    const { relationWorkStore } = props;
     const store = {
         markdownStore: MarkdownStore
     }
     const documentId = props.match.params.id;
-    const { findDocument } = MarkdownStore;
-
+    const { findDocument, createDocumentFocus, deleteDocumentFocusByCondition } = MarkdownStore;
+    const { documentTitle, setDocumentTitle } = Categorystore;
     const { createLike, createShare, updateShare, deleteLike } = CommentStore;
     const [shareVisible, setShareVisible] = useState(false)
 
     const userId = getUser().userId;
     const tenant = getUser().tenant;
-    const [docInfo, setDocInfo] = useState({ name: "", likenumInt: "", commentNumber: "", master: { name: "" } })
+    const [docInfo, setDocInfo] = useState()
     const [showComment, setShowComment] = useState(false);
     const repositoryId = props.match.params.repositoryId;
     const [like, setLike] = useState(false)
+    const [focus, setFocus] = useState(false)
     let [likeNum, setLikeNum] = useState()
     let [commentNum, setCommentNum] = useState()
-    const [title, seTitle] = useState()
     const [value, setValue] = useState()
     const [markdownValue, setMarkdownValue] = useState();
 
     useEffect(() => {
-        seTitle()
+        setDocumentTitle()
         setValue()
         findDocument(documentId).then((data) => {
             if (data.code === 0) {
@@ -49,16 +49,17 @@ const DocumentExamine = (props) => {
                     const value = data.data.details
                     setValue(JSON.parse(value))
                     setMarkdownValue(data.data.detailText)
-                    console.log(JSON.parse(value))
                 } else {
                     setValue()
                 }
-                const node = data.data.node;
+                const document = data.data;
+                const node = document.node;
                 setDocInfo(node)
-                seTitle(node.name)
-                setLike(node.like)
-                setLikeNum(node.likenumInt)
-                setCommentNum(node.commentNumber)
+                setDocumentTitle(node.name)
+                setLike(document.like)
+                setFocus(document.focus)
+                setLikeNum(document.likenumInt)
+                setCommentNum(document.commentNumber)
             }
         })
         return;
@@ -68,18 +69,24 @@ const DocumentExamine = (props) => {
 
     // 点赞
     const addDocLike = () => {
-        const data = {
-            toWhomId: documentId,
-            likeUser: { id: userId },
-            likeType: "doc"
-        }
+       
         if (like) {
+            const data = {
+                toWhomId: documentId,
+                likeUser: userId,
+                likeType: "doc"
+            }
             deleteLike(data).then(res => {
                 setLike(false)
                 likeNum = likeNum - 1;
                 setLikeNum(likeNum)
             })
         } else {
+            const data = {
+                toWhomId: documentId,
+                likeUser: { id: userId },
+                likeType: "doc"
+            }
             createLike(data).then(res => {
                 if (res.code === 0) {
                     setLike(true)
@@ -103,8 +110,34 @@ const DocumentExamine = (props) => {
         const url = `data:,${markdownValue}`;
         const a = document.createElement('a');
         a.href = url;
-        a.download = `${title}.md`;
+        a.download = `${documentTitle}.md`;
         a.click();
+    }
+
+    const createFocus = () => {
+        const params = {
+            documentId: documentId,
+            masterId: userId
+        }
+        createDocumentFocus(params).then(res => {
+            if (res.code === 0) {
+                setFocus(true)
+                message.info("收藏文档成功")
+            }
+        })
+    }
+
+    const deleteFocus = () => {
+        const params = {
+            documentId: documentId,
+            masterId: userId
+        }
+        deleteDocumentFocusByCondition(params).then(res => {
+            if (res.code === 0) {
+                setFocus(false)
+                message.info("取消收藏文档")
+            }
+        })
     }
 
     return (<Provider {...store}>
@@ -114,7 +147,7 @@ const DocumentExamine = (props) => {
             }
 
             <div className="examine-top">
-                <div className="examine-title" id="examine-title">{docInfo.name}</div>
+                <div className="examine-title" id="examine-title">{documentTitle}</div>
                 <div className="document-edit">
                     {
                         value && <svg className="right-icon" aria-hidden="true" onClick={() => props.history.push(`/repositorydetail/${repositoryId}/markdownEdit/${documentId}`)}>
@@ -122,10 +155,15 @@ const DocumentExamine = (props) => {
                         </svg>
                     }
 
-                    <svg className="right-icon" aria-hidden="true">
-                        <use xlinkHref="#icon-collection"></use>
-                    </svg>
-                    {/* <Button shape="round" style={{ backgroundColor: "#5d70ea", color: "#fff" }} onClick={() => setShareVisible(true)}> 分享</Button> */}
+                    {
+                        focus ? <svg className="right-icon" aria-hidden="true" onClick={() => deleteFocus()}>
+                            <use xlinkHref="#icon-collectioned"></use>
+                        </svg>
+                            :
+                            <svg className="right-icon" aria-hidden="true" onClick={() => createFocus()}>
+                                <use xlinkHref="#icon-collection"></use>
+                            </svg>
+                    }
                     <svg className="right-icon" aria-hidden="true" onClick={() => setShareVisible(true)}>
                         <use xlinkHref="#icon-share"></use>
                     </svg>

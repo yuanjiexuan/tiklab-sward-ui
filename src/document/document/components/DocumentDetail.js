@@ -18,9 +18,7 @@ const DocumentDetail = (props)=>{
     const store = {
         documentStore: DocumentStore
     }
-    const {docDetail,updateDocument,findDocument} = DocumentStore;
-
-    const [docInfo, setDocInfo] = useState({name: "",likenumInt: "",commentNumber: ""})
+    const {updateDocument} = DocumentStore;
     
 
     const [editOrExamine,seteditOrExamine] = useState("examine")
@@ -68,8 +66,8 @@ const DocumentDetail = (props)=>{
                 </div>
             </div>
             {
-                editOrExamine === "examine" ? <DocumentExamine docDetail = {docDetail} findDocument ={findDocument} docInfo = {docInfo} value ={value} {...props}/> : 
-                    <DocumentEdit docDetail = {docDetail} onChange ={(value) => saveDocument(value)} docInfo = {docInfo} value={value} {...props}/>
+                editOrExamine === "examine" ? <DocumentExamine {...props} /> : 
+                    <DocumentEdit {...props} />
             }
         </div>
     </Provider>

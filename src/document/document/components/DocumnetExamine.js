@@ -1,5 +1,5 @@
 /*
- * @Descripttion: 
+ * @Descripttion: 文档的展示页面，或者没选择模版时候的展示模版页面
  * @version: 1.0.0
  * @Author: 袁婕轩
  * @Date: 2021-08-09 09:18:21
@@ -18,8 +18,11 @@ import Comment from "./Comment";
 import DocumentAddEdit from "./DocumentAddEdit";
 import CommentShare from "../store/CommentStore";
 import DocumentStore from "../store/DocumentStore";
+import CategoryStore from "../../../repository/common/store/CategoryStore";
+
 const DocumentExamine = (props) => {
     const { relationWorkStore } = props;
+    const { documentTitle, setDocumentTitle } = CategoryStore;
     const store = {
         documentStore: DocumentStore
     }
@@ -31,18 +34,17 @@ const DocumentExamine = (props) => {
 
     const userId = getUser().userId;
     const tenant = getUser().tenant;
-    const [docInfo, setDocInfo] = useState({ name: "", likenumInt: "", commentNumber: "", master: { name: "" } })
+    const [docInfo, setDocInfo] = useState()
     const [showComment, setShowComment] = useState(false);
     const repositoryId = props.match.params.repositoryId;
     const [like, setLike] = useState(false)
     const [focus, setFocus] = useState(false)
     let [likeNum, setLikeNum] = useState()
     let [commentNum, setCommentNum] = useState()
-    const [title, seTitle] = useState()
     const [value, setValue] = useState()
 
     useEffect(() => {
-        seTitle()
+        setDocumentTitle()
         setValue()
         findDocument(documentId).then((data) => {
             if (data.code === 0) {
@@ -51,13 +53,14 @@ const DocumentExamine = (props) => {
                 } else {
                     setValue()
                 }
-                const documentDetail = data.data.node;
-                setDocInfo(documentDetail)
-                seTitle(documentDetail.name)
-                setLike(documentDetail.like)
-                setFocus(documentDetail.focus)
-                setLikeNum(documentDetail.likenumInt)
-                setCommentNum(documentDetail.commentNumber)
+                const document = data.data;
+                const node = document.node;
+                setDocInfo(node)
+                setDocumentTitle(node.name)
+                setLike(document.like)
+                setFocus(document.focus)
+                setLikeNum(document.likenumInt)
+                setCommentNum(document.commentNumber)
             }
         })
         return;
@@ -67,18 +70,23 @@ const DocumentExamine = (props) => {
 
     // 点赞
     const addDocLike = () => {
-        const data = {
-            toWhomId: documentId,
-            likeUser: { id: userId },
-            likeType: "doc"
-        }
         if (like) {
+            const data = {
+                toWhomId: documentId,
+                likeUser: userId,
+                likeType: "doc"
+            }
             deleteLike(data).then(res => {
                 setLike(false)
                 likeNum = likeNum - 1;
                 setLikeNum(likeNum)
             })
         } else {
+            const data = {
+                toWhomId: documentId,
+                likeUser: {id: userId},
+                likeType: "doc"
+            }
             createLike(data).then(res => {
                 if (res.code === 0) {
                     setLike(true)
@@ -116,13 +124,14 @@ const DocumentExamine = (props) => {
             }
         })
     }
+
     return (<Provider {...store}>
         <div className="document-examine">
             {
                 showComment && <Comment documentId={documentId} setShowComment={setShowComment} commentNum={commentNum} setCommentNum={setCommentNum} />
             }
             <div className="examine-top">
-                <div className="examine-title" id="examine-title">{docInfo.name}</div>
+                <div className="examine-title" id="examine-title">{documentTitle}</div>
                 <div className="document-action">
                     {
                         value && <svg className="right-icon" aria-hidden="true" onClick={() => props.history.push(`/repositorydetail/${repositoryId}/docEdit/${documentId}`)}>
@@ -141,45 +150,44 @@ const DocumentExamine = (props) => {
                     <svg className="right-icon" aria-hidden="true" onClick={() => setShareVisible(true)}>
                         <use xlinkHref="#icon-share"></use>
                     </svg>
-                    {/* <svg className="right-icon" aria-hidden="true">
-                        <use xlinkHref="#icon-point"></use>
-                    </svg> */}
                 </div>
             </div>
             {
-                value ? <div className="document-examine-content">
-                    <Row className="document-examine-row">
-                        <Col xl={{ span: 18, offset: 3 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }}>
-                            <div className="document-previeweditor">
-                                <PreviewEditor value={value} relationWorkStore={relationWorkStore} base_url={upload_url} tenant={tenant} />
-                            </div>
-                        </Col>
-                    </Row>
-                </div>
-                    :
-                    <DocumentAddEdit title={title} />
-            }
-            <div className="comment-box">
-                <div className="comment-box-item top-item">
-                    <svg className="midden-icon" aria-hidden="true" onClick={() => setShowComment(!showComment)}>
-                        <use xlinkHref="#icon-comment"></use>
-                    </svg>
-                    <div className="commnet-num">{commentNum}</div>
-                </div>
-                <div className="comment-box-item">
-                    <span className="comment-item" onClick={addDocLike}>
-                        {
-                            like ? <svg className="midden-icon" aria-hidden="true">
-                                <use xlinkHref="#icon-zan"></use>
-                            </svg> : <svg className="midden-icon" aria-hidden="true">
-                                <use xlinkHref="#icon-dianzan"></use>
+                value ? <>
+                    <div className="document-examine-content">
+                        <Row className="document-examine-row">
+                            <Col xl={{ span: 18, offset: 3 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }}>
+                                <div className="document-previeweditor">
+                                    <PreviewEditor value={value} relationWorkStore={relationWorkStore} base_url={upload_url} tenant={tenant} />
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>
+                    <div className="comment-box">
+                        <div className="comment-box-item top-item">
+                            <svg className="midden-icon" aria-hidden="true" onClick={() => setShowComment(!showComment)}>
+                                <use xlinkHref="#icon-comment"></use>
                             </svg>
-                        }
-                    </span>
-                    <div className="commnet-num" style={{ top: "37px" }}>{likeNum}</div>
-                </div>
+                            <div className="commnet-num">{commentNum}</div>
+                        </div>
+                        <div className="comment-box-item">
+                            <span className="comment-item" onClick={addDocLike}>
+                                {
+                                    like ? <svg className="midden-icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-zan"></use>
+                                    </svg> : <svg className="midden-icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-dianzan"></use>
+                                    </svg>
+                                }
+                            </span>
+                            <div className="commnet-num" style={{ top: "37px" }}>{likeNum}</div>
+                        </div>
+                    </div>
+                </>
+                    :
+                    <DocumentAddEdit documentTitle={documentTitle} setDocumentTitle={setDocumentTitle} />
+            }
 
-            </div>
 
             <ShareModal
                 documentIds={[documentId]}

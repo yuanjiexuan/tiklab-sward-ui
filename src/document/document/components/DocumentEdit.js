@@ -22,11 +22,10 @@ import { updateNodeName } from "../../../common/utils/treeDataAction";
 const DocumentEdit = (props) => {
     const { relationWorkStore } = props;
     const { findDocument, updateDocument } = DocumentStore;
-    const { repositoryCatalogueList } = CategoryStore
+    const { documentTitle, setDocumentTitle, repositoryCatalogueList } = CategoryStore
     const documentId = props.match.params.id;
     const [docInfo, setDocInfo] = useState({ name: "", likenumInt: "", commentNumber: "", master: { name: "" } });
-    const [value, setValue] = useState()
-    const [titleValue, setTitleValue] = useState();
+    const [value, setValue] = useState();
     const editRef = useRef(); 
     const ticket = getUser().ticket;
     const tenant = getUser().tenant;
@@ -35,7 +34,7 @@ const DocumentEdit = (props) => {
         findDocument(documentId).then((data) => {
             if (data.code === 0) {
                 const detailDocument = data?.data?.node;
-                setTitleValue(detailDocument.name)
+                setDocumentTitle(detailDocument.name)
                 if (data?.data?.details) {
                     setValue(data?.data?.details);
                 } else {
@@ -76,7 +75,7 @@ const DocumentEdit = (props) => {
     }, [500])
 
     const changeTitle = (value) => {
-        setTitleValue(value.target.value)
+        setDocumentTitle(value.target.value)
         const data = {
             id: documentId,
             node: {
@@ -101,9 +100,6 @@ const DocumentEdit = (props) => {
                 <div className="edit-right">
                     <Button type="primary" onClick={() => save()}>保存</Button>
                     <Button onClick={() => props.history.goBack()}>退出编辑</Button>
-                    {/* <svg className="right-icon" aria-hidden="true">
-                        <use xlinkHref="#icon-point"></use>
-                    </svg> */}
                 </div>
             </div>
             {
@@ -122,8 +118,8 @@ const DocumentEdit = (props) => {
                                     <Input
                                         className="document-title-input"
                                         bordered={false}
-                                        onChange={(value) => setTitleValue(value.target.value)}
-                                        value={titleValue}
+                                        onChange={(value) => setDocumentTitle(value.target.value)}
+                                        value={documentTitle}
                                         onPressEnter={(value) => changeTitle(value)}
                                         onBlur={(value) => changeTitle(value)}
                                     />
@@ -147,4 +143,4 @@ const DocumentEdit = (props) => {
         </div>
     )
 }
-export default inject("relationWorkStore")(observer(withRouter(DocumentEdit)));
+export default withRouter(inject("relationWorkStore")(observer(DocumentEdit)));

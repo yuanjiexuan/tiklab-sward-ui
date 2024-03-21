@@ -14,16 +14,19 @@ export class CategoryStore {
     @observable expandedTree = [];
     // 目录树
     @observable repositoryCatalogueList = [];
-    @observable docDetail = [{
-        title: "",
-        type: "",
-        content: ""
-    }]
-    constructor() {
-        this.aaa = [];
-        makeObservable
+    @observable documentTitle = "";
+    @observable categoryTitle = ""
+
+    @action
+    setDocumentTitle = (value) => {
+        this.documentTitle = value
     }
 
+    @action
+    setCategoryTitle = (value) => {
+        this.categoryTitle = value
+    }
+  
     @action
     setExpandedTree = (value) => {
         this.expandedTree = value;
@@ -80,11 +83,6 @@ export class CategoryStore {
         params.append("id", value.id)
         const data = await Service("/category/findCategory", params);
         return data;
-    }
-
-    @action
-    setDocDetail = (data) => {
-        this.docDetail = {...this.docDetail,...data}
     }
 
     // 创建文档

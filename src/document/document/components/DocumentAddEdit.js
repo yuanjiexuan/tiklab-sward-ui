@@ -1,5 +1,5 @@
 /*
- * @Descripttion: 
+ * @Descripttion: 选择文档模版页面
  * @version: 1.0.0
  * @Author: 袁婕轩
  * @Date: 2021-08-09 09:18:21
@@ -20,11 +20,9 @@ import { updateNodeName } from "../../../common/utils/treeDataAction";
 import setImageUrl from "../../../common/utils/setImageUrl";
 
 const DocumentAddEdit = (props) => {
-    const {title} = props;
-    const [titleValue, setTitleValue] = useState(title);
+    const {documentTitle,setDocumentTitle} = props;
     const { updateDocument } = DocumentStore;
     const { repositoryCatalogueList } = CategoryStore;
-    const imageNames = ["template2.png", "template1.png", "template3.png", "template4.png"];
     const documentId = props.match.params.id;
     const repositoryId = props.match.params.repositoryId;
     const [templateVisible, setTemplateVisible] = useState(false);
@@ -32,17 +30,17 @@ const DocumentAddEdit = (props) => {
     const [templateList, setTemplateList] = useState()
 
     useEffect(() => {
-        setTitleValue(title)
+        // setDocumentTitle(title)
         findDocumentTemplateList().then(data => {
             if (data.code === 0) {
                 setTemplateList(data.data)
             }
         })
         return
-    }, [title])
+    }, [documentId])
 
     const changeTitle = (value) => {
-        setTitleValue(value.target.value)
+        setDocumentTitle(value.target.value)
         
         const data = {
             id: documentId,
@@ -100,8 +98,8 @@ const DocumentAddEdit = (props) => {
                         <Input 
                             className="document-title-input" 
                             bordered={false}
-                            onChange = {(value) => setTitleValue(value.target.value)}
-                            value = {titleValue}
+                            onChange = {(value) => setDocumentTitle(value.target.value)}
+                            value = {documentTitle}
                             onPressEnter = {(value) => changeTitle(value)}
                             onBlur = {(value) => changeTitle(value)}
                         />

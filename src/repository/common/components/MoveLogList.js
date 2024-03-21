@@ -6,25 +6,39 @@
  * @LastEditors: 袁婕轩
  * @LastEditTime: 2021-12-20 14:35:10
  */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, message } from 'antd';
 import "./moveLogList.scss";
 import { observer, inject } from "mobx-react";
 import { withRouter } from 'react-router';
-import { updataTreeSort, findNodeById } from '../../../common/utils/treeDataAction';
+import { updataTreeSort, findNodeById, appendNodeInTree } from '../../../common/utils/treeDataAction';
 
 const MoveLogList = (props) => {
-    const { moveLogListVisible, setMoveLogListVisible, moveItem, categoryStore, 
-        findCategoryChildren, updateDocumentSort, updateCategorySort } = props;
-    const { repositoryCatalogueList } = categoryStore
+    const { moveLogListVisible, setMoveLogListVisible, moveItem, categoryStore,
+        updateDocumentSort, updateCategorySort } = props;
+    const { findNodePageTree } = categoryStore
     const [selectKey, setSelectKey] = useState()
     const repositoryId = props.match.params.repositoryId;
     const parentItem = moveItem?.type === "category" ? moveItem?.parentWikiCategory : moveItem?.wikiCategory
+    const [categoryList, setCategoryList] = useState()
+    const [requsetedCategory, setRequsetedCategory] = useState([])
+    useEffect(() => {
+        if (moveLogListVisible){
+            findNodePageTree({ repositoryId: repositoryId, dimensions: [1, 2], type: "category" }).then((data) => {
+                setCategoryList(data.data)
+            })
+        }else {
+            setRequsetedCategory([])
+            setExpandedTree([])
+        }
+
+    }, [moveLogListVisible])
+
     const onFinish = () => {
-        if(!selectKey) {
+        if (!selectKey) {
             message.warning('请选择要引动到的目录');
             return
-        }else {
+        } else {
             const params = {
                 id: moveItem.id,
                 node: {
@@ -32,44 +46,21 @@ const MoveLogList = (props) => {
                     moveToId: selectKey.id,
                     moveToType: selectKey.type,
                     moveType: "2"
-                    
+
                 }
             }
-            if(moveItem.type === "category") {
+            if (moveItem.type === "category") {
                 updateCategorySort(params)
             }
 
-            if(moveItem.type === "document") {
+            if (moveItem.type === "document") {
                 updateDocumentSort(params)
             }
-            
+
         }
-     
+
     }
-    // const updateDocumentSort = (params) => {
-    //     updateDocument(params).then(res => {
-    //         if (res.code === 0) {
-    //             const node = findNodeById(repositoryCatalogueList, params);
-    //             console.log(node)
-    //             params.parentId = params.wikiCategory.id
-    //             updataTreeSort(repositoryCatalogueList, params, node)
-    //             setMoveLogListVisible(false)
-    //         }
-    //     })
 
-    // }
-
-    // const updateCategorySort = (params) => {
-    //     updateRepositoryCatalogue(params).then(res => {
-    //         if (res.code === 0) {
-    //             const node = findNodeById(repositoryCatalogueList, params);
-    //             console.log(node)
-    //             params.parentId = params.parentWikiCategory.id
-    //             updataTreeSort(repositoryCatalogueList, params, node)
-    //             setMoveLogListVisible(false)
-    //         }
-    //     })
-    // }
     /**
     * 折叠菜单
     */
@@ -89,6 +80,28 @@ const MoveLogList = (props) => {
     const clickOpenMenu = (category) => {
         setOpenOrClose(category.id)
         findCategoryChildren(category.id, category.dimension)
+        // findCategoryChildren(category.id, category.dimension)
+    }
+
+
+    const findCategoryChildren = (id, dimension) => {
+        setSelectKey(id)
+        const isRequested = requsetedCategory.some(category => category === id);
+        if (!isRequested) {
+            const params = {
+                repositoryId: repositoryId,
+                treePath: id,
+                dimensions: [dimension + 1, dimension + 2],
+                type: "category"
+            }
+            findNodePageTree(params).then(data => {
+                if (data.code === 0) {
+                    const list = appendNodeInTree(id, categoryList, data.data, "overview")
+                    setCategoryList([...list])
+                    setRequsetedCategory(requsetedCategory.concat(id))
+                }
+            })
+        }
     }
 
     const selectMoveParent = (category) => {
@@ -98,40 +111,41 @@ const MoveLogList = (props) => {
         //     setSelectKey()
         // }
         setSelectKey(category)
-        
+
     }
     const logTree = (data, levels, faid) => {
         let newLevels = 0;
         return data && data.length > 0 && data.map((category) => {
             if (category.type === "category") {
-                return <div 
-                className={`${isExpandedTree(faid) || 0 == faid ? "" : 'category-menu-submenu-hidden'}
-                    ${category.id === moveItem.id || category.id === parentItem?.id ? "category-disable-select" : "category-allow-select"}
-                `}
+                return <div
+                    className={`${isExpandedTree(faid) || 0 == faid ? "" : 'category-menu-submenu-hidden'} ${category.id === moveItem.id || category.id === parentItem?.id ? "category-disable-select" : "category-allow-select"}`}
                     key={category.id}
                 >
                     <div className={`category-menu-submenu ${category.id === selectKey?.id ? "category-menu-select" : ""} `}
                         key={category.id}
-                        onClick={() => selectMoveParent(category) }
+                        onClick={() => selectMoveParent(category)}
+                        style={{ paddingLeft: levels * 10 }}
                     >
-                        <div style={{ paddingLeft: levels * 10 }}>
-                            {
-                                (category.children && category.children.length > 0) ?
-                                    isExpandedTree(category.id) ? <svg className="icon" aria-hidden="true" onClick={() => clickOpenMenu(category)}>
-                                        <use xlinkHref="#icon-right" ></use>
+                        {/* <div > */}
+                        {
+                            category.children?.length > 0 ?
+                                (!isExpandedTree(category.id) ?
+                                    <svg className="img-icon" aria-hidden="true" onClick={() => clickOpenMenu(category)}>
+                                        <use xlinkHref="#icon-right"></use>
                                     </svg>
-                                        :
-                                        <svg className="icon" aria-hidden="true" onClick={() => clickOpenMenu(category)}>
-                                            <use xlinkHref="#icon-down" ></use>
-                                        </svg> : <svg className="icon" aria-hidden="true">
-                                        <use xlinkHref=""></use>
-                                    </svg>
-                            }
-                            <svg className="icon" aria-hidden="true">
-                                <use xlinkHref="#icon-folder"></use>
-                            </svg>
-                            <span>{category.name} </span>
-                        </div>
+                                    :
+                                    <svg className="img-icon" aria-hidden="true" onClick={() => clickOpenMenu(category)}>
+                                        <use xlinkHref="#icon-down"></use>
+                                    </svg>)
+                                :
+                                <span style={{ width: "21px", height: "21px" }}></span>
+
+                        }
+                        <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-folder"></use>
+                        </svg>
+                        <span>{category.name} </span>
+                        {/* </div> */}
                     </div>
                     {
                         category.children && category.children.length > 0 && (newLevels = levels + 1) && logTree(category.children, newLevels, category.id)
@@ -151,7 +165,7 @@ const MoveLogList = (props) => {
         >
             <div className="move-menu">
                 {
-                    moveLogListVisible && repositoryCatalogueList && logTree(repositoryCatalogueList, 1, 0)
+                    moveLogListVisible && categoryList && logTree(categoryList, 1, 0)
                 }
             </div>
         </Modal>

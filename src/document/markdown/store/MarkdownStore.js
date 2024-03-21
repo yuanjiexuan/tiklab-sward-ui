@@ -7,11 +7,7 @@ class DocumentStore {
     expandedTree = [0];
     // 目录树
     @observable repositoryCatalogueList = [];
-    @observable docDetail = [{
-        title: "",
-        type: "",
-        content: ""
-    }]
+
 
     @observable templatePageParams = {
         current: 1,
@@ -32,11 +28,7 @@ class DocumentStore {
     setRepositoryCatalogueList = (value) => {
         this.repositoryCatalogueList = value
     }
-    
-    @action
-    setDocDetail = (data) => {
-        this.docDetail = {...this.docDetail,...data}
-    }
+
 
     // 创建文档
     @action
@@ -97,6 +89,18 @@ class DocumentStore {
         if(data.code === 0){
             this.templateList = data.data.dataList
         }
+        return data;
+    }
+
+    @action
+    createDocumentFocus = async(value) =>{
+        const data = await Service("/documentFocus/createDocumentFocus",value);
+        return data;
+    }
+
+    @action
+    deleteDocumentFocusByCondition = async(value) =>{
+        const data = await Service("/documentFocus/deleteDocumentFocusByCondition",value);
         return data;
     }
 }
