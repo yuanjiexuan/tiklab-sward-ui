@@ -118,14 +118,14 @@ const AddDropDown = (props) => {
 
     }
     return (
-        <div onClick={(event)=> event.stopPropagation()}> 
+        <div onClick={(event)=> event.stopPropagation()} className="category-add"> 
             {
                 isButton ? <Dropdown overlay={() => addMenu()} placement="bottomLeft">
                     <div className="top-add-botton">添加</div>
                 </Dropdown>
                     :
                     <Dropdown overlay={() => addMenu()} placement="bottomLeft">
-                        <svg className="img-icon" aria-hidden="true">
+                        <svg className="img-icon-16" aria-hidden="true">
                             <use xlinkHref="#icon-plusBlue"></use>
                         </svg>
                     </Dropdown>

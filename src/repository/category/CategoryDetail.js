@@ -87,7 +87,7 @@ const CategoryDetail = (props) => {
 
     return (<Provider {...store}>
         <Row className="log-detail">
-            <Col lg={{ span: "18", offset: "3" }} xxl={{ span: "18", offset: "3" }}>
+            <Col sm={24} md={24} lg={{ span: 24 }} xl={{ span: "18", offset: "3" }} xxl={{ span: "18", offset: "3" }}>
                 <div className="log-detail-content">
                     {
                         logDetail && <Fragment>

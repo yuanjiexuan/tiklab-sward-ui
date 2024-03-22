@@ -81,7 +81,11 @@ const MarkdownEdit = (props) => {
         console.log(value)
         const data = {
             id: documentId,
-            name: value.target.innerText
+            node: {
+                id: documentId,
+                name: value.target.innerText
+            }
+            
         }
         updateDocument(data).then(res => {
             if (res.code === 0) {

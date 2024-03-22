@@ -30,7 +30,7 @@ const RepositoryChangeModal = (props) => {
             }
 
         })
-        modelRef.current.style.left = setButton.current.clientWidth
+        // modelRef.current.style.left = setButton.current.clientWidth
     }
 
 

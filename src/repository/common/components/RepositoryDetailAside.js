@@ -169,7 +169,7 @@ const RepositorydeAside = (props) => {
 
     const deleteDocumentOrCategory = (item, type, id) => {
         if (type === "category") {
-            deleteRepositoryLog(item).then(res => {
+            deleteRepositoryLog(item.id).then(res => {
                 const node = removeNodeInTree(repositoryCatalogueList, null, id)
                 console.log(node)
                 if (node) {
@@ -394,9 +394,12 @@ const RepositorydeAside = (props) => {
             </span>
             <div className={`${isHover === item.id ? "icon-show" : "icon-hidden"}`}>
                 <Dropdown overlay={() => editMenu(item, index)} placement="bottomLeft">
-                    <svg className="img-icon" aria-hidden="true">
-                        <use xlinkHref="#icon-moreBlue"></use>
-                    </svg>
+                    <div className="category-add">
+                        <svg className="img-icon-16" aria-hidden="true">
+                            <use xlinkHref="#icon-moreBlue"></use>
+                        </svg>
+                    </div>
+
                 </Dropdown>
             </div>
         </div>
@@ -424,9 +427,12 @@ const RepositorydeAside = (props) => {
                 {/* <div className="icon-action"> */}
                 <AddDropDown category={item} />
                 <Dropdown overlay={() => editMenu(item, index)} placement="bottomLeft">
-                    <svg className="img-icon" aria-hidden="true">
-                        <use xlinkHref="#icon-moreBlue"></use>
-                    </svg>
+                    <div className="category-add">
+                        <svg className="img-icon-16" aria-hidden="true">
+                            <use xlinkHref="#icon-moreBlue"></use>
+                        </svg>
+                    </div>
+
                 </Dropdown>
             </div>
         </div>
