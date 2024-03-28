@@ -483,13 +483,13 @@ const RepositorydeAside = (props) => {
                                     <img
                                         src={version === "cloud" ? (upload_url + repository.iconUrl + "?tenant=" + tenant) : (upload_url + repository.iconUrl)}
                                         alt=""
-                                        className="img-icon"
+                                        className="midden-icon-25"
                                     />
                                     :
                                     <img
                                         src={('images/repository1.png')}
                                         alt=""
-                                        className="img-icon"
+                                        className="midden-icon-25"
                                     />
                             }
                             <span>{repository?.name}</span>
@@ -513,21 +513,22 @@ const RepositorydeAside = (props) => {
                         </svg>
                         概况
                     </div>
-                    <div className="repository-menu">
-                        <div className="repository-menu-firstmenu"
-                            onMouseOver={() => setIsHover(0)}
-                            onMouseLeave={() => setIsHover(null)}
-                        >
-                            <div className="repository-menu-firstmenu-left">
-                                <svg className="img-icon" aria-hidden="true">
-                                    <use xlinkHref="#icon-repository"></use>
-                                </svg>
-                                <span>知识库</span>
-                            </div>
-                            <div>
-                                <AddDropDown category={null} />
-                            </div>
+                    <div className="repository-menu-firstmenu"
+                        onMouseOver={() => setIsHover(0)}
+                        onMouseLeave={() => setIsHover(null)}
+                    >
+                        <div className="repository-menu-firstmenu-left">
+                            <svg className="img-icon" aria-hidden="true">
+                                <use xlinkHref="#icon-repository"></use>
+                            </svg>
+                            <span>知识库</span>
                         </div>
+                        <div>
+                            <AddDropDown category={null} />
+                        </div>
+                    </div>
+                    <div className="repository-menu">
+
                         <Tree
                             draggable
                             showIcon

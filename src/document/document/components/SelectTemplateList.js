@@ -11,10 +11,11 @@ import { observer, inject } from "mobx-react";
 import { Modal, Layout, Menu } from 'antd';
 import { VideoCameraOutlined } from '@ant-design/icons';
 import "./selectTemplateList.scss"
+import setImageUrl from '../../../common/utils/setImageUrl';
 const { Content, Sider } = Layout;
 
 const SelectTemplateList = (props) => {
-    const { setTemplateVisible,templateVisible, documentId, documentStore } = props;
+    const { setTemplateVisible, templateVisible, documentId, documentStore } = props;
     const imageNames = ["template2.png", "template1.png", "template3.png", "template4.png"];
     const { updateDocument, findDocumentTemplateList } = documentStore;
     const repositoryId = props.match.params.repositoryId;
@@ -30,7 +31,7 @@ const SelectTemplateList = (props) => {
         return;
     }, [])
 
-   
+
     const selectTemplate = (content) => {
         /** detailText 没更新到 */
         const data = {
@@ -38,7 +39,7 @@ const SelectTemplateList = (props) => {
             details: content
         }
         updateDocument(data).then(res => {
-            if(res.code === 0){
+            if (res.code === 0) {
                 setTemplateVisible(false)
                 props.history.push(`/repositorydetail/${repositoryId}/docEdit/${documentId}`)
             }
@@ -52,7 +53,7 @@ const SelectTemplateList = (props) => {
                 title="选择模板"
                 visible={templateVisible}
                 // onCancel={handleCancel}
-                width="670px"
+                width={"70vw"}
                 onCancel={() => setTemplateVisible(false)}
                 destroyOnClose={true}
                 okText="下一步"
@@ -61,6 +62,7 @@ const SelectTemplateList = (props) => {
             >
                 <Layout style={{
                     position: 'relative',
+                    height: "calc(100vh - 200px)"
                 }}>
                     <Sider
                         style={{
@@ -83,9 +85,10 @@ const SelectTemplateList = (props) => {
                             <div className="template-list">
                                 {
                                     templateList && templateList.map((item, index) => {
-                                        return <div className="template-box" key={index} onClick = {() => selectTemplate(item.details)}>
+                                        return <div className="template-box" key={index} onClick={() => selectTemplate(item.details)}>
                                             <img
-                                                src={('/images/' + imageNames[index])}
+                                                src={setImageUrl(item.iconUrl)}
+                                                // src={('/images/' + imageNames[index])}
                                                 alt=""
                                                 className="template-image"
                                             />

@@ -27,7 +27,7 @@ const AddDropDown = (props) => {
                     <svg className="content-add-icon" aria-hidden="true">
                         <use xlinkHref="#icon-folder"></use>
                     </svg>
-                    目录
+                    添加目录
                 </div>
 
             </Menu.Item>
@@ -36,7 +36,7 @@ const AddDropDown = (props) => {
                     <svg className="content-add-icon" aria-hidden="true">
                         <use xlinkHref="#icon-file"></use>
                     </svg>
-                    文档
+                    添加文档
                 </div>
 
             </Menu.Item>
@@ -45,7 +45,7 @@ const AddDropDown = (props) => {
                     <svg className="content-add-icon" aria-hidden="true">
                         <use xlinkHref="#icon-minmap"></use>
                     </svg>
-                    Markdown
+                    添加Markdown
                 </div>
             </Menu.Item>
         </Menu>

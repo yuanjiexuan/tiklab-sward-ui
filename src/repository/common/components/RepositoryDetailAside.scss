@@ -44,6 +44,7 @@
                     display: flex;
                     align-items: center;
                     font-weight: 600;
+                    gap: 5px;
                 }
 
             }
@@ -96,35 +97,36 @@
                 border-left: 3px solid #0053ca;
             }
 
+            .repository-menu-firstmenu {
+                height: 40px;
+                display: flex;
+                line-height: 40px;
+                width: 100%;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px 10px 10px 24px;
+                .category-add {
+                    padding: 4px;
+                    border-radius: 5px;
+                    
+                }
+                .category-add:hover {
+                    background: #E3e8f0;
+                }
+                // background-color: var(--thoughtware-gray-600);
+                .repository-menu-firstmenu-left {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+
+
             .repository-menu {
                 list-style-type: none;
                 height: calc(100% - 130px);
                 cursor: pointer;
                 overflow: auto;
                 background-color: #fff;
-
-                .repository-menu-firstmenu {
-                    height: 40px;
-                    display: flex;
-                    line-height: 40px;
-                    width: 100%;
-                    align-items: center;
-                    justify-content: space-between;
-                    padding: 10px 10px 10px 24px;
-                    .category-add {
-                        padding: 4px;
-                        border-radius: 5px;
-                        
-                    }
-                    .category-add:hover {
-                        background: #E3e8f0;
-                    }
-                    // background-color: var(--thoughtware-gray-600);
-                    .repository-menu-firstmenu-left {
-                        display: flex;
-                        align-items: center;
-                    }
-                }
 
                 .repository-menu-up {
                     margin-top: 100px;
@@ -183,6 +185,25 @@
                 .iconright {
                     margin-left: 10px;
                 }
+            }
+
+            .repository-menu::-webkit-scrollbar {
+                width: 0px;
+                height: 0px;
+            }
+            
+            .repository-menu:hover::-webkit-scrollbar {
+                width: 5px;
+                height: 0px;
+            }
+            .repository-menu::-webkit-scrollbar-thumb {
+                border-radius: 5px;
+                background: var(--thoughtware-gray-500);
+            }
+        
+            .repository-menu::-webkit-scrollbar-track {
+                border-radius: 0;
+                background: var(--thoughtware-gray-600);
             }
 
             .repository-setting-menu {

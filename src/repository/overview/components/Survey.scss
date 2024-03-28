@@ -15,7 +15,7 @@
         border-radius: 4px;
 
         .repository-icon {
-            width: 50px;
+            width: 40px;
             margin-right: 10px;
         }
 
@@ -32,7 +32,6 @@
             .top-name {
                 .name {
                     font-size: 20px;
-                    margin-bottom: 10px;
                 }
 
                 .user {
@@ -40,10 +39,10 @@
                     align-items: center;
 
                     .user-more {
-                        width: 25px;
-                        height: 25px;
-                        border-radius: 25px;
-                        font-size: 16px;
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 20px;
+                        font-size: 12px;
                         background-color: #ddd;
                         display: flex;
                         justify-content: center;

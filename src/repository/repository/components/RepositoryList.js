@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import RepositoryStore from "../store/RepositoryStore";
 import setImageUrl from "../../../common/utils/setImageUrl";
 import { useDebounce } from "../../../common/utils/debounce";
+import UserIcon from "../../../common/UserIcon/UserIcon";
 const RepositoryList = (props) => {
     const { findRepositoryList, createRecent,
         repositorylist, findRecentRepositoryList, createRepositoryFocus,
@@ -94,7 +95,29 @@ const RepositoryList = (props) => {
 
             </div>,
         },
-       
+        {
+            title: "负责人",
+            dataIndex: ["master", "nickname"],
+            key: "master",
+            align: "left",
+            render: (text, record) => (
+                <Space>
+                    <UserIcon name={text} />
+                    {text}
+                </Space>
+            )
+
+        },
+        {
+            title: "可见范围",
+            dataIndex: "limits",
+            key: "limits",
+            align: "left",
+            render: (text, record) => <div>
+               {text ==="0" ? "公开" : "私有"}
+            </div>,
+
+        },
         {
             title: "创建时间",
             dataIndex: "createTime",

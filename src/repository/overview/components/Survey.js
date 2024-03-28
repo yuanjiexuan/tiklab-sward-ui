@@ -137,7 +137,7 @@ const Survey = (props) => {
                                                 </svg>
                                             </div>
                                         </div>
-                                        <div className="desc">
+                                        {/* <div className="desc">
                                             <span>
                                                 目录 {repositoryInfo.categoryNum ? repositoryInfo.categoryNum : 0}
                                             </span>
@@ -145,7 +145,7 @@ const Survey = (props) => {
                                                 文档 {repositoryInfo.documentNum ? repositoryInfo.documentNum : 0}
                                             </span>
 
-                                        </div>
+                                        </div> */}
                                     </div>
 
                                 </div>
