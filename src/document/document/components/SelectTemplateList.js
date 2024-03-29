@@ -12,10 +12,11 @@ import { Modal, Layout, Menu } from 'antd';
 import { VideoCameraOutlined } from '@ant-design/icons';
 import "./selectTemplateList.scss"
 import setImageUrl from '../../../common/utils/setImageUrl';
+import Zhoubao from "../../../assets/images/zhoubao.png";
 const { Content, Sider } = Layout;
 
 const SelectTemplateList = (props) => {
-    const { setTemplateVisible, templateVisible, documentId, documentStore } = props;
+    const { setTemplateVisible, templateVisible, documentId, documentStore, selectTemplate } = props;
     const imageNames = ["template2.png", "template1.png", "template3.png", "template4.png"];
     const { updateDocument, findDocumentTemplateList } = documentStore;
     const repositoryId = props.match.params.repositoryId;
@@ -32,18 +33,10 @@ const SelectTemplateList = (props) => {
     }, [])
 
 
-    const selectTemplate = (content) => {
-        /** detailText 没更新到 */
-        const data = {
-            id: documentId,
-            details: content
-        }
-        updateDocument(data).then(res => {
-            if (res.code === 0) {
-                setTemplateVisible(false)
-                props.history.push(`/repositorydetail/${repositoryId}/docEdit/${documentId}`)
-            }
-        })
+    const selectTemplateInModal = (item) => {
+        
+        selectTemplate(item)
+        setTemplateVisible(false)
     }
 
     return (
@@ -85,10 +78,11 @@ const SelectTemplateList = (props) => {
                             <div className="template-list">
                                 {
                                     templateList && templateList.map((item, index) => {
-                                        return <div className="template-box" key={index} onClick={() => selectTemplate(item.details)}>
+                                        return <div className="template-box" key={index} onClick={() => selectTemplateInModal(item)}>
                                             <img
-                                                src={setImageUrl(item.iconUrl)}
+                                                // src={setImageUrl(item.iconUrl)}
                                                 // src={('/images/' + imageNames[index])}
+                                                src={Zhoubao}
                                                 alt=""
                                                 className="template-image"
                                             />

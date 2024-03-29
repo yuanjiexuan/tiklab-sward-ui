@@ -27,10 +27,7 @@ const DocumentDetail = (props)=>{
     }
     
     const documentId = props.match.params.id;
-   
-    // 初始化
-   
-    
+
     // 保存内容
     const save = (type) => {
         seteditOrExamine(type)

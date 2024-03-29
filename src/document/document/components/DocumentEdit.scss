@@ -88,4 +88,39 @@
         font-size: 30px;
         font-weight: 600;
     }
+    .template-title {
+        height: 40px;
+        line-height: 40px;
+        font-weight: 600;
+        color: #999;
+    }
+    .template-list {
+        display: flex;
+        gap: 10px;
+       
+        .template-box {
+            padding: 10px;
+            border: 1px solid rgba(126, 134, 142, 0.16);
+            box-sizing: border-box;
+            border-radius: 6px;
+            position: relative;
+    
+            .template-image {
+                width: 120px;
+            }
+    
+            .template-name {
+                height: 27px;
+                background: rgb(249, 250, 252);
+                width: 100%;
+                border-radius: 0px 0px 6px 6px;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                padding: 0 10px;
+                line-height: 27px;
+                color: #999;
+            }
+        }
+    }
 }

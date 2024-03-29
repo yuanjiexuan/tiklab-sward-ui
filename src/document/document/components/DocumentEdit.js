@@ -19,16 +19,35 @@ import "thoughtware-slate-ui/es/thoughtware-slate.css";
 import { getUser } from "thoughtware-core-ui";
 import { useDebounce } from "../../../common/utils/debounce";
 import { updateNodeName } from "../../../common/utils/treeDataAction";
+import setImageUrl from "../../../common/utils/setImageUrl";
+import SelectTemplateList from "./SelectTemplateList";
+import Template from "../../../assets/images/template.png";
+import Zhoubao from "../../../assets/images/zhoubao.png";
 const DocumentEdit = (props) => {
-    const { relationWorkStore } = props;
-    const { findDocument, updateDocument } = DocumentStore;
+    const { relationWorkStore, documentStore } = props;
+    console.log(documentStore)
+    const { findDocument, updateDocument, findDocumentTemplateList } = DocumentStore;
     const { documentTitle, setDocumentTitle, repositoryCatalogueList } = CategoryStore
     const documentId = props.match.params.id;
+    const repositoryId = props.match.params.repositoryId;
     const [docInfo, setDocInfo] = useState({ name: "", likenumInt: "", commentNumber: "", master: { name: "" } });
     const [value, setValue] = useState();
-    const editRef = useRef(); 
+    const [valueIsEmpty, setValueIsEmpty] = useState(false);
+    const editRef = useRef();
     const ticket = getUser().ticket;
     const tenant = getUser().tenant;
+    const [templateVisible, setTemplateVisible] = useState(false);
+    const [templateList, setTemplateList] = useState()
+
+    useEffect(() => {
+        findDocumentTemplateList().then(data => {
+            if (data.code === 0) {
+                setTemplateList(data.data)
+            }
+        })
+        return;
+    }, [])
+
     useEffect(() => {
         setValue()
         findDocument(documentId).then((data) => {
@@ -46,6 +65,13 @@ const DocumentEdit = (props) => {
         return;
     }, [documentId])
 
+    useEffect(() => {
+        if (value) {
+            setValueIsEmpty(determineValue(value))
+        }
+
+    }, [value])
+
     const save = () => {
         saveDocument(value)
 
@@ -57,18 +83,17 @@ const DocumentEdit = (props) => {
         const data = {
             id: documentId,
             details: value,
-            detailText:  editRef.current.innerText
+            detailText: editRef.current.innerText
         }
         updateDocument(data)
     }
 
     const updataDesc = useDebounce((value) => {
         setValue(value);
-
         const data = {
             id: documentId,
             details: value,
-            detailText:  editRef.current.innerText
+            detailText: editRef.current.innerText
         }
         updateDocument(data)
 
@@ -82,7 +107,7 @@ const DocumentEdit = (props) => {
                 id: documentId,
                 name: value.target.value
             }
-            
+
         }
         updateDocument(data).then(res => {
             if (res.code === 0) {
@@ -92,24 +117,67 @@ const DocumentEdit = (props) => {
             }
         })
     }
-    
+
+    const determineValue = (value) => {
+        let isEmpty = true;
+        const valueObject = JSON.parse(value);
+        if (valueObject.length > 1) {
+            isEmpty = false;
+        }
+
+        if (valueObject.length === 1) {
+            if (valueObject[0].type === "paragraph") {
+                if (valueObject[0].children[0].text === "") {
+                    isEmpty = true;
+                } else {
+                    isEmpty = false;
+                }
+            } else {
+                isEmpty = false;
+            }
+        }
+        console.log(isEmpty)
+        return isEmpty;
+    }
+
+    const selectTemplate = (item) => {
+        /**
+         * detailText 没更新到
+         */
+        const data = {
+            id: documentId,
+            details: item.details,
+            detailText: item.detailText
+        }
+        setValue(null)
+        updateDocument(data).then(res => {
+            if (res.code === 0) {
+                setValue(item.details)
+                // props.history.push(`/repositorydetail/${repositoryId}/docEdit/${documentId}`)
+            }
+        })
+    }
+
+    const goExamine = () => {
+        props.history.push(`/repositorydetail/${repositoryId}/doc/${documentId}`)
+    }
     return (
         <div className="documnet-edit">
             <div className="edit-top">
                 <div className="edit-title" id="examine-title">{docInfo.name}</div>
                 <div className="edit-right">
                     <Button type="primary" onClick={() => save()}>保存</Button>
-                    <Button onClick={() => props.history.goBack()}>退出编辑</Button>
+                    <Button onClick={() => goExamine()}>退出编辑</Button>
                 </div>
             </div>
             {
                 value && <EditorBig
                     value={value}
                     onChange={value => updataDesc(value)}
-                    relationWorkStore= {relationWorkStore}
-                    base_url = {upload_url}
-                    ticket = {ticket}
-                    tenant = {tenant}
+                    relationWorkStore={relationWorkStore}
+                    base_url={upload_url}
+                    ticket={ticket}
+                    tenant={tenant}
                 >
                     <>
                         <Row className="document-examine-content">
@@ -124,22 +192,59 @@ const DocumentEdit = (props) => {
                                         onBlur={(value) => changeTitle(value)}
                                     />
                                 </div>
-                                <div ref = {editRef}>
+                                <div ref={editRef}>
                                     <EditorBigContent
                                         value={value}
-                                        relationWorkStore= {relationWorkStore}
+                                        relationWorkStore={relationWorkStore}
 
-                                />
+                                    />
                                 </div>
+                                {
+                                    valueIsEmpty &&
+                                    <div className="template-select">
+                                        <div className="template-title">推荐模版</div>
+                                        <div className="template-list">
+                                            {
+                                                templateList && templateList.map((item, index) => {
+                                                    return <div className="template-box" key={index} onClick={() => selectTemplate(item)}>
+                                                        <img
+                                                            // src={setImageUrl(item.iconUrl)}
+                                                            src={Zhoubao}
+                                                            alt=""
+                                                            className="template-image"
+                                                        />
+                                                        <div className="template-name">{item.name}</div>
+                                                    </div>
+                                                })
+                                            }
+                                            <div className="template-box" key={0} onClick={() => setTemplateVisible(true)}>
+                                                <img
+                                                    src={Template}
+                                                    // src={('/images/' + imageNames[index])}
+                                                    alt=""
+                                                    className="template-image"
+                                                />
+                                                <div className="template-name">更多模版</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
                             </Col>
                         </Row>
                     </>
 
                 </EditorBig>
             }
-
-
-
+            <SelectTemplateList 
+                documentId = {documentId} 
+                setTemplateVisible = {setTemplateVisible} 
+                templateVisible = {templateVisible}
+                documentStore = {DocumentStore}
+                selectTemplate = {selectTemplate}
+                {...props} 
+            />
+               
         </div>
     )
 }

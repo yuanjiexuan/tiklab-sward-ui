@@ -19,6 +19,7 @@ import DocumentAddEdit from "./DocumentAddEdit";
 import CommentShare from "../store/CommentStore";
 import DocumentStore from "../store/DocumentStore";
 import CategoryStore from "../../../repository/common/store/CategoryStore";
+import DocumentEdit from "./DocumentEdit";
 
 const DocumentExamine = (props) => {
     const { relationWorkStore } = props;
@@ -52,6 +53,7 @@ const DocumentExamine = (props) => {
                     setValue(data.data.details)
                 } else {
                     setValue()
+                    props.history.push(`/repositorydetail/${repositoryId}/docEdit/${documentId}`)
                 }
                 const document = data.data;
                 const node = document.node;
@@ -153,7 +155,7 @@ const DocumentExamine = (props) => {
                 </div>
             </div>
             {
-                value ? <>
+                value && <>
                     <div className="document-examine-content">
                         <Row className="document-examine-row">
                             <Col xl={{ span: 18, offset: 3 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }}>
@@ -184,8 +186,6 @@ const DocumentExamine = (props) => {
                         </div>
                     </div>
                 </>
-                    :
-                    <DocumentAddEdit documentTitle={documentTitle} setDocumentTitle={setDocumentTitle} />
             }
 
 

@@ -6,7 +6,7 @@
  * @LastEditors: 袁婕轩
  * @LastEditTime: 2021-09-08 16:20:06
  */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { Input, Row, Col, Modal } from 'antd';
 import { EditorBig, EditorBigContent } from "thoughtware-slate-ui";
@@ -25,6 +25,7 @@ const TemplateEdit = (props) => {
     const [titleValue, setTitleValue] = useState("未命名模板");
     const [buttonText, setButtonText] = useState(templateId ? "更改模板" : "创建模板")
     const [visable, setVisable] = useState(false)
+    const editRef = useRef();
 
     const ticket = getUser().ticket;
     const tenant = getUser().tenant;
@@ -46,9 +47,11 @@ const TemplateEdit = (props) => {
 
     const addTemplate = (iconUrl) => {
         const serialize = JSON.stringify(editorValue)
+        console.log(editRef.current.innerText)
         const data = {
             name: titleValue,
             iconUrl: "/image/" +iconUrl,
+            detailText: editRef.current.innerText,
             details: editorValue
         }
 
@@ -159,7 +162,7 @@ const TemplateEdit = (props) => {
                                         value={titleValue}
                                         placeholder="标题"
                                     />
-                                    <div id = "template-detail" className="template-detail">
+                                    <div ref={editRef} id = "template-detail" className="template-detail">
                                       <EditorBigContent
                                         value={editorValue}
                                         onChange={setEditorValue}
