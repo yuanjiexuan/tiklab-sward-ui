@@ -82,7 +82,7 @@ const RepositorydeAside = (props) => {
             wikiRepository: { id: repositoryId }
         }
         createRecent(params)
-        if (item.type === "categpry") {
+        if (item.type === "category") {
             findCategoryChildren(item.id, item.type)
         }
 

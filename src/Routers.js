@@ -49,9 +49,8 @@ const ShareMarkdown = AsyncComponent(() => import("./document/share/components/S
 // 分享文档页面
 const PassWord = AsyncComponent(() => import('./document/share/components/PassWord'))
 
-
+const SettingHome = AsyncComponent(() => import('./setting/home/components/SettingHome.js'))
 const LoadData = AsyncComponent(() => import('./setting/loadData/LoadData'))
-
 // 消息
 const SystemMessageSendType = AsyncComponent(() => import('./setting/message/SystemMessageSendType.js'))
 const SystemMessageType = AsyncComponent(() => import('./setting/message/SystemMessageType.js'))
@@ -283,6 +282,12 @@ const Routes = [
                 component: Setting,
                 key: 'Setting',
                 routes: [
+                    {
+                        path: "/setting/home",
+                        component: SettingHome,
+                        row: true,
+                        exact: true
+                    },
                     {
                         path: "/setting/organ",
                         component: OrgaContent,

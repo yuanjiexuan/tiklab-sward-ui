@@ -88,7 +88,7 @@ const Header = props => {
                     </div>
                     <div className={'frame-header-right-text'}>
                         <div className="frame-header-icon">
-                            <div className="frame-header-set" data-title="系统设置" onClick={() => goSet("/setting/organ")}>
+                            <div className="frame-header-set" data-title="系统设置" onClick={() => goSet("/setting/home")}>
                                 <Space>
                                     <svg aria-hidden="true" className="header-icon">
                                         <use xlinkHref="#icon-iconsetsys"></use>

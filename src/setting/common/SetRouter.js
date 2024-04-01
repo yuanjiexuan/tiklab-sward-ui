@@ -9,7 +9,7 @@
 
 const setDevRouter= [
     {
-        title: "用户与部门",
+        title: "用户与权限",
         icon: 'systemuser',
         id: '/setting/organ',
         purviewCode: "orga",
@@ -45,17 +45,15 @@ const setDevRouter= [
                 purviewCode: "user_dir",
                 code: 1-4,
             },
+            {
+                title: '权限',
+                icon: 'systempermissions',
+                id: "/setting/systemRole",
+                purviewCode: "SysPermission",
+                code: 2
+            },
         ]
     },
-   
-    {
-        title: '权限',
-        icon: 'systempermissions',
-        id: "/setting/systemRole",
-        purviewCode: "SysPermission",
-        code: 2
-    },
-    
     {
         title: "消息",
         icon: 'systemmessage',
