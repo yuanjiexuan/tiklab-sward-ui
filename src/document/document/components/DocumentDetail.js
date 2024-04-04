@@ -7,7 +7,7 @@
  * @LastEditTime: 2021-09-29 09:14:34
  */
 import React,{useState} from "react";
-import { Breadcrumb} from 'antd';
+import { Breadcrumb, message} from 'antd';
 import { Provider, observer } from "mobx-react";
 import "./documentDetail.scss";
 import DocumentExamine from "./DocumnetExamine";
@@ -44,7 +44,11 @@ const DocumentDetail = (props)=>{
 			id: documentId,
 			details: serialize
 		}
-		updateDocument(data)
+		updateDocument(data).then(res => {
+			if (res.code === 0) {
+				message.success("保存成功")
+			}
+		})
     }
     return (<Provider {...store}>
         <div className="documnet-detail">

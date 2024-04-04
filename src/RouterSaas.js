@@ -248,7 +248,7 @@ const RoutesSaas = [
                 key: 'Setting',
                 routes: [
                     {
-                        path: "/setting/organ",
+                        path: "/setting/orga",
                         component: OrgaContent,
                         exact: true
                     },
@@ -274,12 +274,12 @@ const RoutesSaas = [
                         exact: true
                     },
                     {
-                        path: "/setting/directory",
+                        path: "/setting/dir",
                         component: ProjectDirectory,
                         exact: true
                     },
                     {
-                        path: "/setting/usergroup",
+                        path: "/setting/userGroup",
                         component: ProjectUserGroup,
                         exact: true
                     },

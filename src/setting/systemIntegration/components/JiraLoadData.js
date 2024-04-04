@@ -41,8 +41,7 @@ const LoadData = props => {
             <Col lg={{ span: 24 }} xxl={{ span: "18", offset: "3" }}>
                 <div className="load">
                     <Breadcumb
-                        firstText="系统集成"
-                        secondText="jira集成"
+                        firstText="jira集成"
                     />
                     <div className="load-jira">
                         <div>从本地文件导入Jira数据</div>

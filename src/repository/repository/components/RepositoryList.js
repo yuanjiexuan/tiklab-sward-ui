@@ -309,7 +309,7 @@ const RepositoryList = (props) => {
                             <InputSearch onChange={(value) => onSearch(value)} placeholder={"知识库名称"} />
                         </div>
                     </div>
-                    <div className="table-box">
+                    <div className="repository-table-box">
                         <Table
                             columns={columns}
                             dataSource={repositorylist}

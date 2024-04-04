@@ -9,19 +9,30 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { withRouter } from "react-router-dom";
-import { setDevRouter, setPrdRouter } from "./SetRouter"
-import { PrivilegeButton } from "thoughtware-privilege-ui"
+import { setDevRouter, setPrdRouter } from "./SetRouter";
+import { PrivilegeButton } from "thoughtware-privilege-ui";
+import SettingHomeStore from "../../home/store/SettingHomeStore"
+import { observer } from 'mobx-react';
 const SetAside = (props) => {
     // 无子级菜单处理
-    const [selectKey, setSelectKey] = useState("/organ/organ");
+    const {selectKey, setSelectKey} = SettingHomeStore;
 
-    const [router, setRouterMenu] = useState(setDevRouter)
-    const select = (key, index) => {
+    const [router, setRouterMenu] = useState(setDevRouter);
+    const authType =JSON.parse(localStorage.getItem("authConfig"))?.authType;
+    const select = (data) => {
+        const id = data.id;
+       
+        if (data.islink &&  !authType) {
+            const authUrl = JSON.parse(localStorage.getItem("authConfig")).authServiceUrl + "#"+ id;
+            // window.location.href = authUrl;
 
-        props.history.push(key)
-        setSelectKey(key)
-
+            window.open(authUrl, '_blank');
+        }else {
+            props.history.push(id)
+            setSelectKey(id)
+        }
     }
+    
 
     useEffect(() => {
         if (env === "local") {
@@ -30,33 +41,45 @@ const SetAside = (props) => {
         if (env !== "local") {
             setRouterMenu(setPrdRouter)
         }
+
         return
     }, [])
+
 
     const renderMenu = (data, deep, index) => {
         return (
             <PrivilegeButton code={data.purviewCode}>
                 <li
                     style={{ cursor: "pointer", paddingLeft: `${deep * 20 + 20}` }}
-                    className={`orga-aside-li orga-aside-second ${data.id === selectKey ? "orga-aside-select" : ""}`}
-                    onClick={() => select(data.id, index)}
+                    className={`orga-aside-item ${data.id === selectKey ? "orga-aside-select" : ""}`}
+                    onClick={() => select(data)}
                     key={data.code}
                     code={data.encoded}
                 >
                     <span className="orga-aside-item-left">
                         {
-                            deep === 0 && <svg className="img-icon" aria-hidden="true">
+                            data.icon && <svg className="menu-icon" aria-hidden="true">
                                 <use xlinkHref={`#icon-${data.icon}`}></use>
                             </svg>
                         }
-
                         <span>{data.title}</span>
+
                     </span>
+                    {
+                        (data.islink && !authType )&& <div className="orga-aside-item-icon">
+                            <svg className="img-icon" aria-hidden="true">
+                                <use xlinkHref={`#icon-outside`}></use>
+                            </svg>
+                        </div>
+                    }
+                    
 
                 </li>
             </PrivilegeButton>
+
         )
     }
+
     // 树的展开与闭合
     const [expandedTree, setExpandedTree] = useState(["/organ/organ"])
 
@@ -78,12 +101,15 @@ const SetAside = (props) => {
             <PrivilegeButton code={item.purviewCode}>
                 <li key={item.code} title={item.title} className="orga-aside-li">
                     <div className="orga-aside-item orga-aside-first" style={{ paddingLeft: `${deep * 20 + 20}` }} onClick={() => setOpenOrClose(item.id)}>
-                        <span to={item.id} className="orga-aside-item-left">
-                            <svg className="img-icon" aria-hidden="true">
-                                <use xlinkHref={`#icon-${item.icon}`}></use>
-                            </svg>
-                            <span className="orga-aside-title">{item.title}</span>
-                        </span>
+
+                        {
+                            item.icon && <span to={item.id} className="orga-aside-item-left">
+                                <svg className="menu-icon" aria-hidden="true">
+                                    <use xlinkHref={`#icon-${item.icon}`}></use>
+                                </svg>
+                                <span className="orga-aside-title">{item.title}</span>
+                            </span>
+                        }
                         <div className="orga-aside-item-icon">
                             {
                                 item.children ?
@@ -106,6 +132,7 @@ const SetAside = (props) => {
                     </ul>
                 </li>
             </PrivilegeButton>
+
         )
     }
 
@@ -120,12 +147,9 @@ const SetAside = (props) => {
                         })
                     }
                 </ul>
-                {/* <div className="orga-change" onClick={()=> props.history.push("/organ/organ")}>
-                    组织管理
-                </div> */}
             </div>
 
         </Fragment>
     )
 }
-export default withRouter(SetAside);
+export default withRouter(observer(SetAside));

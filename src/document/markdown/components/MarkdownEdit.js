@@ -15,6 +15,7 @@ import MarkdownStore from "../store/MarkdownStore";
 import "thoughtware-markdown-ui/es/thoughtware-markdown.css";
 import Categorystore from "../../../repository/common/store/CategoryStore";
 import { Node } from "slate";
+import { message } from "antd";
 const MarkdownEdit = (props) => {
     const { findDocument, updateDocument } = MarkdownStore;
     const { documentTitle, setDocumentTitle} = Categorystore;
@@ -68,12 +69,11 @@ const MarkdownEdit = (props) => {
             details: JSON.stringify(value),
             detailText: serializeValue
         }
-        updateDocument(data)
-        // .then(res => {
-        //     if (res.code === 0) {
-        //         props.history.push(`/repositorydetail/${repositoryId}/markdownView/${documentId}`)
-        //     }
-        // })
+        updateDocument(data).then(res => {
+			if (res.code === 0) {
+				message.success("保存成功")
+			}
+		})
     }
 
     const changeTitle = (value) => {

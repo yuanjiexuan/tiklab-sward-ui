@@ -11,43 +11,42 @@ const setDevRouter= [
     {
         title: "用户与权限",
         icon: 'systemuser',
-        id: '/setting/organ',
+        id: '/setting/orga',
         purviewCode: "orga",
         code: 1,
         children: [
             {
                 title: "部门",
-                icon: 'orgamanage',
-                id: '/setting/organ',
+                id: '/setting/orga',
                 purviewCode: "orga",
+                islink: true,
                 code: 1-1,
                 
             },
             {
                 title: '用户',
-                icon: 'usermanage',
                 id: '/setting/user',
                 purviewCode: "user",
+                islink: true,
                 code: 1-2,
             },
             {
                 title: '用户组',
-                icon: 'usermanage',
-                id: '/setting/usergroup',
+                id: '/setting/userGroup',
                 purviewCode: "user_group",
+                islink: true,
                 code: 1-3,
             },
             {
         
                 title: "用户目录",
-                icon: 'category',
-                id: '/setting/directory',
+                id: '/setting/dir',
                 purviewCode: "user_dir",
+                islink: true,
                 code: 1-4,
             },
             {
                 title: '权限',
-                icon: 'systempermissions',
                 id: "/setting/systemRole",
                 purviewCode: "SysPermission",
                 code: 2
@@ -63,14 +62,12 @@ const setDevRouter= [
         children: [
             {
                 title: "消息通知方案",
-                icon: 'messagecenter',
                 id: '/setting/messageNotice',
                 purviewCode: "SysMessageNotice",
                 code: 4-1
             },
             {
                 title: '消息发送方式',
-                icon: 'messagecenter',
                 id: '/setting/messageSendType',
                 purviewCode: "SysMessageSendType",
                 code: 4-2,
@@ -106,13 +103,11 @@ const setDevRouter= [
         children: [
             {
                 title: '操作日志',
-                icon: 'systemcenter',
                 id: '/setting/logList',
                 code: 10-1,
             },
             {
                 title: '备份与恢复',
-                icon: 'systemcenter',
                 id: '/setting/backup',
                 code: 10-2,
             }
@@ -146,62 +141,53 @@ const setDevRouter= [
         children: [
             {
                 title: '模板',
-                icon: 'systemtemplate',
                 id: "/setting/template",
                 code: 12-1,
             },
             {
                 title: '用户组',
-                icon: 'projecttype',
                 id: '/setting/usersystemgroup',
                 purviewCode: "user_group",
                 code: 12-18,
             },
             {
                 title: '系统功能',
-                icon: 'systemcenter',
                 id: '/setting/systemFeature',
                 purviewCode: "SysFeatrueSys",
                 code: 12-3,
             },
             {
                 title: '系统角色',
-                icon: 'systemcenter',
                 id: '/setting/systemRoleBuilt',
                 purviewCode: "SysRoleSys",
                 code: 12-4,
             },
             {
                 title: '项目功能',
-                icon: 'projectpriviliage',
                 id: '/setting/projectFeature',
                 purviewCode: "SysFeatrueProject",
                 code: 12-5,
             },
             {
                 title: '项目角色',
-                icon: 'projectpriviliage',
                 id: '/setting/projectRole',
                 purviewCode: "SysRoleProject",
                 code: 12-6
             },
             {
                 title: '消息通知方式',
-                icon: 'messagecenter',
                 id: '/setting/messageNoticeSystem',
                 purviewCode: "SysMessageNotice",
                 code: 12-7,
             },
             {
                 title: '项目消息通知方式',
-                icon: 'messagecenter',
                 id: '/setting/projectMessageNotice',
                 purviewCode: "SysMessageType",
                 code: 12-8,
             },
             {
                 title: '消息类型',
-                icon: 'messagecenter',
                 id: '/setting/messageType',
                 purviewCode: "SysMessageType",
                 code: 12-8,
@@ -209,28 +195,24 @@ const setDevRouter= [
            
             {
                 title: '日志模板',
-                icon: 'systemcenter',
                 id: '/setting/myLogTemplateList',
                 // purviewCode: "SysLogTemplate",
                 code: 12-10,
             },
             {
                 title: '日志类型',
-                icon: 'systemcenter',
                 id: '/setting/projectLogTypeList',
                 // purviewCode: "SysLogType",
                 code: 12-11,
             },
             {
                 title: '待办模板',
-                icon: 'systemcenter',
                 id: '/setting/todoTempList',
                 purviewCode: "SysSetting",
                 code: 12-12,
             },
             {
                 title: '待办类型',
-                icon: 'systemcenter',
                 id: '/setting/todoTypeTask',
                 purviewCode: "SysSetting",
                 code: 12-13,
@@ -241,51 +223,49 @@ const setDevRouter= [
 
 const setPrdRouter= [
     {
-        title: "用户与部门",
+        title: "用户与权限",
         icon: 'systemuser',
-        id: '/setting/organ',
+        id: '/setting/orga',
         purviewCode: "orga",
         code: 1,
         children: [
             {
                 title: "部门",
-                icon: 'orgamanage',
-                id: '/setting/organ',
+                id: '/setting/orga',
                 purviewCode: "orga",
+                islink: true,
                 code: 1-1,
                 
             },
             {
                 title: '用户',
-                icon: 'usermanage',
                 id: '/setting/user',
                 purviewCode: "user",
+                islink: true,
                 code: 1-2,
             },
             {
                 title: '用户组',
-                icon: 'usermanage',
-                id: '/setting/usergroup',
+                id: '/setting/userGroup',
                 purviewCode: "user_group",
+                islink: true,
                 code: 1-3,
             },
             {
         
                 title: "用户目录",
-                icon: 'category',
-                id: '/setting/directory',
+                id: '/setting/dir',
                 purviewCode: "user_dir",
+                islink: true,
                 code: 1-4,
             },
+            {
+                title: '权限',
+                id: "/setting/systemRole",
+                purviewCode: "SysPermission",
+                code: 2
+            },
         ]
-    },
-    
-    {
-        title: '权限',
-        icon: 'systempermissions',
-        id: "/setting/systemRole",
-        purviewCode: "SysPermission",
-        code: 2
     },
     {
         title: "消息",
@@ -296,14 +276,12 @@ const setPrdRouter= [
         children: [
             {
                 title: "消息通知方案",
-                icon: 'messagecenter',
                 id: '/setting/messageNotice',
                 purviewCode: "SysMessageNotice",
                 code: 4-1
             },
             {
                 title: '消息发送方式',
-                icon: 'messagecenter',
                 id: '/setting/messageSendType',
                 purviewCode: "SysMessageSendType",
                 code: 4-2,
@@ -326,7 +304,7 @@ const setPrdRouter= [
             {
                 title: '地址配置',
                 id: '/setting/urlData',
-                code: 9-2,
+                code: 9-1,
             }
         ]
     },
@@ -339,14 +317,11 @@ const setPrdRouter= [
         children: [
             {
                 title: '操作日志',
-                icon: 'systemcenter',
                 id: '/setting/logList',
-                // purviewCode: "SysLogList",
                 code: 10-1,
             },
             {
                 title: '备份与恢复',
-                icon: 'systemcenter',
                 id: '/setting/backup',
                 code: 10-2,
             }

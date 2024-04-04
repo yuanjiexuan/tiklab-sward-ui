@@ -13,7 +13,7 @@ import { Redirect } from "react-router-dom";
 const Login = AsyncComponent(() => import('./login/Login'))
 const Logout = AsyncComponent(() => import('./login/Logout'))
 const Home = AsyncComponent(() => import('./home/home/components/Home'))
-const ProjectNotFound = AsyncComponent(() => import("./setting/common/ProjectNotFond"))
+const ProjectNotFound = AsyncComponent(() => import("./setting/common/components/ProjectNotFond"))
 
 const Index = AsyncComponent(() => import('./home/home/components/Layout'))
 const RepositoryDetail = AsyncComponent(() => import('./repository/common/components/RepositoryLayout'))
@@ -60,7 +60,7 @@ const SystemMessageNoticeBase = AsyncComponent(() => import('./setting/message/S
 const ProjectMessageNoticeContent = AsyncComponent(() => import("./setting/message/ProjectMessageNoticeContent"))
 const DomainMessageNoticeContent = AsyncComponent(() => import("./repository/setting/projectMessage/DomainMessageNoticeContent.js"))
 
-const Setting = AsyncComponent(() => import('./setting/common/Setting'))
+const Setting = AsyncComponent(() => import('./setting/common/components/Setting'))
 const ProjectPlugin = AsyncComponent(() => import('./setting/plugins/ProjectPlugin'))
 
 const SystemFeature = AsyncComponent(() => import('./setting/privilege/SystemFeature'))
@@ -111,8 +111,18 @@ const Routes = [
         component: Logout,
     },
     {
-        path: "/no-auth",
+        path: "/noAuth",
         exact: true,
+        component: VailProductUserPage,
+    },
+    {
+        exact: true,
+        path: '/404',
+        component: VailProductUserPage,
+    },
+    {
+        exact: true,
+        path: '/noaccess',
         component: VailProductUserPage,
     },
     {
@@ -289,7 +299,7 @@ const Routes = [
                         exact: true
                     },
                     {
-                        path: "/setting/organ",
+                        path: "/setting/orga",
                         component: OrgaContent,
                         row: true,
                         exact: true
@@ -321,12 +331,12 @@ const Routes = [
                         exact: true
                     },
                     {
-                        path: "/setting/directory",
+                        path: "/setting/dir",
                         component: ProjectDirectory,
                         exact: true
                     },
                     {
-                        path: "/setting/usergroup",
+                        path: "/setting/userGroup",
                         component: ProjectUserGroup,
                         exact: true
                     },

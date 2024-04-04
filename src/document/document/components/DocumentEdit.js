@@ -7,7 +7,7 @@
  * @LastEditTime: 2021-09-13 13:13:00
  */
 import React, { useEffect, useState, useRef } from "react";
-import { Row, Col, Input } from 'antd';
+import { Row, Col, Input, message } from 'antd';
 import { observer, inject } from "mobx-react";
 import { withRouter } from "react-router-dom";
 import "./documentEdit.scss";
@@ -85,7 +85,11 @@ const DocumentEdit = (props) => {
             details: value,
             detailText: editRef.current.innerText
         }
-        updateDocument(data)
+        updateDocument(data).then(res => {
+			if (res.code === 0) {
+				message.success("保存成功")
+			}
+		})
     }
 
     const updataDesc = useDebounce((value) => {
