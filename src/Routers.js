@@ -15,6 +15,14 @@ const Logout = AsyncComponent(() => import('./login/Logout'))
 const Home = AsyncComponent(() => import('./home/home/components/Home'))
 const ProjectNotFound = AsyncComponent(() => import("./setting/common/components/ProjectNotFond"))
 
+
+const NoFoundPage = AsyncComponent(() => import('./login/NoFoundPage.js'));
+const NoAccessPage = AsyncComponent(() => import('./login/SystemNoAccessPage'));
+const ProjectNoAccessPage = AsyncComponent(() => import('./login/ProjectNoAccessPage'));
+const ExcludeProductUserContent = AsyncComponent(() => import('./login/ExcludeProductUserPage'))
+
+
+
 const Index = AsyncComponent(() => import('./home/home/components/Layout'))
 const RepositoryDetail = AsyncComponent(() => import('./repository/common/components/RepositoryLayout'))
 const Survey = AsyncComponent(() => import('./repository/overview/components/Survey'))
@@ -113,17 +121,17 @@ const Routes = [
     {
         path: "/noAuth",
         exact: true,
-        component: VailProductUserPage,
+        component: ExcludeProductUserContent,
     },
     {
         exact: true,
         path: '/404',
-        component: VailProductUserPage,
+        component: NoFoundPage,
     },
     {
         exact: true,
         path: '/noaccess',
-        component: VailProductUserPage,
+        component: NoAccessPage,
     },
     {
         path: "/share/:shareId",
@@ -197,6 +205,11 @@ const Routes = [
                 path: "/repositorydetail/:repositoryId",
                 component: RepositoryDetail,
                 routes: [
+                    {   
+                        path: "/repositorydetail/:id/noAccess",
+                        exact: true,
+                        component: ProjectNoAccessPage
+                    },
                     {
                         path: "/repositorydetail/:repositoryId/survey",
                         component: Survey

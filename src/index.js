@@ -14,7 +14,7 @@ import { renderRoutes } from "react-router-config";
 import { Provider } from 'mobx-react';
 import { store } from "./stores"
 import { orgStores } from "thoughtware-user-ui/es/store";
-import { getUser, enableAxiosCE } from 'thoughtware-core-ui'
+import { getUser, enableAxios } from 'thoughtware-core-ui'
 import { pluginLoader, PluginProvider } from "thoughtware-plugin-core-ui";
 import './common/language/i18n';
 import "./index.scss";
@@ -25,7 +25,7 @@ import "./assets/index";
 import { privilegeStores } from "thoughtware-privilege-ui/es/store";
 import zhCN from 'antd/es/locale/zh_CN';
 import { ConfigProvider } from 'antd';
-enableAxiosCE()
+enableAxios()
 const Index = observer(() => {
     const { i18n } = useTranslation();
     const [visable, setVisable] = useState(true);

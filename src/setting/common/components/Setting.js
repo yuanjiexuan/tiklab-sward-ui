@@ -11,28 +11,28 @@ import { Layout } from 'antd';
 import SetAside from "./SetAside";
 import "./Setting.scss"
 import { renderRoutes } from "react-router-config";
-import {SystemNav} from "thoughtware-privilege-ui";
-import {setDevRouter, setPrdRouter}  from "./SetRouter";
+import { SystemNav } from "thoughtware-privilege-ui";
+import { setDevRouter, setPrdRouter } from "./SetRouter";
 const { Sider, Content } = Layout;
 const Setting = (props) => {
     const route = props.route;
-    const [router,setRouterMenu] = useState(setDevRouter)
+    const [router, setRouterMenu] = useState(setDevRouter)
     useEffect(() => {
-        if(env === "local"){
+        if (env === "local") {
             setRouterMenu(setDevRouter)
         }
-        if(env !== "local"){
+        if (env !== "local") {
             setRouterMenu(setPrdRouter)
         }
-        return 
-    },[])
+        return
+    }, [])
     return (
         <Fragment>
             <SystemNav
                 {...props}
-                applicationRouters={router} // 菜单
-                outerPath={"/setting"} // 系统设置Layout路径
-                notFoundPath={"/noaccess"}  //找不到页面路径
+                applicationRouters={router}
+                outerPath={"/setting"}
+                noAccessPath={"/noaccess"} //没有资源访问权限页面的路由参数
             >
                 <Layout className="orga">
                     <Sider width={200} className="site-layout-background">
