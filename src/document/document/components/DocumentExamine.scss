@@ -88,6 +88,12 @@
             right: 4px;
         }
     }
-
+    .category-box {
+        position: absolute;
+        top: 50px;
+        right: 0;
+        width: 300px;
+        height: calc(100% - 50px);
+    }
 
 }

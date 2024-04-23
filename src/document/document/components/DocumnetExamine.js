@@ -9,7 +9,7 @@
 import React, { useEffect, useState } from "react";
 import { Provider, inject, observer } from "mobx-react";
 import { Button, Row, Col, message } from 'antd';
-import { PreviewEditor } from "thoughtware-slate-ui";
+import { PreviewEditor, EditorCategory } from "thoughtware-slate-ui";
 import "thoughtware-slate-ui/es/thoughtware-slate.css";
 import "./documentExamine.scss"
 import ShareModal from "../../share/components/ShareModal";
@@ -32,7 +32,7 @@ const DocumentExamine = (props) => {
 
     const { createLike, createShare, updateShare, deleteLike } = CommentShare;
     const [shareVisible, setShareVisible] = useState(false)
-
+    const [showCategory, setShowCategory] = useState(false);
     const userId = getUser().userId;
     const tenant = getUser().tenant;
     const [docInfo, setDocInfo] = useState()
@@ -86,7 +86,7 @@ const DocumentExamine = (props) => {
         } else {
             const data = {
                 toWhomId: documentId,
-                likeUser: {id: userId},
+                likeUser: { id: userId },
                 likeType: "doc"
             }
             createLike(data).then(res => {
@@ -184,10 +184,26 @@ const DocumentExamine = (props) => {
                             </span>
                             <div className="commnet-num" style={{ top: "37px" }}>{likeNum}</div>
                         </div>
+                        <div className="comment-box-item">
+                            <span className="comment-item" onClick={() => setShowCategory(true)}>
+                                {
+                                    like ? <svg className="midden-icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-zan"></use>
+                                    </svg> : <svg className="midden-icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-dianzan"></use>
+                                    </svg>
+                                }
+                            </span>
+                            <div className="commnet-num" style={{ top: "37px" }}>{likeNum}</div>
+                        </div>
                     </div>
                 </>
             }
-
+            {
+                showCategory && <div className="category-box">
+                    <EditorCategory newValue={JSON.parse(value)} setShowCategory={setShowCategory} />
+                </div>
+            }
 
             <ShareModal
                 documentIds={[documentId]}

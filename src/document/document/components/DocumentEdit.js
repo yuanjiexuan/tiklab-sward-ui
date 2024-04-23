@@ -174,6 +174,7 @@ const DocumentEdit = (props) => {
                     <Button onClick={() => goExamine()}>退出编辑</Button>
                 </div>
             </div>
+            <div style={{height: "calc(100% - 60px)"}}>
             {
                 value && <EditorBig
                     value={value}
@@ -240,6 +241,8 @@ const DocumentEdit = (props) => {
 
                 </EditorBig>
             }
+            </div>
+            
             <SelectTemplateList 
                 documentId = {documentId} 
                 setTemplateVisible = {setTemplateVisible} 

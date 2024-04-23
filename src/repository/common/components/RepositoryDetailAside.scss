@@ -19,28 +19,24 @@
 
             .repository-title {
                 display: flex;
-                line-height: 40px;
-                width: 100%;
                 align-items: center;
-                padding: 10px 10px 0 24px;
-
                 justify-content: space-between;
-
+                height: 50px;
+                line-height: 50px;
+                width: 100%;
+                padding: 0 10px 0px 24px;
                 span {
                     height: 100%;
                     overflow: hidden;
                     white-space: nowrap;
                     overflow: hidden;
-                    width: 300px;
                     text-overflow: ellipsis;
-
                     i {
                         margin-right: 10px;
                     }
                 }
 
                 .repository-title-left {
-                    margin-right: 20px;
                     display: flex;
                     align-items: center;
                     font-weight: 600;
