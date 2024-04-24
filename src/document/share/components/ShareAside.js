@@ -41,7 +41,7 @@ const ShareAside = (props) => {
         params.append("shareLink", shareLink)
         const paramsData = {
             shareId: shareLink,
-            dimensions: [1, 2]
+            // dimensions: [1, 2]
         }
         judgeAuthCode(params).then(data => {
             if (data.data === "true") {
@@ -108,6 +108,7 @@ const ShareAside = (props) => {
     const selectKeyFun = (event, item) => {
         event.stopPropagation()
         setSelectKey(item.id)
+        setOpenOrClose(item.id)
         setUrl(item)
     }
     //更新目录
@@ -157,9 +158,9 @@ const ShareAside = (props) => {
                             </svg> :
                                 <svg className="img-icon" aria-hidden="true" onClick={() => setOpenOrClose(item.id)}>
                                     <use xlinkHref="#icon-right" ></use>
-                                </svg> : <svg className="img-icon" aria-hidden="true">
-                                <use xlinkHref="#icon-circle"></use>
-                            </svg>
+                                </svg> : <div className="img-icon" aria-hidden="true">
+                               
+                            </div>
                     }
                     <svg className="img-icon" aria-hidden="true">
                         <use xlinkHref="#icon-folder"></use>
@@ -194,9 +195,8 @@ const ShareAside = (props) => {
                 ref={el => (moveRef.current[item.id] = el)}
             >
                 <div style={{ paddingLeft: levels * 21 + 24 }} className="repository-menu-submenu-left">
-                    <svg className="img-icon" aria-hidden="true">
-                        <use xlinkHref="#icon-circle"></use>
-                    </svg>
+                    <div className="img-icon" aria-hidden="true">
+                    </div>
                     {
                         item.documentType === "document" && <svg className="img-icon" aria-hidden="true">
                             <use xlinkHref="#icon-file"></use>

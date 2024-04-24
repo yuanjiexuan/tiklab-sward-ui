@@ -11,6 +11,8 @@ const ShareListModal = (props) => {
     const [shareVisible, setShareVisible] = useState(false)
     const { createShare, updateShare } = CommentStore;
     const [expandedTree, setExpandedTree] = useState([])
+    const [checkedNodes, setCheckedNodes] = useState([])
+
 
     const isExpandedTree = (key) => {
         return expandedTree.some(item => item === key)
@@ -26,21 +28,40 @@ const ShareListModal = (props) => {
         }
     }
 
-    const onSelect = (selectedKeys, info) => {
-        console.log('selected', selectedKeys, info);
+    const onSelect = (value, node, extra) => {
+        console.log('selected', value, node, extra);
     };
     const onCheck = (checkedKeys, info) => {
         console.log('onCheck', checkedKeys, info);
         const list = info.checkedNodes;
-        let nodeIds = []
-        list.map(item => {
-            nodeIds.push(item.key)
-        })
-        setNodeIds(nodeIds)
+        setNodeIds(checkedKeys)
+        setCheckedNodes(list)
+        // let nodeIds = []
+        // list.map(item => {
+        //     nodeIds.push(item.key)
+        // })
+        // setNodeIds(nodeIds)
 
     };
     const onFinish = () => {
-        if (nodeIds.length > 0) {
+        if (checkedNodes.length > 0) {
+            console.log(checkedNodes)
+            let treePathIds = [];
+            checkedNodes.forEach(item => {
+                let treePath = item.dataRef.treePath;
+                if (treePath) {
+                    treePath = treePath.split(";")
+                    treePath.pop()
+                    console.log(treePath)
+                    treePathIds = treePathIds.concat(treePath)
+                }
+
+            })
+            console.log(treePathIds)
+            let ids = nodeIds.concat(treePathIds)
+            ids = [...new Map(ids.map(item => [item, item])).values()];
+            console.log(ids);
+            setNodeIds(ids)
             setShareVisible(true)
         } else {
             message.warn("请选择要分享的目录或文档")
@@ -120,9 +141,9 @@ const ShareListModal = (props) => {
                 className="share-list-modal"
             >
                 <div className="share-list">
-                    <Tree 
-                        checkable 
-                        showIcon 
+                    <Tree
+                        checkable
+                        showIcon
                         onSelect={onSelect}
                         onCheck={onCheck}
                         expandedKeys={expandedTree}
@@ -134,12 +155,12 @@ const ShareListModal = (props) => {
 
 
             </Modal>
-            <ShareModal 
-                nodeIds={nodeIds} 
-                shareVisible={shareVisible} 
-                setShareVisible={setShareVisible} 
-                createShare={createShare} 
-                updateShare={updateShare} 
+            <ShareModal
+                nodeIds={nodeIds}
+                shareVisible={shareVisible}
+                setShareVisible={setShareVisible}
+                createShare={createShare}
+                updateShare={updateShare}
             />
         </>
 

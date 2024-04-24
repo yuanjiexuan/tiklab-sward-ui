@@ -12,7 +12,7 @@ import "./ShareCategoryDetail.scss"
 import { observer, inject } from "mobx-react";
 const ShareCategoryDetail = (props) => {
     const { shareStore } = props;
-    const { findCategory, findCategoryDocument } = shareStore;
+    const { findCategory, findNodeList } = shareStore;
     const categoryId = props.match.params.id;
     const [logList, setLogList] = useState();
     const [logDetail, setLogDetail] = useState();
@@ -25,7 +25,7 @@ const ShareCategoryDetail = (props) => {
                 setLogDetail(data.data?.node)
             }
         })
-        findCategoryDocument(categoryId).then(data => {
+        findNodeList({ parentId: categoryId }).then(data => {
             setLogList(data.data)
         })
         return;
@@ -50,9 +50,6 @@ const ShareCategoryDetail = (props) => {
             <Col lg={{ span: "18", offset: "3" }} xxl={{ span: "18", offset: "3" }}>
                 <div className="log-detail-content">
                     {
-                        console.log(logDetail)
-                    }
-                    {
                         logDetail && <Fragment>
                             <div className="log-title">
 
@@ -76,27 +73,30 @@ const ShareCategoryDetail = (props) => {
                                     <div className="log-child-title" style={{ flex: 1 }}>
                                         {
                                             item.type && item.type === "category" &&
-                                            <svg className="log-icon" aria-hidden="true">
+                                            <svg className="list-img" aria-hidden="true">
                                                 <use xlinkHref="#icon-folder"></use>
                                             </svg>
                                         }
                                         {
                                             item.type && item.type === "document" && item.documentType === "markdown" &&
-                                            <svg className="log-icon" aria-hidden="true">
+                                            <svg className="list-img" aria-hidden="true">
                                                 <use xlinkHref="#icon-minmap"></use>
                                             </svg>
                                         }
                                         {
                                             item.type && item.type === "document" && item.documentType === "document" &&
-                                            <svg className="log-icon" aria-hidden="true">
+                                            <svg className="list-img" aria-hidden="true">
                                                 <use xlinkHref="#icon-file"></use>
                                             </svg>
                                         }
+                                        <div className="log-child-info">
+                                            <div className="log-child-name" title={item.name}>{item.name}</div>
+                                            <div className="log-child-master" style={{ width: "100px" }}>{item.master.nickname}</div>
+                                        </div>
 
-                                        <span className="log-child-name" title={item.name}>{item.name}</span>
                                     </div>
-                                    <div style={{ flex: 1 }}>{item.master.nickname}</div>
-                                    <div style={{ flex: 1 }}>{item.updateTime}</div>
+
+                                    <div >{item.createTime}</div>
                                 </div>
                             })
                                 :

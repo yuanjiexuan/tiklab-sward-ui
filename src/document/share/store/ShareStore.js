@@ -59,10 +59,10 @@ class ShareStore {
     }
 
     @action
-    findCategoryDocument= async(id)=> {
-        const params = new FormData()
-        params.append("id", id)
-        const data = await ServiceShare("/category/findCategoryDocument", params);
+    findNodeList= async(value)=> {
+        // const params = new FormData()
+        // params.append("id", id)
+        const data = await ServiceShare("/node/findNodeList", value);
         return data;
     }
 }

@@ -8,7 +8,7 @@
  */
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
-import { Col, Row, Dropdown, Menu,  Space } from "antd";
+import { Col, Row, Dropdown, Menu, Space } from "antd";
 import { withRouter } from 'react-router';
 import logo from "../../../assets/images/logo.png";
 import Message from "./MessageList"
@@ -16,7 +16,7 @@ import { observer, inject } from "mobx-react";
 import Search from "../../search/components/Search";
 import { getUser } from 'thoughtware-core-ui';
 const Header = props => {
-    const {systemRoleStore, HelpLink, AppLink, AvatarLink} = props;
+    const { systemRoleStore, HelpLink, AppLink, AvatarLink } = props;
 
     const menuKey = (sessionStorage.getItem("menuKey") && props.location.pathname !== "/home") ? sessionStorage.getItem("menuKey") : "home";
 
@@ -29,18 +29,18 @@ const Header = props => {
 
     const routers = [
         {
-            to:'/home',
+            to: '/home',
             title: '首页',
             key: 'home'
         },
         {
-            to:'/repository',
-            title:'知识库',
+            to: '/repository',
+            title: '知识库',
             key: 'repository'
         },
         {
-            to:'/sysmgr/systemFeature',
-            title:'系统',
+            to: '/sysmgr/systemFeature',
+            title: '系统',
             key: 'sysmgr'
         }
     ]
@@ -74,11 +74,15 @@ const Header = props => {
             <Col span={12}>
                 <div className={'frame-header-left'}>
                     <AppLink isSSO={false} />
-                    {logo && <div className={'frame-header-logo'}>
-                        <img src={logo} alt={'logo'} className="logo-img"/>
-                        <div className="logo-text">Sward</div>
-                    </div>}
-                    {renderRouter()}
+                    {
+                        logo && <div className={'frame-header-logo'}>
+                            <img src={logo} alt={'logo'} className="logo-img" />
+                            <div className="logo-text">Sward</div>
+                        </div>
+                    }
+                    {
+                        renderRouter()
+                    }
                 </div>
             </Col>
             <Col span={12}>
@@ -102,8 +106,8 @@ const Header = props => {
                     </div>
                 </div>
             </Col>
-            
+
         </Row>
     )
 }
-export default withRouter(inject( "systemRoleStore")(observer(Header)));
+export default withRouter(inject("systemRoleStore")(observer(Header)));

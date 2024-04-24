@@ -44,6 +44,7 @@ const ShareModal = (props) => {
     };
     useEffect(()=> {
         if(shareVisible === true) {
+            console.log(nodeIds)
             createShare({nodeIds: nodeIds,limits: value, type: type}).then(data=> {
                 console.log(data)
                 if(data.code === 0) {

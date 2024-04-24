@@ -78,16 +78,15 @@ const ShareLayout = (props) => {
         </div>
     )
     return (<Provider {...store}>
-         <div className="share-page">
+        <div className="share-page">
             <div className="share-page-head">
                 <div className='share-page-logo'>
-                    {/* <img
-                        src={('images/logo_k3.png')}
-                    /> */}
-                    {logo && <div className={'share-header-logo'}>
-                        <img src={logo} alt={'logo'} className="logo-img"/>
-                        <div className="logo-text">sward</div>
-                    </div>}
+                    {
+                        logo && <div className={'frame-header-logo'}>
+                            <img src={logo} alt={'logo'} className="logo-img" />
+                            <div className="logo-text">Sward</div>
+                        </div>
+                    }
                 </div>
                 <div className="share-header-icon">
                     <div className="share-header-help" data-title="帮助与支持">
@@ -112,7 +111,7 @@ const ShareLayout = (props) => {
             </Layout>
         </div>
     </Provider>
-       
+
     )
 }
 
