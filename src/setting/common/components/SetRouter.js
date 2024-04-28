@@ -151,6 +151,11 @@ const setDevRouter= [
                 code: 12-18,
             },
             {
+                title: '虚拟角色',
+                id: '/setting/virtual',
+                code: "virtual",
+            },
+            {
                 title: '系统功能',
                 id: '/setting/systemFeature',
                 purviewCode: "SysFeatrueSys",
@@ -190,7 +195,7 @@ const setDevRouter= [
                 title: '消息类型',
                 id: '/setting/messageType',
                 purviewCode: "SysMessageType",
-                code: 12-8,
+                code: "messageType",
             },
            
             {

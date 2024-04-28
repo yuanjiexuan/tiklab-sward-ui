@@ -77,7 +77,7 @@ const Header = props => {
                     {
                         logo && <div className={'frame-header-logo'}>
                             <img src={logo} alt={'logo'} className="logo-img" />
-                            <div className="logo-text">Sward</div>
+                            <div className="logo-text">sward</div>
                         </div>
                     }
                     {

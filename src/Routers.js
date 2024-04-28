@@ -83,7 +83,7 @@ const OrgaUser = AsyncComponent(() => import('./setting/orga/User'))
 const ProjectDirectory = AsyncComponent(() => import("./setting/user/ProjectDirectory"))
 const ProjectUserGroup = AsyncComponent(() => import("./setting/user/ProjectUserGroup"))
 const ProjectSystemUserGroup = AsyncComponent(() => import("./setting/user/ProjectSystemUserGroup"))
-
+const ProjectVirtualRoleList = AsyncComponent(() => import("./setting/user/ProjectVirtualRoleList"))
 // 系统集成
 const UrlData = AsyncComponent(() => import('./setting/systemIntegration/components/UrlData'));
 
@@ -356,6 +356,11 @@ const Routes = [
                     {
                         path: "/setting/usersystemgroup",
                         component: ProjectSystemUserGroup,
+                        exact: true
+                    },
+                    {
+                        path: "/setting/virtual",
+                        component: ProjectVirtualRoleList,
                         exact: true
                     },
                     // 系统功能管理
