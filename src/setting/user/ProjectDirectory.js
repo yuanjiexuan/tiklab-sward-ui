@@ -3,7 +3,7 @@ import {Directory} from 'thoughtware-user-ui';
 
 const ProjectDirectory = (props) => {
     return (
-        <Directory bgroup = "teamwire"/>
+        <Directory bgroup = "sward"/>
     )
 }
 export default ProjectDirectory;

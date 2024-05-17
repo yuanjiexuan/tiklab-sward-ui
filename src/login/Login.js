@@ -19,6 +19,7 @@ const ProjectLogin = (props) => {
                 loginGoRouter={'/repository'}
                 vaildUserAuthRouter = {"/no-auth"}
                 title = {'知识库管理'}
+                bgroup={'sward'}
             />
         </div>
     )

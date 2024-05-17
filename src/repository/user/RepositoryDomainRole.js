@@ -16,7 +16,7 @@ const RepositoryDomainRole = props => {
             <DomainRole
                 {...props}
                 domainId={repositoryId}
-                bgroup = {"teamwire"}
+                bgroup = {"sward"}
             />
         </div>
         

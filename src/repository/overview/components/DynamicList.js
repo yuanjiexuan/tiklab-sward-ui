@@ -33,7 +33,7 @@ const DynamicList = (props) => {
                         <Breadcumb
                             {...props}
                             firstText={firstText}
-                            secondText="日志列表"
+                            secondText="动态列表"
                         />
                         
                     </div>
@@ -41,7 +41,7 @@ const DynamicList = (props) => {
                     <div className="dynamic-list">
                         {
                             opLogList && opLogList.map((item) => {
-                                return <DynamicListItem content = {item.data} type = {item.actionType.id}/>
+                                return <DynamicListItem content = {item.data} actionType = {item.actionType.id}/>
                             })
                         }
                     </div>

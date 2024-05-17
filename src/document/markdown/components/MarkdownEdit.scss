@@ -48,6 +48,18 @@
         }
         
     }
+    .edit-markdown {
+        height: calc(100% - 50px);
+        .markdown-content {
+            height: calc(100% - 50px);
+        }
+        .markdown-edit {
+            overflow: auto;
+        }
+        .markdown-view {
+            overflow: auto;
+        }
+    }
     .edit-big {
         background-color: #F7F9FE;
         padding-left: 13px;

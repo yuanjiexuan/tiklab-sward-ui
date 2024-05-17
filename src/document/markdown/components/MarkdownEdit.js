@@ -128,9 +128,12 @@ const MarkdownEdit = (props) => {
 
                 </div>
             </div>
+            <div className="edit-markdown" style={{height: "calc(100% - 50px)"}}>
             {
                 value && <Markdown value = {value} setValue = {setValue}/>
             }
+            </div>
+            
 
 
 
