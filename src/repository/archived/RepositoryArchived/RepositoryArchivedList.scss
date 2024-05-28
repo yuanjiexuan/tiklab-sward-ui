@@ -1,0 +1,15 @@
+.repository-archived {
+    padding: var(--thoughtware-padding);
+    .recover-name:hover {
+        color: var(--thoughtware-blue);
+        cursor: pointer;
+    }
+    .recover-button:hover {
+        color: var(--thoughtware-blue);
+        cursor: pointer;
+    }
+    .delete-button:hover {
+        color: var(--thoughtware-blue);
+        cursor: pointer;
+    }
+}

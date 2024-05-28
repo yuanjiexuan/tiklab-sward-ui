@@ -75,6 +75,13 @@ const setDevRouter= [
         ]
     },
     {
+        title: '归档',
+        icon: 'archived',
+        id: '/setting/archived',
+        purviewCode: "SysPlugin",
+        code: "archived",
+    },
+    {
         title: "插件",
         icon: 'systemplugin',
         id: '/setting/plugin',

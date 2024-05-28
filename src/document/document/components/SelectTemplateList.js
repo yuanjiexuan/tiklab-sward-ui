@@ -12,7 +12,11 @@ import { Modal, Layout, Menu } from 'antd';
 import { VideoCameraOutlined } from '@ant-design/icons';
 import "./selectTemplateList.scss"
 import setImageUrl from '../../../common/utils/setImageUrl';
-import Zhoubao from "../../../assets/images/zhoubao.png";
+import weekly from "../../../assets/images/weekly.png";
+import weeklyNomal from "../../../assets/images/weeklyNomal.png";
+import todoWork from "../../../assets/images/todoWork.png";
+import projectPlan from "../../../assets/images/projectPlan.png";
+import projectOperation from "../../../assets/images/projectOperation.png";
 const { Content, Sider } = Layout;
 
 const SelectTemplateList = (props) => {
@@ -22,7 +26,7 @@ const SelectTemplateList = (props) => {
     const repositoryId = props.match.params.repositoryId;
 
     const [templateList, setTemplateList] = useState()
-
+    const imgUrlArray = [weekly, weeklyNomal, todoWork, projectPlan, projectOperation]
     useEffect(() => {
         findDocumentTemplateList().then(data => {
             if (data.code === 0) {
@@ -82,7 +86,7 @@ const SelectTemplateList = (props) => {
                                             <img
                                                 // src={setImageUrl(item.iconUrl)}
                                                 // src={('/images/' + imageNames[index])}
-                                                src={Zhoubao}
+                                                src={imgUrlArray[index]}
                                                 alt=""
                                                 className="template-image"
                                             />

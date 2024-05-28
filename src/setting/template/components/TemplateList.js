@@ -16,13 +16,19 @@ import Button from "../../../common/button/button";
 import TemplateStore from "../store/TemplateStore";
 import TemplateAddModal from "./TemplateAddModal";
 import setImageUrl from "../../../common/utils/setImageUrl";
+import weekly from "../../../assets/images/weekly.png";
+import weeklyNomal from "../../../assets/images/weeklyNomal.png";
+import todoWork from "../../../assets/images/todoWork.png";
+import projectPlan from "../../../assets/images/projectPlan.png";
+import projectOperation from "../../../assets/images/projectOperation.png";
 
 
 const { confirm } = Modal;
 const Template = (props) => {
     const { findDocumentTemplateList, deleteDocumentTemplate, templateList } = TemplateStore;
     const [showAddModal, setShowAddModal] = useState(false)
-    const [editType, setEditType] = useState()
+    const [editType, setEditType] = useState();
+    const imgUrlArray = [weekly, weeklyNomal, todoWork, projectPlan, projectOperation]
     useEffect(() => {
         findDocumentTemplateList()
         return;
@@ -84,7 +90,7 @@ const Template = (props) => {
                                     return <div className="template-box" key={index}>
                                         <div className="template-name"  onClick={() => goView(item.id)}>{item.name}</div>
                                         <img
-                                            src={setImageUrl(item.iconUrl)}
+                                            src={imgUrlArray[index]}
                                             alt=""
                                             className="template-image"
                                         />

@@ -22,7 +22,11 @@ import { updateNodeName } from "../../../common/utils/treeDataAction";
 import setImageUrl from "../../../common/utils/setImageUrl";
 import SelectTemplateList from "./SelectTemplateList";
 import Template from "../../../assets/images/template.png";
-import Zhoubao from "../../../assets/images/zhoubao.png";
+import weekly from "../../../assets/images/weekly.png";
+import weeklyNomal from "../../../assets/images/weeklyNomal.png";
+import todoWork from "../../../assets/images/todoWork.png";
+import projectPlan from "../../../assets/images/projectPlan.png";
+import projectOperation from "../../../assets/images/projectOperation.png";
 const DocumentEdit = (props) => {
     const { relationWorkStore, documentStore } = props;
     console.log(documentStore)
@@ -38,11 +42,12 @@ const DocumentEdit = (props) => {
     const tenant = getUser().tenant;
     const [templateVisible, setTemplateVisible] = useState(false);
     const [templateList, setTemplateList] = useState()
+    const imgUrlArray = [weekly, weeklyNomal, todoWork, projectPlan, projectOperation]
 
     useEffect(() => {
         findDocumentTemplateList().then(data => {
             if (data.code === 0) {
-                setTemplateList(data.data)
+                setTemplateList(data.data.slice(0, 3))
             }
         })
         return;
@@ -214,7 +219,7 @@ const DocumentEdit = (props) => {
                                                     return <div className="template-box" key={index} onClick={() => selectTemplate(item)}>
                                                         <img
                                                             // src={setImageUrl(item.iconUrl)}
-                                                            src={Zhoubao}
+                                                            src={imgUrlArray[index]}
                                                             alt=""
                                                             className="template-image"
                                                         />

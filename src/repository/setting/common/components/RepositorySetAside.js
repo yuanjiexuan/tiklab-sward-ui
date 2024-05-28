@@ -42,6 +42,12 @@ const RepositorySetAside = (props) => {
             icon: 'survey',
             key: `/repositorySet/${repositoryId}/messagenotice`,
             encoded: "message",
+        },
+        {
+            title: '归档',
+            icon: 'archived',
+            key: `/repositorySet/${repositoryId}/archived`,
+            encoded: "archived",
         }
     ];
     // 当前选中路由
@@ -85,14 +91,6 @@ const RepositorySetAside = (props) => {
                             设置
                         </span>
                     </div>
-                    {/* <div className={`repository-set-back`}
-                        onClick={() => backRepository()}
-                    >
-                       
-                        <span>
-                        返回知识库
-                        </span>
-                    </div> */}
                     <ul className="repository-menu">
                         {
                             repositoryrouter && repositoryrouter.map(Item => {

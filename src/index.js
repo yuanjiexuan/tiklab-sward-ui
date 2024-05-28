@@ -42,7 +42,9 @@ const Index = observer(() => {
         languageStore: []
     });
     useEffect(() => {
+        
         pluginLoader(Routes, resources, i18n).then(res => {
+            
             setPluginData(res)
             setVisable(false)
         })

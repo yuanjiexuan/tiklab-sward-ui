@@ -23,11 +23,11 @@ import {
 } from '../../../common/utils/treeDataAction';
 import AddDropDown from './AddDropDown';
 import { DownOutlined } from '@ant-design/icons';
+import NodeArchivedModal from '../../archived/NodeArchived/NodeArchivedModal';
 const { Sider } = Layout;
 
 const RepositorydeAside = (props) => {
     // 解析props
-
     const { searchrepository, repository, repositorylist, categoryStore } = props;
     //语言包
     const { t } = useTranslation();
@@ -49,9 +49,16 @@ const RepositorydeAside = (props) => {
     const [shareListVisible, setShareListVisible] = useState(false)
     const inputRef = React.useRef(null);
     const [isRename, setIsRename] = useState()
+    const [archivedNode, setArchivedNode] = useState()
     const [deleteVisible, setDeleteVisible] = useState(false)
+    const [nodeArchivedVisable, setNodeArchivedVisable] = useState(false)
     useEffect(() => {
-        findNodePageTree({ repositoryId: repositoryId, dimensions: [1, 2] }).then((data) => {
+        const data = {
+            repositoryId: repositoryId, 
+            dimensions: [1, 2],
+            status: "nomal"
+        }
+        findNodePageTree(data).then((data) => {
             setRepositoryCatalogueList(data.data)
         })
         return () => {
@@ -109,6 +116,7 @@ const RepositorydeAside = (props) => {
                     const params = {
                         repositoryId: repositoryId,
                         treePath: id,
+                        status: "nomal",
                         dimensions: [node.dimension + 1, node.dimension + 2]
                     }
                     findNodePageTree(params).then(data => {
@@ -130,6 +138,9 @@ const RepositorydeAside = (props) => {
             <Menu.Item key="edit">
                 重命名
             </Menu.Item>
+            <Menu.Item key="archived">
+                归档
+            </Menu.Item>
             <Menu.Item key="delete">
                 删除
             </Menu.Item>
@@ -139,6 +150,7 @@ const RepositorydeAside = (props) => {
             <Menu.Item key="share">
                 分享
             </Menu.Item>
+         
         </Menu>
     };
 
@@ -164,6 +176,10 @@ const RepositorydeAside = (props) => {
         }
         if (value.key === "share") {
             setShareListVisible(true)
+        }
+        if(value.key === "archived"){
+            setArchivedNode(item)
+            setNodeArchivedVisable(true)
         }
     }
 
@@ -201,6 +217,8 @@ const RepositorydeAside = (props) => {
             })
         }
     }
+
+   
 
     useEffect(() => {
         if (inputRef.current) {
@@ -399,7 +417,6 @@ const RepositorydeAside = (props) => {
                             <use xlinkHref="#icon-moreBlue"></use>
                         </svg>
                     </div>
-
                 </Dropdown>
             </div>
         </div>
@@ -575,6 +592,12 @@ const RepositorydeAside = (props) => {
             >
                 确定删除文档？
             </Modal>
+            <NodeArchivedModal 
+                nodeArchivedVisable = {nodeArchivedVisable}
+                setNodeArchivedVisable = {setNodeArchivedVisable}
+                node = {archivedNode}
+                repositoryCatalogueList = {repositoryCatalogueList}
+            />
         </Fragment>
     )
 }

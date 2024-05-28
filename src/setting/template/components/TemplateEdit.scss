@@ -2,6 +2,9 @@
 .template-add {
     height: calc(100vh - 60px);
     overflow: auto;
+    .edit-context-box {
+        overflow: initial;
+    }
     .template-add-breadcrumb {
         font-size: var(--thoughtware-font-16);
         font-weight: var(--thoughtware-font-weight-bold);

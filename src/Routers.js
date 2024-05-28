@@ -15,13 +15,10 @@ const Logout = AsyncComponent(() => import('./login/Logout'))
 const Home = AsyncComponent(() => import('./home/home/components/Home'))
 const ProjectNotFound = AsyncComponent(() => import("./setting/common/components/ProjectNotFond"))
 
-
 const NoFoundPage = AsyncComponent(() => import('./login/NoFoundPage.js'));
 const NoAccessPage = AsyncComponent(() => import('./login/SystemNoAccessPage'));
 const ProjectNoAccessPage = AsyncComponent(() => import('./login/ProjectNoAccessPage'));
 const ExcludeProductUserContent = AsyncComponent(() => import('./login/ExcludeProductUserPage'))
-
-
 
 const Index = AsyncComponent(() => import('./home/home/components/Layout'))
 const RepositoryDetail = AsyncComponent(() => import('./repository/common/components/RepositoryLayout'))
@@ -45,6 +42,11 @@ const RepositorySet = AsyncComponent(() => import("./repository/setting/common/c
 const RepositoryDomainRole = AsyncComponent(() => import('./repository/user/RepositoryDomainRole'))
 const RepositoryDomainUser = AsyncComponent(() => import('./repository/user/RepositoryDomainUser'))
 const RepositoryBasicInfo = AsyncComponent(() => import('./repository/setting/basicInfo/components/BasicInfo'))
+
+// 归档
+const RepositoryArchived = AsyncComponent(() => import("./repository/archived/NodeArchived/NodeArchivedList.js"))
+const RepositoryArchivedList = AsyncComponent(() => import("./repository/archived/RepositoryArchived/RepositoryArchivedList.js"))
+
 const Template = AsyncComponent(() => import('./setting/template/components/TemplateList'))
 const TemplateEdit = AsyncComponent(() => import('./setting/template/components/TemplateEdit'))
 const TemplatePreview = AsyncComponent(() => import('./setting/template/components/TemplatePreview'))
@@ -102,6 +104,7 @@ const LicenceProductAuth = AsyncComponent(() => import('./setting/version/Produc
 const VailProductUserPage =  AsyncComponent(() => import('./login/VaildProductUserPage'))
 const BackupRecoveryContent = AsyncComponent(() => import('./setting/backups/Backups'))
 const Dnd = AsyncComponent(() => import("./repository/common/components/dnd"))
+
 const Routes = [
     {
         path: "/login",
@@ -293,18 +296,29 @@ const Routes = [
                     {
                         path: "/repositorySet/:repositoryId/messagenotice",
                         component: DomainMessageNoticeContent,
-                    }
+                    },
+                    {
+                        path: "/repositorySet/:repositoryId/archived",
+                        component: RepositoryArchived
+                    },
                 ]
             },
-            {
-                path: "/repositorySet/:repositoryId/basicInfo",
-                component: RepositoryBasicInfo
-            },
+            // {
+            //     path: "/repositorySet/:repositoryId/basicInfo",
+            //     component: RepositoryBasicInfo
+            // },
+            
             {
                 path: "/setting",
                 component: Setting,
                 key: 'Setting',
                 routes: [
+                    {
+                        path: "/setting/archived",
+                        component: RepositoryArchivedList,
+                        row: true,
+                        exact: true
+                    },
                     {
                         path: "/setting/home",
                         component: SettingHome,
