@@ -14,8 +14,9 @@ import { renderRoutes } from "react-router-config";
 import {observer, inject, Provider} from "mobx-react";
 import {getUser} from "thoughtware-core-ui";
 import RepositoryStore from "../../repository/store/RepositoryStore";
-import CategoryStore from "../store/CategoryStore"
+import CategoryStore from "../store/CategoryStore";
 const RepositoryDetail = (props)=>{
+    const {NodeRecycleModal, NodeArchivedModal} = props;
     // 解析props
     const {systemRoleStore,route} = props;
     const store = {
@@ -23,7 +24,7 @@ const RepositoryDetail = (props)=>{
     }
     const {searchrepository, findRepositoryList, repositorylist} = RepositoryStore;
     const repositoryId = props.match.params.repositoryId;
-    const [repository, setRepository] = useState()
+    const [repository, setRepository] = useState();
 
     useEffect(() => {
         searchrepository(repositoryId).then((res)=> {
@@ -48,6 +49,8 @@ const RepositoryDetail = (props)=>{
                 repository={repository}
                 repositorylist={repositorylist} 
                 searchrepository = {searchrepository} 
+                NodeRecycleModal = {NodeRecycleModal}
+                NodeArchivedModal = {NodeArchivedModal}
                 {...props}
             />
             <Layout className="repositorydetail-content">

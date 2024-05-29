@@ -12,11 +12,15 @@ import { withRouter } from "react-router-dom";
 import { Layout, Button } from "antd";
 
 import { useTranslation } from 'react-i18next';
+import { getVersionInfo } from 'thoughtware-core-ui';
+import ArchivedFree from '../../../../common/components/ArchivedFree';
 const { Sider } = Layout;
 
 const RepositorySetAside = (props) => {
     const { t } = useTranslation();
     const repositoryId = props.match.params.repositoryId;
+    const versionInfo = getVersionInfo();
+    const [archivedFreeVisable, setArchivedFreeVisable] = useState(false)
     // 路由
     const repositoryrouter = [
         {
@@ -24,30 +28,49 @@ const RepositorySetAside = (props) => {
             icon: 'survey',
             key: `/repositorySet/${repositoryId}/basicInfo`,
             encoded: "Survey",
+            iseEnhance: false
         },
         {
             title: '成员',
             icon: 'survey',
             key: `/repositorySet/${repositoryId}/user`,
             encoded: "User",
+            iseEnhance: false
         },
         {
             title: '权限',
             icon: 'survey',
             key: `/repositorySet/${repositoryId}/domainRole`,
             encoded: "Privilege",
+            iseEnhance: false
         },
         {
             title: '消息',
             icon: 'survey',
             key: `/repositorySet/${repositoryId}/messagenotice`,
             encoded: "message",
+            iseEnhance: false
         },
         {
-            title: '归档',
+            title: '归档文档目录',
             icon: 'archived',
-            key: `/repositorySet/${repositoryId}/archived`,
+            key: `/repositorySet/${repositoryId}/archivedNode`,
             encoded: "archived",
+            iseEnhance: true
+        },
+        {
+            title: '归档知识库',
+            icon: 'archived',
+            key: `/repositorySet/${repositoryId}/archivedRes`,
+            encoded: "archived",
+            iseEnhance: true
+        },
+        {
+            title: '回收站',
+            icon: 'recycleBin',
+            key: `/repositorySet/${repositoryId}/recycleBin`,
+            encoded: "recycleBin",
+            iseEnhance: true
         }
     ];
     // 当前选中路由
@@ -67,9 +90,20 @@ const RepositorySetAside = (props) => {
      * 点击左侧菜单
      * @param {*} key 
      */
-    const selectKeyFun = (key) => {
-        setSelectKey(key)
-        props.history.push(key)
+    const selectKeyFun = (key, iseEnhance) => {
+        if (versionInfo.expired === false) {
+            setSelectKey(key)
+            props.history.push(key)
+        } else {
+            if (!iseEnhance) {
+                setSelectKey(key)
+                props.history.push(key)
+            } else {
+                setArchivedFreeVisable(true)
+            }
+        }
+
+
 
     }
 
@@ -96,16 +130,25 @@ const RepositorySetAside = (props) => {
                             repositoryrouter && repositoryrouter.map(Item => {
                                 return <div className={`repository-menu-submenu ${Item.key === selectKey ? "repository-menu-select" : ""}`}
                                     key={Item.key}
-                                    onClick={() => selectKeyFun(Item.key)}
+                                    onClick={() => selectKeyFun(Item.key, Item.iseEnhance)}
                                 >
                                     <span className={`${isShowText ? "" : "repository-notext"}`}>
                                         {Item.title}
                                     </span>
+                                    {
+                                        Item.iseEnhance && versionInfo.expired === true &&  <svg className="img-icon" aria-hidden="true" >
+                                        <use xlinkHref="#icon-member"></use>
+                                    </svg>
+                                     }
                                 </div>
                             })
                         }
                     </ul>
                 </div>
+                <ArchivedFree
+                    archivedFreeVisable={archivedFreeVisable}
+                    setArchivedFreeVisable={setArchivedFreeVisable}
+                />
             </Sider>
         </Fragment>
     )

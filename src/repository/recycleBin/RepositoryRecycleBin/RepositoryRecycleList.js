@@ -1,44 +1,43 @@
 import { Row, Col, Table, Space, Modal, Form, Alert, Input, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import Breadcrumb from '../../../common/breadcrumb/breadcrumb';
-import "./RepositoryArchivedList.scss";
-import RepositoryArchivedStore from '../store/RepostoryArchivedStore';
+import "./RepositoryRecycleList.scss";
+import RepositoryRecycleStore from './store/RepositoryRecycleStore';
 
-const RepositoryArchivedList = (props) => {
+const RepositoryRecycleList = (props) => {
 
-    const { findArchivedRepository, recoverArchivedRepository, deleteRepository } = RepositoryArchivedStore;
-    const [archivedRepositoryList, setArchivedRepositoryList] = useState([])
-
+    const { findRecycleRepository, recoverRecycleRepository, deleteRepository } = RepositoryRecycleStore
+    const [recycleRepositoryList, setRecycleRepositoryList] = useState([])
     const [confirmForm] = Form.useForm();
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [confirmProjectName, setConfirmProjectName] = useState();
     const [repositoryInfo, setRepositoryInfo] = useState()
     useEffect(() => {
-        findArchivedRepositoryList()
+        findRecycleRepositoryList()
         return
     }, [])
 
-    const recoverArchived = (repository) => {
+    const recoverRecycle = (repository) => {
         const values = {
             id: repository.id,
-            status: "nomal",
+            recycle: "0"
         };
         console.log(values)
-        recoverArchivedRepository(values).then(res => {
+        recoverRecycleRepository(values).then(res => {
             if (res.code === 0) {
-                findArchivedRepositoryList()
+                findRecycleRepositoryList()
             }
         })
     }
 
-    const findArchivedRepositoryList = () => {
+    const findRecycleRepositoryList = () => {
         const data = {
-            status: "archived"
+            recycle: "1"
         }
-        findArchivedRepository(data).then(res => {
+        findRecycleRepository(data).then(res => {
             if (res.code === 0) {
                 console.log(res.data)
-                setArchivedRepositoryList(res.data)
+                setRecycleRepositoryList(res.data)
             }
         })
     }
@@ -48,34 +47,29 @@ const RepositoryArchivedList = (props) => {
         setRepositoryInfo(item)
     }
 
-    const goRepositorydetail = (repositoryId) => {
-
-        props.history.push({ pathname: `/repositorydetail/${repositoryId}/survey` })
-    }
-
     const columns = [
         {
             title: '名称',
             dataIndex: 'name',
             key: 'name',
-            render: (text, record) => <span className="recover-name" onClick={() => goRepositorydetail(record.id)}>{text}</span>,
+            render: (text, record) => <span className="recover-name">{text}</span>,
         },
         {
             title: '归档日期',
-            dataIndex: 'archivedTime',
-            key: 'archivedTime',
+            dataIndex: 'recycleTime',
+            key: 'recycleTime',
         },
         {
             title: '归档人',
-            dataIndex: ['archivedUser', 'nickname'],
-            key: 'archivedUser',
+            dataIndex: ['recycleUser', 'nickname'],
+            key: 'recycleUser',
         },
         {
             title: '操作',
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
-                    <span className="recover-button" onClick={() => recoverArchived(record)}>恢复</span>
+                    <span className="recover-button" onClick={() => recoverRecycle(record)}>恢复</span>
                     <span className="delete-button" onClick={() => deRepository(record)}>删除</span>
                 </Space>
             ),
@@ -88,7 +82,7 @@ const RepositoryArchivedList = (props) => {
                 if (response.code === 0) {
                     message.success('删除成功');
                     setIsModalVisible(false);
-                    findArchivedRepositoryList()
+                    findRecycleRepositoryList()
                 }
             })
 
@@ -102,15 +96,15 @@ const RepositoryArchivedList = (props) => {
     return (
         <Row>
             <Col lg={{ span: 24 }} xxl={{ span: "18", offset: "3" }} xl={{ span: "18", offset: "3" }}>
-                <div className="repository-archived">
+                <div className="repository-recycle">
                     <Breadcrumb
-                        firstText="归档知识库"
+                        firstText="回收站"
                     />
 
                     <Table
                         expandable={{ defaultExpandAllRows: false, expandedRowRender: null, expandIcon: () => null }}
                         columns={columns}
-                        dataSource={archivedRepositoryList}
+                        dataSource={recycleRepositoryList}
                         rowKey={record => record.id}
                     />
 
@@ -165,4 +159,4 @@ const RepositoryArchivedList = (props) => {
         </Row>
     )
 }
-export default RepositoryArchivedList;
+export default RepositoryRecycleList;

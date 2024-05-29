@@ -13,26 +13,40 @@ import { setDevRouter, setPrdRouter } from "./SetRouter";
 import { PrivilegeButton } from "thoughtware-privilege-ui";
 import SettingHomeStore from "../../home/store/SettingHomeStore"
 import { observer } from 'mobx-react';
+import { getVersionInfo } from 'thoughtware-core-ui';
+import ArchivedFree from '../../../common/components/ArchivedFree';
 const SetAside = (props) => {
     // 无子级菜单处理
-    const {selectKey, setSelectKey} = SettingHomeStore;
+    const { selectKey, setSelectKey } = SettingHomeStore;
 
     const [router, setRouterMenu] = useState(setDevRouter);
-    const authType =JSON.parse(localStorage.getItem("authConfig"))?.authType;
+    const authType = JSON.parse(localStorage.getItem("authConfig"))?.authType;
+    const versionInfo = getVersionInfo();
+    const [archivedFreeVisable, setArchivedFreeVisable] = useState(false)
     const select = (data) => {
         const id = data.id;
-       
-        if (data.islink &&  !authType) {
-            const authUrl = JSON.parse(localStorage.getItem("authConfig")).authServiceUrl + "#"+ id;
+        const iseEnhance = data.iseEnhance;
+        if (data.islink && !authType) {
+            const authUrl = JSON.parse(localStorage.getItem("authConfig")).authServiceUrl + "#" + id;
             // window.location.href = authUrl;
 
             window.open(authUrl, '_blank');
-        }else {
-            props.history.push(id)
-            setSelectKey(id)
+        } else {
+            if (versionInfo.expired === false) {
+                props.history.push(id)
+                setSelectKey(id)
+            } else {
+                if (!iseEnhance) {
+                    props.history.push(id)
+                    setSelectKey(id)
+                } else {
+                    setArchivedFreeVisable(true)
+                }
+            }
+            
         }
     }
-    
+
 
     useEffect(() => {
         if (env === "local") {
@@ -66,13 +80,17 @@ const SetAside = (props) => {
 
                     </span>
                     {
-                        (data.islink && !authType )&& <div className="orga-aside-item-icon">
+                        (data.islink && !authType) && <div className="orga-aside-item-icon">
                             <svg className="img-icon" aria-hidden="true">
                                 <use xlinkHref={`#icon-outside`}></use>
                             </svg>
                         </div>
                     }
-                    
+                    {
+                        data.iseEnhance && versionInfo.expired === true && <svg className="img-icon" aria-hidden="true" >
+                            <use xlinkHref="#icon-member"></use>
+                        </svg>
+                    }
 
                 </li>
             </PrivilegeButton>
@@ -147,6 +165,10 @@ const SetAside = (props) => {
                         })
                     }
                 </ul>
+                <ArchivedFree
+                    archivedFreeVisable={archivedFreeVisable}
+                    setArchivedFreeVisable={setArchivedFreeVisable}
+                />
             </div>
 
         </Fragment>

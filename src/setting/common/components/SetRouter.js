@@ -74,13 +74,7 @@ const setDevRouter= [
             }
         ]
     },
-    {
-        title: '归档',
-        icon: 'archived',
-        id: '/setting/archived',
-        purviewCode: "SysPlugin",
-        code: "archived",
-    },
+   
     {
         title: "插件",
         icon: 'systemplugin',
@@ -120,6 +114,7 @@ const setDevRouter= [
             }
         ]
     }, 
+    
     {
         title: "应用",
         icon: 'systemversion',
@@ -139,7 +134,22 @@ const setDevRouter= [
             }
         ]
     },
-   
+    {
+        title: '归档知识库',
+        icon: 'systemversion',
+        id: '/setting/archived',
+        purviewCode: "SysPlugin",
+        code: "recycle",
+        iseEnhance: true
+    },
+    {
+        title: '回收站',
+        icon: 'systemversion',
+        id: '/setting/recycle',
+        purviewCode: "SysPlugin",
+        code: "recycle",
+        iseEnhance: true
+    },
     {
         title: "基础数据",
         icon: 'systemcenter',

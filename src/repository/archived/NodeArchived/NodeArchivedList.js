@@ -1,35 +1,32 @@
-import { Col, Modal, Row, Space, Table } from "antd";
+import { Alert, Button, Col, Modal, Row, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import Breadcrumb from "../../../common/breadcrumb/breadcrumb";
 import ArchivedStore from "../store/NodeArchivedStore";
 import "./NodeArchivedList.scss"
 import { withRouter } from "react-router";
 const NodeArchived = (props) => {
-    const {findArchivedNode, recoverArchivedNode, deleteRepositoryLog, deleteDocument} = ArchivedStore;
+    const { findArchivedNode, recoverArchivedNode, deleteRepositoryLog, deleteDocument } = ArchivedStore;
     const [archivedNodeList, setArchivedNodeList] = useState(null);
     const repositoryId = props.match.params.repositoryId;
 
-    useEffect(()=> {
+    useEffect(() => {
         findArchivedNodeList()
         return
     }, [])
 
     const findArchivedNodeList = () => {
-        // const data = {
-        //     status: "archived"
-        // }
-
         const data = {
-            repositoryId: repositoryId, 
+            repositoryId: repositoryId,
             status: "archived"
         }
         findArchivedNode(data).then(res => {
-            if(res.code === 0){
+            if (res.code === 0) {
                 console.log(res.data)
                 setArchivedNodeList(res.data)
             }
         })
     }
+    
     const recoverArchived = (node) => {
         const values = {
             id: node.id,
@@ -39,7 +36,7 @@ const NodeArchived = (props) => {
         };
         console.log(values)
         recoverArchivedNode(values).then(res => {
-            if(res.code === 0){
+            if (res.code === 0) {
                 findArchivedNodeList()
             }
         })
@@ -56,26 +53,26 @@ const NodeArchived = (props) => {
         });
 
         const deleteDocumentOrCategory = (item) => {
-            const {type, id} = item;
+            const { type, id } = item;
             if (type === "category") {
                 deleteRepositoryLog(id).then(res => {
-                    if(res.code === 0){
+                    if (res.code === 0) {
                         findArchivedNodeList()
                     }
                 })
             }
             if (type === "document") {
                 deleteDocument(id).then(res => {
-                    if(res.code === 0){
+                    if (res.code === 0) {
                         findArchivedNodeList()
                     }
                 })
             }
         }
-       
     }
+    
     const goDetail = (record) => {
-        const {type, documentType, id} = record;
+        const { type, documentType, id } = record;
         // if (type === "category") {
         //     findCategoryChildren(item.id, item.type)
         // }
@@ -88,35 +85,6 @@ const NodeArchived = (props) => {
         }
         if (documentType === "markdown") {
             props.history.push(`/repositorydetail/${repositoryId}/markdownView/${id}`)
-        }
-    }
-
-    const selectKeyFun = (event, item) => {
-        event.preventDefault()
-        event.stopPropagation();
-        event.nativeEvent.stopImmediatePropagation()
-        const params = {
-            name: item.name,
-            model: item.type,
-            modelId: item.id,
-            master: { id: userId },
-            wikiRepository: { id: repositoryId }
-        }
-        createRecent(params)
-        if (item.type === "category") {
-            findCategoryChildren(item.id, item.type)
-        }
-
-        if (item.type === "category") {
-            localStorage.setItem("categoryId", item.id);
-            setOpenClickCategory(item.id)
-            props.history.push(`/repositorydetail/${repositoryId}/folder/${item.id}`)
-        }
-        if (item.documentType === "document") {
-            props.history.push(`/repositorydetail/${repositoryId}/doc/${item.id}`)
-        }
-        if (item.documentType === "markdown") {
-            props.history.push(`/repositorydetail/${repositoryId}/markdownView/${item.id}`)
         }
     }
 
@@ -154,17 +122,19 @@ const NodeArchived = (props) => {
         <Row>
             <Col lg={{ span: 24 }} xxl={{ span: "18", offset: "3" }} xl={{ span: "18", offset: "3" }}>
                 <div className="node-archived">
-                    <Breadcrumb
-                        firstText="已归档"
-                    />
+
                     <div>
-                        <Table 
-                            expandable = {{defaultExpandAllRows: false, expandedRowRender: null, expandIcon: () => null }} 
-                            columns={columns} 
-                            dataSource={archivedNodeList} 
+                        <Breadcrumb
+                            firstText="归档目录文档"
+                        />
+                        <Table
+                            expandable={{ defaultExpandAllRows: false, expandedRowRender: null, expandIcon: () => null }}
+                            columns={columns}
+                            dataSource={archivedNodeList}
                             rowKey={record => record.id}
                         />
                     </div>
+                    
                 </div>
 
             </Col>

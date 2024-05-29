@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 import RepositoryChangeModal from "./RepositoryChangeModal";
 import ShareListModal from "../../../document/share/components/ShareListModal"
 import MoveLogList from "./MoveLogList"
-import { getUser } from 'thoughtware-core-ui';
+import { getUser, getVersionInfo } from 'thoughtware-core-ui';
 import "./RepositoryDetailAside.scss"
 import {
     appendNodeInTree, removeNodeAndSort,
@@ -23,12 +23,12 @@ import {
 } from '../../../common/utils/treeDataAction';
 import AddDropDown from './AddDropDown';
 import { DownOutlined } from '@ant-design/icons';
-import NodeArchivedModal from '../../archived/NodeArchived/NodeArchivedModal';
+import ArchivedFree from '../../../common/components/ArchivedFree';
 const { Sider } = Layout;
 
 const RepositorydeAside = (props) => {
     // 解析props
-    const { searchrepository, repository, repositorylist, categoryStore } = props;
+    const { searchrepository, repository, repositorylist, categoryStore, NodeRecycleModal, NodeArchivedModal } = props;
     //语言包
     const { t } = useTranslation();
     const { findNodePageTree, updateRepositoryCatalogue, deleteRepositoryLog, updateDocument, deleteDocument,
@@ -52,11 +52,13 @@ const RepositorydeAside = (props) => {
     const [archivedNode, setArchivedNode] = useState()
     const [deleteVisible, setDeleteVisible] = useState(false)
     const [nodeArchivedVisable, setNodeArchivedVisable] = useState(false)
+    const [nodeRecycleVisable, setNodeRecycleVisable] = useState(false)
+    const versionInfo = getVersionInfo();
+    const [archivedFreeVisable, setArchivedFreeVisable] = useState(false)
     useEffect(() => {
         const data = {
-            repositoryId: repositoryId, 
-            dimensions: [1, 2],
-            status: "nomal"
+            repositoryId: repositoryId,
+            dimensions: [1, 2]
         }
         findNodePageTree(data).then((data) => {
             setRepositoryCatalogueList(data.data)
@@ -138,9 +140,6 @@ const RepositorydeAside = (props) => {
             <Menu.Item key="edit">
                 重命名
             </Menu.Item>
-            <Menu.Item key="archived">
-                归档
-            </Menu.Item>
             <Menu.Item key="delete">
                 删除
             </Menu.Item>
@@ -150,7 +149,33 @@ const RepositorydeAside = (props) => {
             <Menu.Item key="share">
                 分享
             </Menu.Item>
-         
+            {
+                NodeArchivedModal && <Menu.Item key="archived">
+                    <div className="repository-aside-archived">
+                        归档
+                        {
+                            versionInfo.expired === true && <svg className="img-icon" aria-hidden="true" >
+                                <use xlinkHref="#icon-member"></use>
+                            </svg>
+                        }
+                    </div>
+
+                </Menu.Item>
+            }
+            {
+                NodeRecycleModal && <Menu.Item key="recycle">
+                    <div className="repository-aside-archived">
+                        移动到回收站
+                        {
+                            versionInfo.expired === true && <svg className="img-icon" aria-hidden="true" >
+                                <use xlinkHref="#icon-member"></use>
+                            </svg>
+                        }
+                    </div>
+
+                </Menu.Item>
+            }
+
         </Menu>
     };
 
@@ -169,6 +194,17 @@ const RepositorydeAside = (props) => {
                 onOk() { deleteDocumentOrCategory(item, type, id) },
                 onCancel() { },
             });
+
+
+        }
+        if (value.key === "recycle") {
+            if (versionInfo.expired === false) {
+                setArchivedNode(item)
+                setNodeRecycleVisable(true)
+            } else {
+                setArchivedFreeVisable(true)
+            }
+
         }
         if (value.key === "move") {
             setMoveLogListVisible(true)
@@ -177,9 +213,14 @@ const RepositorydeAside = (props) => {
         if (value.key === "share") {
             setShareListVisible(true)
         }
-        if(value.key === "archived"){
-            setArchivedNode(item)
-            setNodeArchivedVisable(true)
+        if (value.key === "archived") {
+            if (versionInfo.expired === false) {
+                setArchivedNode(item)
+                setNodeArchivedVisable(true)
+            } else {
+                setArchivedFreeVisable(true)
+            }
+
         }
     }
 
@@ -218,7 +259,7 @@ const RepositorydeAside = (props) => {
         }
     }
 
-   
+
 
     useEffect(() => {
         if (inputRef.current) {
@@ -592,11 +633,27 @@ const RepositorydeAside = (props) => {
             >
                 确定删除文档？
             </Modal>
-            <NodeArchivedModal 
-                nodeArchivedVisable = {nodeArchivedVisable}
-                setNodeArchivedVisable = {setNodeArchivedVisable}
-                node = {archivedNode}
-                repositoryCatalogueList = {repositoryCatalogueList}
+            {
+                NodeArchivedModal && versionInfo.expired === false && <NodeArchivedModal
+                    nodeArchivedVisable={nodeArchivedVisable}
+                    setNodeArchivedVisable={setNodeArchivedVisable}
+                    node={archivedNode}
+                    repositoryCatalogueList={repositoryCatalogueList}
+                />
+            }
+
+            {
+                NodeRecycleModal && versionInfo.expired === false && <NodeRecycleModal
+                    nodeRecycleVisable={nodeRecycleVisable}
+                    setNodeRecycleVisable={setNodeRecycleVisable}
+                    node={archivedNode}
+                    repositoryCatalogueList={repositoryCatalogueList}
+                />
+            }
+
+            <ArchivedFree
+                archivedFreeVisable={archivedFreeVisable}
+                setArchivedFreeVisable={setArchivedFreeVisable}
             />
         </Fragment>
     )

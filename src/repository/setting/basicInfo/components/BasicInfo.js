@@ -16,6 +16,7 @@ import RepositoryIcon from "./RepositoryChangeIcon";
 import { PrivilegeProjectButton } from "thoughtware-privilege-ui";
 import { Collapse } from 'antd';
 import { getUser } from "thoughtware-core-ui";
+import RepositoryRecycleModal from "../../../recycleBin/RepositoryRecycleBin/RepositoryRecycleModal";
 const { Panel } = Collapse;
 const BasicInfo = props => {
     const layout = {
@@ -47,7 +48,7 @@ const BasicInfo = props => {
     const tenant = getUser().tenant;
     const userId = getUser().userId
     const [confirmForm] = Form.useForm();
-
+    const [repositoryRecycleVisable, setRepositoryRecycleVisable] = useState(false)
     useEffect(() => {
         info()
         findAllUser()
@@ -103,8 +104,13 @@ const BasicInfo = props => {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const showModal = () => {
-        setIsModalVisible(true);
+        // 免费版本
+        // setIsModalVisible(true);
+        
+        // 付费版本
+        setRepositoryRecycleVisable(true)
     };
+
 
 
     
@@ -351,6 +357,10 @@ const BasicInfo = props => {
                     setVisible={setVisible}
                     updateRepository={updateRepository}
                     setIconUrl={setIconUrl}
+                />
+                <RepositoryRecycleModal 
+                    repositoryRecycleVisable = {repositoryRecycleVisable}
+                    setRepositoryRecycleVisable = {setRepositoryRecycleVisable}
                 />
 
             </Col>

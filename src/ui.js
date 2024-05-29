@@ -11,9 +11,11 @@ import wikiRoutes from "./Routers";
 import {store} from "./stores"
 import Header from "./home/home/components/Header";
 import Search from "./home/search/components/Search";
+import RepositoryLayout from "./repository/common/components/RepositoryLayout";
 export {
     wikiRoutes,
     store,
     Header,
-    Search
+    Search,
+    RepositoryLayout
 }

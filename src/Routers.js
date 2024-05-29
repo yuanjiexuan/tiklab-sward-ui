@@ -7,103 +7,102 @@
  * @LastEditTime: 2021-09-26 08:59:04
  */
 import React from 'react';
-import AsyncComponent from './common/lazy/SyncComponent'
+import AsyncComponent from './common/lazy/SyncComponent.js'
 import { Redirect } from "react-router-dom";
 
-const Login = AsyncComponent(() => import('./login/Login'))
-const Logout = AsyncComponent(() => import('./login/Logout'))
-const Home = AsyncComponent(() => import('./home/home/components/Home'))
-const ProjectNotFound = AsyncComponent(() => import("./setting/common/components/ProjectNotFond"))
+const Login = AsyncComponent(() => import('./login/Login.js'))
+const Logout = AsyncComponent(() => import('./login/Logout.js'))
+const Home = AsyncComponent(() => import('./home/home/components/Home.js'))
+const ProjectNotFound = AsyncComponent(() => import("./setting/common/components/ProjectNotFond.js"))
 
 const NoFoundPage = AsyncComponent(() => import('./login/NoFoundPage.js'));
-const NoAccessPage = AsyncComponent(() => import('./login/SystemNoAccessPage'));
-const ProjectNoAccessPage = AsyncComponent(() => import('./login/ProjectNoAccessPage'));
-const ExcludeProductUserContent = AsyncComponent(() => import('./login/ExcludeProductUserPage'))
+const NoAccessPage = AsyncComponent(() => import('./login/SystemNoAccessPage.js'));
+const ProjectNoAccessPage = AsyncComponent(() => import('./login/ProjectNoAccessPage.js'));
+const ExcludeProductUserContent = AsyncComponent(() => import('./login/ExcludeProductUserPage.js'))
 
-const Index = AsyncComponent(() => import('./home/home/components/Layout'))
-const RepositoryDetail = AsyncComponent(() => import('./repository/common/components/RepositoryLayout'))
-const Survey = AsyncComponent(() => import('./repository/overview/components/Survey'))
-const DynamicList = AsyncComponent(() => import("./repository/overview/components/DynamicList"))
+const Index = AsyncComponent(() => import('./home/home/components/Layout.js'))
+const RepositoryDetail = AsyncComponent(() => import('./repository/common/components/RepositoryLayout.js'))
+const Survey = AsyncComponent(() => import('./repository/overview/components/Survey.js'))
+const DynamicList = AsyncComponent(() => import("./repository/overview/components/DynamicList.js"))
 
-const LogDetail = AsyncComponent(() => import('./repository/category/CategoryDetail'))
+const LogDetail = AsyncComponent(() => import('./repository/category/CategoryDetail.js'))
 
 
 // 知识库
-const Repository = AsyncComponent(() => import('./repository/repository/components/RepositoryList'))
-const RepositoryAdd = AsyncComponent(() => import('./repository/repository/components/RepositoryAdd'))
-const DocumentEdit = AsyncComponent(() => import("./document/document/components/DocumentEdit"))
-const DocumnetExamine = AsyncComponent(() => import("./document/document/components/DocumnetExamine"))
-const DocumentAddEdit = AsyncComponent(() => import("./document/document/components/DocumentAddEdit"))
+const Repository = AsyncComponent(() => import('./repository/repository/components/RepositoryList.js'))
+const RepositoryAdd = AsyncComponent(() => import('./repository/repository/components/RepositoryAdd.js'))
+const DocumentEdit = AsyncComponent(() => import("./document/document/components/DocumentEdit.js"))
+const DocumnetExamine = AsyncComponent(() => import("./document/document/components/DocumnetExamine.js"))
+const DocumentAddEdit = AsyncComponent(() => import("./document/document/components/DocumentAddEdit.js"))
 
-const MarkdownDocumentEdit = AsyncComponent(() => import("./document/markdown/components/markdownEdit"))
-const MarkdownDocumentView = AsyncComponent(() => import("./document/markdown/components/markdownView"))
+const MarkdownDocumentEdit = AsyncComponent(() => import("./document/markdown/components/markdownEdit.js"))
+const MarkdownDocumentView = AsyncComponent(() => import("./document/markdown/components/markdownView.js"))
 
-const RepositorySet = AsyncComponent(() => import("./repository/setting/common/components/RepositorySet"))
-const RepositoryDomainRole = AsyncComponent(() => import('./repository/user/RepositoryDomainRole'))
-const RepositoryDomainUser = AsyncComponent(() => import('./repository/user/RepositoryDomainUser'))
-const RepositoryBasicInfo = AsyncComponent(() => import('./repository/setting/basicInfo/components/BasicInfo'))
+const RepositorySet = AsyncComponent(() => import("./repository/setting/common/components/RepositorySet.js"))
+const RepositoryDomainRole = AsyncComponent(() => import('./repository/user/RepositoryDomainRole.js'))
+const RepositoryDomainUser = AsyncComponent(() => import('./repository/user/RepositoryDomainUser.js'))
+const RepositoryBasicInfo = AsyncComponent(() => import('./repository/setting/basicInfo/components/BasicInfo.js'))
 
 // 归档
-const RepositoryArchived = AsyncComponent(() => import("./repository/archived/NodeArchived/NodeArchivedList.js"))
-const RepositoryArchivedList = AsyncComponent(() => import("./repository/archived/RepositoryArchived/RepositoryArchivedList.js"))
 
-const Template = AsyncComponent(() => import('./setting/template/components/TemplateList'))
-const TemplateEdit = AsyncComponent(() => import('./setting/template/components/TemplateEdit'))
-const TemplatePreview = AsyncComponent(() => import('./setting/template/components/TemplatePreview'))
+
+const Template = AsyncComponent(() => import('./setting/template/components/TemplateList.js'))
+const TemplateEdit = AsyncComponent(() => import('./setting/template/components/TemplateEdit.js'))
+const TemplatePreview = AsyncComponent(() => import('./setting/template/components/TemplatePreview.js'))
 // 分享文档页面
-const ShareDocument = AsyncComponent(() => import('./document/share/components/ShareDocument'))
-const SharePage = AsyncComponent(()=> import('./document/share/components/ShareLayout'))
-const ShareCategory = AsyncComponent(() => import('./document/share/components/PassWord'))
-const ShareCategoryDetail = AsyncComponent(() => import('./document/share/components/ShareCategoryDetail'))
-const ShareMarkdown = AsyncComponent(() => import("./document/share/components/ShareMarkdown"))
+const ShareDocument = AsyncComponent(() => import('./document/share/components/ShareDocument.js'))
+const SharePage = AsyncComponent(()=> import('./document/share/components/ShareLayout.js'))
+const ShareCategory = AsyncComponent(() => import('./document/share/components/PassWord.js'))
+const ShareCategoryDetail = AsyncComponent(() => import('./document/share/components/ShareCategoryDetail.js'))
+const ShareMarkdown = AsyncComponent(() => import("./document/share/components/ShareMarkdown.js"))
 // 分享文档页面
-const PassWord = AsyncComponent(() => import('./document/share/components/PassWord'))
+const PassWord = AsyncComponent(() => import('./document/share/components/PassWord.js'))
 
 const SettingHome = AsyncComponent(() => import('./setting/home/components/SettingHome.js'))
-const LoadData = AsyncComponent(() => import('./setting/loadData/LoadData'))
+const LoadData = AsyncComponent(() => import('./setting/loadData/LoadData.js'))
 // 消息
 const SystemMessageSendType = AsyncComponent(() => import('./setting/message/SystemMessageSendType.js'))
 const SystemMessageType = AsyncComponent(() => import('./setting/message/SystemMessageType.js'))
 const SystemMessageTemplate = AsyncComponent(() => import('./setting/message/SystemMessageTemplate.js'))
 const SystemMessageNotice = AsyncComponent(() => import('./setting/message/SystemMessageNotice.js'))
 const SystemMessageNoticeBase = AsyncComponent(() => import('./setting/message/SystemMessageNoticeBase.js'))
-const ProjectMessageNoticeContent = AsyncComponent(() => import("./setting/message/ProjectMessageNoticeContent"))
+const ProjectMessageNoticeContent = AsyncComponent(() => import("./setting/message/ProjectMessageNoticeContent.js"))
 const DomainMessageNoticeContent = AsyncComponent(() => import("./repository/setting/projectMessage/DomainMessageNoticeContent.js"))
 
-const Setting = AsyncComponent(() => import('./setting/common/components/Setting'))
-const ProjectPlugin = AsyncComponent(() => import('./setting/plugins/ProjectPlugin'))
+const Setting = AsyncComponent(() => import('./setting/common/components/Setting.js'))
+const ProjectPlugin = AsyncComponent(() => import('./setting/plugins/ProjectPlugin.js'))
 
-const SystemFeature = AsyncComponent(() => import('./setting/privilege/SystemFeature'))
-const SystemRoleBuilt = AsyncComponent(() => import('./setting/privilege/SystemRoleBuilt'))
-const SystemRole = AsyncComponent(() => import('./setting/privilege/SystemRole'))
-const ProjectFeature = AsyncComponent(() => import('./setting/privilege/ProjectFeature'))
-const ProjectRole = AsyncComponent(() => import('./setting/privilege/ProjectRole'))
+const SystemFeature = AsyncComponent(() => import('./setting/privilege/SystemFeature.js'))
+const SystemRoleBuilt = AsyncComponent(() => import('./setting/privilege/SystemRoleBuilt.js'))
+const SystemRole = AsyncComponent(() => import('./setting/privilege/SystemRole.js'))
+const ProjectFeature = AsyncComponent(() => import('./setting/privilege/ProjectFeature.js'))
+const ProjectRole = AsyncComponent(() => import('./setting/privilege/ProjectRole.js'))
 
 //组织用户
-const OrgaContent = AsyncComponent(() => import('./setting/orga/Orga'))
-const OrgaUser = AsyncComponent(() => import('./setting/orga/User'))
-const ProjectDirectory = AsyncComponent(() => import("./setting/user/ProjectDirectory"))
-const ProjectUserGroup = AsyncComponent(() => import("./setting/user/ProjectUserGroup"))
-const ProjectSystemUserGroup = AsyncComponent(() => import("./setting/user/ProjectSystemUserGroup"))
-const ProjectVirtualRoleList = AsyncComponent(() => import("./setting/user/ProjectVirtualRoleList"))
+const OrgaContent = AsyncComponent(() => import('./setting/orga/Orga.js'))
+const OrgaUser = AsyncComponent(() => import('./setting/orga/User.js'))
+const ProjectDirectory = AsyncComponent(() => import("./setting/user/ProjectDirectory.js"))
+const ProjectUserGroup = AsyncComponent(() => import("./setting/user/ProjectUserGroup.js"))
+const ProjectSystemUserGroup = AsyncComponent(() => import("./setting/user/ProjectSystemUserGroup.js"))
+const ProjectVirtualRoleList = AsyncComponent(() => import("./setting/user/ProjectVirtualRoleList.js"))
 // 系统集成
-const UrlData = AsyncComponent(() => import('./setting/systemIntegration/components/UrlData'));
+const UrlData = AsyncComponent(() => import('./setting/systemIntegration/components/UrlData.js'));
 
 //工时
 const TaskListContent = AsyncComponent(() => import('./setting/todo/TaskList.js'))
-const TodoTempListContent = AsyncComponent(() => import('./setting/todo/TodoTempList'))
-const MyTodoTaskContent = AsyncComponent(() => import('./setting/todo/MyTodoTask'))
-const TodoTypeListContent = AsyncComponent(() => import('./setting/todo/TodoTypeList'))
+const TodoTempListContent = AsyncComponent(() => import('./setting/todo/TodoTempList.js'))
+const MyTodoTaskContent = AsyncComponent(() => import('./setting/todo/MyTodoTask.js'))
+const TodoTypeListContent = AsyncComponent(() => import('./setting/todo/TodoTypeList.js'))
 
 const LogList = AsyncComponent(() => import('./setting/log/Log.js'))
-const LogTemplateList = AsyncComponent(() => import('./setting/log/MyLogTemplateList'))
-const ProjectLogTypeList = AsyncComponent(() => import('./setting/log/LogTypeList'))
+const LogTemplateList = AsyncComponent(() => import('./setting/log/MyLogTemplateList.js'))
+const ProjectLogTypeList = AsyncComponent(() => import('./setting/log/LogTypeList.js'))
 
-const LicenceVersion = AsyncComponent(() => import('./setting/version/Version'))
+const LicenceVersion = AsyncComponent(() => import('./setting/version/Version.js'))
 const LicenceProductAuth = AsyncComponent(() => import('./setting/version/Product.js'))
-const VailProductUserPage =  AsyncComponent(() => import('./login/VaildProductUserPage'))
-const BackupRecoveryContent = AsyncComponent(() => import('./setting/backups/Backups'))
-const Dnd = AsyncComponent(() => import("./repository/common/components/dnd"))
+const VailProductUserPage =  AsyncComponent(() => import('./login/VaildProductUserPage.js'))
+const BackupRecoveryContent = AsyncComponent(() => import('./setting/backups/Backups.js'))
+const Dnd = AsyncComponent(() => import("./repository/common/components/dnd.js"))
 
 const Routes = [
     {
@@ -296,29 +295,16 @@ const Routes = [
                     {
                         path: "/repositorySet/:repositoryId/messagenotice",
                         component: DomainMessageNoticeContent,
-                    },
-                    {
-                        path: "/repositorySet/:repositoryId/archived",
-                        component: RepositoryArchived
-                    },
+                    }
                 ]
             },
-            // {
-            //     path: "/repositorySet/:repositoryId/basicInfo",
-            //     component: RepositoryBasicInfo
-            // },
-            
+
             {
                 path: "/setting",
                 component: Setting,
                 key: 'Setting',
                 routes: [
-                    {
-                        path: "/setting/archived",
-                        component: RepositoryArchivedList,
-                        row: true,
-                        exact: true
-                    },
+                    
                     {
                         path: "/setting/home",
                         component: SettingHome,
