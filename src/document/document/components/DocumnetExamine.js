@@ -8,7 +8,7 @@
  */
 import React, { useEffect, useState } from "react";
 import { Provider, inject, observer } from "mobx-react";
-import { Button, Row, Col, message } from 'antd';
+import { Button, Row, Col, message, Empty } from 'antd';
 import { PreviewEditor, EditorCategory } from "thoughtware-slate-ui";
 import "thoughtware-slate-ui/es/thoughtware-slate.css";
 import "./documentExamine.scss"
@@ -19,7 +19,7 @@ import DocumentAddEdit from "./DocumentAddEdit";
 import CommentShare from "../store/CommentStore";
 import DocumentStore from "../store/DocumentStore";
 import CategoryStore from "../../../repository/common/store/CategoryStore";
-import DocumentEdit from "./DocumentEdit";
+
 
 const DocumentExamine = (props) => {
     const { relationWorkStore } = props;
@@ -49,6 +49,10 @@ const DocumentExamine = (props) => {
         setValue()
         findDocument(documentId).then((data) => {
             if (data.code === 0) {
+                if(!data.data) {
+                    setDocInfo(node)
+                    return
+                }
                 if (data.data.details) {
                     setValue(data.data.details)
                 } else {
@@ -128,7 +132,8 @@ const DocumentExamine = (props) => {
     }
 
     return (<Provider {...store}>
-        <div className="document-examine">
+        {
+            docInfo ? <div className="document-examine">
             {
                 showComment && <Comment documentId={documentId} setShowComment={setShowComment} commentNum={commentNum} setCommentNum={setCommentNum} />
             }
@@ -184,7 +189,7 @@ const DocumentExamine = (props) => {
                             </span>
                             <div className="commnet-num" style={{ top: "37px" }}>{likeNum}</div>
                         </div>
-                        <div className="comment-box-item">
+                        {/* <div className="comment-box-item">
                             <span className="comment-item" onClick={() => setShowCategory(true)}>
                                 {
                                     like ? <svg className="midden-icon" aria-hidden="true">
@@ -195,7 +200,7 @@ const DocumentExamine = (props) => {
                                 }
                             </span>
                             <div className="commnet-num" style={{ top: "37px" }}>{likeNum}</div>
-                        </div>
+                        </div> */}
                     </div>
                 </>
             }
@@ -215,6 +220,13 @@ const DocumentExamine = (props) => {
                 type={"document"}
             />
         </div>
+        :
+        <div className="document-empty">
+            <Empty image="/images/nodata.png" description="文档不存在或者已被删除~"/>
+        </div>
+        
+        }
+        
     </Provider>
 
     )

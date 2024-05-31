@@ -15,8 +15,8 @@ import Breadcumb from "../../../../common/breadcrumb/breadcrumb";
 import RepositoryIcon from "./RepositoryChangeIcon";
 import { PrivilegeProjectButton } from "thoughtware-privilege-ui";
 import { Collapse } from 'antd';
-import { getUser } from "thoughtware-core-ui";
-import RepositoryRecycleModal from "../../../recycleBin/RepositoryRecycleBin/RepositoryRecycleModal";
+import { getUser, getVersionInfo } from "thoughtware-core-ui";
+import ArchivedFree from "../../../../common/components/ArchivedFree";
 const { Panel } = Collapse;
 const BasicInfo = props => {
     const layout = {
@@ -39,7 +39,7 @@ const BasicInfo = props => {
 
     const [form] = Form.useForm();
     const repositoryId = props.match.params.repositoryId;
-    const { repositorySetStore, systemRoleStore } = props;
+    const { repositorySetStore, systemRoleStore, RepositoryRecycleModal } = props;
     const { deleteRepository, updateRepository, findRepository, findAllUser, uselist } = repositorySetStore;
     const [disable, setDisabled] = useState(true);
     const [iconUrl, setIconUrl] = useState();
@@ -48,7 +48,10 @@ const BasicInfo = props => {
     const tenant = getUser().tenant;
     const userId = getUser().userId
     const [confirmForm] = Form.useForm();
-    const [repositoryRecycleVisable, setRepositoryRecycleVisable] = useState(false)
+    const [repositoryRecycleVisable, setRepositoryRecycleVisable] = useState(false);
+    const versionInfo = getVersionInfo();
+    const [archivedFreeVisable, setArchivedFreeVisable] = useState(false)
+
     useEffect(() => {
         info()
         findAllUser()
@@ -59,7 +62,7 @@ const BasicInfo = props => {
         findRepository(repositoryId).then((response) => {
             if (response.code === 0) {
                 const data = response.data;
-                
+
                 form.setFieldsValue({
                     name: data.name,
                     limits: data.limits,
@@ -105,15 +108,21 @@ const BasicInfo = props => {
 
     const showModal = () => {
         // 免费版本
-        // setIsModalVisible(true);
-        
-        // 付费版本
-        setRepositoryRecycleVisable(true)
+
+        setIsModalVisible(true);
+
     };
 
+    const showRecycle = () => {
+        if (versionInfo.expired === false) {
+            setRepositoryRecycleVisable(true)
+        } else {
+            setArchivedFreeVisable(true)
+        }
+    }
 
 
-    
+
 
     const handleCancel = () => {
         setIsModalVisible(false);
@@ -292,63 +301,76 @@ const BasicInfo = props => {
                         <Panel header={repositoryDelete()} key="2">
                             <div className="repository-set-delete">
                                 <div className="repository-set-icon-block">
-                                此知识库及其目录将在回收站中保留 60 天，之后将被永久删除
-
+                                    删除知识库会直接把知识库，知识库内的文档，目录都删除；移入回收站此知识库及其目录将在回收站中保留
                                 </div>
 
                                 <PrivilegeProjectButton code={'RepositoryDelete'} domainId={repositoryId}  {...props}>
-                                    <div className="change-button delete-button" onClick={() => showModal()}>
-                                        删除知识库
+                                    <div className="button-row">
+                                        <div className="change-button" onClick={() => showRecycle()}>
+                                            移入回收站
+                                            {
+                                                versionInfo.expired && <svg className="img-icon-16" aria-hidden="true" >
+                                                    <use xlinkHref="#icon-member"></use>
+                                                </svg>
+                                            }
+                                        </div>
+                                        <div className="change-button delete-button" onClick={() => showModal()}>
+                                            删除知识库
+                                        </div>
                                     </div>
+
+
                                 </PrivilegeProjectButton>
                             </div>
                         </Panel>
                     </Collapse>
                 </div>
                 <div className="project-delete-confirm">
-                    <Modal 
-                        title="确定删除" 
-                        getContainer={false} 
-                        visible={isModalVisible} 
-                        closable={false} 
-                        onOk={handleOk} 
-                        onCancel={handleCancel} 
-                        okText={"确定"} 
+                    <Modal
+                        title="确定删除"
+                        getContainer={false}
+                        visible={isModalVisible}
+                        closable={false}
+                        onOk={handleOk}
+                        onCancel={handleCancel}
+                        okText={"确定"}
                         cancelText={"取消"}
-                        okType= "danger"
-                        okButtonProps={{type: "primary"}}
+                        okType="danger"
+                        okButtonProps={{ type: "primary" }}
                     >
                         <Alert message=" 此知识库及其目录、文档、附件和评论将被永久删除" type="error" showIcon />
-
-                        <Form
-                            form={confirmForm}
-                            name="dependencies"
-                            autoComplete="off"
-                            style={{
-                                maxWidth: 600,
-                            }}
-                            layout="vertical"
-                        >
-                            <Form.Item
-                                label="知识库名称"
-                                name="confirmProjectName"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: `请输入知识库名称`,
-                                    },
-                                    ({ getFieldValue }) => ({
-                                        validator(rule, value) {
-                                            //getFieldValue可以获得其他输入框的内容
-                                            if (repositoryInfo?.name !== value) return Promise.reject(`请输入正确的知识库名字`);
-                                            return Promise.resolve();
-                                        }
-                                    })
-                                ]}
+                        <div style={{ padding: "20px 0" }}>
+                            <Form
+                                form={confirmForm}
+                                name="dependencies"
+                                autoComplete="off"
+                                style={{
+                                    maxWidth: 600,
+                                }}
+                                layout="vertical"
                             >
-                                <Input value={confirmProjectName} onChange={(value) => setConfirmProjectName(value.target.value)} />
-                            </Form.Item>
-                        </Form>
+                                <Form.Item
+                                    label="知识库名称"
+                                    name="confirmProjectName"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: `请输入知识库名称`,
+                                        },
+                                        ({ getFieldValue }) => ({
+                                            validator(rule, value) {
+                                                //getFieldValue可以获得其他输入框的内容
+                                                if (repositoryInfo?.name !== value) return Promise.reject(`请输入正确的知识库名字`);
+                                                return Promise.resolve();
+                                            }
+                                        })
+                                    ]}
+                                >
+                                    <Input value={confirmProjectName} onChange={(value) => setConfirmProjectName(value.target.value)} />
+                                </Form.Item>
+                            </Form>
+                        </div>
+
                     </Modal>
                 </div>
 
@@ -358,11 +380,17 @@ const BasicInfo = props => {
                     updateRepository={updateRepository}
                     setIconUrl={setIconUrl}
                 />
-                <RepositoryRecycleModal 
-                    repositoryRecycleVisable = {repositoryRecycleVisable}
-                    setRepositoryRecycleVisable = {setRepositoryRecycleVisable}
-                />
+                {
+                    RepositoryRecycleModal && <RepositoryRecycleModal
+                        repositoryRecycleVisable={repositoryRecycleVisable}
+                        setRepositoryRecycleVisable={setRepositoryRecycleVisable}
+                    />
+                }
 
+                <ArchivedFree
+                    archivedFreeVisable={archivedFreeVisable}
+                    setArchivedFreeVisable={setArchivedFreeVisable}
+                />
             </Col>
         </Row >
     )

@@ -11,8 +11,6 @@ import React from 'react';
 import { renderRoutes } from "react-router-config";
 import Header from "./Header";
 import "../components/header.scss";
-import { UserVerify } from 'thoughtware-eam-ui';
-import { connect } from 'thoughtware-plugin-core-ui/es';
 import { AppLink, HelpLink, AvatarLink } from 'thoughtware-licence-ui';
 const Layout = (props) => {
     const route = props.route ? props.route.routes : [];
@@ -34,10 +32,4 @@ const Layout = (props) => {
 }
 
 
-const IndexHoc = UserVerify(Layout, '/noAuth')
-function mapStateToProps(state) {
-    return {
-        pluginStore: state.pluginStore
-    }
-}
-export default connect(mapStateToProps)(IndexHoc);
+export default Layout;

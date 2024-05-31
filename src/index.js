@@ -15,12 +15,10 @@ import { Provider } from 'mobx-react';
 import { store } from "./stores"
 import { orgStores } from "thoughtware-user-ui/es/store";
 import { getUser, enableAxios } from 'thoughtware-core-ui'
-import { pluginLoader, PluginProvider } from "thoughtware-plugin-core-ui";
 import './common/language/i18n';
 import "./index.scss";
 import { observer } from "mobx-react"
 import { useTranslation } from 'react-i18next';
-import resources from './common/language/resources';
 import "./assets/index";
 import { privilegeStores } from "thoughtware-privilege-ui/es/store";
 import zhCN from 'antd/es/locale/zh_CN';
@@ -28,43 +26,23 @@ import { ConfigProvider } from 'antd';
 enableAxios()
 const Index = observer(() => {
     const { i18n } = useTranslation();
-    const [visable, setVisable] = useState(true);
-
     const allStore = {
         ...privilegeStores,
         ...orgStores,
         ...store
     }
 
-    const [pluginData, setPluginData] = useState({
-        routes: Routes,
-        pluginStore: [],
-        languageStore: []
-    });
-    useEffect(() => {
-        
-        pluginLoader(Routes, resources, i18n).then(res => {
-            
-            setPluginData(res)
-            setVisable(false)
-        })
-        return;
-    }, []);
-
-    if (visable) return <div>加载。。。</div>
 
     return (
-        <PluginProvider store={pluginData}>
-            <Provider {...allStore}>
-                <ConfigProvider locale={zhCN}>
-                    <HashRouter >
-                        {
-                            renderRoutes(pluginData.routes)
-                        }
-                    </HashRouter>
-                </ConfigProvider>
-            </Provider>
-        </PluginProvider>
+        <Provider {...allStore}>
+            <ConfigProvider locale={zhCN}>
+                <HashRouter >
+                    {
+                        renderRoutes(Routes)
+                    }
+                </HashRouter>
+            </ConfigProvider>
+        </Provider>
     )
 });
 

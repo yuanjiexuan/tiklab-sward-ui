@@ -28,8 +28,6 @@ const SetAside = (props) => {
         const iseEnhance = data.iseEnhance;
         if (data.islink && !authType) {
             const authUrl = JSON.parse(localStorage.getItem("authConfig")).authServiceUrl + "#" + id;
-            // window.location.href = authUrl;
-
             window.open(authUrl, '_blank');
         } else {
             if (versionInfo.expired === false) {

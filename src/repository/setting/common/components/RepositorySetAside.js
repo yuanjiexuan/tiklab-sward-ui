@@ -136,7 +136,7 @@ const RepositorySetAside = (props) => {
                                         {Item.title}
                                     </span>
                                     {
-                                        Item.iseEnhance && versionInfo.expired === true &&  <svg className="img-icon" aria-hidden="true" >
+                                        Item.iseEnhance && versionInfo.expired === true &&  <svg className="img-icon-16" aria-hidden="true" >
                                         <use xlinkHref="#icon-member"></use>
                                     </svg>
                                      }

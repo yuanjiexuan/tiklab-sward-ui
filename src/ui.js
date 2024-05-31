@@ -12,10 +12,16 @@ import {store} from "./stores"
 import Header from "./home/home/components/Header";
 import Search from "./home/search/components/Search";
 import RepositoryLayout from "./repository/common/components/RepositoryLayout";
+import BasicInfo from "./repository/setting/basicInfo/components/BasicInfo";
+import Layout from "./home/home/components/Layout";
+import ArchivedFree from "./common/components/ArchivedFree";
 export {
     wikiRoutes,
     store,
     Header,
     Search,
-    RepositoryLayout
+    RepositoryLayout, 
+    BasicInfo,
+    Layout,
+    ArchivedFree
 }

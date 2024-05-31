@@ -3,11 +3,16 @@ import "./SettingHome.scss";
 import { Row, Col } from "antd";
 import SettingHomeStore from "../store/SettingHomeStore"
 import { observer } from "mobx-react";
+import { getVersionInfo } from "thoughtware-core-ui";
+import ArchivedFree from "../../../common/components/ArchivedFree";
 
 const SettingHome = (props) => {
     const { findOrgaNum, selectKey, setSelectKey } = SettingHomeStore;
     const [numList, setNumList] = useState({});
     const authType = JSON.parse(localStorage.getItem("authConfig"))?.authType;
+    const versionInfo = getVersionInfo();
+    const [archivedFreeVisable, setArchivedFreeVisable] = useState(false)
+
     useEffect(() => {
         findOrgaNum().then(res => {
             if (res.code === 0) {
@@ -139,6 +144,34 @@ const SettingHome = (props) => {
                     path: '/setting/productAuth',
                 },
             ]
+        },
+        {
+            title: '归档知识库',
+            key: "archived",
+            cloudShow: true,
+            eeShow: true,
+            children: [
+                {
+                    title: '归档知识库',
+                    key: "archived",
+                    path: '/setting/archived',
+                    isEnhance: true
+                },
+            ]
+        },
+        {
+            title: '回收站',
+            key: "recycle",
+            cloudShow: true,
+            eeShow: true,
+            children: [
+                {
+                    title: '回收站',
+                    key: "recycle",
+                    path: '/setting/recycle',
+                    isEnhance: true,
+                },
+            ]
         }
     ]
 
@@ -147,6 +180,13 @@ const SettingHome = (props) => {
         if (data.islink && !authType) {
             const authUrl = JSON.parse(localStorage.getItem("authConfig")).authServiceUrl + "#" + data.path;
             window.open(authUrl, '_blank');
+        } else if (data.isEnhance) {
+            if (versionInfo.expired) {
+                setArchivedFreeVisable(true)
+            } else {
+                props.history.push(data.path)
+                setSelectKey(data.path)
+            }
         } else {
             props.history.push(data.path)
             setSelectKey(data.path)
@@ -184,7 +224,13 @@ const SettingHome = (props) => {
 
 
                                                     }
-                                                    <div className="module-title">{moduleItem.title}</div>
+                                                    <div className="module-title">{moduleItem.title}
+                                                        {
+                                                            versionInfo.expired && moduleItem.isEnhance && <svg className="img-icon-16" aria-hidden="true" >
+                                                                <use xlinkHref="#icon-member"></use>
+                                                            </svg>
+                                                        }
+                                                    </div>
                                                 </div>
                                             })
                                         }
@@ -206,7 +252,14 @@ const SettingHome = (props) => {
 
 
                                                     }
-                                                    <div className="module-title">{moduleItem.title}</div>
+                                                    <div className="module-title">
+                                                        {moduleItem.title}
+                                                        {
+                                                            versionInfo.expired && moduleItem.isEnhance && <svg className="img-icon-16" aria-hidden="true" >
+                                                                <use xlinkHref="#icon-member"></use>
+                                                            </svg>
+                                                        }
+                                                    </div>
                                                 </div>
                                             })
                                         }
@@ -217,6 +270,10 @@ const SettingHome = (props) => {
                         })
                     }
                 </div>
+                <ArchivedFree
+                    archivedFreeVisable={archivedFreeVisable}
+                    setArchivedFreeVisable={setArchivedFreeVisable}
+                />
             </Col>
         </Row>
 

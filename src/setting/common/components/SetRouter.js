@@ -7,7 +7,7 @@
  * @LastEditTime: 2022-04-25 10:09:01
  */
 
-const setDevRouter= [
+const setDevRouter = [
     {
         title: "用户与权限",
         icon: 'systemuser',
@@ -20,30 +20,30 @@ const setDevRouter= [
                 id: '/setting/orga',
                 purviewCode: "orga",
                 islink: true,
-                code: 1-1,
-                
+                code: 1 - 1,
+
             },
             {
                 title: '用户',
                 id: '/setting/user',
                 purviewCode: "user",
                 islink: true,
-                code: 1-2,
+                code: 1 - 2,
             },
             {
                 title: '用户组',
                 id: '/setting/userGroup',
                 purviewCode: "user_group",
                 islink: true,
-                code: 1-3,
+                code: 1 - 3,
             },
             {
-        
+
                 title: "用户目录",
                 id: '/setting/dir',
                 purviewCode: "user_dir",
                 islink: true,
-                code: 1-4,
+                code: 1 - 4,
             },
             {
                 title: '权限',
@@ -64,23 +64,15 @@ const setDevRouter= [
                 title: "消息通知方案",
                 id: '/setting/messageNotice',
                 purviewCode: "SysMessageNotice",
-                code: 4-1
+                code: 4 - 1
             },
             {
                 title: '消息发送方式',
                 id: '/setting/messageSendType',
                 purviewCode: "SysMessageSendType",
-                code: 4-2,
+                code: 4 - 2,
             }
         ]
-    },
-   
-    {
-        title: "插件",
-        icon: 'systemplugin',
-        id: '/setting/plugin',
-        purviewCode: "SysPlugin",
-        code: 8,
     },
     {
         title: "系统集成",
@@ -91,7 +83,7 @@ const setDevRouter= [
             {
                 title: '地址配置',
                 id: '/setting/urlData',
-                code: 9-1,
+                code: 9 - 1,
             }
         ]
     },
@@ -105,16 +97,16 @@ const setDevRouter= [
             {
                 title: '操作日志',
                 id: '/setting/logList',
-                code: 10-1,
+                code: 10 - 1,
             },
             {
                 title: '备份与恢复',
                 id: '/setting/backup',
-                code: 10-2,
+                code: 10 - 2,
             }
         ]
-    }, 
-    
+    },
+
     {
         title: "应用",
         icon: 'systemversion',
@@ -125,28 +117,26 @@ const setDevRouter= [
             {
                 title: '版本与许可证',
                 id: "/setting/version",
-                code: 11-1,
+                code: 11 - 1,
             },
             {
                 title: '应用访问权限',
                 id: "/setting/productAuth",
-                code: 11-2,
+                code: 11 - 2,
             }
         ]
     },
     {
         title: '归档知识库',
-        icon: 'systemversion',
+        icon: 'systemreset',
         id: '/setting/archived',
-        purviewCode: "SysPlugin",
         code: "recycle",
         iseEnhance: true
     },
     {
         title: '回收站',
-        icon: 'systemversion',
+        icon: 'systemdelete',
         id: '/setting/recycle',
-        purviewCode: "SysPlugin",
         code: "recycle",
         iseEnhance: true
     },
@@ -159,13 +149,13 @@ const setDevRouter= [
             {
                 title: '模板',
                 id: "/setting/template",
-                code: 12-1,
+                code: 12 - 1,
             },
             {
                 title: '用户组',
                 id: '/setting/usersystemgroup',
                 purviewCode: "user_group",
-                code: 12-18,
+                code: 12 - 18,
             },
             {
                 title: '虚拟角色',
@@ -176,37 +166,37 @@ const setDevRouter= [
                 title: '系统功能',
                 id: '/setting/systemFeature',
                 purviewCode: "SysFeatrueSys",
-                code: 12-3,
+                code: 12 - 3,
             },
             {
                 title: '系统角色',
                 id: '/setting/systemRoleBuilt',
                 purviewCode: "SysRoleSys",
-                code: 12-4,
+                code: 12 - 4,
             },
             {
                 title: '项目功能',
                 id: '/setting/projectFeature',
                 purviewCode: "SysFeatrueProject",
-                code: 12-5,
+                code: 12 - 5,
             },
             {
                 title: '项目角色',
                 id: '/setting/projectRole',
                 purviewCode: "SysRoleProject",
-                code: 12-6
+                code: 12 - 6
             },
             {
                 title: '消息通知方式',
                 id: '/setting/messageNoticeSystem',
                 purviewCode: "SysMessageNotice",
-                code: 12-7,
+                code: 12 - 7,
             },
             {
                 title: '项目消息通知方式',
                 id: '/setting/projectMessageNotice',
                 purviewCode: "SysMessageType",
-                code: 12-8,
+                code: 12 - 8,
             },
             {
                 title: '消息类型',
@@ -214,36 +204,36 @@ const setDevRouter= [
                 purviewCode: "SysMessageType",
                 code: "messageType",
             },
-           
+
             {
                 title: '日志模板',
                 id: '/setting/myLogTemplateList',
                 // purviewCode: "SysLogTemplate",
-                code: 12-10,
+                code: 12 - 10,
             },
             {
                 title: '日志类型',
                 id: '/setting/projectLogTypeList',
                 // purviewCode: "SysLogType",
-                code: 12-11,
+                code: 12 - 11,
             },
             {
                 title: '待办模板',
                 id: '/setting/todoTempList',
                 purviewCode: "SysSetting",
-                code: 12-12,
+                code: 12 - 12,
             },
             {
                 title: '待办类型',
                 id: '/setting/todoTypeTask',
                 purviewCode: "SysSetting",
-                code: 12-13,
+                code: 12 - 13,
             }
         ]
     }
 ];
 
-const setPrdRouter= [
+const setPrdRouter = [
     {
         title: "用户与权限",
         icon: 'systemuser',
@@ -256,30 +246,30 @@ const setPrdRouter= [
                 id: '/setting/orga',
                 purviewCode: "orga",
                 islink: true,
-                code: 1-1,
-                
+                code: 1 - 1,
+
             },
             {
                 title: '用户',
                 id: '/setting/user',
                 purviewCode: "user",
                 islink: true,
-                code: 1-2,
+                code: 1 - 2,
             },
             {
                 title: '用户组',
                 id: '/setting/userGroup',
                 purviewCode: "user_group",
                 islink: true,
-                code: 1-3,
+                code: 1 - 3,
             },
             {
-        
+
                 title: "用户目录",
                 id: '/setting/dir',
                 purviewCode: "user_dir",
                 islink: true,
-                code: 1-4,
+                code: 1 - 4,
             },
             {
                 title: '权限',
@@ -300,22 +290,15 @@ const setPrdRouter= [
                 title: "消息通知方案",
                 id: '/setting/messageNotice',
                 purviewCode: "SysMessageNotice",
-                code: 4-1
+                code: 4 - 1
             },
             {
                 title: '消息发送方式',
                 id: '/setting/messageSendType',
                 purviewCode: "SysMessageSendType",
-                code: 4-2,
+                code: 4 - 2,
             }
         ]
-    },
-    {
-        title: "插件",
-        icon: 'systemplugin',
-        id: '/setting/plugin',
-        purviewCode: "SysPlugin",
-        code: 8,
     },
     {
         title: "系统集成",
@@ -326,7 +309,7 @@ const setPrdRouter= [
             {
                 title: '地址配置',
                 id: '/setting/urlData',
-                code: 9-1,
+                code: 9 - 1,
             }
         ]
     },
@@ -340,15 +323,15 @@ const setPrdRouter= [
             {
                 title: '操作日志',
                 id: '/setting/logList',
-                code: 10-1,
+                code: 10 - 1,
             },
             {
                 title: '备份与恢复',
                 id: '/setting/backup',
-                code: 10-2,
+                code: 10 - 2,
             }
         ]
-    }, 
+    },
     {
         title: "应用",
         icon: 'systemversion',
@@ -359,15 +342,29 @@ const setPrdRouter= [
             {
                 title: '版本与许可证',
                 id: "/setting/version",
-                code: 11-1,
+                code: 11 - 1,
             },
             {
                 title: '应用访问权限',
                 id: "/setting/productAuth",
-                code: 11-2,
+                code: 11 - 2,
             }
         ]
-    }
+    },
+    {
+        title: '归档知识库',
+        icon: 'systemreset',
+        id: '/setting/archived',
+        code: "recycle",
+        iseEnhance: true
+    },
+    {
+        title: '回收站',
+        icon: 'systemdelete',
+        id: '/setting/recycle',
+        code: "recycle",
+        iseEnhance: true
+    },
 ];
 
-export  {setDevRouter, setPrdRouter};
+export { setDevRouter, setPrdRouter };

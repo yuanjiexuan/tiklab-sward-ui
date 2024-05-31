@@ -2,31 +2,43 @@
 import React, { useState } from "react";
 import { Modal, Button } from 'antd';
 import "./ArchivedFree.scss";
-import bulidend from "../../assets/images/bulidend.jpg";
+import nodeArchived from "../../assets/images/nodeArchived.png";
+import nodeRecycle from "../../assets/images/nodeRecycle.png";
+import repositoryArchived from "../../assets/images/repositoryArchived.png";
+import repositoryRecycle from "../../assets/images/repositoryRecycle.png";
 // import Button from "../../common/button/Button";
 const ArchivedFree = (props) => {
     const { archivedFreeVisable, setArchivedFreeVisable } = props;
-    const [imgUrl, setImgUrl] = useState(bulidend);
-    const [activeImage, setActiveImage] = useState("bulidend");
+    const [imgUrl, setImgUrl] = useState(nodeArchived);
+    const [activeImage, setActiveImage] = useState("nodeArchived");
     const goBuy = () => {
         if(version === "cloud"){
-            window.open("https://work.thoughtware.cn/#/enterprise/application/kanass")
+            window.open("https://work.thoughtware.cn/#/enterprise/application/sward")
         }else {
-            window.open("https://thoughtware.cn/account/subscribe/apply/kanass")
+            window.open("https://thoughtware.cn/account/subscribe/apply/sward")
         }
     }
     const list = [
         {
-            id: "bulidend",
-            imgUrl: bulidend,
-            title: "归档文档，目录，知识库"
+            id: "nodeArchived",
+            imgUrl: nodeArchived,
+            title: "归档文档，目录"
         },
         {
-            id: "bulidend",
-            imgUrl: bulidend,
-            title: "回收站功能"
+            id: "nodeRecycle",
+            imgUrl: nodeRecycle,
+            title: "文档，目录回收站"
+        },
+        {
+            id: "repositoryArchived",
+            imgUrl: repositoryArchived,
+            title: "归档知识库"
+        },
+        {
+            id: "repositoryRecycle",
+            imgUrl: repositoryRecycle,
+            title: "知识库回收站"
         }
-      
     ]
 
     const changeImage = (imgUrl, id) => {
@@ -55,6 +67,7 @@ const ArchivedFree = (props) => {
                             return <div className={`archived-desc-item ${item.id === activeImage ? 'archived-desc-active-item' : ''}`}
                                 onClick={() => changeImage(item.imgUrl, item.id)}
                                 onMouseEnter={() => changeImage(item.imgUrl, item.id)}
+                                key={item.id}
                             >
                                 <svg className="icon-14" aria-hidden="true">
                                     <use xlinkHref="#icon-radio"></use>

@@ -72,10 +72,10 @@ export class CategoryStore {
 
     // 删除目录
     @action
-    deleteRepositoryLog= async(value)=> {
+    deleteNode= async(value)=> {
         const params = new FormData();
         params.append("id", value)
-        const data = await Service("/category/deleteCategory", params);
+        const data = await Service("/node/deleteNode", params);
         return data;
     }
 

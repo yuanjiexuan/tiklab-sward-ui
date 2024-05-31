@@ -70,7 +70,6 @@ const ProjectMessageNoticeContent = AsyncComponent(() => import("./setting/messa
 const DomainMessageNoticeContent = AsyncComponent(() => import("./repository/setting/projectMessage/DomainMessageNoticeContent.js"))
 
 const Setting = AsyncComponent(() => import('./setting/common/components/Setting.js'))
-const ProjectPlugin = AsyncComponent(() => import('./setting/plugins/ProjectPlugin.js'))
 
 const SystemFeature = AsyncComponent(() => import('./setting/privilege/SystemFeature.js'))
 const SystemRoleBuilt = AsyncComponent(() => import('./setting/privilege/SystemRoleBuilt.js'))
@@ -469,11 +468,6 @@ const Routes = [
                     {
                         path: "/setting/loadData",
                         component: LoadData,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/plugin",
-                        component: ProjectPlugin,
                         exact: true
                     },
                     {

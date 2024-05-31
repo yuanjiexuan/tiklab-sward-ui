@@ -32,7 +32,6 @@
         color: #ff0000;
     }
     .change-button {
-        text-align: center;
         height: 30px;
         line-height: 30px;
         background: var(--thoughtware-blue);
@@ -41,10 +40,19 @@
         width: 100px;
         font-size: 12px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+    }
+    .button-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
     }
     .delete-button {
         background-color: #ff0000;
-        margin-top: 10px;
+        // margin-top: 10px;
     }
 
 }

@@ -31,7 +31,7 @@ const RepositorydeAside = (props) => {
     const { searchrepository, repository, repositorylist, categoryStore, NodeRecycleModal, NodeArchivedModal } = props;
     //语言包
     const { t } = useTranslation();
-    const { findNodePageTree, updateRepositoryCatalogue, deleteRepositoryLog, updateDocument, deleteDocument,
+    const { findNodePageTree, updateRepositoryCatalogue, deleteNode, updateDocument,
         repositoryCatalogueList, setRepositoryCatalogueList, createRecent,
         expandedTree, setExpandedTree, setDocumentTitle, setCategoryTitle, findCategory } = categoryStore;
 
@@ -54,7 +54,10 @@ const RepositorydeAside = (props) => {
     const [nodeArchivedVisable, setNodeArchivedVisable] = useState(false)
     const [nodeRecycleVisable, setNodeRecycleVisable] = useState(false)
     const versionInfo = getVersionInfo();
-    const [archivedFreeVisable, setArchivedFreeVisable] = useState(false)
+    const [archivedFreeVisable, setArchivedFreeVisable] = useState(false);
+    
+
+
     useEffect(() => {
         const data = {
             repositoryId: repositoryId,
@@ -100,10 +103,10 @@ const RepositorydeAside = (props) => {
             setOpenClickCategory(item.id)
             props.history.push(`/repositorydetail/${repositoryId}/folder/${item.id}`)
         }
-        if (item.documentType === "document") {
+        if (item.type === "document") {
             props.history.push(`/repositorydetail/${repositoryId}/doc/${item.id}`)
         }
-        if (item.documentType === "markdown") {
+        if (item.type === "markdown") {
             props.history.push(`/repositorydetail/${repositoryId}/markdownView/${item.id}`)
         }
     }
@@ -149,32 +152,28 @@ const RepositorydeAside = (props) => {
             <Menu.Item key="share">
                 分享
             </Menu.Item>
-            {
-                NodeArchivedModal && <Menu.Item key="archived">
-                    <div className="repository-aside-archived">
-                        归档
-                        {
-                            versionInfo.expired === true && <svg className="img-icon" aria-hidden="true" >
-                                <use xlinkHref="#icon-member"></use>
-                            </svg>
-                        }
-                    </div>
+            <Menu.Item key="archived">
+                <div className="repository-aside-archived">
+                    归档
+                    {
+                        versionInfo.expired === true && <svg className="img-icon" aria-hidden="true" >
+                            <use xlinkHref="#icon-member"></use>
+                        </svg>
+                    }
+                </div>
 
-                </Menu.Item>
-            }
-            {
-                NodeRecycleModal && <Menu.Item key="recycle">
-                    <div className="repository-aside-archived">
-                        移动到回收站
-                        {
-                            versionInfo.expired === true && <svg className="img-icon" aria-hidden="true" >
-                                <use xlinkHref="#icon-member"></use>
-                            </svg>
-                        }
-                    </div>
+            </Menu.Item>
+            <Menu.Item key="recycle">
+                <div className="repository-aside-archived">
+                    移动到回收站
+                    {
+                        versionInfo.expired === true && <svg className="img-icon" aria-hidden="true" >
+                            <use xlinkHref="#icon-member"></use>
+                        </svg>
+                    }
+                </div>
 
-                </Menu.Item>
-            }
+            </Menu.Item>
 
         </Menu>
     };
@@ -226,7 +225,7 @@ const RepositorydeAside = (props) => {
 
     const deleteDocumentOrCategory = (item, type, id) => {
         if (type === "category") {
-            deleteRepositoryLog(item.id).then(res => {
+            deleteNode(item.id).then(res => {
                 const node = removeNodeInTree(repositoryCatalogueList, null, id)
                 console.log(node)
                 if (node) {
@@ -242,7 +241,7 @@ const RepositorydeAside = (props) => {
             })
         }
         if (type === "document") {
-            deleteDocument(item.id).then(res => {
+            deleteNode(item.id).then(res => {
                 const node = removeNodeInTree(repositoryCatalogueList, null, id)
                 console.log(node)
                 if (node) {
@@ -586,7 +585,6 @@ const RepositorydeAside = (props) => {
                         </div>
                     </div>
                     <div className="repository-menu">
-
                         <Tree
                             draggable
                             showIcon

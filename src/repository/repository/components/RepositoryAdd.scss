@@ -2,6 +2,8 @@
 
     .repository-type-col {
         padding: var(--thoughtware-padding-item);
+        height: calc(100vh - 49px);
+        overflow: hidden;
     }
 
     .repositoryadd-close {
