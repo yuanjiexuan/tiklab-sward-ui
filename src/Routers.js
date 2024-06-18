@@ -24,7 +24,7 @@ const Index = AsyncComponent(() => import('./home/home/components/Layout.js'))
 const RepositoryDetail = AsyncComponent(() => import('./repository/common/components/RepositoryLayout.js'))
 const Survey = AsyncComponent(() => import('./repository/overview/components/Survey.js'))
 const DynamicList = AsyncComponent(() => import("./repository/overview/components/DynamicList.js"))
-
+const FocusDocumentList = AsyncComponent(() => import("./home/home/components/FocusDocumentList.js"))
 const LogDetail = AsyncComponent(() => import('./repository/category/CategoryDetail.js'))
 
 
@@ -178,6 +178,12 @@ const Routes = [
                 key: 'home'
             },
             {
+                path: "/focusDocumentList",
+                exact: true,
+                component: FocusDocumentList,
+                key: 'focusDocumentList'
+            },
+            {
                 path:"/404",
                 exact: true,
                 component: ProjectNotFound,
@@ -218,6 +224,10 @@ const Routes = [
                     {
                         path: "/repositorydetail/:repositoryId/dynamicList",
                         component: DynamicList
+                    },
+                    {
+                        path: "/repositorydetail/:repositoryId/focusDocumentList",
+                        component: FocusDocumentList
                     },
                     {
                         path: "/repositorydetail/:repositoryId/doc/:id",

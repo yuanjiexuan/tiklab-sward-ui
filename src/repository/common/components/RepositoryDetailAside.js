@@ -73,7 +73,7 @@ const RepositorydeAside = (props) => {
 
     useEffect(() => {
         // 初次进入激活导航菜单
-        if (props.location.pathname.split("/")[4] === "survey") {
+        if (props.location.pathname.split("/")[3] === "survey") {
             setSelectKey("survey")
         } else {
             setSelectKey(id)
@@ -103,10 +103,10 @@ const RepositorydeAside = (props) => {
             setOpenClickCategory(item.id)
             props.history.push(`/repositorydetail/${repositoryId}/folder/${item.id}`)
         }
-        if (item.type === "document") {
+        if (item.documentType === "document") {
             props.history.push(`/repositorydetail/${repositoryId}/doc/${item.id}`)
         }
-        if (item.type === "markdown") {
+        if (item.documentType === "markdown") {
             props.history.push(`/repositorydetail/${repositoryId}/markdownView/${item.id}`)
         }
     }
@@ -528,6 +528,11 @@ const RepositorydeAside = (props) => {
         })
     }
 
+    const goSurvey = () => {
+        setSelectKey("survey") 
+        props.history.push(`/repositorydetail/${repositoryId}/survey`); 
+        
+    }
 
     return (
         <Fragment>
@@ -563,7 +568,7 @@ const RepositorydeAside = (props) => {
                     </div>
                     <div
                         className={`repository-survey ${selectKey === "survey" ? "repository-menu-select" : ""} `}
-                        onClick={() => { props.history.push(`/repositorydetail/${repositoryId}/survey`); setSelectKey("survey") }}
+                        onClick= {() => goSurvey()}
                     >
                         <svg className="img-icon" aria-hidden="true">
                             <use xlinkHref="#icon-home"></use>

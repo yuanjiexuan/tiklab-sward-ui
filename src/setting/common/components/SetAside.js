@@ -26,7 +26,8 @@ const SetAside = (props) => {
     const select = (data) => {
         const id = data.id;
         const iseEnhance = data.iseEnhance;
-        if (data.islink && !authType) {
+        // getAuthconfig
+        if (data.islink && authType) {
             const authUrl = JSON.parse(localStorage.getItem("authConfig")).authServiceUrl + "#" + id;
             window.open(authUrl, '_blank');
         } else {

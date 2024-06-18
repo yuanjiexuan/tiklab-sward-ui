@@ -33,7 +33,7 @@ const DynamicList = (props) => {
                         <Breadcumb
                             {...props}
                             firstText={firstText}
-                            secondText="动态列表"
+                            secondText="动态"
                         />
                         
                     </div>

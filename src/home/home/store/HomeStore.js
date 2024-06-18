@@ -4,7 +4,20 @@ import { Service } from "../../../common/utils/requset";
 class HomeStore {
     @observable currentLink = "home";
     @observable opLogList = [];
-    @observable messageList = []
+    @observable messageList = [];
+    @observable focusCondition = {
+        orderParams: [{
+            name: "focusTime",
+            orderType: "desc"
+        }],
+        pageParam: {
+            pageSize: 10,
+            currentPage: 1,
+        }
+    };
+    @observable focusTotal = 1;
+    
+
     @action
     setCurrentLink = (value) => {
         this.currentLink = value
@@ -72,5 +85,14 @@ class HomeStore {
         return data;
     }
 
+    @action
+    findDocumentFocusPage = async(value) => {
+        Object.assign(this.focusCondition,  { ...value })
+        const data = await Service("/documentFocus/findDocumentFocusPage", this.focusCondition);
+        if(data.code === 0){
+            this.focusTotal = data.data.totalRecord;
+        }
+        return data;
+    }
 }
 export default new HomeStore();

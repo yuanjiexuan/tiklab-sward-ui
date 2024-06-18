@@ -13,13 +13,14 @@ import AddDropDown from "../../common/components/AddDropDown";
 import DynamicListItem from "./DynamicItem";
 const Survey = (props) => {
     const { findRepository, findLogpage, opLogList, findUserList, findDocumentRecentList,
-        findCategoryListTreeById, } = SurveyStore;
+        findCategoryListTreeById, findDocumentFocusPage } = SurveyStore;
 
     const { expandedTree, setExpandedTree, repositoryCatalogueList } = CategoryStore;
 
     const [repositoryInfo, setRepositoryInfo] = useState();
     const repositoryId = props.match.params.repositoryId
     const [recentViewDocumentList, setRecentViewDocumentList] = useState([]);
+    const [focusDocumentList, setFocusDocumentList] = useState([])
     const [userList, setUserList] = useState();
     const userId = getUser().userId;
     const tenant = getUser().tenant;
@@ -43,6 +44,18 @@ const Survey = (props) => {
         findDocumentRecentList(recentParams).then(res => {
             if (res.code === 0) {
                 setRecentViewDocumentList([...res.data])
+            }
+
+        })
+
+        const data = {
+            masterId: userId,
+            repositoryId: repositoryId
+        }
+        findDocumentFocusPage(data).then(res => {
+            if (res.code === 0) {
+                console.log(res)
+                setFocusDocumentList(res.data.dataList)
             }
 
         })
@@ -71,8 +84,7 @@ const Survey = (props) => {
         }
         findCategoryListTreeById(params).then(res => {
             if (res.code === 0) {
-                console.log(res.data[0])
-                replaceTree(repositoryCatalogueList, res.data[0])
+                // replaceTree(repositoryCatalogueList, res.data[0])
                 if (document.treePath) {
                     const list = document.treePath.split(";")
                     list.pop();
@@ -83,6 +95,16 @@ const Survey = (props) => {
                 }
             }
         })
+    }
+
+    const goFocusDocumentDetail = item => {
+        if (item.documentType === "document") {
+            props.history.push(`/repositorydetail/${item.wikiRepository.id}/doc/${item.id}`)
+        }
+        if (item.documentType === "markdown") {
+            props.history.push(`/repositorydetail/${item.wikiRepository.id}/markdownView/${item.id}`)
+        }
+        // sessionStorage.setItem("menuKey", "repository")
     }
 
     /**
@@ -200,6 +222,51 @@ const Survey = (props) => {
                                 :
                                 <Empty image="/images/nodata.png" description="暂时没有查看过文档~" />
                         }
+                    </div>
+
+                    <div className="home-document focus-document">
+                        <div className="document-box-title">
+                            <span className="name">收藏文档</span>
+                            <div className="more" onClick={() => { props.history.push(`/repositorydetail/${repositoryId}/focusDocumentList`) }}>
+                                <svg aria-hidden="true" className="svg-icon">
+                                    <use xlinkHref="#icon-rightjump"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            {
+                                focusDocumentList && focusDocumentList.length > 0 ? focusDocumentList.map((item) => {
+                                    return <div className="document-list-item" key={item.id} >
+                                        <div className='document-item-left' style={{ flex: 1 }}>
+                                            <div>
+                                                {
+                                                    item.node.documentType === "document" && <svg className="document-icon" aria-hidden="true">
+                                                        <use xlinkHref="#icon-file"></use>
+                                                    </svg>
+                                                }
+                                                {
+                                                    item.node.documentType === "markdown" && <svg className="document-icon" aria-hidden="true">
+                                                        <use xlinkHref="#icon-minmap"></use>
+                                                    </svg>
+                                                }
+                                            </div>
+
+                                            <div className="document-item-text">
+                                                <div className="document-title" onClick={() => goFocusDocumentDetail(item.node)}>{item.node.name}</div>
+                                                <div className="document-master" style={{ flex: 1 }}>{item.wikiRepository?.name}</div>
+                                            </div>
+
+                                        </div>
+
+                                        {/* <div className="document-repository">{item.master.nickname}</div> */}
+
+                                        <div className="document-time">{item.focusTime}</div>
+                                    </div>
+                                })
+                                    :
+                                    <Empty image="/images/nodata.png" description="暂时没有数据~" />
+                            }
+                        </div>
                     </div>
                     <div className="home-dynamic">
                         <div className="dynamic-box-title">

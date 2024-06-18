@@ -117,7 +117,10 @@ const DocumentExamine = (props) => {
     const createFocus = () => {
         const params = {
             documentId: documentId,
-            masterId: userId
+            masterId: userId,
+            wikiRepository: {
+                id: repositoryId
+            }
         }
         createDocumentFocus(params).then(res => {
             if (res.code === 0) {

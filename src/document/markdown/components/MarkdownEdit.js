@@ -16,6 +16,7 @@ import "thoughtware-markdown-ui/es/thoughtware-markdown.css";
 import Categorystore from "../../../repository/common/store/CategoryStore";
 import { Node } from "slate";
 import { message } from "antd";
+import { useDebounce } from "../../../common/utils/debounce";
 const MarkdownEdit = (props) => {
     const { findDocument, updateDocument } = MarkdownStore;
     const { documentTitle, setDocumentTitle} = Categorystore;
@@ -52,7 +53,7 @@ const MarkdownEdit = (props) => {
 
     const save = () => {
         console.log(value)
-        saveDocument(value)
+        saveDocument(value, "click")
 
         // editRef.current.submit()
     }
@@ -60,7 +61,7 @@ const MarkdownEdit = (props) => {
         const text =  nodes.map(n => Node.string(n)).join('\n');
         return text;
     }
-    const saveDocument = (value) => {
+    const saveDocument = (value, type) => {
         setValue(value)
         const serializeValue = serialize(value[0].children)
         console.log(serialize)
@@ -70,12 +71,16 @@ const MarkdownEdit = (props) => {
             detailText: serializeValue
         }
         updateDocument(data).then(res => {
-			if (res.code === 0) {
+			if (res.code === 0 && type === "click") {
 				message.success("保存成功")
 			}
 		})
     }
 
+    const changeEdit =  useDebounce((value) => {
+        saveDocument(value, "auto")
+
+    }, [500])
     const changeTitle = (value) => {
         // setTitleValue(value.target.value)
         console.log(value)
@@ -110,6 +115,8 @@ const MarkdownEdit = (props) => {
         document.getElementById("examine-title").focus()
         setIsFocus(true)
     }
+
+  
     return (
         <div className="document-markdown-edit">
             <div className="edit-top">
@@ -130,7 +137,7 @@ const MarkdownEdit = (props) => {
             </div>
             <div className="edit-markdown" style={{height: "calc(100% - 50px)"}}>
             {
-                value && <Markdown value = {value} setValue = {setValue}/>
+                value && <Markdown value = {value} setValue = {setValue} onChange = {(value) => changeEdit(value)}/>
             }
             </div>
             

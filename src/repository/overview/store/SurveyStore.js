@@ -2,6 +2,16 @@ import { observable, action } from "mobx";
 import { Service } from "../../../common/utils/requset";
 export class SurveyStore {
     @observable opLogList = [];
+    @observable focusCondition = {
+        orderParams: [{
+            name: "focusTime",
+            orderType: "desc"
+        }],
+        pageParam: {
+            pageSize: 10,
+            currentPage: 1,
+        }
+    };
 
     @action
     findDocumentRecentList= async(value)=> {
@@ -48,6 +58,13 @@ export class SurveyStore {
         params.append("id", value.id)
         // params.append("treePath", value.treePath)
         const data = await Service("/node/findAllHigherNode",params);
+        return data;
+    }
+
+    @action
+    findDocumentFocusPage = async(value) => {
+        Object.assign(this.focusCondition,  { ...value })
+        const data = await Service("/documentFocus/findDocumentFocusPage", this.focusCondition)
         return data;
     }
 

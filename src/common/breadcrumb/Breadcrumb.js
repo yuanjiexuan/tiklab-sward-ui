@@ -6,25 +6,29 @@ const Breadcumb = (props) => {
     const { homeImage, firstText, secondText, firstUrl, children } = props;
 
     const goUrl = () => {
-        if(firstUrl){
+        if (firstUrl) {
             props.history.push(firstUrl)
-        }else {
+        } else {
             props.history.goBack()
         }
     }
     return (
         <div className="page-head">
-            <div className="page-breadcrumb">
-                {/* <svg className="svg-icon" aria-hidden="true">
-                    <use xlinkHref="#icon-home"></use>
-                </svg> */}
-                <span onClick={() => goUrl()} className = {`${secondText ? "page-link" : ""}`}>{firstText}</span>
+            <div className={`page-breadcrumb`}>
+                {
+                    secondText &&
+                    <svg className= {`svg-icon page-back ${secondText ? "page-link" : ""}`} aria-hidden="true" onClick={() => goUrl()}>
+                        <use xlinkHref="#icon-pageLeft"></use>
+                    </svg>
+                }
+                <span>{firstText}</span>
                 {
                     secondText && <>
-                        <svg className="svg-icon" aria-hidden="true">
+                        {/* <svg className="svg-icon" aria-hidden="true">
                             <use xlinkHref="#icon-rightBlue"></use>
-                        </svg>
-                        <span>{secondText}</span>
+                        </svg> */}
+                        <> &nbsp; / &nbsp; <span>{secondText}</span>
+                        </>
                     </>
                 }
 

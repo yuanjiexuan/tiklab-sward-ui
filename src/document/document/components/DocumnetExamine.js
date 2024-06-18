@@ -28,6 +28,7 @@ const DocumentExamine = (props) => {
         documentStore: DocumentStore
     }
     const documentId = props.match.params.id;
+    const repositoryId = props.match.params.repositoryId;
     const { findDocument, createDocumentFocus, deleteDocumentFocusByCondition } = DocumentStore;
 
     const { createLike, createShare, updateShare, deleteLike } = CommentShare;
@@ -37,7 +38,7 @@ const DocumentExamine = (props) => {
     const tenant = getUser().tenant;
     const [docInfo, setDocInfo] = useState()
     const [showComment, setShowComment] = useState(false);
-    const repositoryId = props.match.params.repositoryId;
+    
     const [like, setLike] = useState(false)
     const [focus, setFocus] = useState(false)
     let [likeNum, setLikeNum] = useState()
@@ -108,7 +109,10 @@ const DocumentExamine = (props) => {
     const createFocus = () => {
         const params = {
             documentId: documentId,
-            masterId: userId
+            masterId: userId,
+            wikiRepository: {
+                id: repositoryId
+            }
         }
         createDocumentFocus(params).then(res => {
             if (res.code === 0) {

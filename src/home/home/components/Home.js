@@ -1,12 +1,13 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import "./home.scss";
-import { Row, Col, Empty } from 'antd';
+import { Row, Col, Empty, Pagination } from 'antd';
 import { observer } from 'mobx-react';
 import { getUser } from 'thoughtware-core-ui';
 import HomeStore from "../store/HomeStore";
 const Home = (props) => {
-    const { findDocumentRecentList, findRecentRepositoryList } = HomeStore;
+    const { findDocumentRecentList, findRecentRepositoryList, findDocumentFocusPage } = HomeStore;
     const [recentViewDocumentList, setRecentViewDocumentList] = useState([]);
+    const [focusDocumentList, setFocusDocumentList] = useState([])
     const [recentRepositoryDocumentList, setRecentRepositoryDocumentList] = useState([]);
     const userId = getUser().userId
     const tenant = getUser().tenant;
@@ -24,6 +25,17 @@ const Home = (props) => {
             console.log(res)
             if (res.code === 0) {
                 setRecentViewDocumentList([...res.data])
+            }
+
+        })
+
+        const data = {
+            masterId: userId
+        }
+        findDocumentFocusPage(data).then(res => {
+            if (res.code === 0) {
+                console.log(res)
+                setFocusDocumentList(res.data.dataList)
             }
 
         })
@@ -48,14 +60,24 @@ const Home = (props) => {
         props.history.push(`/repositorydetail/${repository.id}/survey`)
     }
     const goDocumentDetail = item => {
-        if (item.model === "document") {
-            props.history.push(`/repositorydetail/${item.wikiRepository.id}/doc/${item.modelId}`)
+        if (item.documentType === "document") {
+            props.history.push(`/repositorydetail/${item.wikiRepository.id}/doc/${item.id}`)
         }
-        if (item.model === "repository") {
-            props.history.push(`/repositorydetail/${item.wikiRepository.id}/survey`)
+        if (item.documentType === "markdown") {
+            props.history.push(`/repositorydetail/${item.wikiRepository.id}/markdownView/${item.id}`)
         }
         sessionStorage.setItem("menuKey", "repository")
 
+    }
+
+    const goFocusDocumentDetail = item => {
+        if (item.documentType === "document") {
+            props.history.push(`/repositorydetail/${item.wikiRepository.id}/doc/${item.id}`)
+        }
+        if (item.documentType === "markdown") {
+            props.history.push(`/repositorydetail/${item.wikiRepository.id}/markdownView/${item.id}`)
+        }
+        sessionStorage.setItem("menuKey", "repository")
     }
     return (
         <div className="home">
@@ -71,29 +93,29 @@ const Home = (props) => {
                                     {
                                         recentRepositoryDocumentList.map(item => {
                                             return <div className="repository-item" key={item.id} onClick={() => goRepositoryDetail(item)} >
-                                                    <div className="item-title">
-                                                        {
-                                                            item.iconUrl ?
-                                                                <img
-                                                                    src={version === "cloud" ? (upload_url + item.iconUrl + "?tenant=" + tenant) : (upload_url + item.iconUrl)}
+                                                <div className="item-title">
+                                                    {
+                                                        item.iconUrl ?
+                                                            <img
+                                                                src={version === "cloud" ? (upload_url + item.iconUrl + "?tenant=" + tenant) : (upload_url + item.iconUrl)}
 
-                                                                    alt=""
-                                                                    className="list-img"
-                                                                />
-                                                                :
-                                                                <img
-                                                                    src={('images/repository1.png')}
-                                                                    alt=""
-                                                                    className="list-img"
-                                                                />
-                                                        }
-                                                        <span>{item.name}</span>
-                                                    </div>
-                                                    <div className="item-work">
-                                                        <div className="process-work"><span style={{ color: "#999" }}>文档</span><span>{item.documentNum}篇</span></div>
-                                                        <div className="end-work"><span style={{ color: "#999" }}>目录</span><span>{item.categoryNum}个</span></div>
-                                                    </div>
+                                                                alt=""
+                                                                className="list-img"
+                                                            />
+                                                            :
+                                                            <img
+                                                                src={('images/repository1.png')}
+                                                                alt=""
+                                                                className="list-img"
+                                                            />
+                                                    }
+                                                    <span>{item.name}</span>
                                                 </div>
+                                                <div className="item-work">
+                                                    <div className="process-work"><span style={{ color: "#999" }}>文档</span><span>{item.documentNum}篇</span></div>
+                                                    <div className="end-work"><span style={{ color: "#999" }}>目录</span><span>{item.categoryNum}个</span></div>
+                                                </div>
+                                            </div>
                                         })
                                     }
                                 </div>
@@ -114,13 +136,23 @@ const Home = (props) => {
                                     return <div className="document-list-item" key={item.id} >
                                         <div className='document-item-left' style={{ flex: 1 }}>
                                             <div>
-                                                <svg className="document-icon" aria-hidden="true">
+                                                {/* <svg className="document-icon" aria-hidden="true">
                                                     <use xlinkHref="#icon-file"></use>
-                                                </svg>
+                                                </svg> */}
+                                                {
+                                                    item.node.documentType === "document" && <svg className="document-icon" aria-hidden="true">
+                                                        <use xlinkHref="#icon-file"></use>
+                                                    </svg>
+                                                }
+                                                {
+                                                    item.node.documentType === "markdown" && <svg className="document-icon" aria-hidden="true">
+                                                        <use xlinkHref="#icon-minmap"></use>
+                                                    </svg>
+                                                }
                                             </div>
 
                                             <div className="document-item-text">
-                                                <div className="document-title" onClick={() => goDocumentDetail(item)}>{item.name}</div>
+                                                <div className="document-title" onClick={() => goDocumentDetail(item.node)}>{item.name}</div>
                                                 <div className="document-master" style={{ flex: 1 }}>{item.wikiRepository?.name}</div>
                                             </div>
 
@@ -137,7 +169,54 @@ const Home = (props) => {
                         </div>
 
                     </div>
+                    <div className="home-document focus-document">
+                        <div className="document-box-title">
+                            <span className="name">收藏文档</span>
+                            <div className="more" onClick={() => { props.history.push(`/focusDocumentList`) }}>
+                                <svg aria-hidden="true" className="svg-icon">
+                                    <use xlinkHref="#icon-rightjump"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            {
+                                focusDocumentList && focusDocumentList.length > 0 ? focusDocumentList.map((item) => {
+                                    return <div className="document-list-item" key={item.id} >
+                                        <div className='document-item-left' style={{ flex: 1 }}>
+                                            <div>
+                                                {/* <svg className="document-icon" aria-hidden="true">
+                                                    <use xlinkHref="#icon-file"></use>
+                                                </svg> */}
+                                                {
+                                                    item.node.documentType === "document" && <svg className="document-icon" aria-hidden="true">
+                                                        <use xlinkHref="#icon-file"></use>
+                                                    </svg>
+                                                }
+                                                {
+                                                    item.node.documentType === "markdown" && <svg className="document-icon" aria-hidden="true">
+                                                        <use xlinkHref="#icon-minmap"></use>
+                                                    </svg>
+                                                }
+                                            </div>
 
+                                            <div className="document-item-text">
+                                                <div className="document-title" onClick={() => goFocusDocumentDetail(item.node)}>{item.node.name}</div>
+                                                <div className="document-master" style={{ flex: 1 }}>{item.wikiRepository?.name}</div>
+                                            </div>
+
+                                        </div>
+
+                                        <div className="document-repository">{item.master.nickname}</div>
+
+                                        <div className="document-time">{item.focusTime}</div>
+                                    </div>
+                                })
+                                    :
+                                    <Empty image="/images/nodata.png" description="暂时没有数据~" />
+                            }
+                        </div>
+                    </div>
+                    
                 </Col>
             </Row>
 

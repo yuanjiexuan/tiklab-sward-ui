@@ -32,7 +32,7 @@ const Index = observer(() => {
         ...store
     }
 
-
+    
     return (
         <Provider {...allStore}>
             <ConfigProvider locale={zhCN}>

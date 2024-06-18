@@ -29,7 +29,6 @@ import projectPlan from "../../../assets/images/projectPlan.png";
 import projectOperation from "../../../assets/images/projectOperation.png";
 const DocumentEdit = (props) => {
     const { relationWorkStore, documentStore } = props;
-    console.log(documentStore)
     const { findDocument, updateDocument, findDocumentTemplateList } = DocumentStore;
     const { documentTitle, setDocumentTitle, repositoryCatalogueList } = CategoryStore
     const documentId = props.match.params.id;
