@@ -242,7 +242,6 @@ const DocumentEdit = (props) => {
                             </Col>
                         </Row>
                     </>
-
                 </EditorBig>
             }
             </div>

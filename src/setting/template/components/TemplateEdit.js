@@ -46,8 +46,6 @@ const TemplateEdit = (props) => {
 
 
     const addTemplate = (iconUrl) => {
-        const serialize = JSON.stringify(editorValue)
-        console.log(editRef.current.innerText)
         const data = {
             name: titleValue,
             iconUrl: "/image/" +iconUrl,

@@ -78,8 +78,6 @@ const AddDropDown = (props) => {
                     treePath: category ? category.treepath : null
                 }: null
             }
-           
-           
         }
         if (value.key === "document") {
             params.node.documentType = "document"
