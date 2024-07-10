@@ -70,23 +70,23 @@ const SetAside = (props) => {
                     code={data.encoded}
                 >
                     <span className="orga-aside-item-left">
-                        {
+                        {/* {
                             data.icon && <svg className="menu-icon" aria-hidden="true">
                                 <use xlinkHref={`#icon-${data.icon}`}></use>
                             </svg>
-                        }
+                        } */}
                         <span>{data.title}</span>
 
                     </span>
                     {
                         (data.islink && !authType) && <div className="orga-aside-item-icon">
-                            <svg className="img-icon" aria-hidden="true">
+                            <svg className="img-icon-16" aria-hidden="true">
                                 <use xlinkHref={`#icon-outside`}></use>
                             </svg>
                         </div>
                     }
                     {
-                        data.iseEnhance && versionInfo.expired === true && <svg className="img-icon" aria-hidden="true" >
+                        data.iseEnhance && versionInfo.expired === true && <svg className="img-icon-16" aria-hidden="true" >
                             <use xlinkHref="#icon-member"></use>
                         </svg>
                     }
@@ -121,9 +121,9 @@ const SetAside = (props) => {
 
                         {
                             item.icon && <span to={item.id} className="orga-aside-item-left">
-                                <svg className="menu-icon" aria-hidden="true">
+                                {/* <svg className="menu-icon" aria-hidden="true">
                                     <use xlinkHref={`#icon-${item.icon}`}></use>
-                                </svg>
+                                </svg> */}
                                 <span className="orga-aside-title">{item.title}</span>
                             </span>
                         }
@@ -157,6 +157,7 @@ const SetAside = (props) => {
         <Fragment>
             <div className="orga-aside">
                 <ul style={{ padding: 0 }} key="0" className="orga-aside-top">
+                    <div className="orga-aside-name">设置</div>
                     {
                         router && router.map((firstItem, index) => {
                             return firstItem.children && firstItem.children.length > 0 ?

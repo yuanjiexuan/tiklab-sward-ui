@@ -105,9 +105,6 @@ export class RepositoryStore {
     @action
     findRecentRepositoryList = async (value) => {
         const data = await Service("/repository/findRecentRepositoryList", value);
-        // if (data.code === 0) {
-        //     this.repositorylist = data.data;
-        // }
         return data;
     }
 

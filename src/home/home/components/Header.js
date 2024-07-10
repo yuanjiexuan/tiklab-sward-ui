@@ -1,5 +1,5 @@
 /*
- * @Descripttion: 页面头部
+ * @Descripttion: 系统头部
  * @version: 1.0.0
  * @Author: 袁婕轩
  * @Date: 2022-01-08 10:44:07
@@ -7,18 +7,20 @@
  * @LastEditTime: 2022-04-25 10:16:03
  */
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from "react-i18next";
-import { Col, Row, Dropdown, Menu, Space } from "antd";
 import { withRouter } from 'react-router';
-import logo from "../../../assets/images/logo.png";
-import Message from "./MessageList"
-import { observer, inject } from "mobx-react";
-import Search from "../../search/components/Search";
 import { getUser } from 'thoughtware-core-ui';
-const Header = props => {
-    const { systemRoleStore, HelpLink, AppLink, AvatarLink } = props;
+import { observer, inject } from "mobx-react";
+import { AppLink, HelpLink, AvatarLink } from 'thoughtware-licence-ui';
+import Search from "../../search/components/Search";
+import MessageList from "./MessageList";
+import logo from "../../../assets/images/logo.png";
+import "./Header.scss";
 
-    const menuKey = (sessionStorage.getItem("menuKey") && props.location.pathname !== "/home") ? sessionStorage.getItem("menuKey") : "home";
+const Header = props => {
+    const { systemRoleStore } = props;
+
+    // 登录者的信息
+    const user = getUser();
 
     useEffect(() => {
         if (user && user.userId) {
@@ -27,87 +29,26 @@ const Header = props => {
         return;
     }, [])
 
-    const routers = [
-        {
-            to: '/home',
-            title: '首页',
-            key: 'home'
-        },
-        {
-            to: '/repository',
-            title: '知识库',
-            key: 'repository'
-        },
-        {
-            to: '/sysmgr/systemFeature',
-            title: '系统',
-            key: 'sysmgr'
-        }
-    ]
-    const user = getUser();
-
-    const changeCurrentLink = item => {
-        localStorage.removeItem("sprintId")
-        props.history.push(item.to)
-        sessionStorage.setItem("menuKey", item.key)
-    }
-
-    const renderRouter = () => {
-        if (routers) {
-            return (
-                <div className={'frame-header-link'}>
-                    <div key='home' onClick={() => changeCurrentLink(routers[0])} className={`frame-header-link-item ${menuKey === "home" ? 'frame-header-link-active' : null}`}> <span>{routers[0].title}</span> </div>
-                    <div key='repository' onClick={() => changeCurrentLink(routers[1])} className={`frame-header-link-item ${menuKey === "repository" ? 'frame-header-link-active' : null}`}> <span>{routers[1].title}</span> </div>
-                </div>
-            )
-        }
-    }
-
-    const goSet = (url) => {
-        props.history.push(url)
-        sessionStorage.setItem("menuKey", "set")
-    };
-
-
     return (
-        <Row className="frame-header">
-            <Col span={12}>
-                <div className={'frame-header-left'}>
-                    <AppLink isSSO={false} />
-                    {
-                        logo && <div className={'frame-header-logo'}>
-                            <img src={logo} alt={'logo'} className="logo-img" />
-                            <div className="logo-text">sward</div>
-                        </div>
-                    }
-                    {
-                        renderRouter()
-                    }
+        <div className='frame-header'>
+            <div className="frame-left">
+            <div className="frame-applink">
+                    <AppLink />
                 </div>
-            </Col>
-            <Col span={12}>
-                <div className={'frame-header-right'}>
-                    <div className='frame-header-right-search-wrap'>
-                        <Search />
-                    </div>
-                    <div className={'frame-header-right-text'}>
-                        <div className="frame-header-icon">
-                            <div className="frame-header-set" data-title="系统设置" onClick={() => goSet("/setting/home")}>
-                                <Space>
-                                    <svg aria-hidden="true" className="header-icon">
-                                        <use xlinkHref="#icon-iconsetsys"></use>
-                                    </svg>
-                                </Space>
-                            </div>
-                        </div>
-                        <Message />
-                        <HelpLink />
-                        <AvatarLink {...props} />
-                    </div>
+                <div className='frame-menu-logo' onClick={() => props.history.push("/home")}>
+                    <img src={logo} alt={'logo'} className="logo-img" />
+                    <div className='logo-text'>Sward</div>
                 </div>
-            </Col>
+            </div>
 
-        </Row>
+            <div className='frame-header-search-wrap'>
+                <Search />
+            </div>
+            <div className={'frame-header-right'}>
+                <MessageList />
+                <AvatarLink {...props} />
+            </div>
+        </div>
     )
 }
-export default withRouter(inject("systemRoleStore")(observer(Header)));
+export default withRouter(inject('homeStore', 'systemRoleStore')(observer(Header)));
