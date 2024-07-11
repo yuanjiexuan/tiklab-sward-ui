@@ -10,14 +10,13 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router';
 import { getUser } from 'thoughtware-core-ui';
 import { observer, inject } from "mobx-react";
-import { AppLink, HelpLink, AvatarLink } from 'thoughtware-licence-ui';
 import Search from "../../search/components/Search";
 import MessageList from "./MessageList";
 import logo from "../../../assets/images/logo.png";
 import "./Header.scss";
 
 const Header = props => {
-    const { systemRoleStore } = props;
+    const { systemRoleStore, AppLink, AvatarLink } = props;
 
     // 登录者的信息
     const user = getUser();
@@ -37,7 +36,7 @@ const Header = props => {
                 </div>
                 <div className='frame-menu-logo' onClick={() => props.history.push("/home")}>
                     <img src={logo} alt={'logo'} className="logo-img" />
-                    <div className='logo-text'>Sward</div>
+                    <div className='logo-text'>sward</div>
                 </div>
             </div>
 

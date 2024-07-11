@@ -32,6 +32,13 @@ const FirstMenu = (props) => {
             key: 'repository',
             icon: "repository-grey",
             actionIcon: "repository-blue"
+        },
+        {
+            to: '/setting/home',
+            title: '设置',
+            key: 'setting',
+            icon: "setting-grey",
+            actionIcon: "setting-blue"
         }
     ]
 
@@ -86,11 +93,11 @@ const FirstMenu = (props) => {
 
             <div className="first-menu-bottom">
                 <HelpLink />
-                <div className="first-set"  data-title-right="设置" onClick={() => goSet()}>
-                        <svg aria-hidden="true" className="svg-icon">
-                            <use xlinkHref="#icon-iconsetsys"></use>
-                        </svg>
-                </div>
+                {/* <div className="first-set" data-title-right="设置" onClick={() => goSet()}>
+                    <svg aria-hidden="true" className="svg-icon">
+                        <use xlinkHref="#icon-iconsetsys"></use>
+                    </svg>
+                </div> */}
             </div>
 
         </div>

@@ -67,7 +67,7 @@ const ShareAside = (props) => {
             if (data.data === "false") {
                 findShareCategory(paramsData).then((data) => {
                     if (data.code === 0) {
-                        setNodeList(data.data)
+                        setRepositoryCatalogueList(data.data)
                         const item = data.data[0]
                         setUrl(item)
                         setSelectKey(item.id)
