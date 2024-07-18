@@ -15,6 +15,9 @@ const Logout = AsyncComponent(() => import('./login/Logout.js'))
 const Home = AsyncComponent(() => import('./home/home/components/Home.js'))
 const ProjectNotFound = AsyncComponent(() => import("./setting/common/components/ProjectNotFond.js"))
 
+// 收藏
+const Collect = AsyncComponent(() => import("./home/collect/components/Collect"))
+
 const NoFoundPage = AsyncComponent(() => import('./login/NoFoundPage.js'));
 const NoAccessPage = AsyncComponent(() => import('./login/SystemNoAccessPage.js'));
 const ProjectNoAccessPage = AsyncComponent(() => import('./login/ProjectNoAccessPage.js'));
@@ -44,8 +47,6 @@ const RepositoryDomainUser = AsyncComponent(() => import('./repository/user/Repo
 const RepositoryBasicInfo = AsyncComponent(() => import('./repository/setting/basicInfo/components/BasicInfo.js'))
 
 // 归档
-
-
 const Template = AsyncComponent(() => import('./setting/template/components/TemplateList.js'))
 const TemplateEdit = AsyncComponent(() => import('./setting/template/components/TemplateEdit.js'))
 const TemplatePreview = AsyncComponent(() => import('./setting/template/components/TemplatePreview.js'))
@@ -307,7 +308,12 @@ const Routes = [
                     }
                 ]
             },
-
+            {
+                path: "/collect",
+                exact: true,
+                component: Collect,
+                key: 'collect'
+            },
             {
                 path: "/setting",
                 component: Setting,

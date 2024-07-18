@@ -1,7 +1,7 @@
 import { observable, action } from "mobx";
 import { Service } from "../../../common/utils/requset";
 export class RepositoryStore {
-    @observable repositorylist = [];
+    @observable repositoryList = [];
     @observable repositoryTypelist = [];
     @observable uselist = [];
     @observable repository = [];
@@ -23,7 +23,7 @@ export class RepositoryStore {
     findRepositoryList = async (params) => {
         const data = await Service("/repository/findRepositoryListByUser", params);
         if (data.code === 0) {
-            this.repositorylist = data.data;
+            this.repositoryList = data.data;
         }
         return data;
     }
@@ -33,7 +33,7 @@ export class RepositoryStore {
         const data = await Service("/repository/findRepositoryListByUser", {});
         if (data.code === 0) {
             this.allRepositorylist = data.data;
-            this.repositorylist = data.data;
+            this.repositoryList = data.data;
         }
         return data;
     }
@@ -66,7 +66,7 @@ export class RepositoryStore {
         param.append("id", values);
         const data = await Service("/repository/findRepository", param);
         if (data.code === 0) {
-            this.repositorylist = [data.data];
+            this.repositoryList = [data.data];
         }
         return data;
     }
@@ -118,11 +118,15 @@ export class RepositoryStore {
     findFocusRepositoryList = async (value) => {
         const data = await Service("/repository/findFocusRepositoryList", value);
         if (data.code === 0) {
-            this.repositorylist = data.data;
+            this.repositoryList = data.data;
         }
         return data;
     }
-
+    @action
+    getFocusRepositoryList = async (value) => {
+        const data = await Service("/repository/findFocusRepositoryList", value);
+        return data;
+    }
     @action
     deleteRepositoryFocusByCondition = async (value) => {
         const data = await Service("/repositoryFocus/deleteRepositoryFocusByCondition", value);

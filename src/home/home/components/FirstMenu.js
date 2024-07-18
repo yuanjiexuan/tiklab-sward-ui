@@ -1,9 +1,6 @@
 import React from "react";
 import "./FirstMenu.scss";
-
 import { withRouter } from "react-router";
-import { Space, Tooltip } from "antd";
-import { HelpLink } from "thoughtware-licence-ui";
 
 const FirstMenu = (props) => {
     console.log(sessionStorage.getItem("menuKey"))
@@ -34,11 +31,11 @@ const FirstMenu = (props) => {
             actionIcon: "repository-blue"
         },
         {
-            to: '/setting/home',
-            title: '设置',
+            to: '/collect',
+            title: '收藏',
             key: 'setting',
-            icon: "setting-grey",
-            actionIcon: "setting-blue"
+            icon: "focus-grey",
+            actionIcon: "focus-blue"
         }
     ]
 
@@ -92,12 +89,11 @@ const FirstMenu = (props) => {
             {renderRouter()}
 
             <div className="first-menu-bottom">
-                <HelpLink />
-                {/* <div className="first-set" data-title-right="设置" onClick={() => goSet()}>
+                <div className="first-set" data-title-right="设置" onClick={() => goSet()}>
                     <svg aria-hidden="true" className="svg-icon">
                         <use xlinkHref="#icon-iconsetsys"></use>
                     </svg>
-                </div> */}
+                </div>
             </div>
 
         </div>

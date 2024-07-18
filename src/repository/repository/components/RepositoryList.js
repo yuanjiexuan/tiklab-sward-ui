@@ -14,8 +14,8 @@ import { useDebounce } from "../../../common/utils/debounce";
 import UserIcon from "../../../common/UserIcon/UserIcon";
 const RepositoryList = (props) => {
     const { findRepositoryList, createRecent,
-        repositorylist, findRecentRepositoryList, createRepositoryFocus,
-        findFocusRepositoryList, deleteRepositoryFocusByCondition, activeTabs, setActiveTabs } = RepositoryStore;
+        repositoryList, findRecentRepositoryList, createRepositoryFocus,
+        findFocusRepositoryList, getFocusRepositoryList, deleteRepositoryFocusByCondition, activeTabs, setActiveTabs } = RepositoryStore;
     const userId = getUser().userId;
     const tenant = getUser().tenant;
     const [focusRepositoryList, setFocusRepositoryList] = useState([])
@@ -66,7 +66,7 @@ const RepositoryList = (props) => {
     }, [])
 
     const findFocusRepository = (id) => {
-        findFocusRepositoryList({ masterId: id }).then(res => {
+        getFocusRepositoryList({ masterId: id }).then(res => {
             if (res.code === 0) {
                 const focusList = res.data;
                 focusList.map(item => {
@@ -249,7 +249,6 @@ const RepositoryList = (props) => {
                     </Breadcumb>
                     <div className="recent-repository">
                         <div className="repository-title">常用知识库</div>
-
                         {
                             recentRepositoryDocumentList.length > 0 ?
                                 <div className="repository-box">{
@@ -312,7 +311,7 @@ const RepositoryList = (props) => {
                     <div className="repository-table-box">
                         <Table
                             columns={columns}
-                            dataSource={repositorylist}
+                            dataSource={repositoryList}
                             rowKey={record => record.id}
                             onChange={handleTableChange}
                             pagination={false}

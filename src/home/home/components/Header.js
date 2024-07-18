@@ -14,9 +14,10 @@ import Search from "../../search/components/Search";
 import MessageList from "./MessageList";
 import logo from "../../../assets/images/logo.png";
 import "./Header.scss";
+import ProjectFeature from '../../../setting/version/ProjectFeature';
 
 const Header = props => {
-    const { systemRoleStore, AppLink, AvatarLink } = props;
+    const { systemRoleStore, AppLink, AvatarLink, HelpLink } = props;
 
     // 登录者的信息
     const user = getUser();
@@ -45,6 +46,8 @@ const Header = props => {
             </div>
             <div className={'frame-header-right'}>
                 <MessageList />
+                <HelpLink />
+                <ProjectFeature />
                 <AvatarLink {...props} />
             </div>
         </div>
