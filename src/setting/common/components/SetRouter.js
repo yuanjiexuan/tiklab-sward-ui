@@ -18,6 +18,7 @@ const setDevRouter = [
             {
                 title: "部门",
                 id: '/setting/orga',
+                easId: '/user/orga',
                 purviewCode: "orga",
                 islink: true,
                 code: 1 - 1,
@@ -26,6 +27,7 @@ const setDevRouter = [
             {
                 title: '用户',
                 id: '/setting/user',
+                easId: '/user/user',
                 purviewCode: "user",
                 islink: true,
                 code: 1 - 2,
@@ -33,6 +35,7 @@ const setDevRouter = [
             {
                 title: '用户组',
                 id: '/setting/userGroup',
+                easId: '/user/userGroup',
                 purviewCode: "user_group",
                 islink: true,
                 code: 1 - 3,
@@ -41,6 +44,7 @@ const setDevRouter = [
 
                 title: "用户目录",
                 id: '/setting/dir',
+                easId: '/user/dir',
                 purviewCode: "user_dir",
                 islink: true,
                 code: 1 - 4,
@@ -127,7 +131,7 @@ const setDevRouter = [
         ]
     },
     {
-        title: '归档知识库',
+        title: '归档',
         icon: 'systemreset',
         id: '/setting/archived',
         code: "recycle",
@@ -244,6 +248,7 @@ const setPrdRouter = [
             {
                 title: "部门",
                 id: '/setting/orga',
+                easId: '/user/orga',
                 purviewCode: "orga",
                 islink: true,
                 code: 1 - 1,
@@ -252,6 +257,7 @@ const setPrdRouter = [
             {
                 title: '用户',
                 id: '/setting/user',
+                easId: '/user/user',
                 purviewCode: "user",
                 islink: true,
                 code: 1 - 2,
@@ -259,6 +265,7 @@ const setPrdRouter = [
             {
                 title: '用户组',
                 id: '/setting/userGroup',
+                easId: '/user/userGroup',
                 purviewCode: "user_group",
                 islink: true,
                 code: 1 - 3,
@@ -267,6 +274,7 @@ const setPrdRouter = [
 
                 title: "用户目录",
                 id: '/setting/dir',
+                easId: '/user/dir',
                 purviewCode: "user_dir",
                 islink: true,
                 code: 1 - 4,
@@ -352,7 +360,7 @@ const setPrdRouter = [
         ]
     },
     {
-        title: '归档知识库',
+        title: '归档',
         icon: 'systemreset',
         id: '/setting/archived',
         code: "recycle",

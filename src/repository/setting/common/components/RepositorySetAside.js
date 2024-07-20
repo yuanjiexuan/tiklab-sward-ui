@@ -52,16 +52,9 @@ const RepositorySetAside = (props) => {
             iseEnhance: false
         },
         {
-            title: '归档文档目录',
+            title: '归档',
             icon: 'archived',
             key: `/repositorySet/${repositoryId}/archivedNode`,
-            encoded: "archived",
-            iseEnhance: true
-        },
-        {
-            title: '归档知识库',
-            icon: 'archived',
-            key: `/repositorySet/${repositoryId}/archivedRes`,
             encoded: "archived",
             iseEnhance: true
         },

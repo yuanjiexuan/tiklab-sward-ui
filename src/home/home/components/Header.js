@@ -12,7 +12,7 @@ import { getUser } from 'thoughtware-core-ui';
 import { observer, inject } from "mobx-react";
 import Search from "../../search/components/Search";
 import MessageList from "./MessageList";
-import logo from "../../../assets/images/logo.png";
+import {productImg,productWhiteImg} from "thoughtware-core-ui";
 import "./Header.scss";
 import ProjectFeature from '../../../setting/version/ProjectFeature';
 
@@ -36,7 +36,7 @@ const Header = props => {
                     <AppLink />
                 </div>
                 <div className='frame-menu-logo' onClick={() => props.history.push("/home")}>
-                    <img src={logo} alt={'logo'} className="logo-img" />
+                    <img src={productWhiteImg.sward} alt={'logo'} className="logo-img" />
                     <div className='logo-text'>sward</div>
                 </div>
             </div>
