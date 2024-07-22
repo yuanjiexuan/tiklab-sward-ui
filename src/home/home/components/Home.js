@@ -28,7 +28,7 @@ const Home = (props) => {
 
         })
 
-       
+
         const recentRepositoryParams = {
             masterId: userId,
             model: "repository",
@@ -103,8 +103,10 @@ const Home = (props) => {
                                     }
                                 </div>
                                 :
+                                <div className="repository-box-empty">
+                                    <Empty image="/images/nodata.png" description="暂时没有查看过知识库~" />
+                                </div>
 
-                                <Empty image="/images/nodata.png" description="暂时没有查看过知识库~" />
 
                         }
                     </div>
@@ -152,8 +154,8 @@ const Home = (props) => {
                         </div>
 
                     </div>
-                   
-                    
+
+
                 </Col>
             </Row>
 

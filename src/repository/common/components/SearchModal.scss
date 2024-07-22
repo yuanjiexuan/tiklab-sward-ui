@@ -1,0 +1,89 @@
+.repository-search-modal {
+    .ant-modal-body {
+        padding: 0;
+    }
+    
+    .repository-search-modal-input {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        border-bottom: 1px solid #f0f0f0;
+        
+    }
+    .recent-box {
+        padding: 10px;
+        .recent-title {
+            color: #202d407a;
+            font-weight: 600;
+            font-size: 12px;
+            padding-left: 10px;
+            height: 20px;
+            line-height: 20px;
+        }
+        .item-box {
+            .item-one {
+                padding: 0 10px;
+                display: flex;
+                align-items: center;
+                height: 35px;
+                cursor: pointer;
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+                span{
+                    width: 100px;
+                    text-align: left;
+                    margin-left: 10px;
+                    overflow: hidden;
+                    flex: 1;
+                }
+                .item-desc {
+                    color: #999;
+                    font-size: 12px;
+                }
+            }
+            .item-one:hover {
+                background-color: #f5f7fa;
+            }
+        }
+    }
+    .search-result-box {
+        padding: 10px;
+        .search-result-title {
+            color: #202d407a;
+            font-weight: 600;
+            font-size: 12px;
+            padding-left: 10px;
+            height: 20px;
+            line-height: 20px;
+        }
+        .item-box {
+            .item-one {
+                padding: 0 10px;
+                display: flex;
+                align-items: center;
+                height: 35px;
+                cursor: pointer;
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+                span{
+                    width: 100px;
+                    text-align: left;
+                    margin-left: 10px;
+                    overflow: hidden;
+                    flex: 1;
+                }
+                .item-desc {
+                    color: #999;
+                    font-size: 12px;
+                }
+            }
+            .item-one:hover {
+                background-color: #f5f7fa;
+            }
+        }
+    }
+}

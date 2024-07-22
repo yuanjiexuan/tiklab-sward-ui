@@ -1,7 +1,6 @@
 .repository-survey-row {
     height: calc(100vh - 48px);
     overflow: auto;
-    background-color: var(--thoughtware-gray-600);
 }
 .repository-survey {
     padding: var(--thoughtware-padding);
@@ -10,8 +9,7 @@
         align-items: center;
         justify-content: space-between;
         padding: var(--thoughtware-padding);
-        margin-bottom: 15px;
-        background: #fff;
+        background: var(--thoughtware-gray-600);
         border-radius: 4px;
 
         .repository-icon {
@@ -118,8 +116,7 @@
     .home-dynamic {
         background-color: #fff;
         border-radius: 4px;
-        padding: 0 15px 15px;
-        margin-bottom: 15px;
+        margin-top: 20px;
 
         .dynamic-box-title {
             width: 100%;
@@ -181,10 +178,9 @@
     }
 
     .home-document {
-        padding: 0 15px 15px;
         background: #fff;
         border-radius: 4px;
-        margin-bottom: 15px;
+        margin-top: 20px;
 
         .document-box-title {
             width: 100%;

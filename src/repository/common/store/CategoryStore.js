@@ -131,6 +131,18 @@ export class CategoryStore {
         const data = await Service("/document/deleteDocument", params);
         return data;
     }
+
+    @action
+    findRecentList = async(value) => {
+        const data = await Service("/recent/findRecentList", value);
+        return data;
+    }
+
+    @action
+    searchRepositoryDocument = async(value) => {
+        const data = await Service("/search/searchRepositoryDocument", value);
+        return data;
+    }
 }
 
 export default new CategoryStore();

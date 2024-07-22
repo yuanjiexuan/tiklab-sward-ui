@@ -1,6 +1,6 @@
 .home {
     height: calc(100vh - 48px);
-    background-color: var(--thoughtware-gray-800);
+    padding: var(--thoughtware-padding);
     overflow: auto;
     .home-row {
         height: 100%;
@@ -12,8 +12,7 @@
         padding: var(--thoughtware-padding);
     }
     .home-repository {
-        padding: var(--thoughtware-padding);
-        margin-bottom: 15px;
+        margin-bottom: 20px;
         border-radius: 4px;
         background: #fff;
         .repository-title {
@@ -101,7 +100,6 @@
     }
 
     .home-document {
-        padding: var(--thoughtware-padding);
         background: #fff;
         border-radius: 4px;
         .document-box-title {
@@ -127,7 +125,7 @@
             align-items: center;
             line-height: 25px;
             gap: 10px;
-            margin-top: 10px;
+            margin-bottom: 10px;
             flex-shrink: 1;
             min-width: 0;
             .document-item-left {

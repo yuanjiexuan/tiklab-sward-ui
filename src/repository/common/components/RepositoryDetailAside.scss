@@ -50,7 +50,15 @@
                 position: relative;
                 align-items: center;
             }
-
+            .repository-search-input {
+                display: flex;
+                align-items: center;
+                background-color: var(--thoughtware-gray-600);
+                height: 40px;
+                line-height: 40px;
+                padding-left: 20px;
+                gap: 10px;
+            }
             .setting {
                 border-top: 1px solid #f0f2f5;
             }
@@ -58,7 +66,7 @@
             .repository-menu-node {
                 display: flex;
                 align-items: center;
-
+                padding-left: 20px;
                 .ant-tree-switcher {
                     padding: 10px 0;
 

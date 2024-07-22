@@ -10,7 +10,7 @@
 import React, { Fragment, useState, useEffect, useId, useRef } from 'react';
 import { withRouter } from "react-router-dom";
 import { observer, inject } from "mobx-react";
-import { Menu, Dropdown, Layout, Form, Tree, message, Modal } from 'antd';
+import { Menu, Dropdown, Layout, Form, Tree, message, Modal, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
 import RepositoryChangeModal from "./RepositoryChangeModal";
 import ShareListModal from "../../../document/share/components/ShareListModal"
@@ -24,6 +24,7 @@ import {
 import AddDropDown from './AddDropDown';
 import { DownOutlined } from '@ant-design/icons';
 import ArchivedFree from '../../../common/components/ArchivedFree';
+import SearchModal from './SearchModal';
 const { Sider } = Layout;
 
 const RepositorydeAside = (props) => {
@@ -55,7 +56,7 @@ const RepositorydeAside = (props) => {
     const [nodeRecycleVisable, setNodeRecycleVisable] = useState(false)
     const versionInfo = getVersionInfo();
     const [archivedFreeVisable, setArchivedFreeVisable] = useState(false);
-    
+    const [showSearchModal, setShowSearchModal] = useState(false)
 
 
     useEffect(() => {
@@ -529,9 +530,9 @@ const RepositorydeAside = (props) => {
     }
 
     const goSurvey = () => {
-        setSelectKey("survey") 
-        props.history.push(`/repositorydetail/${repositoryId}/survey`); 
-        
+        setSelectKey("survey")
+        props.history.push(`/repositorydetail/${repositoryId}/survey`);
+
     }
 
     return (
@@ -566,9 +567,24 @@ const RepositorydeAside = (props) => {
                             />
                         </div>
                     </div>
+
+                    <div className="repository-search-input" onClick={() => setShowSearchModal(true)}>
+                        <svg className="svg-icon" aria-hidden="true">
+                            <use xlinkHref="#icon-search"></use>
+                        </svg>
+                        <div className="workList-search-input">文档名字，关键字</div>
+                        {/* <Input bordered={false} allowClear
+                                placeholder="文档名字，关键字"
+                                
+                                key={"search"}
+                                disabled = {true}
+                                // value={searchCondition.keyWord}
+                                // onChange={(value) => handleChange("keyWord", value.target.value)}
+                            /> */}
+                    </div>
                     <div
                         className={`repository-survey ${selectKey === "survey" ? "repository-menu-select" : ""} `}
-                        onClick= {() => goSurvey()}
+                        onClick={() => goSurvey()}
                     >
                         <svg className="img-icon" aria-hidden="true">
                             <use xlinkHref="#icon-home"></use>
@@ -657,6 +673,11 @@ const RepositorydeAside = (props) => {
             <ArchivedFree
                 archivedFreeVisable={archivedFreeVisable}
                 setArchivedFreeVisable={setArchivedFreeVisable}
+            />
+            <SearchModal 
+                showSearchModal={showSearchModal} 
+                setShowSearchModal={setShowSearchModal} 
+                repositoryId = {repositoryId}    
             />
         </Fragment>
     )

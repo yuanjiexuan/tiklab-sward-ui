@@ -8,14 +8,15 @@ import { getUser } from "thoughtware-core-ui";
 import { Empty } from "antd";
 import { withRouter } from "react-router";
 const Search = (props) => {
-    const { getSearch, searchDocumentList, searchWikiList, getSearchSore, setKeyWord, findDocumentRecentList, findRecentRepositoryList } = SearchStore;
+    const { getSearch, searchDocumentList, searchWikiList, getSearchSore, setKeyWord, findDocumentRecentList, 
+        findRecentRepositoryList } = SearchStore;
     const [show, setShow] = useState(false);
     const [isSeach, setIsSeach] = useState(false);
     const dropDown = useRef();
     const userId = getUser().id;
     const tenant = getUser().tenant;
     const inputRef = useRef();
-
+    const [showLong, setShowLong] = useState(false)
 
     const findRecent = () => {
         const recentParams = {
@@ -101,20 +102,30 @@ const Search = (props) => {
         <Fragment>
             <div className="search"
                 tabIndex="-1"
-                
-                // onBlur={hiddenBox}
+                onMouseEnter={() => setShowLong(true)}
+                onMouseLeave={() => { setShowLong(false); setShow(false) }}
+               
                 ref={dropDown}
             >
-                <div className={`search-box ${show === true ? "search-long-box" : "search-short-box"}`} >
-                    <SearchOutlined />
+                <div className={`search-box ${!showLong ? "short-box" : "long-box"}`} >
                     <input
-                        ref = {inputRef}
-                        className="search-input"
+                        className={`search-box-input ${showLong ? "show-input" : "hidden-input"}`}
                         onChange={changeValue}
-                        onKeyDown={submit}
                         onFocus={showBox}
-                        placeholder="搜索知识库、文档"
+                        ref={inputRef}
+                        placeholder="搜索文档、知识库"
+
                     />
+                    {
+                        !showLong ? <svg className="img-25" aria-hidden="true">
+                            <use xlinkHref="#icon-searchtop" ></use>
+                        </svg>
+                            :
+                            <svg className="img-icon" aria-hidden="true">
+                                <use xlinkHref="#icon-searchtop" ></use>
+                            </svg>
+                    }
+
                 </div>
                 <div className={`show-box ${(show === true) ? null : "hidden-box"}`}>
                     {

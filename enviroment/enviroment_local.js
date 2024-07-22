@@ -29,7 +29,7 @@ let env = "local";
 env = JSON.stringify(env)
 const appKey = JSON.stringify('');
 const appSecret = JSON.stringify('');
-const version = JSON.stringify('ee');
+const version = JSON.stringify('ce');
 const client = JSON.stringify('web');
 
 const isSaas = false;
