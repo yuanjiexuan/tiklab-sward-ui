@@ -1,6 +1,5 @@
 .home {
     height: calc(100vh - 48px);
-    padding: var(--thoughtware-padding);
     overflow: auto;
     .home-row {
         height: 100%;
@@ -16,12 +15,11 @@
         border-radius: 4px;
         background: #fff;
         .repository-title {
-            font-size: 14px;
             font-weight: var(--thoughtware-font-weight-bold);
         }
         .repository-box {
             display: flex;
-            justify-content: flex-start;
+            align-items: center;
             flex-wrap: wrap;
             gap: 15px;
             padding: 10px 0;
@@ -42,7 +40,7 @@
             box-sizing: border-box;
             border-bottom: 2px solid var(--thoughtware-gray-600);
             min-width: 200px;
-            max-width: 240px;
+            max-width: 260px;
             .item-title {
                 margin-bottom: 10px;
                 font-weight: var(--thoughtware-font-weight-bold);
@@ -104,6 +102,8 @@
         border-radius: 4px;
         .document-box-title {
             width: 100%;
+            height: 40px;
+            line-height: 40px;
             font-weight: var(--thoughtware-font-weight-bold);
             display: flex;
             justify-content: space-between;

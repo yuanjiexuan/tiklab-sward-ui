@@ -9,6 +9,7 @@ const SearchModal = (props) => {
     const { showSearchModal, setShowSearchModal, repositoryId, categoryStore } = props;
     const {findRecentList, searchRepositoryDocument} = categoryStore;
     const [recentDocumentList, setRecentDocumentList] = useState([]);
+    const [searchDocumentList, setSearchDocumentList] = useState([])
     const [isSearch, setIsSeach] = useState(false)
     const userId = getUser().userId;
     
@@ -52,11 +53,14 @@ const SearchModal = (props) => {
             }
             searchRepositoryDocument(param).then(res => {
                 console.log(res)
+                if(res.code === 0){
+                    setSearchDocumentList(res.data)
+                }
             })
         }else {
             setIsSeach(false)
         }
-       
+        return null
     }, [])
 
     // const search = useDebounce((value) => {
@@ -124,9 +128,9 @@ const SearchModal = (props) => {
             <div className="search-result-box">
                 <div className="search-result-title">搜索结果</div>
                 {
-                    recentDocumentList.length > 0 ? <>
+                    searchDocumentList.length > 0 ? <>
                         {
-                            recentDocumentList.map((documentItem) => {
+                            searchDocumentList.map((documentItem) => {
                                 return <div className="item-box" key={documentItem.id}>
                                     <div className="item-one" onClick={() => toWorkItem(documentItem.modelId)}>
                                         <svg className="img-icon" aria-hidden="true">

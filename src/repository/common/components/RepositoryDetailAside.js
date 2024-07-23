@@ -568,20 +568,6 @@ const RepositorydeAside = (props) => {
                         </div>
                     </div>
 
-                    <div className="repository-search-input" onClick={() => setShowSearchModal(true)}>
-                        <svg className="svg-icon" aria-hidden="true">
-                            <use xlinkHref="#icon-search"></use>
-                        </svg>
-                        <div className="workList-search-input">文档名字，关键字</div>
-                        {/* <Input bordered={false} allowClear
-                                placeholder="文档名字，关键字"
-                                
-                                key={"search"}
-                                disabled = {true}
-                                // value={searchCondition.keyWord}
-                                // onChange={(value) => handleChange("keyWord", value.target.value)}
-                            /> */}
-                    </div>
                     <div
                         className={`repository-survey ${selectKey === "survey" ? "repository-menu-select" : ""} `}
                         onClick={() => goSurvey()}
@@ -599,9 +585,13 @@ const RepositorydeAside = (props) => {
                             <svg className="img-icon" aria-hidden="true">
                                 <use xlinkHref="#icon-repository"></use>
                             </svg>
-                            <span>知识库</span>
+
+                            <span>目录</span>
                         </div>
-                        <div>
+                        <div className="repository-menu-firstmenu-right">
+                            <svg className="svg-icon" aria-hidden="true" onClick={() => setShowSearchModal(true)}>
+                                <use xlinkHref="#icon-search"></use>
+                            </svg>
                             <AddDropDown category={null} />
                         </div>
                     </div>
@@ -674,10 +664,10 @@ const RepositorydeAside = (props) => {
                 archivedFreeVisable={archivedFreeVisable}
                 setArchivedFreeVisable={setArchivedFreeVisable}
             />
-            <SearchModal 
-                showSearchModal={showSearchModal} 
-                setShowSearchModal={setShowSearchModal} 
-                repositoryId = {repositoryId}    
+            <SearchModal
+                showSearchModal={showSearchModal}
+                setShowSearchModal={setShowSearchModal}
+                repositoryId={repositoryId}
             />
         </Fragment>
     )
