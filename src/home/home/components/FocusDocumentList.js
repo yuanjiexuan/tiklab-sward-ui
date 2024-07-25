@@ -128,10 +128,7 @@ const FocusDocumentList = (props) => {
                         }
                     </div>
                     {
-                        console.log(focusTotal)
-                    }
-                    {
-                        focusTotal && focusTotal > 0 && <div className="focus-pagination">
+                        focusTotal > 0 && <div className="focus-pagination">
                             <Pagination
                                 onChange={onPageChange}
                                 simple

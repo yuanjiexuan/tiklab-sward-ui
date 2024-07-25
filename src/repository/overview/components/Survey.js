@@ -224,50 +224,7 @@ const Survey = (props) => {
                         }
                     </div>
 
-                    <div className="home-document focus-document">
-                        <div className="document-box-title">
-                            <span className="name">收藏文档</span>
-                            <div className="more" onClick={() => { props.history.push(`/repositorydetail/${repositoryId}/focusDocumentList`) }}>
-                                <svg aria-hidden="true" className="svg-icon">
-                                    <use xlinkHref="#icon-rightjump"></use>
-                                </svg>
-                            </div>
-                        </div>
-                        <div>
-                            {
-                                focusDocumentList && focusDocumentList.length > 0 ? focusDocumentList.map((item) => {
-                                    return <div className="document-list-item" key={item.id} >
-                                        <div className='document-item-left' style={{ flex: 1 }}>
-                                            <div>
-                                                {
-                                                    item.node.documentType === "document" && <svg className="document-icon" aria-hidden="true">
-                                                        <use xlinkHref="#icon-file"></use>
-                                                    </svg>
-                                                }
-                                                {
-                                                    item.node.documentType === "markdown" && <svg className="document-icon" aria-hidden="true">
-                                                        <use xlinkHref="#icon-minmap"></use>
-                                                    </svg>
-                                                }
-                                            </div>
-
-                                            <div className="document-item-text">
-                                                <div className="document-title" onClick={() => goFocusDocumentDetail(item.node)}>{item.node.name}</div>
-                                                <div className="document-master" style={{ flex: 1 }}>{item.wikiRepository?.name}</div>
-                                            </div>
-
-                                        </div>
-
-                                        {/* <div className="document-repository">{item.master.nickname}</div> */}
-
-                                        <div className="document-time">{item.focusTime}</div>
-                                    </div>
-                                })
-                                    :
-                                    <Empty image="/images/nodata.png" description="暂时没有数据~" />
-                            }
-                        </div>
-                    </div>
+                    
                     <div className="home-dynamic">
                         <div className="dynamic-box-title">
                             <span className="name">最新动态</span>

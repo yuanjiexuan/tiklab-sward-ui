@@ -159,7 +159,10 @@
                     }
                 }
             }
-            .document-repository {
+            .document-master-name {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
                 width: 150px;
                 text-overflow: ellipsis;
                 white-space: nowrap;

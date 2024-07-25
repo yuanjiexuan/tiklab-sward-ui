@@ -97,6 +97,9 @@ const SearchModal = (props) => {
                     onChange={(value) => searchDocument(value)}
                     key={"search"}
                 />
+                <svg className="svg-icon close-icon" aria-hidden="true" onClick={() => setShowSearchModal(false)}>
+                    <use xlinkHref="#icon-close"></use>
+                </svg>
             </div>
             {
                 !isSearch ? <div className="recent-box">

@@ -28,7 +28,7 @@ const SetAside = (props) => {
         const iseEnhance = data.iseEnhance;
         // getAuthconfig
         if (data.islink && !authType) {
-            const authUrl = JSON.parse(localStorage.getItem("authConfig")).authServiceUrl + "#" + data.easId;
+            const authUrl = JSON.parse(localStorage.getItem("authConfig")).authServiceUrl + "#" + data.id;
             window.open(authUrl, '_blank');
         } else {
             if (versionInfo.expired === false) {
@@ -63,18 +63,18 @@ const SetAside = (props) => {
         return (
             <PrivilegeButton code={data.purviewCode}>
                 <li
-                    style={{ cursor: "pointer", paddingLeft: `${deep * 20 + 20}` }}
+                    style={{ cursor: "pointer", paddingLeft: `${deep * 20 + 28}` }}
                     className={`orga-aside-item ${data.id === selectKey ? "orga-aside-select" : ""}`}
                     onClick={() => select(data)}
                     key={data.code}
                     code={data.encoded}
                 >
                     <span className="orga-aside-item-left">
-                        {/* {
+                        {
                             data.icon && <svg className="menu-icon" aria-hidden="true">
                                 <use xlinkHref={`#icon-${data.icon}`}></use>
                             </svg>
-                        } */}
+                        }
                         <span>{data.title}</span>
 
                     </span>
@@ -117,13 +117,13 @@ const SetAside = (props) => {
         return (
             <PrivilegeButton code={item.purviewCode}>
                 <li key={item.code} title={item.title} className="orga-aside-li">
-                    <div className="orga-aside-item orga-aside-first" style={{ paddingLeft: `${deep * 20 + 20}` }} onClick={() => setOpenOrClose(item.id)}>
+                    <div className="orga-aside-item orga-aside-first" style={{ paddingLeft: `${deep * 20 + 28}` }} onClick={() => setOpenOrClose(item.id)}>
 
                         {
                             item.icon && <span to={item.id} className="orga-aside-item-left">
-                                {/* <svg className="menu-icon" aria-hidden="true">
+                                <svg className="menu-icon" aria-hidden="true">
                                     <use xlinkHref={`#icon-${item.icon}`}></use>
-                                </svg> */}
+                                </svg>
                                 <span className="orga-aside-title">{item.title}</span>
                             </span>
                         }
@@ -153,11 +153,20 @@ const SetAside = (props) => {
         )
     }
 
+    const backProject = () => {
+        props.history.push(`/home`)
+        sessionStorage.setItem("menuKey", "home")
+    }
+
     return (
         <Fragment>
             <div className="orga-aside">
                 <ul style={{ padding: 0 }} key="0" className="orga-aside-top">
-                    <div className="orga-aside-name">设置</div>
+                    <div className="orga-aside-name"><svg className="svg-icon" aria-hidden="true" onClick={() => backProject()}>
+                            <use xlinkHref="#icon-backproject"></use>
+                        </svg>
+                        设置
+                    </div>
                     {
                         router && router.map((firstItem, index) => {
                             return firstItem.children && firstItem.children.length > 0 ?

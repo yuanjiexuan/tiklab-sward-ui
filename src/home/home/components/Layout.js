@@ -20,7 +20,7 @@ const Layout = (props) => {
     const store = {
         homeStore: HomeStore
     }
-    const showFirstMenu = ["home", "repository"]
+    const showFirstMenu = ["setting"]
     const route = props.route.routes;
     const pathname = props.location.pathname.split("/")[1];
     console.log(pathname)
@@ -31,10 +31,9 @@ const Layout = (props) => {
             <div className="layout">
                 <Header AppLink={AppLink} AvatarLink = {AvatarLink} HelpLink = {HelpLink} {...props} />
                 <div className="layout-content">
-                    {/* {
-                        showFirstMenu.indexOf(pathname) > -1 && <FirstMenu AppLink={AppLink} {...props} />
-                    } */}
-                     <FirstMenu {...props} />
+                    {
+                        pathname !== "setting" && <FirstMenu AppLink={AppLink} {...props} />
+                    }
                     <div className="layout-page">
                         {renderRoutes(route)}
                     </div>

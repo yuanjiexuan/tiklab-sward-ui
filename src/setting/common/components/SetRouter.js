@@ -139,7 +139,7 @@ const setDevRouter = [
     },
     {
         title: '回收站',
-        icon: 'systemdelete',
+        icon: 'systemrecycle',
         id: '/setting/recycle',
         code: "recycle",
         iseEnhance: true

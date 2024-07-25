@@ -4,6 +4,7 @@ import { Row, Col, Empty, Pagination } from 'antd';
 import { observer } from 'mobx-react';
 import { getUser } from 'thoughtware-core-ui';
 import HomeStore from "../store/HomeStore";
+import UserIcon from '../../../common/UserIcon/UserIcon';
 const Home = (props) => {
     const { findDocumentRecentList, findRecentRepositoryList, findDocumentFocusPage } = HomeStore;
     const [recentViewDocumentList, setRecentViewDocumentList] = useState([]);
@@ -65,7 +66,7 @@ const Home = (props) => {
     return (
         <div className="home">
             <Row className="home-row">
-                <Col xl={{ span: 18, offset: 3 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }} className="home-col">
+                <Col xl={{ span: 14, offset: 5 }} lg={{ span: 16, offset: 4 }} md={{ span: 20, offset: 2 }} className="home-col">
 
                     <div className="home-repository">
                         <div className="repository-title">常用知识库</div>
@@ -143,7 +144,10 @@ const Home = (props) => {
 
                                         </div>
 
-                                        <div className="document-repository">{item.master.nickname}</div>
+                                        <div className="document-master-name">
+                                            <UserIcon name = {item.master.nickname} size = "big" />
+                                            {item.master.nickname}
+                                        </div>
 
                                         <div className="document-time">{item.recentTime}</div>
                                     </div>

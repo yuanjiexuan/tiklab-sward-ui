@@ -79,15 +79,13 @@ const FirstMenu = (props) => {
     * 跳转到系统设置
     */
     const goSet = () => {
-        props.history.push("/setting/home")
+        props.history.push("/setting/version")
         sessionStorage.setItem("menuKey", "set")
     };
 
     return (
         <div className="first-menu">
-
             {renderRouter()}
-
             <div className="first-menu-bottom">
                 <div className="first-set" data-title-right="设置" onClick={() => goSet()}>
                     <svg aria-hidden="true" className="svg-icon">
@@ -95,7 +93,6 @@ const FirstMenu = (props) => {
                     </svg>
                 </div>
             </div>
-
         </div>
     )
 }
