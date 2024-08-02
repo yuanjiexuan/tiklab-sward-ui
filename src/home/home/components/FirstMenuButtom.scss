@@ -1,0 +1,22 @@
+.first-menu-bottom-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10px;
+    .first-menu-link-item {
+        padding: 5px;
+        margin-bottom: 0;
+    }
+}
+.first-menu-bottom-text {
+    
+    .first-menu-bottom-item {
+        height: 40px;
+        display: flex;
+        line-height: 40px;
+        width: 100%;
+        align-items: center;
+        padding: 0 20px;
+        cursor: pointer;
+    }
+}

@@ -8,12 +8,14 @@ import { useEffect } from 'react';
 import HomeStore from "../store/HomeStore";
 
 const MessageList = (props) => {
-    const { findMessageDispatchItemPage, messageTotal, messageList, isMessageReachBottom, updateMessageDispatchItem } = HomeStore;
+    const {isShowText, theme} = props;
+    const { findMessageDispatchItemPage, messageTotal, messageList, 
+        isMessageReachBottom, updateMessageDispatchItem } = HomeStore;
     const [currenTab, setCurrentTab] = useState("0")
     const [currentPage, setCurrentPage] = useState(0)
     const [open, setOpen] = useState(false);
     const messageRef = useRef()
-
+    const [unReadMessage, setUnReadMessage] = useState(0)
     const openDrawer = () => {
         setOpen(true)
         findMessageDispatchItemPage({ page: 1, status: currenTab })
@@ -65,23 +67,47 @@ const MessageList = (props) => {
     }
     return (
         <div ref = {messageRef}>
-            <a className="frame-header-language" data-title="消息提示" onClick={() => openDrawer()}>
+            {/* <a className="frame-header-language" data-title="消息提示" onClick={() => openDrawer()}>
                 <Badge count={0} size="small">
                     <Avatar
                         size="small" style={{ background: "transparent", fontSize: "22px" }} icon={<MessageOutlined style={{ color: "#2c2c2c" }} />} />
                 </Badge>
-            </a>
+            </a> */}
+             {
+                isShowText ?
+                    <div className="message-text first-menu-text-item" onClick={() => setOpen(true)}>
+                        <svg className="icon-18" aria-hidden="true">
+                            <use xlinkHref={`${theme === "default" ? "#icon-message": "#icon-message-white"}`} ></use>
+                        </svg>
+                        <div className="message-text-name">消息</div>
+                        <div className="message-text-count">
+                            {unReadMessage}
+                        </div>
+                    </div>
+                    :
+                    <div className="message-icon first-menu-link-item" data-title-right="消息" onClick={() => setOpen(true)}>
+                        {/* <Badge count={unReadMessage} size="small">
+                            <Avatar
+                                size="small" style={{ fontSize: "20px" }} icon={ <svg className="icon-18" aria-hidden="true">
+                                    <use xlinkHref={`${theme === "default" ? "#icon-message": "#icon-message-white"}`} ></use>
+                                </svg>} />
+                        </Badge> */}
+                        <svg className="icon-18" aria-hidden="true">
+                            <use xlinkHref={`${theme === "default" ? "#icon-message": "#icon-message-white"}`} ></use>
+                        </svg>
+                    </div>
+            }
             <Drawer
                 title="消息"
-                placement={"right"}
+                placement={"left"}
                 closable={true}
                 onClose={onClose}
                 visible={open}
-                className="frame-header-drawer"
                 mask={false}
                 destroyOnClose={true}
                 width={375}
                 getContainer = {false}
+                className={`frame-header-drawer ${isShowText ? "message-drawer-expend" : "message-drawer-inpend"} `}
             >
                 <div className="message-content">
                     <Tabs onChange={onChange} size = "small" activeKey = {currenTab}>

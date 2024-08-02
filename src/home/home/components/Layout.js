@@ -20,23 +20,19 @@ const Layout = (props) => {
     const store = {
         homeStore: HomeStore
     }
-    const showFirstMenu = ["setting"]
+
     const route = props.route.routes;
     const pathname = props.location.pathname.split("/")[1];
-    console.log(pathname)
-    console.log(props)
+
 
     return (
         <Provider {...store}>
             <div className="layout">
-                <Header AppLink={AppLink} AvatarLink = {AvatarLink} HelpLink = {HelpLink} {...props} />
-                <div className="layout-content">
-                    {
-                        pathname !== "setting" && <FirstMenu AppLink={AppLink} {...props} />
-                    }
-                    <div className="layout-page">
-                        {renderRoutes(route)}
-                    </div>
+                {
+                    pathname !== "setting" && <FirstMenu AppLink={AppLink} {...props} />
+                }
+                <div className="layout-left">
+                    {renderRoutes(route)}
                 </div>
 
             </div>

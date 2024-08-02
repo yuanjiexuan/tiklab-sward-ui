@@ -49,14 +49,14 @@ const Home = (props) => {
 
     const goRepositoryDetail = repository => {
         sessionStorage.setItem("menuKey", "repository")
-        props.history.push(`/repositorydetail/${repository.id}/survey`)
+        props.history.push(`/index/repositorydetail/${repository.id}/survey`)
     }
     const goDocumentDetail = item => {
         if (item.documentType === "document") {
-            props.history.push(`/repositorydetail/${item.wikiRepository.id}/doc/${item.id}`)
+            props.history.push(`/index/repositorydetail/${item.wikiRepository.id}/doc/${item.id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/repositorydetail/${item.wikiRepository.id}/markdownView/${item.id}`)
+            props.history.push(`/index/repositorydetail/${item.wikiRepository.id}/markdownView/${item.id}`)
         }
         sessionStorage.setItem("menuKey", "repository")
 

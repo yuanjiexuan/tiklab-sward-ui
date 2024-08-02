@@ -15,6 +15,7 @@ import SettingHomeStore from "../../home/store/SettingHomeStore"
 import { observer } from 'mobx-react';
 import { getVersionInfo } from 'thoughtware-core-ui';
 import ArchivedFree from '../../../common/components/ArchivedFree';
+import Logo from "../../../home/home/components/Logo";
 const SetAside = (props) => {
     // 无子级菜单处理
     const { selectKey, setSelectKey } = SettingHomeStore;
@@ -63,7 +64,7 @@ const SetAside = (props) => {
         return (
             <PrivilegeButton code={data.purviewCode}>
                 <li
-                    style={{ cursor: "pointer", paddingLeft: `${deep * 20 + 28}` }}
+                    style={{ cursor: "pointer", paddingLeft: `${deep * 20 + 20}` }}
                     className={`orga-aside-item ${data.id === selectKey ? "orga-aside-select" : ""}`}
                     onClick={() => select(data)}
                     key={data.code}
@@ -117,7 +118,7 @@ const SetAside = (props) => {
         return (
             <PrivilegeButton code={item.purviewCode}>
                 <li key={item.code} title={item.title} className="orga-aside-li">
-                    <div className="orga-aside-item orga-aside-first" style={{ paddingLeft: `${deep * 20 + 28}` }} onClick={() => setOpenOrClose(item.id)}>
+                    <div className="orga-aside-item orga-aside-first" style={{ paddingLeft: `${deep * 20 + 20}` }} onClick={() => setOpenOrClose(item.id)}>
 
                         {
                             item.icon && <span to={item.id} className="orga-aside-item-left">
@@ -154,7 +155,7 @@ const SetAside = (props) => {
     }
 
     const backProject = () => {
-        props.history.push(`/home`)
+        props.history.push(`/index/home`)
         sessionStorage.setItem("menuKey", "home")
     }
 
@@ -162,6 +163,7 @@ const SetAside = (props) => {
         <Fragment>
             <div className="orga-aside">
                 <ul style={{ padding: 0 }} key="0" className="orga-aside-top">
+                    <Logo theme = {"default"} isShowText = {true} />
                     <div className="orga-aside-name"><svg className="svg-icon" aria-hidden="true" onClick={() => backProject()}>
                             <use xlinkHref="#icon-backproject"></use>
                         </svg>

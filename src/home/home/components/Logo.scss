@@ -1,0 +1,28 @@
+.sward-logo {
+    padding: 15px var(--thoughtware-padding);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    .logo-img {
+        height: 32px;
+        width: 32px;
+    }
+}
+.sward-logo-text {
+    // height: var(--thoughtware-head-height);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px 20px;
+    .logo-img {
+        height: 32px;
+        width: 32px;
+    }
+
+    .logo-text {
+        margin-left: 10px;
+        font-size: 20px;
+        font-weight: 500;
+    }
+}

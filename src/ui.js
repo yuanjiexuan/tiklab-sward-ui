@@ -16,6 +16,8 @@ import RepositoryLayout from "./repository/common/components/RepositoryLayout";
 import BasicInfo from "./repository/setting/basicInfo/components/BasicInfo";
 import Layout from "./home/home/components/Layout";
 import ArchivedFree from "./common/components/ArchivedFree";
+import HeaderCe from "./home/home/components/HeaderCe";
+import Logo from "./home/home/components/Logo";
 export {
     wikiRoutes,
     store,
@@ -25,5 +27,7 @@ export {
     BasicInfo,
     Layout,
     ArchivedFree,
-    FirstMenu
+    FirstMenu,
+    HeaderCe,
+    Logo
 }

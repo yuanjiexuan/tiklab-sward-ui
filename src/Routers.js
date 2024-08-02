@@ -165,119 +165,120 @@ const Routes = [
     },
     {
         path: "/",
-        component: () => <Redirect to="/home" />,
+        component: () => <Redirect to="/index/home" />,
         exact: true,
     },
     {
-        path: "/",
+        path: "/index",
         component: Index,
         routes: [
             {
-                path: "/home",
+                path: "/index/home",
                 exact: true,
                 component: Home,
                 key: 'home'
             },
             {
-                path: "/focusDocumentList",
+                path: "/index/focusDocumentList",
                 exact: true,
                 component: FocusDocumentList,
                 key: 'focusDocumentList'
             },
             {
-                path:"/404",
+                path: "/index/404",
                 exact: true,
                 component: ProjectNotFound,
                 key: 'NotFound'
             },
             {
-                path: "/repository",
+                path: "/index/repository",
                 exact: true,
                 component: Repository,
                 key: 'repository'
 
             },
             {
-                path: "/repositoryAdd",
+                path: "/index/repositoryAdd",
                 exact: true,
                 component: RepositoryAdd,
                 key: 'home'
             },
             {
-                path: "/template",
+                path: "/index/template",
                 exact: true,
                 component: Template,
                 key: 'template'
             },
             {
-                path: "/repositorydetail/:repositoryId",
+                path: "/index/repositorydetail/:repositoryId",
                 component: RepositoryDetail,
                 routes: [
                     {   
-                        path: "/repositorydetail/:id/noAccess",
+                        path: "/index/repositorydetail/:id/noAccess",
                         exact: true,
                         component: ProjectNoAccessPage
                     },
                     {
-                        path: "/repositorydetail/:repositoryId/survey",
+                        path: "/index/repositorydetail/:repositoryId/survey",
                         component: Survey
                     },
                     {
-                        path: "/repositorydetail/:repositoryId/dynamicList",
+                        path: "/index/repositorydetail/:repositoryId/dynamicList",
                         component: DynamicList
                     },
                     {
-                        path: "/repositorydetail/:repositoryId/focusDocumentList",
+                        path: "/index/repositorydetail/:repositoryId/focusDocumentList",
                         component: FocusDocumentList
                     },
                     {
-                        path: "/repositorydetail/:repositoryId/doc/:id",
+                        path: "/index/repositorydetail/:repositoryId/doc/:id",
                         component: DocumnetExamine
-                    },{
-                        path: "/repositorydetail/:repositoryId/add/:id",
+                    },
+                    {
+                        path: "/index/repositorydetail/:repositoryId/add/:id",
                         component: DocumentAddEdit
                     },
                     {
-                        path: "/repositorydetail/:repositoryId/docEdit/:id",
+                        path: "/index/repositorydetail/:repositoryId/docEdit/:id",
                         component: DocumentEdit
                     },
 
                     {
-                        path: "/repositorydetail/:repositoryId/docEdit/:id",
+                        path: "/index/repositorydetail/:repositoryId/docEdit/:id",
                         component: DocumentEdit
                     },
 
                     {
-                        path: "/repositorydetail/:repositoryId/markdownEdit/:id",
+                        path: "/index/repositorydetail/:repositoryId/markdownEdit/:id",
                         component: MarkdownDocumentEdit
                     },
                     {
-                        path: "/repositorydetail/:repositoryId/markdownView/:id",
+                        path: "/index/repositorydetail/:repositoryId/markdownView/:id",
                         component: MarkdownDocumentView
                     },
                     {
-                        path: "/repositorydetail/:repositoryId/folder/:id",
+                        path: "/index/repositorydetail/:repositoryId/folder/:id",
                         component: LogDetail
                     },
                     {
-                        path: "/repositorydetail/:repositoryId/repositorySet",
+                        path: "/index/repositorydetail/:repositoryId/repositorySet",
                         component: RepositorySet,
                         routes: [
                             {
-                                path: "/repositorydetail/:repositoryId/repositorySet/basicInfo",
+                                path: "/index/repositorydetail/:repositoryId/repositorySet/basicInfo",
                                 component: RepositoryBasicInfo
                             },
                             {
-                                path: "/repositorydetail/:repositoryId/repositorySet/user",
+                                path: "/index/repositorydetail/:repositoryId/repositorySet/user",
                                 component: RepositoryDomainUser,
                                 exact: true
                             },
                             {
-                                path: "/repositorydetail/:repositoryId/repositorySet/domainRole",
+                                path: "/index/repositorydetail/:repositoryId/repositorySet/domainRole",
                                 component: RepositoryDomainRole
                             },
                             {
-                                path: "/repositorydetail/:repositoryId/repositorySet/messagenotice",
+                                path: "/index/repositorydetail/:repositoryId/repositorySet/messagenotice",
                                 component: DomainMessageNoticeContent,
                             }
                         ]
@@ -286,229 +287,230 @@ const Routes = [
                 ]
             },
             {
-                path: "/repositorySet/:repositoryId",
+                path: "/index/repositorySet/:repositoryId",
                 component: RepositorySet,
                 routes: [
                     {
-                        path: "/repositorySet/:repositoryId/basicInfo",
+                        path: "/index/repositorySet/:repositoryId/basicInfo",
                         component: RepositoryBasicInfo
                     },
                     {
-                        path: "/repositorySet/:repositoryId/user",
+                        path: "/index/repositorySet/:repositoryId/user",
                         component: RepositoryDomainUser,
                         exact: true
                     },
                     {
-                        path: "/repositorySet/:repositoryId/domainRole",
+                        path: "/index/repositorySet/:repositoryId/domainRole",
                         component: RepositoryDomainRole
                     },
                     {
-                        path: "/repositorySet/:repositoryId/messagenotice",
+                        path: "/index/repositorySet/:repositoryId/messagenotice",
                         component: DomainMessageNoticeContent,
                     }
                 ]
             },
             {
-                path: "/collect",
+                path: "/index/collect",
                 exact: true,
                 component: Collect,
                 key: 'collect'
             },
-            {
-                path: "/setting",
-                component: Setting,
-                key: 'Setting',
-                routes: [
-                    
-                    {
-                        path: "/setting/home",
-                        component: SettingHome,
-                        row: true,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/orga",
-                        component: OrgaContent,
-                        row: true,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/template",
-                        exact: true,
-                        component: Template,
-                        key: 'template'
-                    },
-                    {
-                        path: "/setting/templateAdd",
-                        component: TemplateEdit,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/templateView/:templateId",
-                        component: TemplatePreview,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/templateAdd/:templateId",
-                        component: TemplateEdit,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/user",
-                        component: OrgaUser,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/dir",
-                        component: ProjectDirectory,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/userGroup",
-                        component: ProjectUserGroup,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/usersystemgroup",
-                        component: ProjectSystemUserGroup,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/virtual",
-                        component: ProjectVirtualRoleList,
-                        exact: true
-                    },
-                    // 系统功能管理
-                    {
-                        path: "/setting/systemFeature",
-                        component: SystemFeature,
-                        exact: true
-                    },
-                    // 系统内置角色管理
-                    {
-                        path: "/setting/systemRoleBuilt",
-                        component: SystemRoleBuilt,
-                        exact: true
-                    },
-                    // 系统角色管理
-                    {
-                        path: "/setting/systemRole",
-                        component: SystemRole,
-                        exact: true
-                    },
-                    // 项目功能管理
-                    {
-                        path: "/setting/projectFeature",
-                        component: ProjectFeature,
-                        exact: true
-                    },
-                    // 项目角色管理
-                    {
-                        path: "/setting/projectRole",
-                        component: ProjectRole,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/messageNotice",
-                        component: SystemMessageNotice,
-                        row: true,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/messageNoticeSystem",
-                        component: SystemMessageNoticeBase,
-                        row: true,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/projectMessageNotice",
-                        component: ProjectMessageNoticeContent,
-                        row: true,
-                        exact: true
-                    },
-                    
-                    {
-                        path: "/setting/messageTemplate",
-                        component: SystemMessageTemplate,
-                        row: true,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/messageType",
-                        component: SystemMessageType,
-                        row: true,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/messageSendType",
-                        component: SystemMessageSendType,
-                        row: true,
-                        exact: true
-                    },
-
-                    {
-                        path: "/setting/taskList",
-                        component: TaskListContent,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/myTodoTask",
-                        component: MyTodoTaskContent,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/todoTypeTask",
-                        component: TodoTypeListContent,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/todoTempList",
-                        component: TodoTempListContent,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/logList",
-                        component: LogList,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/myLogTemplateList",
-                        component: LogTemplateList,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/projectLogTypeList",
-                        component: ProjectLogTypeList,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/loadData",
-                        component: LoadData,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/urlData",
-                        component: UrlData,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/version",
-                        component: LicenceVersion,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/productAuth",
-                        component: LicenceProductAuth,
-                        exact: true
-                    },
-                    {
-                        path: "/setting/backup",
-                        component: BackupRecoveryContent,
-                        exact: true
-                    }
-                ]
-            },
+            
         ]
-    }
+    },
+    {
+        path: "/setting",
+        component: Setting,
+        key: 'Setting',
+        routes: [
+            
+            {
+                path: "/setting/home",
+                component: SettingHome,
+                row: true,
+                exact: true
+            },
+            {
+                path: "/setting/orga",
+                component: OrgaContent,
+                row: true,
+                exact: true
+            },
+            {
+                path: "/setting/template",
+                exact: true,
+                component: Template,
+                key: 'template'
+            },
+            {
+                path: "/setting/templateAdd",
+                component: TemplateEdit,
+                exact: true
+            },
+            {
+                path: "/setting/templateView/:templateId",
+                component: TemplatePreview,
+                exact: true
+            },
+            {
+                path: "/setting/templateAdd/:templateId",
+                component: TemplateEdit,
+                exact: true
+            },
+            {
+                path: "/setting/user",
+                component: OrgaUser,
+                exact: true
+            },
+            {
+                path: "/setting/dir",
+                component: ProjectDirectory,
+                exact: true
+            },
+            {
+                path: "/setting/userGroup",
+                component: ProjectUserGroup,
+                exact: true
+            },
+            {
+                path: "/setting/usersystemgroup",
+                component: ProjectSystemUserGroup,
+                exact: true
+            },
+            {
+                path: "/setting/virtual",
+                component: ProjectVirtualRoleList,
+                exact: true
+            },
+            // 系统功能管理
+            {
+                path: "/setting/systemFeature",
+                component: SystemFeature,
+                exact: true
+            },
+            // 系统内置角色管理
+            {
+                path: "/setting/systemRoleBuilt",
+                component: SystemRoleBuilt,
+                exact: true
+            },
+            // 系统角色管理
+            {
+                path: "/setting/systemRole",
+                component: SystemRole,
+                exact: true
+            },
+            // 项目功能管理
+            {
+                path: "/setting/projectFeature",
+                component: ProjectFeature,
+                exact: true
+            },
+            // 项目角色管理
+            {
+                path: "/setting/projectRole",
+                component: ProjectRole,
+                exact: true
+            },
+            {
+                path: "/setting/messageNotice",
+                component: SystemMessageNotice,
+                row: true,
+                exact: true
+            },
+            {
+                path: "/setting/messageNoticeSystem",
+                component: SystemMessageNoticeBase,
+                row: true,
+                exact: true
+            },
+            {
+                path: "/setting/projectMessageNotice",
+                component: ProjectMessageNoticeContent,
+                row: true,
+                exact: true
+            },
+            
+            {
+                path: "/setting/messageTemplate",
+                component: SystemMessageTemplate,
+                row: true,
+                exact: true
+            },
+            {
+                path: "/setting/messageType",
+                component: SystemMessageType,
+                row: true,
+                exact: true
+            },
+            {
+                path: "/setting/messageSendType",
+                component: SystemMessageSendType,
+                row: true,
+                exact: true
+            },
+
+            {
+                path: "/setting/taskList",
+                component: TaskListContent,
+                exact: true
+            },
+            {
+                path: "/setting/myTodoTask",
+                component: MyTodoTaskContent,
+                exact: true
+            },
+            {
+                path: "/setting/todoTypeTask",
+                component: TodoTypeListContent,
+                exact: true
+            },
+            {
+                path: "/setting/todoTempList",
+                component: TodoTempListContent,
+                exact: true
+            },
+            {
+                path: "/setting/logList",
+                component: LogList,
+                exact: true
+            },
+            {
+                path: "/setting/myLogTemplateList",
+                component: LogTemplateList,
+                exact: true
+            },
+            {
+                path: "/setting/projectLogTypeList",
+                component: ProjectLogTypeList,
+                exact: true
+            },
+            {
+                path: "/setting/loadData",
+                component: LoadData,
+                exact: true
+            },
+            {
+                path: "/setting/urlData",
+                component: UrlData,
+                exact: true
+            },
+            {
+                path: "/setting/version",
+                component: LicenceVersion,
+                exact: true
+            },
+            {
+                path: "/setting/productAuth",
+                component: LicenceProductAuth,
+                exact: true
+            },
+            {
+                path: "/setting/backup",
+                component: BackupRecoveryContent,
+                exact: true
+            }
+        ]
+    },
 ]
 export default Routes;

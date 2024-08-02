@@ -71,7 +71,7 @@ const DocumentAddEdit = (props) => {
         }
         updateDocument(data).then(res => {
             if(res.code === 0){
-                props.history.push(`/repositorydetail/${repositoryId}/docEdit/${documentId}`)
+                props.history.push(`/index/repositorydetail/${repositoryId}/docEdit/${documentId}`)
             }
         })
     }
@@ -86,7 +86,7 @@ const DocumentAddEdit = (props) => {
         }
         updateDocument(data).then(res => {
             if(res.code === 0){
-                props.history.push(`/repositorydetail/${repositoryId}/docEdit/${documentId}`)
+                props.history.push(`/index/repositorydetail/${repositoryId}/docEdit/${documentId}`)
             }
         })
     }

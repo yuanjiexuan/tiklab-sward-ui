@@ -4,12 +4,11 @@
     z-index: 1;
     .ant-layout-sider-children {
         position: fixed;
-        width: 250px;
 
         .repository-aside {
             background-color: #fff;
             border-right: 1px solid #f0f2f5;
-            height: calc(100vh - 48px);
+            height: 100%;
             width: 270px;
 
             ul {

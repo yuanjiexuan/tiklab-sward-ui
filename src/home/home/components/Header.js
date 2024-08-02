@@ -9,19 +9,21 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router';
 import { getUser } from 'thoughtware-core-ui';
-import { observer, inject } from "mobx-react";
+import { observer, inject, Provider } from "mobx-react";
 import Search from "../../search/components/Search";
 import MessageList from "./MessageList";
-import {productImg,productWhiteImg} from "thoughtware-core-ui";
+import { productImg, productWhiteImg } from "thoughtware-core-ui";
 import "./Header.scss";
 import ProjectFeature from '../../../setting/version/ProjectFeature';
-
+import HomeStore from '../store/HomeStore';
 const Header = props => {
-    const { systemRoleStore, AppLink, AvatarLink, HelpLink } = props;
-
+    const { systemRoleStore, AppLink, AvatarLink, HelpLink, SetIsShowText, isShowText } = props;
+    
     // 登录者的信息
     const user = getUser();
-
+    const store = {
+        homeStore: HomeStore
+    }
     useEffect(() => {
         if (user && user.userId) {
             systemRoleStore.getSystemPermissions(user.userId, "sward")
@@ -30,28 +32,38 @@ const Header = props => {
     }, [])
 
     return (
-        <div className='frame-header'>
-            <div className="frame-left">
-            <div className="frame-applink">
-                    <AppLink />
-                </div>
-                <div className='frame-menu-logo' onClick={() => props.history.push("/home")}>
+        <Provider {...store}>
+            <div className='frame-header'>
+                <div className="frame-left">
+                    <div className="frame-applink">
+                        {
+                            isShowText ? <svg className="img-25" aria-hidden="true" onClick={() => SetIsShowText(!isShowText)}>
+                                <use xlinkHref="#icon-indentation-left"></use>
+                            </svg>
+                                :
+                                <svg className="img-25" aria-hidden="true" onClick={() => SetIsShowText(!isShowText)}>
+                                    <use xlinkHref="#icon-indentation-right"></use>
+                                </svg>
+                        }
+                    </div>
+                    {/* <div className='frame-menu-logo' onClick={() => props.history.push("/home")}>
                     <img src={productWhiteImg.sward} alt={'logo'} className="logo-img" />
                     <div className='logo-text'>sward</div>
+                </div> */}
+                </div>
+
+                <div className='frame-header-search-wrap'></div>
+                <div className={'frame-header-right'}>
+                    <Search />
+                    <MessageList />
+                    <HelpLink />
+                    <ProjectFeature />
+                    <AppLink />
+                    <AvatarLink {...props} />
                 </div>
             </div>
+        </Provider>
 
-            <div className='frame-header-search-wrap'>
-                
-            </div>
-            <div className={'frame-header-right'}>
-                <Search />
-                <MessageList />
-                <HelpLink />
-                <ProjectFeature />
-                <AvatarLink {...props} />
-            </div>
-        </div>
     )
 }
-export default withRouter(inject('homeStore', 'systemRoleStore')(observer(Header)));
+export default withRouter(inject('systemRoleStore')(observer(Header)));

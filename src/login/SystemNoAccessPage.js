@@ -11,7 +11,7 @@ const SystemNoAccessPage = props =>{
     return (
         <NoAccess
             {...props}
-            homePath={'/home'} //传返回的页面路由参数
+            homePath={'/index/home'} //传返回的页面路由参数
         />
     )
 }

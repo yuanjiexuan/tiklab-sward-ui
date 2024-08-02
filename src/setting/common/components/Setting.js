@@ -13,6 +13,7 @@ import "./Setting.scss"
 import { renderRoutes } from "react-router-config";
 import { SystemNav } from "thoughtware-privilege-ui";
 import { setDevRouter, setPrdRouter } from "./SetRouter";
+import HeaderCe from "../../../home/home/components/HeaderCe";
 const { Sider, Content } = Layout;
 const Setting = (props) => {
     const route = props.route;

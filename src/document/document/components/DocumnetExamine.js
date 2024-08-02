@@ -58,7 +58,7 @@ const DocumentExamine = (props) => {
                     setValue(data.data.details)
                 } else {
                     setValue()
-                    props.history.push(`/repositorydetail/${repositoryId}/docEdit/${documentId}`)
+                    props.history.push(`/index/repositorydetail/${repositoryId}/docEdit/${documentId}`)
                 }
                 const document = data.data;
                 const node = document.node;
@@ -145,7 +145,7 @@ const DocumentExamine = (props) => {
                 <div className="examine-title" id="examine-title">{documentTitle}</div>
                 <div className="document-action">
                     {
-                        value && <svg className="right-icon" aria-hidden="true" onClick={() => props.history.push(`/repositorydetail/${repositoryId}/docEdit/${documentId}`)}>
+                        value && <svg className="right-icon" aria-hidden="true" onClick={() => props.history.push(`/index/repositorydetail/${repositoryId}/docEdit/${documentId}`)}>
                             <use xlinkHref="#icon-edit"></use>
                         </svg>
                     }

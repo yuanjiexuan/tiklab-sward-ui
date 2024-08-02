@@ -13,7 +13,7 @@ const ProjectNoAccessPage = props =>{
     return (
         <NoAccess
             {...props}
-            homePath={repositoryId ? `/repositorydetail/${repositoryId}/survey` : '/home'} //传返回的页面路由参数
+            homePath={repositoryId ? `/index/repositorydetail/${repositoryId}/survey` : '/index/home'} //传返回的页面路由参数
         />
     )
 }

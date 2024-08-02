@@ -68,13 +68,13 @@ const Search = (props) => {
 
 
     const toRepository = (repository) => {
-        props.history.push(`/repositorydetail/${repository.id}/survey`)
+        props.history.push(`/index/repositorydetail/${repository.id}/survey`)
         setShow(false)
     }
     const toWorkItem =  (id, repository) => {
 
         // localStorage.setItem("repository", repository.id)
-        props.history.push(`/repositorydetail/${repository.id}/doc/${id}`)
+        props.history.push(`/index/repositorydetail/${repository.id}/doc/${id}`)
         setShow(false)
     }
 

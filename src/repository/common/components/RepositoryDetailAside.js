@@ -102,13 +102,13 @@ const RepositorydeAside = (props) => {
         if (item.type === "category") {
             localStorage.setItem("categoryId", item.id);
             setOpenClickCategory(item.id)
-            props.history.push(`/repositorydetail/${repositoryId}/folder/${item.id}`)
+            props.history.push(`/index/repositorydetail/${repositoryId}/folder/${item.id}`)
         }
         if (item.documentType === "document") {
-            props.history.push(`/repositorydetail/${repositoryId}/doc/${item.id}`)
+            props.history.push(`/index/repositorydetail/${repositoryId}/doc/${item.id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/repositorydetail/${repositoryId}/markdownView/${item.id}`)
+            props.history.push(`/index/repositorydetail/${repositoryId}/markdownView/${item.id}`)
         }
     }
 
@@ -231,13 +231,13 @@ const RepositorydeAside = (props) => {
                 console.log(node)
                 if (node) {
                     if (node.type === "category") {
-                        props.history.push(`/repositorydetail/${repositoryId}/folder/${node.id}`)
+                        props.history.push(`/index/repositorydetail/${repositoryId}/folder/${node.id}`)
                     }
                     if (node.type === "document") {
-                        props.history.push(`/repositorydetail/${repositoryId}/doc/${node.id}`)
+                        props.history.push(`/index/repositorydetail/${repositoryId}/doc/${node.id}`)
                     }
                 } else {
-                    props.history.push(`/repositorydetail/${repositoryId}/survey`)
+                    props.history.push(`/index/repositorydetail/${repositoryId}/survey`)
                 }
             })
         }
@@ -247,13 +247,13 @@ const RepositorydeAside = (props) => {
                 console.log(node)
                 if (node) {
                     if (node.type === "category") {
-                        props.history.push(`/repositorydetail/${repositoryId}/folder/${node.id}`)
+                        props.history.push(`/index/repositorydetail/${repositoryId}/folder/${node.id}`)
                     }
                     if (node.type === "document") {
-                        props.history.push(`/repositorydetail/${repositoryId}/doc/${node.id}`)
+                        props.history.push(`/index/repositorydetail/${repositoryId}/doc/${node.id}`)
                     }
                 } else {
-                    props.history.push(`/repositorydetail/${repositoryId}/survey`)
+                    props.history.push(`/index/repositorydetail/${repositoryId}/survey`)
                 }
             })
         }
@@ -531,7 +531,7 @@ const RepositorydeAside = (props) => {
 
     const goSurvey = () => {
         setSelectKey("survey")
-        props.history.push(`/repositorydetail/${repositoryId}/survey`);
+        props.history.push(`/index/repositorydetail/${repositoryId}/survey`);
 
     }
 
@@ -611,7 +611,7 @@ const RepositorydeAside = (props) => {
                             }
                         </Tree>
                     </div>
-                    <div className="repository-setting-menu" onClick={() => props.history.push(`/repositorySet/${repositoryId}/basicInfo`)}>
+                    <div className="repository-setting-menu" onClick={() => props.history.push(`/index/repositorySet/${repositoryId}/basicInfo`)}>
                         <svg className="img-icon" aria-hidden="true">
                             <use xlinkHref="#icon-set"></use>
                         </svg>

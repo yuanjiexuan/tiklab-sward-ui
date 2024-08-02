@@ -18,7 +18,7 @@ const DynamicList = (props) => {
             findLogpage({ userId: userId,repositoryId: repositoryId })
         }
 
-        if (props.route.path === "/repositorydetail/:repositoryId/dynamicList") {
+        if (props.route.path === "/index/repositorydetail/:repositoryId/dynamicList") {
             setFirstText("知识库概况")
             findLogpage({ userId: userId, repositoryId: repositoryId })
         }

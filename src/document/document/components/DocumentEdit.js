@@ -161,13 +161,13 @@ const DocumentEdit = (props) => {
         updateDocument(data).then(res => {
             if (res.code === 0) {
                 setValue(item.details)
-                // props.history.push(`/repositorydetail/${repositoryId}/docEdit/${documentId}`)
+                // props.history.push(`/index/repositorydetail/${repositoryId}/docEdit/${documentId}`)
             }
         })
     }
 
     const goExamine = () => {
-        props.history.push(`/repositorydetail/${repositoryId}/doc/${documentId}`)
+        props.history.push(`/index/repositorydetail/${repositoryId}/doc/${documentId}`)
     }
     return (
         <div className="documnet-edit">

@@ -14,6 +14,7 @@ import { Layout, Button } from "antd";
 import { useTranslation } from 'react-i18next';
 import { getVersionInfo } from 'thoughtware-core-ui';
 import ArchivedFree from '../../../../common/components/ArchivedFree';
+
 const { Sider } = Layout;
 
 const RepositorySetAside = (props) => {
@@ -26,48 +27,48 @@ const RepositorySetAside = (props) => {
         {
             title: '知识库信息',
             icon: 'survey',
-            key: `/repositorySet/${repositoryId}/basicInfo`,
+            key: `/index/repositorySet/${repositoryId}/basicInfo`,
             encoded: "Survey",
             iseEnhance: false
         },
         {
             title: '成员',
             icon: 'survey',
-            key: `/repositorySet/${repositoryId}/user`,
+            key: `/index/repositorySet/${repositoryId}/user`,
             encoded: "User",
             iseEnhance: false
         },
         {
             title: '权限',
             icon: 'survey',
-            key: `/repositorySet/${repositoryId}/domainRole`,
+            key: `/index/repositorySet/${repositoryId}/domainRole`,
             encoded: "Privilege",
             iseEnhance: false
         },
         {
             title: '消息',
             icon: 'survey',
-            key: `/repositorySet/${repositoryId}/messagenotice`,
+            key: `/index/repositorySet/${repositoryId}/messagenotice`,
             encoded: "message",
             iseEnhance: false
         },
         {
             title: '归档',
             icon: 'archived',
-            key: `/repositorySet/${repositoryId}/archivedNode`,
+            key: `/index/repositorySet/${repositoryId}/archivedNode`,
             encoded: "archived",
             iseEnhance: true
         },
         {
             title: '回收站',
             icon: 'recycleBin',
-            key: `/repositorySet/${repositoryId}/recycleBin`,
+            key: `/index/repositorySet/${repositoryId}/recycleBin`,
             encoded: "recycleBin",
             iseEnhance: true
         }
     ];
     // 当前选中路由
-    const [selectKey, setSelectKey] = useState(`/repositorySet/${repositoryId}/basicInfo`);
+    const [selectKey, setSelectKey] = useState(`/index/repositorySet/${repositoryId}/basicInfo`);
 
     // 菜单是否折叠
     const [isShowText, SetIsShowText] = useState(true)
@@ -101,15 +102,13 @@ const RepositorySetAside = (props) => {
     }
 
     const backRepository = () => {
-        props.history.push(`/repositorydetail/${repositoryId}/survey`)
+        props.history.push(`/index/repositorydetail/${repositoryId}/survey`)
     }
-
 
     return (
         <Fragment>
             <Sider trigger={null} collapsible collapsed={!isShowText} collapsedWidth="50" width="200">
                 <div className={`repository-set-aside ${isShowText ? "" : "repository-icon"}`}>
-
                     <div className="repository-set-title">
                         <svg className="menu-icon" aria-hidden="true" onClick={() => backRepository()}>
                             <use xlinkHref="#icon-backrepository"></use>
