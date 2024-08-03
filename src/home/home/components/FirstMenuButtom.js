@@ -16,6 +16,7 @@ const FirstMenuButtom = (props) => {
             {
                 isShowText ?
                     <div className="first-menu-bottom-text ">
+                        <Search isShowText={isShowText} theme={theme} />
                         <MessageList isShowText={isShowText} theme={theme} />
                         <HelpLinkCloud
                             bgroup={"kanass"}
@@ -56,6 +57,7 @@ const FirstMenuButtom = (props) => {
 
                     :
                     <div className="first-menu-bottom-icon">
+                        <Search isShowText={isShowText} theme={theme} />
                         <MessageList isShowText={isShowText} theme={theme} />
                         <HelpLinkCloud
                             bgroup={"kanass"}
@@ -96,6 +98,7 @@ const FirstMenuButtom = (props) => {
                     {
                         isShowText ?
                             <div className="first-menu-bottom-text ">
+                                <Search isShowText={isShowText} theme={theme} />
                                 <MessageList isShowText={isShowText} theme={theme} />
                                 <HelpLink
                                     bgroup={"kanass"}
@@ -122,6 +125,7 @@ const FirstMenuButtom = (props) => {
                                     }
                                 />
                                 <AvatarLink
+                                
                                     changeTheme={changeTheme}
                                     iconComponent={
                                         <div className="first-menu-text-item">
@@ -136,6 +140,7 @@ const FirstMenuButtom = (props) => {
 
                             :
                             <div className="first-menu-bottom-icon">
+                                <Search isShowText={isShowText} theme={theme} />
                                 <MessageList isShowText={isShowText} theme={theme} />
                                 <HelpLink
                                     bgroup={"kanass"}

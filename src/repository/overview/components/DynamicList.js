@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import Breadcumb from "../../../common/breadcrumb/breadcrumb";
 import { inject, observer } from "mobx-react";
 import { getUser } from "thoughtware-core-ui";
-import { Row, Col } from "antd";
+import { Row, Col, Empty } from "antd";
 import "./DynamicList.scss";
 import SurveyStore from "../store/SurveyStore";
 import DynamicListItem from "./DynamicItem";
+import DyncmicTimeAxis from "./DyncmicTimeAxis";
+import PaginationCommon from "../../../common/page/Page";
 const DynamicList = (props) => {
-    const { findLogpage, opLogList } = SurveyStore;
+    const { findLogpage, logList, opLogCondition } = SurveyStore;
     const userId = getUser().userId;
     const [firstText, setFirstText] = useState();
     const repositoryId = props.match.params.repositoryId;
@@ -15,16 +17,25 @@ const DynamicList = (props) => {
     useEffect(() => {
         if (props.route.path === "/dynamic") {
             setFirstText("首页")
-            findLogpage({ userId: userId,repositoryId: repositoryId })
+            findLogpage({data: { repositoryId: repositoryId }})
         }
 
         if (props.route.path === "/index/repositorydetail/:repositoryId/dynamicList") {
             setFirstText("知识库概况")
-            findLogpage({ userId: userId, repositoryId: repositoryId })
+            findLogpage({data: { repositoryId: repositoryId }})
         }
         return;
     }, [])
+    const onPageChange = (page, pageSize) => {
+        const params = {
+            pageParam: {
+                ...opLogCondition.pageParam,
+                currentPage: page
+            }
 
+        }
+        findLogpage(params)
+    };
     return (
         <Row className="dynamic-row">
             <Col xl={{ span: 18, offset: 3 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }} className="dynamic-col">
@@ -35,16 +46,23 @@ const DynamicList = (props) => {
                             firstText={firstText}
                             secondText="动态"
                         />
-                        
+
                     </div>
 
                     <div className="dynamic-list">
                         {
-                            opLogList && opLogList.map((item) => {
-                                return <DynamicListItem content = {item.data} actionType = {item.actionType.id}/>
-                            })
+                            logList && logList.length > 0 ? <DyncmicTimeAxis logList={logList} /> : <Empty image="/images/nodata.png" description="暂时没有动态~" />
                         }
                     </div>
+
+                    <PaginationCommon
+                        currentPage={opLogCondition.pageParam.currentPage}
+                        changePage={(currentPage) => onPageChange(currentPage)}
+                        totalPage={opLogCondition.pageParam.totalPage}
+                        total={opLogCondition.pageParam.total}
+                        refresh={() => onPageChange(1)}
+                        showRefresh={true}
+                    />
                 </div>
             </Col>
         </Row>

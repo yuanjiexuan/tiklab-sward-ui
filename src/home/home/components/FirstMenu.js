@@ -13,6 +13,7 @@ const FirstMenu = (props) => {
     const [themeClass, setThemeClass] = useState("first-sider-gray")
 
     useEffect(() => {
+        sessionStorage.setItem("menuKey", "home")
         getThemeClass(theme)
         return null;
     }, [])
@@ -179,7 +180,7 @@ const FirstMenu = (props) => {
                         {renderRouter()}
                     </div>
 
-                    <FirstMenuButtom isShowText={isShowText} theme={theme} changeTheme={changeTheme} />
+                    <FirstMenuButtom isShowText={isShowText} theme={theme} changeTheme={changeTheme} {...props} />
                     <div className={"menu-box-right-border"}>
                         <div className={"menu-box-isexpanded"} onClick={toggleCollapsed}>
                             {

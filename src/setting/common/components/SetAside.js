@@ -163,11 +163,12 @@ const SetAside = (props) => {
         <Fragment>
             <div className="orga-aside">
                 <ul style={{ padding: 0 }} key="0" className="orga-aside-top">
-                    <Logo theme = {"default"} isShowText = {true} />
-                    <div className="orga-aside-name"><svg className="svg-icon" aria-hidden="true" onClick={() => backProject()}>
-                            <use xlinkHref="#icon-backproject"></use>
+                    <div className="orga-aside-name">设置</div>
+                    <div className="orga-aside-back" onClick={() => backProject()}>
+                        <svg className="svg-icon" aria-hidden="true" >
+                            <use xlinkHref="#icon-home-grey"></use>
                         </svg>
-                        设置
+                        返回首页
                     </div>
                     {
                         router && router.map((firstItem, index) => {

@@ -11,9 +11,10 @@ import CategoryStore from "../../common/store/CategoryStore";
 import { replaceTree } from '../../../common/utils/treeDataAction';
 import AddDropDown from "../../common/components/AddDropDown";
 import DynamicListItem from "./DynamicItem";
+import DyncmicTimeAxis from "./DyncmicTimeAxis";
 const Survey = (props) => {
-    const { findRepository, findLogpage, opLogList, findUserList, findDocumentRecentList,
-        findCategoryListTreeById, findDocumentFocusPage } = SurveyStore;
+    const { findRepository, findLogpage, logList, findUserList, findDocumentRecentList,
+        findCategoryListTreeById, findDocumentFocusPage, opLogCondition } = SurveyStore;
 
     const { expandedTree, setExpandedTree, repositoryCatalogueList } = CategoryStore;
 
@@ -25,7 +26,7 @@ const Survey = (props) => {
     const userId = getUser().userId;
     const tenant = getUser().tenant;
     useEffect(() => {
-        findLogpage({ userId: userId, repositoryId: repositoryId })
+        findLogpage({data:{ repositoryId: repositoryId, pageParam: {...opLogCondition.pageParam, pageSize: 10 }} })
 
         findRepository({ id: repositoryId }).then(res => {
             if (res.code === 0) {
@@ -235,19 +236,9 @@ const Survey = (props) => {
                             </div>
                         </div>
                         <div className="dynamic-list">
-                            {
-                                opLogList.length > 0 ? opLogList.map(item => {
-                                    return <DynamicListItem 
-                                    key = {item.id} 
-                                    user = {item.user} 
-                                    time = {item.createTime} 
-                                    content = {item.data} 
-                                    actionType = {item.actionType.id}
-                                    />
-                                })
-                                    :
-                                    <Empty image="/images/nodata.png" description="暂时没有动态~" />
-                            }
+                        {
+                            logList && logList.length > 0 ? <DyncmicTimeAxis logList={logList} /> : <Empty image="/images/nodata.png" description="暂时没有动态~" />
+                        }
                         </div>
                     </div>
                 </div>

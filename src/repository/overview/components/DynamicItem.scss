@@ -3,9 +3,8 @@
     align-items: center;
     font-size: 14px;
     justify-content: space-between;
-    margin-bottom: 10px;
     gap: 20px;
-
+    flex: 1;
     .dynamic-list-item-content {
         display: flex;
         align-items: center;

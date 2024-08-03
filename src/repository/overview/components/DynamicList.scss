@@ -1,25 +1,14 @@
 .dynamic-row {
-    height: calc(100vh - 48px);
-    background-color: var(--thoughtware-gray-600);
+    height: 100vh;
     overflow: auto;
-    .dynamic-row {
-        background-color: #fff;
-    }
 }
 
 .dynamic-list-page {
-    background: #fff;
     height: 100%;
-    overflow: auto;
+    padding: var(--thoughtware-padding);
     .dynamic-list-top {
-        position: sticky;
-        top: 0;
-        z-index: 3;
-        background: #fff;
-        padding: 15px 15px 0;
-    }
-    .dynamic-list {
-        padding: 0 15px 15px;
+        height: 32px;
+        line-height: 32px;
     }
     .dynamic-filter {
         padding: 15px 0;

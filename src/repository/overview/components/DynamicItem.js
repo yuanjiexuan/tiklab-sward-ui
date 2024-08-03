@@ -17,13 +17,11 @@ const DynamicListItem = (props) => {
     }
     const setDom = () => {
         let dom = null;
-        
         switch (actionType) {
             case "SWARD_LOGTYPE_DOCUMENTADD":
                 dom = (
                     <div className="dynamic-list-item" key={key}>
                         <div className="dynamic-list-item-content">
-                            <div className="dynamic-user-icon">{createUserIcon}</div>
                             <div className="dynamic-content">
                                 <div className="dynamic-document-action">{createUser.nickname}添加了文档</div>
                                 <div className="dynamic-document-item">
@@ -31,14 +29,12 @@ const DynamicListItem = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div>{updateTime}</div>
                     </div>
                 )
                 break;
             case "SWARD_LOGTYPE_DOCUMENTUPDATENAME":
                 dom = <div className="dynamic-list-item" key={key}>
                     <div className="dynamic-list-item-content">
-                        <div className="dynamic-user-icon">{createUserIcon}</div>
                         <div className="dynamic-content">
                             <div className="dynamic-document-action">{createUserName}修改了文档名称</div>
                             <div className="dynamic-document-update">
@@ -57,7 +53,6 @@ const DynamicListItem = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div>{createTime}</div>
                 </div>
                 break;
             default:

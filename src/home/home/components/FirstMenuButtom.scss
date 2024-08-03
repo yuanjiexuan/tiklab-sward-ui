@@ -3,13 +3,25 @@
     flex-direction: column;
     align-items: center;
     padding-bottom: 10px;
+
     .first-menu-link-item {
-        padding: 5px;
+        padding: 8px;
         margin-bottom: 0;
+
+        .user-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+        }
     }
 }
+
 .first-menu-bottom-text {
-    
+    .user-icon {
+        width: 20px;
+        height: 20px;
+        border-radius: 20px;
+    }
     .first-menu-bottom-item {
         height: 40px;
         display: flex;

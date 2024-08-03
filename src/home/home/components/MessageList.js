@@ -106,7 +106,6 @@ const MessageList = (props) => {
                 mask={false}
                 destroyOnClose={true}
                 width={375}
-                getContainer = {false}
                 className={`frame-header-drawer ${isShowText ? "message-drawer-expend" : "message-drawer-inpend"} `}
             >
                 <div className="message-content">
