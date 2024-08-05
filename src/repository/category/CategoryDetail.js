@@ -141,7 +141,7 @@ const CategoryDetail = (props) => {
 
                                     </div>
 
-                                    <div >{item.createTime.slice(0, 10)}</div>
+                                    <div >{item.createTime?.slice(0, 10)}</div>
                                 </div>
                             })
                                 :

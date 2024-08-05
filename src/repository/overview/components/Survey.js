@@ -215,7 +215,7 @@ const Survey = (props) => {
 
                                             {/* <div style={{ flex: 1 }}>{item.wikiRepository.name}</div> */}
 
-                                            <div >{item.updateTime.slice(0, 10)}</div>
+                                            <div >{item.updateTime?.slice(0, 10)}</div>
                                         </div>
                                     })
                                 }
