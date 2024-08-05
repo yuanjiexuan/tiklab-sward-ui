@@ -59,7 +59,9 @@ export class SurveyStore {
 
     @action
     findLogpage = async (value) => {
-        this.opLogCondition = extendObservable(this.opLogCondition, { ...value })
+        console.log(value)
+        Object.assign(this.opLogCondition, value)
+        console.log(this.opLogCondition)
         const data = await Service("/oplog/findlogpage", this.opLogCondition);
         if (data.code === 0) {
             const dataList = data.data.dataList;

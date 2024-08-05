@@ -19,7 +19,8 @@ import { message } from "antd";
 import { useDebounce } from "../../../common/utils/debounce";
 const MarkdownEdit = (props) => {
     const { findDocument, updateDocument } = MarkdownStore;
-    const { documentTitle, setDocumentTitle} = Categorystore;
+    const { documentTitle, setDocumentTitle } = Categorystore;
+    const [documentDate, setDocumentDate] = useState()
     const documentId = props.match.params.id;
     const repositoryId = props.match.params.repositoryId;
     const [value, setValue] = useState();
@@ -28,11 +29,11 @@ const MarkdownEdit = (props) => {
         findDocument(documentId).then((data) => {
             if (data.code === 0) {
                 if (data.data.details) {
-                    
+
                     const value = data.data.details;
                     setValue(JSON.parse(value))
                 } else {
-                    setValue( [
+                    setValue([
                         {
                             type: 'paragraph',
                             children: [
@@ -46,6 +47,7 @@ const MarkdownEdit = (props) => {
                 }
                 const node = data.data.node;
                 setDocumentTitle(node.name)
+                setDocumentDate(node.updateTime)
             }
         })
         return;
@@ -58,7 +60,7 @@ const MarkdownEdit = (props) => {
         // editRef.current.submit()
     }
     const serialize = nodes => {
-        const text =  nodes.map(n => Node.string(n)).join('\n');
+        const text = nodes.map(n => Node.string(n)).join('\n');
         return text;
     }
     const saveDocument = (value, type) => {
@@ -71,13 +73,13 @@ const MarkdownEdit = (props) => {
             detailText: serializeValue
         }
         updateDocument(data).then(res => {
-			if (res.code === 0 && type === "click") {
-				message.success("保存成功")
-			}
-		})
+            if (res.code === 0 && type === "click") {
+                message.success("保存成功")
+            }
+        })
     }
 
-    const changeEdit =  useDebounce((value) => {
+    const changeEdit = useDebounce((value) => {
         saveDocument(value, "auto")
 
     }, [500])
@@ -90,7 +92,7 @@ const MarkdownEdit = (props) => {
                 id: documentId,
                 name: value.target.innerText
             }
-            
+
         }
         updateDocument(data).then(res => {
             if (res.code === 0) {
@@ -104,8 +106,8 @@ const MarkdownEdit = (props) => {
     }
     const [isFocus, setIsFocus] = useState()
     const keyDown = (event) => {
-        
-        if(event.keyCode === 13){
+
+        if (event.keyCode === 13) {
             event.stopPropagation();
             event.preventDefault()
             changeTitle(event)
@@ -116,31 +118,39 @@ const MarkdownEdit = (props) => {
         setIsFocus(true)
     }
 
-  
+
     return (
         <div className="document-markdown-edit">
             <div className="edit-top">
-                <div 
-                    id="examine-title" 
-                    contentEditable = {true} 
-                    suppressContentEditableWarning
-                    className={`edit-title ${isFocus ? "edit-title-focus" : ""}`}
-                    onBlur={(event)=> changeTitle(event)}
-                    onKeyDown={(event => keyDown(event))}
-                    onClick={() => focus() }
-                >{documentTitle}</div>
+                <div className={`edit-title`}>
+
+                    <div
+                        contentEditable={true}
+                        suppressContentEditableWarning
+                        className={`edit-title-top ${isFocus ? "edit-title-focus" : ""}`}
+                        onBlur={(event) => changeTitle(event)}
+                        onKeyDown={(event => keyDown(event))}
+                        onClick={() => focus()}
+                        id="examine-title"
+                    >
+                        {documentTitle}
+                    </div>
+                    <div className="edit-title-date">
+                        更新日期：{documentDate}
+                    </div>
+                </div>
                 <div className="edit-right">
                     <Button type="primary" onClick={() => save()}>保存</Button>
                     <Button onClick={() => props.history.replace(`/index/repositorydetail/${repositoryId}/markdownView/${documentId}`)}>退出编辑</Button>
 
                 </div>
             </div>
-            <div className="edit-markdown" style={{height: "calc(100% - 50px)"}}>
-            {
-                value && <Markdown value = {value} setValue = {setValue} onChange = {(value) => changeEdit(value)}/>
-            }
+            <div className="edit-markdown" style={{ height: "calc(100% - 50px)" }}>
+                {
+                    value && <Markdown value={value} setValue={setValue} onChange={(value) => changeEdit(value)} />
+                }
             </div>
-            
+
 
 
 

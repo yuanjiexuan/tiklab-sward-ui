@@ -37,7 +37,7 @@ const RepositorydeAside = (props) => {
         expandedTree, setExpandedTree, setDocumentTitle, setCategoryTitle, findCategory } = categoryStore;
 
     // 当前选中目录id
-    const id = props.location.pathname.split("/")[4];
+    const id = props.location.pathname.split("/")[5];
     const [selectKey, setSelectKey] = useState(id);
     const [changeRepositoryVisible, setChangeRepositoryVisible] = useState(null)
     const repositoryId = props.match.params.repositoryId;
@@ -74,7 +74,7 @@ const RepositorydeAside = (props) => {
 
     useEffect(() => {
         // 初次进入激活导航菜单
-        if (props.location.pathname.split("/")[3] === "survey") {
+        if (props.location.pathname.split("/")[4] === "survey") {
             setSelectKey("survey")
         } else {
             setSelectKey(id)
@@ -84,6 +84,7 @@ const RepositorydeAside = (props) => {
 
     //点击左侧菜单
     const selectKeyFun = (event, item) => {
+        // setSelectKey(item.id)
         event.preventDefault()
         event.stopPropagation();
         event.nativeEvent.stopImmediatePropagation()
@@ -113,7 +114,7 @@ const RepositorydeAside = (props) => {
     }
 
     const findCategoryChildren = (id, type) => {
-        setSelectKey(id)
+        // setSelectKey(id)
         const isRequested = requsetedCategory.some(category => category === id);
         if (!isRequested) {
             findCategory({ id: id }).then(res => {
@@ -454,7 +455,7 @@ const RepositorydeAside = (props) => {
             <div className={`${isHover === item.id ? "icon-show" : "icon-hidden"}`}>
                 <Dropdown overlay={() => editMenu(item, index)} placement="bottomLeft">
                     <div className="category-add">
-                        <svg className="img-icon-16" aria-hidden="true">
+                        <svg className="icon-18" aria-hidden="true">
                             <use xlinkHref="#icon-moreBlue"></use>
                         </svg>
                     </div>
@@ -486,7 +487,7 @@ const RepositorydeAside = (props) => {
                 <AddDropDown category={item} />
                 <Dropdown overlay={() => editMenu(item, index)} placement="bottomLeft">
                     <div className="category-add">
-                        <svg className="img-icon-16" aria-hidden="true">
+                        <svg className="icon-18" aria-hidden="true">
                             <use xlinkHref="#icon-moreBlue"></use>
                         </svg>
                     </div>
@@ -540,23 +541,29 @@ const RepositorydeAside = (props) => {
             <Sider trigger={null} collapsible collapsedWidth="50" width="270" className="repositorydetail-aside">
                 <div className='repository-aside'>
                     <div className="repository-title title">
-                        <span className="repository-title-left">
-                            {
-                                repository?.iconUrl ?
-                                    <img
-                                        src={version === "cloud" ? (upload_url + repository.iconUrl + "?tenant=" + tenant) : (upload_url + repository.iconUrl)}
-                                        alt=""
-                                        className="midden-icon-25"
-                                    />
-                                    :
-                                    <img
-                                        src={('images/repository1.png')}
-                                        alt=""
-                                        className="midden-icon-25"
-                                    />
-                            }
-                            <span>{repository?.name}</span>
-                        </span>
+                        <div className="repository-title-left">
+                            <div className="repository-title-left-icon">
+                                {
+                                    repository?.iconUrl ?
+                                        <img
+                                            src={version === "cloud" ? (upload_url + repository.iconUrl + "?tenant=" + tenant) : (upload_url + repository.iconUrl)}
+                                            alt=""
+                                            className="midden-icon-25"
+                                        />
+                                        :
+                                        <img
+                                            src={('images/repository1.png')}
+                                            alt=""
+                                            className="midden-icon-25"
+                                        />
+                                }
+                            </div>
+
+                            <div className="repository-title-center">
+                                <div className="name">{repository?.name}</div>
+                                <div className="type">{repository?.limits === "1" ? "私密知识库" : "公共知识库"}</div>
+                            </div>
+                        </div>
                         <div className="repository-toggleCollapsed">
                             <RepositoryChangeModal
                                 searchrepository={searchrepository}
@@ -578,6 +585,18 @@ const RepositorydeAside = (props) => {
                         概况
                     </div>
                     <div className="repository-menu-firstmenu"
+                        onClick={() => setShowSearchModal(true)}
+                        style={{cursor: "pointer"}}
+                    >
+                        <div className="repository-menu-firstmenu-left">
+                            <svg className="img-icon" aria-hidden="true">
+                                <use xlinkHref="#icon-search-default"></use>
+                            </svg>
+                            搜索
+                        </div>
+
+                    </div>
+                    <div className="repository-menu-firstmenu"
                         onMouseOver={() => setIsHover(0)}
                         onMouseLeave={() => setIsHover(null)}
                     >
@@ -589,9 +608,6 @@ const RepositorydeAside = (props) => {
                             <span>目录</span>
                         </div>
                         <div className="repository-menu-firstmenu-right">
-                            <svg className="svg-icon" aria-hidden="true" onClick={() => setShowSearchModal(true)}>
-                                <use xlinkHref="#icon-search"></use>
-                            </svg>
                             <AddDropDown category={null} />
                         </div>
                     </div>
@@ -606,6 +622,9 @@ const RepositorydeAside = (props) => {
                             onExpand={(expandedKeys, expanded) => setOpenOrClose(expanded)}
                             onDrop={onDrop}
                         >
+                            {
+                                console.log(selectKey)
+                            }
                             {
                                 categoryTree(repositoryCatalogueList)
                             }

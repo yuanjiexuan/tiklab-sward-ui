@@ -78,16 +78,19 @@
             justify-content: space-between;
             padding: 0 10px;
             border-radius: 4px;
-            gap: 15px;
+            gap: 20px;
             
             .log-child-title {
                 display: flex;
                 align-items: center;
                 min-width: 0;
                 flex-shrink: 1;
+                gap: 10px;
             }
             .log-child-info {
                 line-height: 30px;
+                flex-shrink: 1;
+                min-width: 0;
                 .log-child-name {
                     min-width: 0;
                     flex-shrink: 1;

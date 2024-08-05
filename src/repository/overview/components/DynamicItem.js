@@ -38,12 +38,12 @@ const DynamicListItem = (props) => {
                         <div className="dynamic-content">
                             <div className="dynamic-document-action">{createUserName}修改了文档名称</div>
                             <div className="dynamic-document-update">
-                                <div
+                                {/* <div
                                     className="dynamic-document-oldvalue"
                                 >
                                     {oldValue}
                                 </div>
-                                ———
+                                ——— */}
                                 <div
                                     className="dynamic-document-newValue" 
                                     onClick={() => goDynamicDetail()}

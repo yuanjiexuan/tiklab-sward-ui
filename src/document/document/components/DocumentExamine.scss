@@ -10,14 +10,12 @@
     }
 
     .document-examine-row {
-        height: calc(100vh - 70px);
+        height: calc(100vh - 85px);
         overflow: auto;
         flex: 1;
     }
 
     .examine-top {
-        line-height: 50px;
-        height: 50px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -25,8 +23,18 @@
         padding: 0 20px;
 
         .examine-title {
-            font-size: 18px;
-            font-weight: 600;
+            .examine-title-top {
+                height: 30px;
+                line-height: 30px;
+                font-weight: 600;
+                font-size: 16px;
+            }
+            .examine-title-date {
+                height: 29px;
+                line-height: 29px;
+                font-size: 11px;
+                color: #666;
+            }
         }
 
         .comment-item {

@@ -3,25 +3,34 @@
     background-color: #fff;
     height: 100vh;
     .edit-top {
-        line-height: 50px;
-        height: 50px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0 20px;
-        border-bottom: 1px solid #EFF1F7;
-        background-color: #F7F9FE;
         .edit-title {
-            font-size: 18px;
-            font-weight: 600;
-            height: 40px;
-            outline: none;
-            line-height: 40px;
-            border-radius: 5px;
-            box-sizing: border-box;
-            padding: 0 10px; 
+            // font-size: 18px;
+            // font-weight: 600;
+            // height: 40px;
+            // outline: none;
+            // line-height: 40px;
+            // border-radius: 5px;
+            // box-sizing: border-box;
+            // padding: 0 20px; 
+
+            .edit-title-top {
+                height: 30px;
+                line-height: 30px;
+                font-weight: 600;
+                font-size: 16px;
+            }
+            .edit-title-date {
+                height: 29px;
+                line-height: 29px;
+                font-size: 11px;
+                color: #666;
+            }
         }
-        .edit-title:hover {
+        .edit-title-top:hover {
             background-color: #fff;
         }
         // .edit-title:focus-visible {
@@ -58,6 +67,14 @@
         }
         .markdown-view {
             overflow: auto;
+        }
+        .markdown-edit {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .markdown-editor-nav-bar {
+            background-color: var(--thoughtware-gray-600);
+            border-bottom: 0;
         }
     }
     .edit-big {

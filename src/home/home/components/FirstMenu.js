@@ -26,34 +26,53 @@ const FirstMenu = (props) => {
         props.history.push(item.to)
         sessionStorage.setItem("menuKey", item.key)
     }
+
+    const setActiveIcon = (type) => {
+        let activeIcon = type + theme + "-active"
+        switch (theme) {
+            case "default":
+                activeIcon = type + theme + "-active";
+                break;
+            case "blue":
+                activeIcon = type + theme;
+                break;
+            case "black":
+                activeIcon = type + "blue";
+                break;
+            default:
+                activeIcon = type + theme + "-active";
+                break;
+        }
+        return activeIcon;
+    }
     // 系统顶部菜单
     const routers = [
         {
             to: '/index/home',
             title: '首页',
             key: 'home',
-            icon: theme === "default" ? "home-grey" : "home-white",
-            actionIcon: theme === "default" ? "home-blue" : "home-white"
+            icon: 'home-' + theme,
+            actionIcon: setActiveIcon("home-")
         },
         {
             to: '/index/repository',
             title: '知识库',
             key: 'repository',
-            icon: theme === "default" ? "repository-grey" : "repository-white",
-            actionIcon: theme === "default" ? "repository-blue" : "repository-white"
+            icon: 'repository-' + theme,
+            actionIcon: setActiveIcon("repository-")
         },
         {
             to: '/index/collect',
             title: '收藏',
             key: 'collect',
-            icon: theme === "default" ? "focus-grey" : "focus-white",
-            actionIcon: theme === "default" ? "focus-blue" : "focus-white"
+            icon: 'focus-' + theme,
+            actionIcon: setActiveIcon("focus-")
         },
         {
-            to: '/setting/version',
+            to: '/setting/logList',
             title: '设置',
-            key: 'setting',
-            icon: theme === "default" ? "set" : "set-white",
+            icon: 'set-' + theme,
+            actionIcon: setActiveIcon("set-")
         }
     ]
 

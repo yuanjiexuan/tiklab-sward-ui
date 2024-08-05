@@ -36,7 +36,7 @@ const CategoryDetail = (props) => {
             }
 
         })
-        findNodeList({parentId: categoryId}).then(data => {
+        findNodeList({ parentId: categoryId }).then(data => {
             setLogList(data.data)
         })
         return;
@@ -113,24 +113,27 @@ const CategoryDetail = (props) => {
                             logList && logList.length > 0 ? logList.map(item => {
                                 return <div className="log-child-list" key={item.id} onClick={() => goToDocument(item)}>
                                     <div className="log-child-title" style={{ flex: 1 }}>
-                                        {
-                                            item.type && item.type === "category" &&
-                                            <svg className="list-img" aria-hidden="true">
-                                                <use xlinkHref="#icon-folder"></use>
-                                            </svg>
-                                        }
-                                        {
-                                            item.type && item.type === "document" && item.documentType === "markdown" &&
-                                            <svg className="list-img" aria-hidden="true">
-                                                <use xlinkHref="#icon-minmap"></use>
-                                            </svg>
-                                        }
-                                        {
-                                            item.type && item.type === "document" && item.documentType === "document" &&
-                                            <svg className="list-img" aria-hidden="true">
-                                                <use xlinkHref="#icon-file"></use>
-                                            </svg>
-                                        }
+                                        <div>
+                                            {
+                                                item.type && item.type === "category" &&
+                                                <svg className="list-img" aria-hidden="true">
+                                                    <use xlinkHref="#icon-folder"></use>
+                                                </svg>
+                                            }
+                                            {
+                                                item.type && item.type === "document" && item.documentType === "markdown" &&
+                                                <svg className="list-img" aria-hidden="true">
+                                                    <use xlinkHref="#icon-minmap"></use>
+                                                </svg>
+                                            }
+                                            {
+                                                item.type && item.type === "document" && item.documentType === "document" &&
+                                                <svg className="list-img" aria-hidden="true">
+                                                    <use xlinkHref="#icon-file"></use>
+                                                </svg>
+                                            }
+                                        </div>
+
                                         <div className="log-child-info">
                                             <div className="log-child-name" title={item.name}>{item.name}</div>
                                             <div className="log-child-master" style={{ width: "100px" }}>{item.master.nickname}</div>
@@ -138,7 +141,7 @@ const CategoryDetail = (props) => {
 
                                     </div>
 
-                                    <div >{item.createTime}</div>
+                                    <div >{item.createTime.slice(0, 10)}</div>
                                 </div>
                             })
                                 :

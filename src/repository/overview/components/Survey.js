@@ -26,7 +26,7 @@ const Survey = (props) => {
     const userId = getUser().userId;
     const tenant = getUser().tenant;
     useEffect(() => {
-        findLogpage({data:{ repositoryId: repositoryId, pageParam: {...opLogCondition.pageParam, pageSize: 10 }} })
+        findLogpage({data:{ repositoryId: repositoryId}, pageParam: {...opLogCondition.pageParam, pageSize: 10 } })
 
         findRepository({ id: repositoryId }).then(res => {
             if (res.code === 0) {
@@ -215,7 +215,7 @@ const Survey = (props) => {
 
                                             {/* <div style={{ flex: 1 }}>{item.wikiRepository.name}</div> */}
 
-                                            <div >{item.updateTime}</div>
+                                            <div >{item.updateTime.slice(0, 10)}</div>
                                         </div>
                                     })
                                 }

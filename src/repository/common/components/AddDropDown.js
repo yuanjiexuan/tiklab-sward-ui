@@ -123,7 +123,7 @@ const AddDropDown = (props) => {
                 </Dropdown>
                     :
                     <Dropdown overlay={() => addMenu()} placement="bottomLeft">
-                        <svg className="img-icon-16" aria-hidden="true">
+                        <svg className="icon-18" aria-hidden="true">
                             <use xlinkHref="#icon-plusBlue"></use>
                         </svg>
                     </Dropdown>

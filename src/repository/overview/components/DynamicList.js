@@ -17,12 +17,12 @@ const DynamicList = (props) => {
     useEffect(() => {
         if (props.route.path === "/dynamic") {
             setFirstText("首页")
-            findLogpage({data: { repositoryId: repositoryId }})
+            findLogpage({data: { repositoryId: repositoryId }, pageParam: {...opLogCondition.pageParam, pageSize: 20 }})
         }
 
         if (props.route.path === "/index/repositorydetail/:repositoryId/dynamicList") {
             setFirstText("知识库概况")
-            findLogpage({data: { repositoryId: repositoryId }})
+            findLogpage({data: { repositoryId: repositoryId }, pageParam: {...opLogCondition.pageParam, pageSize: 20 }})
         }
         return;
     }, [])

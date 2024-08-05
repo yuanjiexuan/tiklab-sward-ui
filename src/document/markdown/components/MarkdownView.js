@@ -27,7 +27,7 @@ const DocumentExamine = (props) => {
     const { documentTitle, setDocumentTitle } = Categorystore;
     const { createLike, createShare, updateShare, deleteLike } = CommentStore;
     const [shareVisible, setShareVisible] = useState(false)
-
+    const [documentDate, setDocumentDate] = useState()
     const userId = getUser().userId;
     const tenant = getUser().tenant;
     const [docInfo, setDocInfo] = useState()
@@ -56,6 +56,7 @@ const DocumentExamine = (props) => {
                 const node = document.node;
                 setDocInfo(node)
                 setDocumentTitle(node.name)
+                setDocumentDate(node.updateTime)
                 setLike(document.like)
                 setFocus(document.focus)
                 setLikeNum(document.likenumInt)
@@ -69,7 +70,7 @@ const DocumentExamine = (props) => {
 
     // 点赞
     const addDocLike = () => {
-       
+
         if (like) {
             const data = {
                 toWhomId: documentId,
@@ -150,7 +151,15 @@ const DocumentExamine = (props) => {
             }
 
             <div className="examine-top">
-                <div className="examine-title" id="examine-title">{documentTitle}</div>
+                <div className="examine-title" id="examine-title">
+
+                    <div className="examine-title-top">
+                        {documentTitle}
+                    </div>
+                    <div className="examine-title-date">
+                        更新日期：{documentDate}
+                    </div>
+                </div>
                 <div className="document-edit">
                     {
                         value && <svg className="right-icon" aria-hidden="true" onClick={() => props.history.push(`/index/repositorydetail/${repositoryId}/markdownEdit/${documentId}`)}>

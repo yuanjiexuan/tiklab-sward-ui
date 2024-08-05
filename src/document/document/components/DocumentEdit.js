@@ -90,10 +90,10 @@ const DocumentEdit = (props) => {
             detailText: editRef.current.innerText
         }
         updateDocument(data).then(res => {
-			if (res.code === 0) {
-				message.success("保存成功")
-			}
-		})
+            if (res.code === 0) {
+                message.success("保存成功")
+            }
+        })
     }
 
     const updataDesc = useDebounce((value) => {
@@ -172,89 +172,96 @@ const DocumentEdit = (props) => {
     return (
         <div className="documnet-edit">
             <div className="edit-top">
-                <div className="edit-title" id="examine-title">{docInfo.name}</div>
+                <div className="edit-title" id="examine-title">
+                    <div className="edit-title-top">
+                        {docInfo.name}
+                    </div>
+                    <div className="edit-title-date">
+                      更新日期：{docInfo.updateTime}
+                    </div>
+                </div>
                 <div className="edit-right">
                     <Button type="primary" onClick={() => save()}>保存</Button>
                     <Button onClick={() => goExamine()}>退出编辑</Button>
                 </div>
             </div>
-            <div style={{height: "calc(100% - 60px)"}}>
-            {
-                value && <EditorBig
-                    value={value}
-                    onChange={value => updataDesc(value)}
-                    relationWorkStore={relationWorkStore}
-                    base_url={upload_url}
-                    ticket={ticket}
-                    tenant={tenant}
-                >
-                    <>
-                        <Row className="document-examine-content">
-                            <Col xl={{ span: 18, offset: 3 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }}>
-                                <div className="document-title">
-                                    <Input
-                                        className="document-title-input"
-                                        bordered={false}
-                                        onChange={(value) => setDocumentTitle(value.target.value)}
-                                        value={documentTitle}
-                                        onPressEnter={(value) => changeTitle(value)}
-                                        onBlur={(value) => changeTitle(value)}
-                                    />
-                                </div>
-                                <div ref={editRef}>
-                                    <EditorBigContent
-                                        value={value}
-                                        relationWorkStore={relationWorkStore}
+            <div style={{ height: "calc(100% - 60px)" }}>
+                {
+                    value && <EditorBig
+                        value={value}
+                        onChange={value => updataDesc(value)}
+                        relationWorkStore={relationWorkStore}
+                        base_url={upload_url}
+                        ticket={ticket}
+                        tenant={tenant}
+                    >
+                        <>
+                            <Row className="document-examine-content">
+                                <Col xl={{ span: 18, offset: 3 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }}>
+                                    <div className="document-title">
+                                        <Input
+                                            className="document-title-input"
+                                            bordered={false}
+                                            onChange={(value) => setDocumentTitle(value.target.value)}
+                                            value={documentTitle}
+                                            onPressEnter={(value) => changeTitle(value)}
+                                            onBlur={(value) => changeTitle(value)}
+                                        />
+                                    </div>
+                                    <div ref={editRef}>
+                                        <EditorBigContent
+                                            value={value}
+                                            relationWorkStore={relationWorkStore}
 
-                                    />
-                                </div>
-                                {
-                                    valueIsEmpty &&
-                                    <div className="template-select">
-                                        <div className="template-title">推荐模版</div>
-                                        <div className="template-list">
-                                            {
-                                                templateList && templateList.map((item, index) => {
-                                                    return <div className="template-box" key={index} onClick={() => selectTemplate(item)}>
-                                                        <img
-                                                            // src={setImageUrl(item.iconUrl)}
-                                                            src={imgUrlArray[index]}
-                                                            alt=""
-                                                            className="template-image"
-                                                        />
-                                                        <div className="template-name">{item.name}</div>
-                                                    </div>
-                                                })
-                                            }
-                                            <div className="template-box" key={0} onClick={() => setTemplateVisible(true)}>
-                                                <img
-                                                    src={Template}
-                                                    // src={('/images/' + imageNames[index])}
-                                                    alt=""
-                                                    className="template-image"
-                                                />
-                                                <div className="template-name">更多模版</div>
+                                        />
+                                    </div>
+                                    {
+                                        valueIsEmpty &&
+                                        <div className="template-select">
+                                            <div className="template-title">推荐模版</div>
+                                            <div className="template-list">
+                                                {
+                                                    templateList && templateList.map((item, index) => {
+                                                        return <div className="template-box" key={index} onClick={() => selectTemplate(item)}>
+                                                            <img
+                                                                // src={setImageUrl(item.iconUrl)}
+                                                                src={imgUrlArray[index]}
+                                                                alt=""
+                                                                className="template-image"
+                                                            />
+                                                            <div className="template-name">{item.name}</div>
+                                                        </div>
+                                                    })
+                                                }
+                                                <div className="template-box" key={0} onClick={() => setTemplateVisible(true)}>
+                                                    <img
+                                                        src={Template}
+                                                        // src={('/images/' + imageNames[index])}
+                                                        alt=""
+                                                        className="template-image"
+                                                    />
+                                                    <div className="template-name">更多模版</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                }
+                                    }
 
-                            </Col>
-                        </Row>
-                    </>
-                </EditorBig>
-            }
+                                </Col>
+                            </Row>
+                        </>
+                    </EditorBig>
+                }
             </div>
-            
-            <SelectTemplateList 
-                documentId = {documentId} 
-                setTemplateVisible = {setTemplateVisible} 
-                templateVisible = {templateVisible}
-                documentStore = {DocumentStore}
-                selectTemplate = {selectTemplate}
-                {...props} 
+
+            <SelectTemplateList
+                documentId={documentId}
+                setTemplateVisible={setTemplateVisible}
+                templateVisible={templateVisible}
+                documentStore={DocumentStore}
+                selectTemplate={selectTemplate}
+                {...props}
             />
-               
+
         </div>
     )
 }

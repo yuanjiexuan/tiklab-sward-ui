@@ -26,22 +26,31 @@
     background-color: #fff;
     height: 100vh;
     .edit-top {
-        line-height: 50px;
-        height: 50px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0 20px;
-        border-bottom: 1px solid #EFF1F7;
-        background-color: #F7F9FE;
+        // border-bottom: 1px solid #f7f8fa;
+        // background-color: #F7F9FE;
         .edit-title {
-            font-size: 18px;
-            font-weight: 600;
+            .edit-title-top {
+                height: 30px;
+                line-height: 30px;
+                font-weight: 600;
+                font-size: 16px;
+            }
+            .edit-title-date {
+                height: 30px;
+                line-height: 30px;
+                font-size: 11px;
+                color: #666;
+            }
         }
-        .document-edit {
-            display: flex;
-            align-items: center;
-        }
+        // .document-edit {
+        //     display: flex;
+        //     align-items: center;
+           
+        // }
         .inline {
             border-left: 2px solid #f0f0f0;
             height: 20px;
@@ -59,6 +68,10 @@
             
 
         }
+    }
+    .edit-toolbar {
+        border-bottom: 0;
+        background-color: var(--thoughtware-gray-600);
     }
     .edit-right {
         display: flex;
