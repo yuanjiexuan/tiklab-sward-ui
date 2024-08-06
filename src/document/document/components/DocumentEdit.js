@@ -181,8 +181,8 @@ const DocumentEdit = (props) => {
                     </div>
                 </div>
                 <div className="edit-right">
-                    <Button type="primary" onClick={() => save()}>保存</Button>
-                    <Button onClick={() => goExamine()}>退出编辑</Button>
+                    <Button type="primary" className="edit-right-save" onClick={() => save()}>保存</Button>
+                    <Button  className="edit-right-eqit" onClick={() => goExamine()}>退出</Button>
                 </div>
             </div>
             <div style={{ height: "calc(100% - 60px)" }}>

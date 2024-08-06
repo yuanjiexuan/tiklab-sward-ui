@@ -8,24 +8,17 @@
         justify-content: space-between;
         padding: 0 20px;
         .edit-title {
-            // font-size: 18px;
-            // font-weight: 600;
-            // height: 40px;
-            // outline: none;
-            // line-height: 40px;
-            // border-radius: 5px;
-            // box-sizing: border-box;
-            // padding: 0 20px; 
+            padding-top: 10px;
 
             .edit-title-top {
-                height: 30px;
-                line-height: 30px;
+                height: 25px;
+                line-height: 25px;
                 font-weight: 600;
                 font-size: 16px;
             }
             .edit-title-date {
-                height: 29px;
-                line-height: 29px;
+                height: 25px;
+                line-height: 25px;
                 font-size: 11px;
                 color: #666;
             }
@@ -92,6 +85,16 @@
         justify-content: space-between;
         align-items: center;
         gap: 10px;
+
+        .edit-right-save {
+            background: #0d66e4ad;
+            color: #fff;
+            font-weight: normal;
+        }
+        .edit-right-eqit {
+            background: #f0f2f5;
+            font-weight: normal;
+        }
         .icon-svg {
             width: 20px;
             height: 20px;

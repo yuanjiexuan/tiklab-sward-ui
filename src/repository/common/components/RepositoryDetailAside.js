@@ -430,12 +430,12 @@ const RepositorydeAside = (props) => {
             onMouseLeave={(event) => { event.stopPropagation(), setIsHover(null) }}
         >
             {
-                item.documentType === "document" && <svg className="img-icon" aria-hidden="true">
+                item.documentType === "document" && <svg className="icon-18" aria-hidden="true">
                     <use xlinkHref="#icon-file"></use>
                 </svg>
             }
             {
-                item.documentType === "markdown" && <svg className="img-icon" aria-hidden="true">
+                item.documentType === "markdown" && <svg className="icon-18" aria-hidden="true">
                     <use xlinkHref="#icon-minmap"></use>
                 </svg>
             }
@@ -472,7 +472,7 @@ const RepositorydeAside = (props) => {
             onMouseOver={(event) => { event.stopPropagation(), setIsHover(item.id) }}
             onMouseLeave={(event) => { event.stopPropagation(), setIsHover(null) }}
         >
-            <svg className="img-icon" aria-hidden="true">
+            <svg className="icon-18" aria-hidden="true">
                 <use xlinkHref="#icon-folder"></use>
             </svg>
             <div className={`${isRename === item.id ? "repository-input" : "repository-view"}`}
@@ -548,13 +548,13 @@ const RepositorydeAside = (props) => {
                                         <img
                                             src={version === "cloud" ? (upload_url + repository.iconUrl + "?tenant=" + tenant) : (upload_url + repository.iconUrl)}
                                             alt=""
-                                            className="midden-icon-25"
+                                            className="icon-24"
                                         />
                                         :
                                         <img
                                             src={('images/repository1.png')}
                                             alt=""
-                                            className="midden-icon-25"
+                                            className="icon-24"
                                         />
                                 }
                             </div>
@@ -579,7 +579,7 @@ const RepositorydeAside = (props) => {
                         className={`repository-survey ${selectKey === "survey" ? "repository-menu-select" : ""} `}
                         onClick={() => goSurvey()}
                     >
-                        <svg className="img-icon" aria-hidden="true">
+                        <svg className="icon-18" aria-hidden="true">
                             <use xlinkHref="#icon-home"></use>
                         </svg>
                         概况
@@ -589,7 +589,7 @@ const RepositorydeAside = (props) => {
                         style={{cursor: "pointer"}}
                     >
                         <div className="repository-menu-firstmenu-left">
-                            <svg className="img-icon" aria-hidden="true">
+                            <svg className="icon-18" aria-hidden="true">
                                 <use xlinkHref="#icon-search-default"></use>
                             </svg>
                             搜索
@@ -601,7 +601,7 @@ const RepositorydeAside = (props) => {
                         onMouseLeave={() => setIsHover(null)}
                     >
                         <div className="repository-menu-firstmenu-left">
-                            <svg className="img-icon" aria-hidden="true">
+                            <svg className="icon-18" aria-hidden="true">
                                 <use xlinkHref="#icon-repository"></use>
                             </svg>
 
@@ -622,9 +622,6 @@ const RepositorydeAside = (props) => {
                             onExpand={(expandedKeys, expanded) => setOpenOrClose(expanded)}
                             onDrop={onDrop}
                         >
-                            {
-                                console.log(selectKey)
-                            }
                             {
                                 categoryTree(repositoryCatalogueList)
                             }

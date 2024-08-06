@@ -231,7 +231,7 @@ const RepositoryList = (props) => {
     }
 
     const goRepositoryAdd = () => {
-        history.push("/repositoryAdd")
+        history.push("/index/repositoryAdd")
     }
     // const goRepositoryDetail = repository => {
     //     props.history.push(`/index/repositorydetail/${repository.id}/survey`)

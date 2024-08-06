@@ -23,7 +23,7 @@
                 justify-content: space-between;
                 border-bottom: 1px solid #f3f4f5;
                 width: 100%;
-                padding: 0 10px 0px 24px;
+                padding: 10px 8px 0px 21px;
 
                 span {
 
@@ -35,12 +35,12 @@
                 .repository-title-left {
                     display: flex;
                     align-items: center;
-                    gap: 10px;
+                    gap: 5px;
 
                     .repository-title-center {
                         .name {
                             height: 100%;
-                            line-height: 30px;
+                            line-height: 25px;
                             overflow: hidden;
                             white-space: nowrap;
                             overflow: hidden;
@@ -53,7 +53,7 @@
                         .type {
                             font-size: 11px;
                             color: #666;
-                            line-height: 30px;
+                            line-height: 25px;
                         }
                     }
                 }
@@ -132,7 +132,7 @@
                 align-items: center;
                 justify-content: space-between;
                 padding: 10px 10px 10px 24px;
-
+                gap: 5px;
                 .category-add {
                     border-radius: 5px;
                     height: 20px;
@@ -148,6 +148,7 @@
                 .repository-menu-firstmenu-left {
                     display: flex;
                     align-items: center;
+                    gap: 8px;
                 }
 
                 .repository-menu-firstmenu-right {
@@ -181,7 +182,7 @@
                     align-items: center;
                     // justify-content: space-between;
                     padding: 10px 10px 10px 0;
-
+                    gap: 5px;
                     .img-icon {
                         flex-shrink: 0;
                     }
@@ -299,6 +300,7 @@
                 cursor: pointer;
                 display: flex;
                 align-items: center;
+                gap: 8px;
             }
 
             .repository-survey:hover {

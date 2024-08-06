@@ -8,7 +8,7 @@
  */
 import React, { useEffect, useState } from "react";
 import { Provider, inject, observer } from "mobx-react";
-import { Button, Row, Col, message, Empty } from 'antd';
+import {  Row, Col, message, Empty } from 'antd';
 import { PreviewEditor, EditorCategory } from "thoughtware-slate-ui";
 import "thoughtware-slate-ui/es/thoughtware-slate.css";
 import "./documentExamine.scss"
@@ -19,7 +19,7 @@ import DocumentAddEdit from "./DocumentAddEdit";
 import CommentShare from "../store/CommentStore";
 import DocumentStore from "../store/DocumentStore";
 import CategoryStore from "../../../repository/common/store/CategoryStore";
-
+import Button from "../../../common/button/button";
 
 const DocumentExamine = (props) => {
     const { relationWorkStore } = props;
@@ -154,11 +154,7 @@ const DocumentExamine = (props) => {
                         </div>
                     </div>
                     <div className="document-action">
-                        {
-                            value && <svg className="right-icon" aria-hidden="true" onClick={() => props.history.push(`/index/repositorydetail/${repositoryId}/docEdit/${documentId}`)}>
-                                <use xlinkHref="#icon-edit"></use>
-                            </svg>
-                        }
+                        
                         {
                             focus ? <svg className="right-icon" aria-hidden="true" onClick={() => deleteFocus()}>
                                 <use xlinkHref="#icon-collectioned"></use>
@@ -168,9 +164,11 @@ const DocumentExamine = (props) => {
                                     <use xlinkHref="#icon-collection"></use>
                                 </svg>
                         }
-                        <svg className="right-icon" aria-hidden="true" onClick={() => setShareVisible(true)}>
-                            <use xlinkHref="#icon-share"></use>
-                        </svg>
+                        {
+                            value && <Button className = "document-action-edit" onClick={() => props.history.push(`/index/repositorydetail/${repositoryId}/docEdit/${documentId}`)}>编辑</Button>
+                        }
+                        <Button  className = "document-action-share" onClick={() => setShareVisible(true)}>分享</Button>
+
                     </div>
                 </div>
                 {

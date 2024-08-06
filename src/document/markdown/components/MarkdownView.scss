@@ -19,19 +19,20 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border: 1px solid #f7f8fa;
+        border-bottom: 1px solid #f7f8fa;
         padding: 0 20px;
 
         .examine-title {
+            padding-top: 10px;
             .examine-title-top {
-                height: 30px;
-                line-height: 30px;
+                height: 25px;
+                line-height: 25px;
                 font-weight: 600;
                 font-size: 16px;
             }
             .examine-title-date {
-                height: 29px;
-                line-height: 29px;
+                height: 25px;
+                line-height: 25px;
                 font-size: 11px;
                 color: #666;
             }
@@ -46,6 +47,15 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            .document-action-edit {
+                background: #0d66e4ad;
+                color: #fff;
+                font-weight: normal;
+            }
+            .document-action-share {
+                background: #f0f2f5;
+                font-weight: normal;
+            }
             .right-icon {
                 width: 20px;
                 height: 20px;

@@ -181,7 +181,7 @@ const RepositoryAddInfo = (props) => {
                             },
                         ]}
                     >
-                        <TextArea rows={3} />
+                        <TextArea rows={3} placeholder="知识库描述" />
                     </Form.Item>
                     <Form.Item
                         label="图标"

@@ -30,18 +30,17 @@
         align-items: center;
         justify-content: space-between;
         padding: 0 20px;
-        // border-bottom: 1px solid #f7f8fa;
-        // background-color: #F7F9FE;
         .edit-title {
+            padding-top: 10px;
             .edit-title-top {
-                height: 30px;
-                line-height: 30px;
+                height: 25px;
+                line-height: 25px;
                 font-weight: 600;
                 font-size: 16px;
             }
             .edit-title-date {
-                height: 30px;
-                line-height: 30px;
+                height: 25px;
+                line-height: 25px;
                 font-size: 11px;
                 color: #666;
             }
@@ -78,6 +77,16 @@
         justify-content: space-between;
         align-items: center;
         gap: 10px;
+
+        .edit-right-save {
+            background: #0d66e4ad;
+            color: #fff;
+            font-weight: normal;
+        }
+        .edit-right-eqit {
+            background: #f0f2f5;
+            font-weight: normal;
+        }
         .icon-svg {
             width: 20px;
             height: 20px;

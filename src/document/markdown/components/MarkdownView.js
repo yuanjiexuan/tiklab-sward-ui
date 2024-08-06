@@ -8,7 +8,8 @@
  */
 import React, { useEffect, useState } from "react";
 import { Provider, inject, observer } from "mobx-react";
-import { Button, Row, Col, Dropdown, message } from 'antd';
+import { Row, Col, Dropdown, message } from 'antd';
+import Button from "../../../common/button/button";
 import { MarkdownView } from "thoughtware-markdown-ui";
 import "thoughtware-markdown-ui/es/thoughtware-markdown.css";
 import "./markdownView.scss"
@@ -161,11 +162,11 @@ const DocumentExamine = (props) => {
                     </div>
                 </div>
                 <div className="document-edit">
-                    {
+                    {/* {
                         value && <svg className="right-icon" aria-hidden="true" onClick={() => props.history.push(`/index/repositorydetail/${repositoryId}/markdownEdit/${documentId}`)}>
                             <use xlinkHref="#icon-edit"></use>
                         </svg>
-                    }
+                    } */}
 
                     {
                         focus ? <svg className="right-icon" aria-hidden="true" onClick={() => deleteFocus()}>
@@ -176,10 +177,13 @@ const DocumentExamine = (props) => {
                                 <use xlinkHref="#icon-collection"></use>
                             </svg>
                     }
-                    <svg className="right-icon" aria-hidden="true" onClick={() => setShareVisible(true)}>
-                        <use xlinkHref="#icon-share"></use>
-                    </svg>
-                    <Dropdown
+                    {
+                        value && <Button className="document-action-edit" onClick={() => props.history.push(`/index/repositorydetail/${repositoryId}/markdownEdit/${documentId}`)}>编辑</Button>
+                    }
+                    <Button className="document-action-share" onClick={() => setShareVisible(true)}>分享</Button>
+
+                   
+                    {/* <Dropdown
                         overlay={moreMenu}
                         placement="bottomLeft"
                         trigger="click"
@@ -187,7 +191,7 @@ const DocumentExamine = (props) => {
                         <svg className="right-icon" aria-hidden="true">
                             <use xlinkHref="#icon-point"></use>
                         </svg>
-                    </Dropdown>
+                    </Dropdown> */}
 
                 </div>
             </div>

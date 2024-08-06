@@ -1,38 +1,6 @@
 .change-repository {
     position: relative;
 
-    // .repository-title {
-    //     display: flex;
-    //     align-items: center;
-    //     padding: 10px 15px;
-    //     color: #000;
-        
-    //     cursor: pointer;
-    //     .repository-text {
-    //         margin: 0 10px;
-
-    //         .type {
-    //             font-size: 12px;
-    //             font-weight: 500;
-    //         }
-    //     }
-
-    //     span {
-    //         width: 100px;
-    //         height: 100%;
-    //         overflow: hidden;
-
-    //         i {
-    //             margin-right: 10px;
-    //         }
-    //     }
-
-    //     .repository-aside-icon {
-    //         width: 15px;
-    //         height: 15px;
-    //     }
-    // }
-
     .repository-title-icon {
         display: flex;
         width: 100%;
@@ -41,6 +9,10 @@
         .repository-aside-icon {
             width: 15px;
             height: 15px;
+        }
+        .repository-toggleCollapsed:hover {
+            background-color: #edf0f5;
+            border-radius: 5px;
         }
     }
 
