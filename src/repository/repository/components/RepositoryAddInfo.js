@@ -7,7 +7,7 @@ import { useState } from "react";
 import { withRouter } from "react-router";
 import { inject, observer } from "mobx-react";
 import { getUser } from "thoughtware-core-ui";
-import setImageUrl from "../../../common/utils/setImageUrl";
+import ImgComponent from "../../../common/imgComponent/ImgComponent";
 const { TextArea } = Input;
 
 const layout = {
@@ -191,18 +191,18 @@ const RepositoryAddInfo = (props) => {
                             {
                                 iconList && iconList.map((item) => {
                                     return <div key={item.key} className={`repository-icon  ${item.iconUrl === iconUrl ? "icon-select" : null}`} onClick={() => { setIconUrl(item.iconUrl) }}>
-                                        <img
-                                            src={setImageUrl(item.iconUrl)}
+                                        <ImgComponent
+                                            src={item.iconUrl}
                                             alt="" className="img-icon" 
                                         />
                                     </div>
                                 })
                             }
-                            <Upload {...upLoadIcon}>
+                            {/* <Upload {...upLoadIcon}>
                                 <div className="project-icon">
                                     <img src={UploadIcon1} alt="" className="list-img" />
                                 </div>
-                            </Upload>
+                            </Upload> */}
                         </div>
 
 

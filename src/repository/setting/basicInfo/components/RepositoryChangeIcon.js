@@ -4,10 +4,11 @@ import { withRouter } from "react-router";
 import UploadIcon1 from "../../../../assets/images/uploadIcon.png";
 import { getUser } from "thoughtware-core-ui";
 import RepositoryIconStore from "../store/RepositoryStore";
+import ImgComponent from "../../../../common/imgComponent/ImgComponent";
 const RepositoryIcon = (props) => {
 
     const [form] = Form.useForm();
-    
+
     const { visible, setVisible, updateRepository, setIconUrl } = props;
 
     const [repositoryIconUrl, setProjectIconUrl] = useState("")
@@ -15,7 +16,7 @@ const RepositoryIcon = (props) => {
     const { findIconList, creatIcon } = RepositoryIconStore;
     const repositoryId = props.match.params.repositoryId;
     const [iconList, setIconList] = useState();
-    
+
     useEffect(() => {
         getIconList()
         return;
@@ -79,11 +80,11 @@ const RepositoryIcon = (props) => {
                 visible={visible}
                 // footer={null}
                 onCancel={onCancel}
-                onOk = {onFinish}
-                okText = {"确定"}
-                cancelText = {"取消"}
+                onOk={onFinish}
+                okText={"确定"}
+                cancelText={"取消"}
                 className="repository-icon-modal"
-                closable = {false}
+                closable={false}
             >
                 <Form >
                     <Form.Item
@@ -94,18 +95,20 @@ const RepositoryIcon = (props) => {
                             {
                                 iconList && iconList.map((item) => {
                                     return <div className={`repository-icon ${item.iconUrl === repositoryIconUrl ? "icon-select" : null}`} key={item.key} onClick={() => { setProjectIconUrl(item.iconUrl) }}>
-                                        <img 
-                                            src={version === "cloud" ? (upload_url + item.iconUrl + "?tenant=" + tenant) : (upload_url + item.iconUrl)}
+
+                                        <ImgComponent
+                                            src={item.iconUrl}
+                                            alt=""
                                             className="midden-icon-25"
                                         />
                                     </div>
                                 })
                             }
-                            <Upload {...upLoadIcon}>
+                            {/* <Upload {...upLoadIcon}>
                                 <div className="project-icon">
                                     <img src={UploadIcon1} alt="" className="midden-icon-25" />
                                 </div>
-                            </Upload>
+                            </Upload> */}
                         </div>
                     </Form.Item>
                 </Form>

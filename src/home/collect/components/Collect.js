@@ -3,6 +3,7 @@ import "./Collect.scss";
 import { Col, Empty, Row } from "antd";
 import { getUser } from "thoughtware-core-ui";
 import CollectStore from "../store/CollectStore";
+import ImgComponent from "../../../common/imgComponent/ImgComponent";
 
 const Collect = (props) => {
     const { findDocumentFocusPage, findFocusRepositoryList, createRecent } = CollectStore;
@@ -61,30 +62,21 @@ const Collect = (props) => {
 
                 <div className="collect-repository">
                     <div className="repository-title">收藏知识库</div>
-                    { 
+                    {
                         focusRepositoryList.length > 0 ?
                             <div className="repository-box">
                                 {
                                     focusRepositoryList.map(item => {
-                                        return <div className="repository-item" key={item.id} 
-                                            onClick={() => goRepositoryDetail(item)} 
-                                            >
+                                        return <div className="repository-item" key={item.id}
+                                            onClick={() => goRepositoryDetail(item)}
+                                        >
                                             <div className="item-title">
-                                                {
-                                                    item.iconUrl ?
-                                                        <img
-                                                            src={version === "cloud" ? (upload_url + item.iconUrl + "?tenant=" + tenant) : (upload_url + item.iconUrl)}
+                                                <ImgComponent
+                                                    src={item.iconUrl}
+                                                    alt=""
+                                                    className="list-img"
+                                                />
 
-                                                            alt=""
-                                                            className="list-img"
-                                                        />
-                                                        :
-                                                        <img
-                                                            src={('images/repository1.png')}
-                                                            alt=""
-                                                            className="list-img"
-                                                        />
-                                                }
                                                 <span>{item.name}</span>
                                             </div>
                                             <div className="item-work">

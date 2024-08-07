@@ -12,6 +12,7 @@ import { replaceTree } from '../../../common/utils/treeDataAction';
 import AddDropDown from "../../common/components/AddDropDown";
 import DynamicListItem from "./DynamicItem";
 import DyncmicTimeAxis from "./DyncmicTimeAxis";
+import ImgComponent from "../../../common/imgComponent/ImgComponent";
 const Survey = (props) => {
     const { findRepository, findLogpage, logList, findUserList, findDocumentRecentList,
         findCategoryListTreeById, findDocumentFocusPage, opLogCondition } = SurveyStore;
@@ -26,7 +27,7 @@ const Survey = (props) => {
     const userId = getUser().userId;
     const tenant = getUser().tenant;
     useEffect(() => {
-        findLogpage({data:{ repositoryId: repositoryId}, pageParam: {...opLogCondition.pageParam, pageSize: 10 } })
+        findLogpage({ data: { repositoryId: repositoryId }, pageParam: { ...opLogCondition.pageParam, pageSize: 10 } })
 
         findRepository({ id: repositoryId }).then(res => {
             if (res.code === 0) {
@@ -126,20 +127,11 @@ const Survey = (props) => {
 
                                 <div className="top-left">
                                     <div>
-                                        {
-                                            repositoryInfo.iconUrl ?
-                                                <img
-                                                    src={version === "cloud" ? (upload_url + repositoryInfo.iconUrl + "?tenant=" + tenant) : (upload_url + repositoryInfo.iconUrl)}
-                                                    alt=""
-                                                    className="repository-icon"
-                                                />
-                                                :
-                                                <img
-                                                    src={('images/repository1.png')}
-                                                    alt=""
-                                                    className="repository-icon"
-                                                />
-                                        }
+                                        <ImgComponent
+                                            src={repositoryInfo.iconUrl}
+                                            alt=""
+                                            className="repository-icon"
+                                        />
                                     </div>
 
 
@@ -149,7 +141,7 @@ const Survey = (props) => {
                                             {
                                                 userList && userList.length > 0 && userList.map((item, index) => {
                                                     if (index < 5) {
-                                                        return <div key = {item.id}><UserIcon size="big" name={item.user.nickname}></UserIcon></div>
+                                                        return <div key={item.id}><UserIcon size="big" name={item.user.nickname}></UserIcon></div>
                                                     }
 
                                                 })
@@ -225,7 +217,7 @@ const Survey = (props) => {
                         }
                     </div>
 
-                    
+
                     <div className="home-dynamic">
                         <div className="dynamic-box-title">
                             <span className="name">最新动态</span>
@@ -236,9 +228,9 @@ const Survey = (props) => {
                             </div>
                         </div>
                         <div className="dynamic-list">
-                        {
-                            logList && logList.length > 0 ? <DyncmicTimeAxis logList={logList} /> : <Empty image="/images/nodata.png" description="暂时没有动态~" />
-                        }
+                            {
+                                logList && logList.length > 0 ? <DyncmicTimeAxis logList={logList} /> : <Empty image="/images/nodata.png" description="暂时没有动态~" />
+                            }
                         </div>
                     </div>
                 </div>

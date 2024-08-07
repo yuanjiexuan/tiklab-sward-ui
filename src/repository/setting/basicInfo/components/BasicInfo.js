@@ -17,6 +17,7 @@ import { PrivilegeProjectButton } from "thoughtware-privilege-ui";
 import { Collapse } from 'antd';
 import { getUser, getVersionInfo } from "thoughtware-core-ui";
 import ArchivedFree from "../../../../common/components/ArchivedFree";
+import ImgComponent from "../../../../common/imgComponent/ImgComponent";
 const { Panel } = Collapse;
 const BasicInfo = props => {
     const layout = {
@@ -201,20 +202,13 @@ const BasicInfo = props => {
                                     labelAlign="left"
                                 >
                                     <div className="form-icon-col">
-                                        <div className="form-icon">
-                                            {
-                                                iconUrl ?
-                                                    <img
-                                                        src={version === "cloud" ? (upload_url + iconUrl + "?tenant=" + tenant) : (upload_url + iconUrl)}
-                                                        alt="" width={60} height={60}
-                                                    />
-                                                    :
-                                                    <img
-                                                        src={('images/repository1.png')}
-                                                        alt="" width={60} height={60}
-                                                    />
-                                            }
-                                        </div>
+                                    <ImgComponent
+                                                src={repositoryInfo?.iconUrl}
+                                                alt=""
+                                                className="form-icon"
+                                                width = "50"
+                                                height = "50"
+                                            />
 
                                         <span>知识库图标，可点击更改按钮修改icon</span>
                                     </div>

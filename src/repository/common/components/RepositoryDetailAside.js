@@ -25,6 +25,7 @@ import AddDropDown from './AddDropDown';
 import { DownOutlined } from '@ant-design/icons';
 import ArchivedFree from '../../../common/components/ArchivedFree';
 import SearchModal from './SearchModal';
+import ImgComponent from '../../../common/imgComponent/ImgComponent';
 const { Sider } = Layout;
 
 const RepositorydeAside = (props) => {
@@ -543,20 +544,11 @@ const RepositorydeAside = (props) => {
                     <div className="repository-title title">
                         <div className="repository-title-left">
                             <div className="repository-title-left-icon">
-                                {
-                                    repository?.iconUrl ?
-                                        <img
-                                            src={version === "cloud" ? (upload_url + repository.iconUrl + "?tenant=" + tenant) : (upload_url + repository.iconUrl)}
-                                            alt=""
-                                            className="icon-24"
-                                        />
-                                        :
-                                        <img
-                                            src={('images/repository1.png')}
-                                            alt=""
-                                            className="icon-24"
-                                        />
-                                }
+                                <ImgComponent
+                                    src={repository?.iconUrl}
+                                    alt=""
+                                    className="icon-24"
+                                />
                             </div>
 
                             <div className="repository-title-center">
@@ -586,7 +578,7 @@ const RepositorydeAside = (props) => {
                     </div>
                     <div className="repository-menu-firstmenu"
                         onClick={() => setShowSearchModal(true)}
-                        style={{cursor: "pointer"}}
+                        style={{ cursor: "pointer" }}
                     >
                         <div className="repository-menu-firstmenu-left">
                             <svg className="icon-18" aria-hidden="true">

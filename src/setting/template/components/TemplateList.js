@@ -14,8 +14,6 @@ import { observer, inject } from "mobx-react";
 import Breadcrumb from "../../../common/breadcrumb/breadcrumb";
 import Button from "../../../common/button/button";
 import TemplateStore from "../store/TemplateStore";
-import TemplateAddModal from "./TemplateAddModal";
-import setImageUrl from "../../../common/utils/setImageUrl";
 import weekly from "../../../assets/images/weekly.png";
 import weeklyNomal from "../../../assets/images/weeklyNomal.png";
 import todoWork from "../../../assets/images/todoWork.png";
@@ -26,7 +24,6 @@ import projectOperation from "../../../assets/images/projectOperation.png";
 const { confirm } = Modal;
 const Template = (props) => {
     const { findDocumentTemplateList, deleteDocumentTemplate, templateList } = TemplateStore;
-    const [showAddModal, setShowAddModal] = useState(false)
     const [editType, setEditType] = useState();
     const imgUrlArray = [weekly, weeklyNomal, todoWork, projectPlan, projectOperation]
     useEffect(() => {
@@ -35,8 +32,6 @@ const Template = (props) => {
     }, [])
     const addModal = () => {
         props.history.push("/setting/templateAdd")
-        // setEditType("add")
-        // setShowAddModal(true)
         
     }
 
@@ -105,7 +100,6 @@ const Template = (props) => {
 
                     </Col>
                 </Row>
-                <TemplateAddModal showAddModal = {showAddModal} setShowAddModal = {setShowAddModal} editType = {editType}/>
             {/* </Layout> */}
         </Fragment>
     )

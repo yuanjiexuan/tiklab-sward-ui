@@ -7,6 +7,7 @@ import { useDebounce, useThrottle } from "../../../common/utils/debounce";
 import { getUser } from "thoughtware-core-ui";
 import { Empty, Modal } from "antd";
 import { withRouter } from "react-router";
+import ImgComponent from "../../../common/imgComponent/ImgComponent";
 const Search = (props) => {
     const { isShowText, theme } = props;
 
@@ -137,8 +138,8 @@ const Search = (props) => {
                                                     searchWikiList.map((wikiItem) => {
                                                         return <div className="item-box" key={wikiItem.id}>
                                                             <div className="item-one" onClick={() => toRepository(wikiItem)}>
-                                                                <img
-                                                                    src={version === "cloud" ? (upload_url + wikiItem.iconUrl + "?tenant=" + tenant) : (upload_url + wikiItem.iconUrl)}
+                                                                <ImgComponent
+                                                                    src={wikiItem.iconUrl}
                                                                     alt=""
                                                                 />
                                                                 <span>{wikiItem.name}</span>
@@ -192,8 +193,8 @@ const Search = (props) => {
                                                         searchWikiList.map((wikiItem) => {
                                                             return <div className="item-box" key={wikiItem.id}>
                                                                 <div className="item-one" onClick={() => toRepository(wikiItem)}>
-                                                                    <img
-                                                                        src={version === "cloud" ? (upload_url + wikiItem.iconUrl + "?tenant=" + tenant) : (upload_url + wikiItem.iconUrl)}
+                                                                    <ImgComponent
+                                                                        src={wikiItem.iconUrl}
                                                                         alt=""
                                                                     />
                                                                     <span>{wikiItem.name}</span>

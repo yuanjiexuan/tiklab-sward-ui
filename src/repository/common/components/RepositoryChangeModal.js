@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./RepositoryChangeModal.scss";
 import { withRouter } from "react-router";
-import setImageUrl from "../../../common/utils/setImageUrl";
 import RepositoryStore from "../../repository/store/RepositoryStore";
 import { observer } from "mobx-react";
 import { getUser } from "thoughtware-core-ui";
+import ImgComponent from "../../../common/imgComponent/ImgComponent";
 
 const RepositoryChangeModal = (props) => {
     const { searchrepository, repository } = props;
@@ -100,8 +100,8 @@ const RepositoryChangeModal = (props) => {
                         onMouseOut={handleMouseOut}
 
                     >
-                        <img
-                            src={setImageUrl(repository.iconUrl)}
+                        <ImgComponent
+                            src={repository.iconUrl}
                             alt=""
                             className="list-img"
                         />
@@ -128,8 +128,8 @@ const RepositoryChangeModal = (props) => {
                             onMouseOut={handleMouseOut}
 
                         >
-                            <img
-                                src={setImageUrl(item.iconUrl)}
+                            <ImgComponent
+                                src={item.iconUrl}
                                 alt=""
                                 className="list-img"
                             />

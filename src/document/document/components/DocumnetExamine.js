@@ -15,7 +15,6 @@ import "./documentExamine.scss"
 import ShareModal from "../../share/components/ShareModal";
 import { getUser } from "thoughtware-core-ui";
 import Comment from "./Comment";
-import DocumentAddEdit from "./DocumentAddEdit";
 import CommentShare from "../store/CommentStore";
 import DocumentStore from "../store/DocumentStore";
 import CategoryStore from "../../../repository/common/store/CategoryStore";

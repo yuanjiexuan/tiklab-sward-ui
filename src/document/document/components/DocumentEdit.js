@@ -19,7 +19,6 @@ import "thoughtware-slate-ui/es/thoughtware-slate.css";
 import { getUser } from "thoughtware-core-ui";
 import { useDebounce } from "../../../common/utils/debounce";
 import { updateNodeName } from "../../../common/utils/treeDataAction";
-import setImageUrl from "../../../common/utils/setImageUrl";
 import SelectTemplateList from "./SelectTemplateList";
 import Template from "../../../assets/images/template.png";
 import weekly from "../../../assets/images/weekly.png";
@@ -224,7 +223,6 @@ const DocumentEdit = (props) => {
                                                     templateList && templateList.map((item, index) => {
                                                         return <div className="template-box" key={index} onClick={() => selectTemplate(item)}>
                                                             <img
-                                                                // src={setImageUrl(item.iconUrl)}
                                                                 src={imgUrlArray[index]}
                                                                 alt=""
                                                                 className="template-image"

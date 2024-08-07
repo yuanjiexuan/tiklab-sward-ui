@@ -10,8 +10,7 @@ import React, { useState, useEffect } from 'react';
 import { observer, inject } from "mobx-react";
 import { Modal, Layout, Menu } from 'antd';
 import { VideoCameraOutlined } from '@ant-design/icons';
-import "./selectTemplateList.scss"
-import setImageUrl from '../../../common/utils/setImageUrl';
+import "./selectTemplateList.scss";
 import weekly from "../../../assets/images/weekly.png";
 import weeklyNomal from "../../../assets/images/weeklyNomal.png";
 import todoWork from "../../../assets/images/todoWork.png";
@@ -84,8 +83,6 @@ const SelectTemplateList = (props) => {
                                     templateList && templateList.map((item, index) => {
                                         return <div className="template-box" key={index} onClick={() => selectTemplateInModal(item)}>
                                             <img
-                                                // src={setImageUrl(item.iconUrl)}
-                                                // src={('/images/' + imageNames[index])}
                                                 src={imgUrlArray[index]}
                                                 alt=""
                                                 className="template-image"

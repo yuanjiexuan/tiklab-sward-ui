@@ -9,9 +9,9 @@ import Button from "../../../common/button/button";
 import "./RepositoryList.scss";
 import { useHistory } from 'react-router-dom';
 import RepositoryStore from "../store/RepositoryStore";
-import setImageUrl from "../../../common/utils/setImageUrl";
 import { useDebounce } from "../../../common/utils/debounce";
 import UserIcon from "../../../common/UserIcon/UserIcon";
+import ImgComponent from "../../../common/imgComponent/ImgComponent";
 const RepositoryList = (props) => {
     const { findRepositoryList, createRecent,
         repositoryList, findRecentRepositoryList, createRepositoryFocus,
@@ -83,8 +83,8 @@ const RepositoryList = (props) => {
             key: "name",
             align: "left",
             render: (text, record) => <div onClick={() => goRepositorydetail(record)} className="repository-title">
-                <img
-                    src={setImageUrl(record.iconUrl)}
+                <ImgComponent
+                    src={record.iconUrl}
                     alt=""
                     className="list-img"
                 />
@@ -114,7 +114,7 @@ const RepositoryList = (props) => {
             key: "limits",
             align: "left",
             render: (text, record) => <div>
-               {text ==="0" ? "公开" : "私有"}
+                {text === "0" ? "公开" : "私有"}
             </div>,
 
         },
@@ -256,21 +256,11 @@ const RepositoryList = (props) => {
                                         return <Fragment>
                                             <div className="repository-item" key={item.id} onClick={() => goRepositorydetail(item)} >
                                                 <div className="item-title">
-                                                    {
-                                                        item.iconUrl ?
-                                                            <img
-                                                                src={version === "cloud" ? (upload_url + item.iconUrl + "?tenant=" + tenant) : (upload_url + item.iconUrl)}
-
-                                                                alt=""
-                                                                className="list-img"
-                                                            />
-                                                            :
-                                                            <img
-                                                                src={('images/repository1.png')}
-                                                                alt=""
-                                                                className="list-img"
-                                                            />
-                                                    }
+                                                    <ImgComponent
+                                                        src={item.iconUrl}
+                                                        alt=""
+                                                        className="list-img"
+                                                    />
                                                     <span>{item.name}</span>
                                                 </div>
                                                 <div className="item-work">

@@ -36,7 +36,6 @@ const Repository = AsyncComponent(() => import('./repository/repository/componen
 const RepositoryAdd = AsyncComponent(() => import('./repository/repository/components/RepositoryAdd.js'))
 const DocumentEdit = AsyncComponent(() => import("./document/document/components/DocumentEdit.js"))
 const DocumnetExamine = AsyncComponent(() => import("./document/document/components/DocumnetExamine.js"))
-const DocumentAddEdit = AsyncComponent(() => import("./document/document/components/DocumentAddEdit.js"))
 
 const MarkdownDocumentEdit = AsyncComponent(() => import("./document/markdown/components/markdownEdit.js"))
 const MarkdownDocumentView = AsyncComponent(() => import("./document/markdown/components/markdownView.js"))
@@ -233,10 +232,6 @@ const Routes = [
                     {
                         path: "/index/repositorydetail/:repositoryId/doc/:id",
                         component: DocumnetExamine
-                    },
-                    {
-                        path: "/index/repositorydetail/:repositoryId/add/:id",
-                        component: DocumentAddEdit
                     },
                     {
                         path: "/index/repositorydetail/:repositoryId/docEdit/:id",

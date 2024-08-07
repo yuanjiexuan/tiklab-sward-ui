@@ -16,6 +16,10 @@
     .repository-set-info {
         .repository-form-icon {
             align-items: center;
+            .form-icon {
+                width: 50px;
+                height: 50px;
+            }
             .form-icon-col {
                 display: flex;
                 align-items: center;

@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 import { getUser } from 'thoughtware-core-ui';
 import HomeStore from "../store/HomeStore";
 import UserIcon from '../../../common/UserIcon/UserIcon';
+import ImgComponent from '../../../common/imgComponent/ImgComponent';
 const Home = (props) => {
     const { findDocumentRecentList, findRecentRepositoryList, findDocumentFocusPage } = HomeStore;
     const [recentViewDocumentList, setRecentViewDocumentList] = useState([]);
@@ -78,21 +79,11 @@ const Home = (props) => {
                                         recentRepositoryDocumentList.map(item => {
                                             return <div className="repository-item" key={item.id} onClick={() => goRepositoryDetail(item)} >
                                                 <div className="item-title">
-                                                    {
-                                                        item.iconUrl ?
-                                                            <img
-                                                                src={version === "cloud" ? (upload_url + item.iconUrl + "?tenant=" + tenant) : (upload_url + item.iconUrl)}
-
-                                                                alt=""
-                                                                className="list-img"
-                                                            />
-                                                            :
-                                                            <img
-                                                                src={('images/repository1.png')}
-                                                                alt=""
-                                                                className="list-img"
-                                                            />
-                                                    }
+                                                    <ImgComponent
+                                                        src={item.iconUrl}
+                                                        alt=""
+                                                        className="list-img"
+                                                    />
                                                     <span>{item.name}</span>
                                                 </div>
                                                 <div className="item-work">
@@ -145,7 +136,7 @@ const Home = (props) => {
                                         </div>
 
                                         <div className="document-master-name">
-                                            <UserIcon name = {item.master.nickname} size = "big" />
+                                            <UserIcon name={item.master.nickname} size="big" />
                                             {item.master.nickname}
                                         </div>
 
