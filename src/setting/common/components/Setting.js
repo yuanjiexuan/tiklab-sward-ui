@@ -14,9 +14,13 @@ import { renderRoutes } from "react-router-config";
 import { SystemNav } from "thoughtware-privilege-ui";
 import { setDevRouter, setPrdRouter } from "./SetRouter";
 import HeaderCe from "../../../home/home/components/HeaderCe";
+import { inject, observer } from 'mobx-react';
+import { getUser } from 'thoughtware-core-ui';
 const { Sider, Content } = Layout;
 const Setting = (props) => {
+    const {systemRoleStore} = props;
     const route = props.route;
+    const user = getUser();
     const [router, setRouterMenu] = useState(setDevRouter)
     useEffect(() => {
         if (env === "local") {
@@ -27,6 +31,14 @@ const Setting = (props) => {
         }
         return
     }, [])
+
+    useEffect(() => {
+        if (user && user.userId) {
+            systemRoleStore.getSystemPermissions(user.userId, "kanass")
+        }
+        return;
+    }, [])
+
     return (
         <Fragment>
             <SystemNav
@@ -53,4 +65,4 @@ const Setting = (props) => {
     )
 }
 
-export default Setting;
+export default inject("systemRoleStore")(observer(Setting));;

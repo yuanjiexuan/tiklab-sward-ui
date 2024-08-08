@@ -29,7 +29,7 @@ const SetAside = (props) => {
         const iseEnhance = data.iseEnhance;
         // getAuthconfig
         if (data.islink && !authType) {
-            const authUrl = JSON.parse(localStorage.getItem("authConfig")).authServiceUrl + "#" + data.id;
+            const authUrl = JSON.parse(localStorage.getItem("authConfig"))?.authServiceUrl + "#" + data.id;
             window.open(authUrl, '_blank');
         } else {
             if (versionInfo.expired === false) {

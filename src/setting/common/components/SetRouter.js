@@ -38,7 +38,7 @@ const setDevRouter = [
                 easId: '/user/userGroup',
                 purviewCode: "user_group",
                 islink: true,
-                code: 1 - 3,
+                code: 1-3,
             },
             {
 
