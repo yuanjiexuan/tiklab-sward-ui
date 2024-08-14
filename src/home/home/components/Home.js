@@ -6,6 +6,7 @@ import { getUser } from 'thoughtware-core-ui';
 import HomeStore from "../store/HomeStore";
 import UserIcon from '../../../common/UserIcon/UserIcon';
 import ImgComponent from '../../../common/imgComponent/ImgComponent';
+import { nodata } from '../../../assets/image';
 const Home = (props) => {
     const { findDocumentRecentList, findRecentRepositoryList, findDocumentFocusPage } = HomeStore;
     const [recentViewDocumentList, setRecentViewDocumentList] = useState([]);
@@ -96,7 +97,7 @@ const Home = (props) => {
                                 </div>
                                 :
                                 <div className="repository-box-empty">
-                                    <Empty image="/images/nodata.png" description="暂时没有查看过知识库~" />
+                                    <Empty image={nodata} description="暂时没有查看过知识库~" />
                                 </div>
 
 
@@ -144,7 +145,7 @@ const Home = (props) => {
                                     </div>
                                 })
                                     :
-                                    <Empty image="/images/nodata.png" description="暂时没有数据~" />
+                                    <Empty image={nodata} description="暂时没有数据~" />
                             }
                         </div>
 

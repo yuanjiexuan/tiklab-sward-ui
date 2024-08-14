@@ -4,6 +4,7 @@ import { inject, observer } from "mobx-react";
 import { Empty } from "antd";
 import "./CommentShare.scss"
 import UserIcon from "../../../common/UserIcon/UserIcon";
+import { nodata } from "../../../assets/image";
 const CommentShare = (props) => {
     const { commentStore, documentId, setShowComment, shareStore } = props;
     const { findCommentPage } = commentStore;
@@ -112,7 +113,7 @@ const CommentShare = (props) => {
                         }
                     </>
                         :
-                        <Empty image="/images/nodata.png" description="暂时没有评价~" />
+                        <Empty image={nodata} description="暂时没有评价~" />
                 }
 
 

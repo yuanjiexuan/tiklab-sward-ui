@@ -234,7 +234,6 @@ const DocumentEdit = (props) => {
                                                 <div className="template-box" key={0} onClick={() => setTemplateVisible(true)}>
                                                     <img
                                                         src={Template}
-                                                        // src={('/images/' + imageNames[index])}
                                                         alt=""
                                                         className="template-image"
                                                     />

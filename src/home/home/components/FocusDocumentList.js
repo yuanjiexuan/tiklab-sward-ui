@@ -5,6 +5,7 @@ import { getUser } from "thoughtware-core-ui";
 import { Row, Col, Empty, Pagination } from "antd";
 import "./FocusDocumentList.scss";
 import HomeStore from "../store/HomeStore";
+import { nodata } from "../../../assets/image";
 const FocusDocumentList = (props) => {
     const { findDocumentFocusPage, focusTotal, focusCondition } = HomeStore;
     const userId = getUser().userId;
@@ -124,7 +125,7 @@ const FocusDocumentList = (props) => {
                                 </div>
                             })
                                 :
-                                <Empty image="/images/nodata.png" description="暂时没有数据~" />
+                                <Empty image={nodata} description="暂时没有数据~" />
                         }
                     </div>
                     {

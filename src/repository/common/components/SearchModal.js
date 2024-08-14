@@ -5,6 +5,7 @@ import { getUser } from 'thoughtware-core-ui';
 import { withRouter } from 'react-router';
 import { inject, observer } from 'mobx-react';
 import { useDebounce } from '../../../common/utils/debounce';
+import { nodata } from '../../../assets/image';
 const SearchModal = (props) => {
     const { showSearchModal, setShowSearchModal, repositoryId, categoryStore } = props;
     const {findRecentList, searchRepositoryDocument} = categoryStore;
@@ -124,7 +125,7 @@ const SearchModal = (props) => {
                         }
                     </>
                         :
-                        <Empty image="/images/nodata.png" description="暂时没有数据~" />
+                        <Empty image={nodata} description="暂时没有数据~" />
                 }
             </div>
             :
@@ -150,7 +151,7 @@ const SearchModal = (props) => {
                         }
                     </>
                         :
-                        <Empty image="/images/nodata.png" description="暂时没有数据~" />
+                        <Empty image={nodata} description="暂时没有数据~" />
                 }
             </div>
             }

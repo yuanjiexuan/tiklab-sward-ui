@@ -14,6 +14,7 @@ import CategoryAdd from "../common/components/CategoryAdd"
 import { getUser } from "thoughtware-core-ui";
 import CategoryStore from "../common/store/CategoryStore";
 import AddDropDown from "../common/components/AddDropDown";
+import { nodata } from "../../assets/image";
 const CategoryDetail = (props) => {
     const store = {
         categoryStore: CategoryStore
@@ -145,7 +146,7 @@ const CategoryDetail = (props) => {
                                 </div>
                             })
                                 :
-                                <Empty image="/images/nodata.png" description="暂时没有内容~" />
+                                <Empty image={nodata} description="暂时没有内容~" />
                         }
                     </div>
 

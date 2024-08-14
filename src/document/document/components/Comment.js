@@ -8,6 +8,7 @@ import { getUser } from "thoughtware-core-ui";
 import moment from "moment";
 import CommentStore from "../store/CommentStore"
 import UserIcon from "../../../common/UserIcon/UserIcon";
+import { nodata } from "../../../assets/image";
 const Comment = (props) => {
     const { documentId, setShowComment, commentNum, setCommentNum } = props;
     const { createComment, findCommentPage, deleteComment, deleteCommentCondition } = CommentStore;
@@ -283,7 +284,7 @@ const Comment = (props) => {
                         }
                     </>
                         :
-                        <Empty image="/images/nodata.png" description="暂时没有评价~" />
+                        <Empty image={nodata} description="暂时没有评价~" />
                 }
 
 

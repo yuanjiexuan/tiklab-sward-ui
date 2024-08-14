@@ -104,11 +104,6 @@ const RepositoryIcon = (props) => {
                                     </div>
                                 })
                             }
-                            {/* <Upload {...upLoadIcon}>
-                                <div className="project-icon">
-                                    <img src={UploadIcon1} alt="" className="midden-icon-25" />
-                                </div>
-                            </Upload> */}
                         </div>
                     </Form.Item>
                 </Form>

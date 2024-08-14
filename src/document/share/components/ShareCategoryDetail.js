@@ -10,6 +10,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Row, Col, Empty } from 'antd';
 import "./ShareCategoryDetail.scss"
 import { observer, inject } from "mobx-react";
+import { nodata } from "../../../assets/image";
 const ShareCategoryDetail = (props) => {
     const { shareStore } = props;
     const { findCategory, findNodeList } = shareStore;
@@ -100,7 +101,7 @@ const ShareCategoryDetail = (props) => {
                                 </div>
                             })
                                 :
-                                <Empty image="/images/nodata.png" description="暂时没有内容~" />
+                                <Empty image={nodata} description="暂时没有内容~" />
                         }
                     </div>
 

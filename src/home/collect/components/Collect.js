@@ -4,6 +4,7 @@ import { Col, Empty, Row } from "antd";
 import { getUser } from "thoughtware-core-ui";
 import CollectStore from "../store/CollectStore";
 import ImgComponent from "../../../common/imgComponent/ImgComponent";
+import { nodata } from "../../../assets/image";
 
 const Collect = (props) => {
     const { findDocumentFocusPage, findFocusRepositoryList, createRecent } = CollectStore;
@@ -89,7 +90,7 @@ const Collect = (props) => {
                             </div>
                             :
 
-                            <Empty image="/images/nodata.png" description="没有收藏过知识库~" />
+                            <Empty image={nodata} description="没有收藏过知识库~" />
 
                     }
                 </div>
@@ -136,7 +137,7 @@ const Collect = (props) => {
                                 </div>
                             })
                                 :
-                                <Empty image="/images/nodata.png" description="暂时没有数据~" />
+                                <Empty image={nodata} description="暂时没有数据~" />
                         }
                     </div>
                 </div>

@@ -8,6 +8,7 @@ import SurveyStore from "../store/SurveyStore";
 import DynamicListItem from "./DynamicItem";
 import DyncmicTimeAxis from "./DyncmicTimeAxis";
 import PaginationCommon from "../../../common/page/Page";
+import { nodata } from "../../../assets/image";
 const DynamicList = (props) => {
     const { findLogpage, logList, opLogCondition } = SurveyStore;
     const userId = getUser().userId;
@@ -51,7 +52,7 @@ const DynamicList = (props) => {
 
                     <div className="dynamic-list">
                         {
-                            logList && logList.length > 0 ? <DyncmicTimeAxis logList={logList} /> : <Empty image="/images/nodata.png" description="暂时没有动态~" />
+                            logList && logList.length > 0 ? <DyncmicTimeAxis logList={logList} /> : <Empty image={nodata} description="暂时没有动态~" />
                         }
                     </div>
 

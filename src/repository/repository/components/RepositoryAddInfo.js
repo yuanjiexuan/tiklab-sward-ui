@@ -2,7 +2,6 @@ import React, { Fragment, useEffect } from "react";
 import { Form, Input, message, Upload } from 'antd';
 import "./repositoryAddInfo.scss";
 import Button from "../../../common/button/button";
-import UploadIcon1 from "../../../assets/images/uploadIcon.png";
 import { useState } from "react";
 import { withRouter } from "react-router";
 import { inject, observer } from "mobx-react";

@@ -12,6 +12,7 @@ import RepositoryStore from "../store/RepositoryStore";
 import { useDebounce } from "../../../common/utils/debounce";
 import UserIcon from "../../../common/UserIcon/UserIcon";
 import ImgComponent from "../../../common/imgComponent/ImgComponent";
+import { nodata } from "../../../assets/image";
 const RepositoryList = (props) => {
     const { findRepositoryList, createRecent,
         repositoryList, findRecentRepositoryList, createRepositoryFocus,
@@ -276,7 +277,7 @@ const RepositoryList = (props) => {
 
                                 :
 
-                                <Empty image="/images/nodata.png" description="暂时没有查看过知识库~" />
+                                <Empty image={nodata} description="暂时没有查看过知识库~" />
                         }
 
                     </div>

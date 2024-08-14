@@ -8,11 +8,10 @@ import "./survey.scss";
 import { getUser } from "thoughtware-core-ui";
 import SurveyStore from "../store/SurveyStore";
 import CategoryStore from "../../common/store/CategoryStore";
-import { replaceTree } from '../../../common/utils/treeDataAction';
 import AddDropDown from "../../common/components/AddDropDown";
-import DynamicListItem from "./DynamicItem";
 import DyncmicTimeAxis from "./DyncmicTimeAxis";
 import ImgComponent from "../../../common/imgComponent/ImgComponent";
+import { nodata } from "../../../assets/image";
 const Survey = (props) => {
     const { findRepository, findLogpage, logList, findUserList, findDocumentRecentList,
         findCategoryListTreeById, findDocumentFocusPage, opLogCondition } = SurveyStore;
@@ -202,18 +201,14 @@ const Survey = (props) => {
                                                     <div className='document-title' onClick={() => goDocumentDetail(item)}>{item.name}</div>
                                                     <div className='document-master'>{item.master.nickname}</div>
                                                 </div>
-
                                             </div>
-
-                                            {/* <div style={{ flex: 1 }}>{item.wikiRepository.name}</div> */}
-
                                             <div >{item.updateTime?.slice(0, 10)}</div>
                                         </div>
                                     })
                                 }
                             </div>
-                                :
-                                <Empty image="/images/nodata.png" description="暂时没有查看过文档~" />
+                            :
+                            <Empty image={nodata} description="暂时没有查看过文档~" />
                         }
                     </div>
 
@@ -229,7 +224,7 @@ const Survey = (props) => {
                         </div>
                         <div className="dynamic-list">
                             {
-                                logList && logList.length > 0 ? <DyncmicTimeAxis logList={logList} /> : <Empty image="/images/nodata.png" description="暂时没有动态~" />
+                                logList && logList.length > 0 ? <DyncmicTimeAxis logList={logList} /> : <Empty image={nodata} description="暂时没有动态~" />
                             }
                         </div>
                     </div>

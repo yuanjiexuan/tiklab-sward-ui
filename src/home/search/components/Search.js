@@ -8,6 +8,7 @@ import { getUser } from "thoughtware-core-ui";
 import { Empty, Modal } from "antd";
 import { withRouter } from "react-router";
 import ImgComponent from "../../../common/imgComponent/ImgComponent";
+import { nodata } from "../../../assets/image";
 const Search = (props) => {
     const { isShowText, theme } = props;
 
@@ -179,7 +180,7 @@ const Search = (props) => {
 
                                     </Fragment>
                                         :
-                                        <Empty image="/images/nodata.png" description="暂时没有数据~" />
+                                        <Empty image={nodata} description="暂时没有数据~" />
                                 }
                             </div>
                                 :
@@ -210,7 +211,7 @@ const Search = (props) => {
                                                 </>
 
                                                 :
-                                                <Empty image="/images/nodata.png" description="暂时没有数据~" />
+                                                <Empty image={nodata} description="暂时没有数据~" />
                                         }
                                     </div>
                                     <div className="sort-box">
@@ -235,7 +236,7 @@ const Search = (props) => {
                                                 }
                                             </>
                                                 :
-                                                <Empty image="/images/nodata.png" description="暂时没有数据~" />
+                                                <Empty image={nodata} description="暂时没有数据~" />
                                         }
                                     </div>
 

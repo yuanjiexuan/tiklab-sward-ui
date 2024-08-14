@@ -18,7 +18,7 @@ module.exports = {
         filename: 'js/[name].[hash:8].js',
         chunkFilename: 'js/[name].[hash:8].js',
         path: DIST_PATH,
-        publicPath: '/',
+        publicPath: '/sward',
     },
     resolve: {
         extensions: ['.js', '.jsx', '.json'],
@@ -95,7 +95,6 @@ module.exports = {
                 use: {
                     loader: 'url-loader',
                     options: {  
-                        // publicPath: 'images',
                         outputPath: 'images/',
                         name: '[name].[ext]', // 图片输出的路径
                         limit: 0,

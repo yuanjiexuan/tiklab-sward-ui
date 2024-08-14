@@ -19,6 +19,7 @@ import CommentShare from "../store/CommentStore";
 import DocumentStore from "../store/DocumentStore";
 import CategoryStore from "../../../repository/common/store/CategoryStore";
 import Button from "../../../common/button/button";
+import { nodata } from "../../../assets/image";
 
 const DocumentExamine = (props) => {
     const { relationWorkStore } = props;
@@ -233,7 +234,7 @@ const DocumentExamine = (props) => {
             </div>
                 :
                 <div className="document-empty">
-                    <Empty image="/images/nodata.png" description="文档不存在或者已被删除~" />
+                    <Empty image={nodata} description="文档不存在或者已被删除~" />
                 </div>
 
         }
