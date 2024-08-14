@@ -6,7 +6,7 @@ import "./Logo.scss";
 const Logo = (props) => {
     const { isShowText, theme } = props;
     const goHomePage = (router) => {
-        props.history.push("/index/home")
+        props.history.push("/home")
         sessionStorage.setItem("menuKey", "home")
     }
     return <>

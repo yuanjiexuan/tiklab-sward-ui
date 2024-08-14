@@ -7,7 +7,7 @@ import setImageUrl from "../utils/setImageUrl";
 
 const ImgComponent = (props) => {
     const {src, alt, className, title, style, isRemote} = props;
-    const url = version === "cloud" ? `/sward/images/${src}`: `/sward/images/${src}`
+    const url = version === "cloud" ? `/images/${src}`: `/images/${src}`
     return (
         <img
             src={isRemote ? setImageUrl(src) : url}

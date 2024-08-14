@@ -27,48 +27,48 @@ const RepositorySetAside = (props) => {
         {
             title: '知识库信息',
             icon: 'survey',
-            key: `/index/repositorySet/${repositoryId}/basicInfo`,
+            key: `/repositorySet/${repositoryId}/basicInfo`,
             encoded: "Survey",
             iseEnhance: false
         },
         {
             title: '成员',
             icon: 'survey',
-            key: `/index/repositorySet/${repositoryId}/user`,
+            key: `/repositorySet/${repositoryId}/user`,
             encoded: "User",
             iseEnhance: false
         },
         {
             title: '权限',
             icon: 'survey',
-            key: `/index/repositorySet/${repositoryId}/domainRole`,
+            key: `/repositorySet/${repositoryId}/domainRole`,
             encoded: "Privilege",
             iseEnhance: false
         },
         {
             title: '消息',
             icon: 'survey',
-            key: `/index/repositorySet/${repositoryId}/messagenotice`,
+            key: `/repositorySet/${repositoryId}/messagenotice`,
             encoded: "message",
             iseEnhance: false
         },
         {
             title: '归档',
             icon: 'archived',
-            key: `/index/repositorySet/${repositoryId}/archivedNode`,
+            key: `/repositorySet/${repositoryId}/archivedNode`,
             encoded: "archived",
             iseEnhance: true
         },
         {
             title: '回收站',
             icon: 'recycleBin',
-            key: `/index/repositorySet/${repositoryId}/recycleBin`,
+            key: `/repositorySet/${repositoryId}/recycleBin`,
             encoded: "recycleBin",
             iseEnhance: true
         }
     ];
     // 当前选中路由
-    const [selectKey, setSelectKey] = useState(`/index/repositorySet/${repositoryId}/basicInfo`);
+    const [selectKey, setSelectKey] = useState(`/repositorySet/${repositoryId}/basicInfo`);
 
     // 菜单是否折叠
     const [isShowText, SetIsShowText] = useState(true)
@@ -102,7 +102,7 @@ const RepositorySetAside = (props) => {
     }
 
     const backRepository = () => {
-        props.history.push(`/index/repositorydetail/${repositoryId}/survey`)
+        props.history.push(`/repository/${repositoryId}/survey`)
     }
 
     return (

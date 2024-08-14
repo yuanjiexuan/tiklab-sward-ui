@@ -16,10 +16,10 @@ const SearchModal = (props) => {
     
     const toWorkItem = (id) => {
         if (item.documentType === "document") {
-            props.history.push(`/index/repositorydetail/${repositoryId}/doc/${id}`)
+            props.history.push(`/repository/${repositoryId}/doc/${id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/index/repositorydetail/${repositoryId}/markdownView/${id}`)
+            props.history.push(`/repository/${repositoryId}/markdownView/${id}`)
         }
         sessionStorage.setItem("menuKey", "repository")
 

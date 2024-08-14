@@ -71,13 +71,13 @@ const Survey = (props) => {
 
     const goDocumentDetail = document => {
         if (document.documentType === "document") {
-            props.history.push(`/index/repositorydetail/${document.wikiRepository.id}/doc/${document.id}`)
+            props.history.push(`/repository/${document.wikiRepository.id}/doc/${document.id}`)
         }
         if (document.documentType === "markdown") {
-            props.history.push(`/index/repositorydetail/${document.wikiRepository.id}/markdownView/${document.id}`)
+            props.history.push(`/repository/${document.wikiRepository.id}/markdownView/${document.id}`)
         }
         if (document.type === "category") {
-            props.history.push(`/index/repositorydetail/${document.wikiRepository.id}/folder/${document.id}`)
+            props.history.push(`/repository/${document.wikiRepository.id}/folder/${document.id}`)
         }
         const params = {
             id: document.id,
@@ -100,10 +100,10 @@ const Survey = (props) => {
 
     const goFocusDocumentDetail = item => {
         if (item.documentType === "document") {
-            props.history.push(`/index/repositorydetail/${item.wikiRepository.id}/doc/${item.id}`)
+            props.history.push(`/repository/${item.wikiRepository.id}/doc/${item.id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/index/repositorydetail/${item.wikiRepository.id}/markdownView/${item.id}`)
+            props.history.push(`/repository/${item.wikiRepository.id}/markdownView/${item.id}`)
         }
         // sessionStorage.setItem("menuKey", "repository")
     }
@@ -145,7 +145,7 @@ const Survey = (props) => {
 
                                                 })
                                             }
-                                            <div className="user-more" onClick={() => props.history.push(`/index/repositorySet/${repositoryId}/user`)}>
+                                            <div className="user-more" onClick={() => props.history.push(`/repositorySet/${repositoryId}/user`)}>
                                                 <svg className="user-more-icon" aria-hidden="true">
                                                     <use xlinkHref="#icon-more"></use>
                                                 </svg>
@@ -216,7 +216,7 @@ const Survey = (props) => {
                     <div className="home-dynamic">
                         <div className="dynamic-box-title">
                             <span className="name">最新动态</span>
-                            <div className="more" onClick={() => { props.history.push(`/index/repositorydetail/${repositoryId}/dynamicList`) }}>
+                            <div className="more" onClick={() => { props.history.push(`/repository/${repositoryId}/dynamicList`) }}>
                                 <svg aria-hidden="true" className="svg-icon">
                                     <use xlinkHref="#icon-rightjump"></use>
                                 </svg>

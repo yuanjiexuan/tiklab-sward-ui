@@ -65,13 +65,13 @@ const Search = (props) => {
 
 
     const toRepository = (repository) => {
-        props.history.push(`/index/repositorydetail/${repository.id}/survey`)
+        props.history.push(`/repository/${repository.id}/survey`)
         setSearchModal(false)
     }
     const toWorkItem = (id, repository) => {
 
         // localStorage.setItem("repository", repository.id)
-        props.history.push(`/index/repositorydetail/${repository.id}/doc/${id}`)
+        props.history.push(`/repository/${repository.id}/doc/${id}`)
         setSearchModal(false)
     }
 

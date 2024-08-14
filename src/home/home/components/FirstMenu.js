@@ -48,21 +48,21 @@ const FirstMenu = (props) => {
     // 系统顶部菜单
     const routers = [
         {
-            to: '/index/home',
+            to: '/home',
             title: '首页',
             key: 'home',
             icon: 'home-' + theme,
             actionIcon: setActiveIcon("home-")
         },
         {
-            to: '/index/repository',
+            to: '/repository',
             title: '知识库',
             key: 'repository',
             icon: 'repository-' + theme,
             actionIcon: setActiveIcon("repository-")
         },
         {
-            to: '/index/collect',
+            to: '/collect',
             title: '收藏',
             key: 'collect',
             icon: 'focus-' + theme,

@@ -164,10 +164,155 @@ const Routes = [
     },
     {
         path: "/",
-        component: () => <Redirect to="/home" />,
+        component: () => <Redirect to="/index/home" />,
         exact: true,
     },
-   
+    {
+        path: "/index",
+        component: Index,
+        routes: [
+            {
+                path: "/index/home",
+                exact: true,
+                component: Home,
+                key: 'home'
+            },
+            {
+                path: "/index/focusDocumentList",
+                exact: true,
+                component: FocusDocumentList,
+                key: 'focusDocumentList'
+            },
+            {
+                path: "/index/404",
+                exact: true,
+                component: ProjectNotFound,
+                key: 'NotFound'
+            },
+            {
+                path: "/index/repository",
+                exact: true,
+                component: Repository,
+                key: 'repository'
+
+            },
+            {
+                path: "/index/repositoryAdd",
+                exact: true,
+                component: RepositoryAdd,
+                key: 'home'
+            },
+            {
+                path: "/index/template",
+                exact: true,
+                component: Template,
+                key: 'template'
+            },
+            {
+                path: "/index/repositorydetail/:repositoryId",
+                component: RepositoryDetail,
+                routes: [
+                    {   
+                        path: "/index/repositorydetail/:id/noAccess",
+                        exact: true,
+                        component: ProjectNoAccessPage
+                    },
+                    {
+                        path: "/index/repositorydetail/:repositoryId/survey",
+                        component: Survey
+                    },
+                    {
+                        path: "/index/repositorydetail/:repositoryId/dynamicList",
+                        component: DynamicList
+                    },
+                    {
+                        path: "/index/repositorydetail/:repositoryId/focusDocumentList",
+                        component: FocusDocumentList
+                    },
+                    {
+                        path: "/index/repositorydetail/:repositoryId/doc/:id",
+                        component: DocumnetExamine
+                    },
+                    {
+                        path: "/index/repositorydetail/:repositoryId/docEdit/:id",
+                        component: DocumentEdit
+                    },
+
+                    {
+                        path: "/index/repositorydetail/:repositoryId/docEdit/:id",
+                        component: DocumentEdit
+                    },
+
+                    {
+                        path: "/index/repositorydetail/:repositoryId/markdownEdit/:id",
+                        component: MarkdownDocumentEdit
+                    },
+                    {
+                        path: "/index/repositorydetail/:repositoryId/markdownView/:id",
+                        component: MarkdownDocumentView
+                    },
+                    {
+                        path: "/index/repositorydetail/:repositoryId/folder/:id",
+                        component: LogDetail
+                    },
+                    {
+                        path: "/index/repositorydetail/:repositoryId/repositorySet",
+                        component: RepositorySet,
+                        routes: [
+                            {
+                                path: "/index/repositorydetail/:repositoryId/repositorySet/basicInfo",
+                                component: RepositoryBasicInfo
+                            },
+                            {
+                                path: "/index/repositorydetail/:repositoryId/repositorySet/user",
+                                component: RepositoryDomainUser,
+                                exact: true
+                            },
+                            {
+                                path: "/index/repositorydetail/:repositoryId/repositorySet/domainRole",
+                                component: RepositoryDomainRole
+                            },
+                            {
+                                path: "/index/repositorydetail/:repositoryId/repositorySet/messagenotice",
+                                component: DomainMessageNoticeContent,
+                            }
+                        ]
+                    },
+                    
+                ]
+            },
+            {
+                path: "/index/repositorySet/:repositoryId",
+                component: RepositorySet,
+                routes: [
+                    {
+                        path: "/index/repositorySet/:repositoryId/basicInfo",
+                        component: RepositoryBasicInfo
+                    },
+                    {
+                        path: "/index/repositorySet/:repositoryId/user",
+                        component: RepositoryDomainUser,
+                        exact: true
+                    },
+                    {
+                        path: "/index/repositorySet/:repositoryId/domainRole",
+                        component: RepositoryDomainRole
+                    },
+                    {
+                        path: "/index/repositorySet/:repositoryId/messagenotice",
+                        component: DomainMessageNoticeContent,
+                    }
+                ]
+            },
+            {
+                path: "/index/collect",
+                exact: true,
+                component: Collect,
+                key: 'collect'
+            },
+            
+        ]
+    },
     {
         path: "/setting",
         component: Setting,
@@ -360,152 +505,6 @@ const Routes = [
                 component: BackupRecoveryContent,
                 exact: true
             }
-        ]
-    },
-    {
-        path: "/",
-        component: Index,
-        routes: [
-            {
-                path: "/home",
-                exact: true,
-                component: Home,
-                key: 'home'
-            },
-            {
-                path: "/focusDocumentList",
-                exact: true,
-                component: FocusDocumentList,
-                key: 'focusDocumentList'
-            },
-            {
-                path: "/404",
-                exact: true,
-                component: ProjectNotFound,
-                key: 'NotFound'
-            },
-            {
-                path: "/repository",
-                exact: true,
-                component: Repository,
-                key: 'repository'
-
-            },
-            {
-                path: "/repositoryAdd",
-                exact: true,
-                component: RepositoryAdd,
-                key: 'home'
-            },
-            {
-                path: "/template",
-                exact: true,
-                component: Template,
-                key: 'template'
-            },
-            {
-                path: "/repository/:repositoryId",
-                component: RepositoryDetail,
-                routes: [
-                    {   
-                        path: "/repository/:id/noAccess",
-                        exact: true,
-                        component: ProjectNoAccessPage
-                    },
-                    {
-                        path: "/repository/:repositoryId/survey",
-                        component: Survey
-                    },
-                    {
-                        path: "/repository/:repositoryId/dynamicList",
-                        component: DynamicList
-                    },
-                    {
-                        path: "/repository/:repositoryId/focusDocumentList",
-                        component: FocusDocumentList
-                    },
-                    {
-                        path: "/repository/:repositoryId/doc/:id",
-                        component: DocumnetExamine
-                    },
-                    {
-                        path: "/repository/:repositoryId/docEdit/:id",
-                        component: DocumentEdit
-                    },
-
-                    {
-                        path: "/repository/:repositoryId/docEdit/:id",
-                        component: DocumentEdit
-                    },
-
-                    {
-                        path: "/repository/:repositoryId/markdownEdit/:id",
-                        component: MarkdownDocumentEdit
-                    },
-                    {
-                        path: "/repository/:repositoryId/markdownView/:id",
-                        component: MarkdownDocumentView
-                    },
-                    {
-                        path: "/repository/:repositoryId/folder/:id",
-                        component: LogDetail
-                    },
-                    {
-                        path: "/repository/:repositoryId/set",
-                        component: RepositorySet,
-                        routes: [
-                            {
-                                path: "/repository/:repositoryId/set/basicInfo",
-                                component: RepositoryBasicInfo
-                            },
-                            {
-                                path: "/repository/:repositoryId/set/user",
-                                component: RepositoryDomainUser,
-                                exact: true
-                            },
-                            {
-                                path: "/repository/:repositoryId/set/domainRole",
-                                component: RepositoryDomainRole
-                            },
-                            {
-                                path: "/repository/:repositoryId/set/messagenotice",
-                                component: DomainMessageNoticeContent,
-                            }
-                        ]
-                    },
-                    
-                ]
-            },
-            {
-                path: "/repositorySet/:repositoryId",
-                component: RepositorySet,
-                routes: [
-                    {
-                        path: "/repositorySet/:repositoryId/basicInfo",
-                        component: RepositoryBasicInfo
-                    },
-                    {
-                        path: "/repositorySet/:repositoryId/user",
-                        component: RepositoryDomainUser,
-                        exact: true
-                    },
-                    {
-                        path: "/repositorySet/:repositoryId/domainRole",
-                        component: RepositoryDomainRole
-                    },
-                    {
-                        path: "/repositorySet/:repositoryId/messagenotice",
-                        component: DomainMessageNoticeContent,
-                    }
-                ]
-            },
-            {
-                path: "/collect",
-                exact: true,
-                component: Collect,
-                key: 'collect'
-            },
-            
         ]
     },
 ]

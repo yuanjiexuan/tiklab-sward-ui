@@ -32,7 +32,7 @@ const FocusDocumentList = (props) => {
             })
         }
 
-        if (props.route.path === "/index/repositorydetail/:repositoryId/focusDocumentList") {
+        if (props.route.path === "/repository/:repositoryId/focusDocumentList") {
             setFirstText("知识库概况")
             const data = {
                 masterId: userId,
@@ -55,10 +55,10 @@ const FocusDocumentList = (props) => {
 
     const goFocusDocumentDetail = item => {
         if (item.documentType === "document") {
-            props.history.push(`/index/repositorydetail/${item.wikiRepository.id}/doc/${item.id}`)
+            props.history.push(`/repository/${item.wikiRepository.id}/doc/${item.id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/index/repositorydetail/${item.wikiRepository.id}/markdownView/${item.id}`)
+            props.history.push(`/repository/${item.wikiRepository.id}/markdownView/${item.id}`)
         }
         sessionStorage.setItem("menuKey", "repository")
     }

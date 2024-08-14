@@ -103,10 +103,10 @@ const AddDropDown = (props) => {
                         setRepositoryCatalogueList([...list])
                     })
                     if (value.key === "document") {
-                        props.history.push(`/index/repositorydetail/${repositoryId}/docEdit/${data.data}`)
+                        props.history.push(`/repository/${repositoryId}/docEdit/${data.data}`)
                     }
                     if (value.key === "markdown") {
-                        props.history.push(`/index/repositorydetail/${repositoryId}/markdownEdit/${data.data}`)
+                        props.history.push(`/repository/${repositoryId}/markdownEdit/${data.data}`)
                     }
 
                 }

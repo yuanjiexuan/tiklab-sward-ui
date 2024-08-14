@@ -21,7 +21,7 @@ const DynamicList = (props) => {
             findLogpage({data: { repositoryId: repositoryId }, pageParam: {...opLogCondition.pageParam, pageSize: 20 }})
         }
 
-        if (props.route.path === "/index/repositorydetail/:repositoryId/dynamicList") {
+        if (props.route.path === "/repository/:repositoryId/dynamicList") {
             setFirstText("知识库概况")
             findLogpage({data: { repositoryId: repositoryId }, pageParam: {...opLogCondition.pageParam, pageSize: 20 }})
         }
