@@ -5,7 +5,7 @@ import Logo from "./Logo";
 
 const FirstMenu = (props) => {
     console.log(sessionStorage.getItem("menuKey"))
-    const menuKey = (sessionStorage.getItem("menuKey") && props.location.pathname !== "/home") ? sessionStorage.getItem("menuKey") : "home";
+    const menuKey = (sessionStorage.getItem("menuKey") && props.location.pathname !== "/index") ? sessionStorage.getItem("menuKey") : "home";
     /**
          * 点击菜单跳转
          * @param {菜单信息} item 
@@ -18,7 +18,7 @@ const FirstMenu = (props) => {
 
     const routers = [
         {
-            to: '/home',
+            to: '/index',
             title: '首页',
             key: 'home',
             icon: "home-grey",

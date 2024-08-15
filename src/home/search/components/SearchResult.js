@@ -54,7 +54,7 @@ const SearchResult = (props) => {
     const toRepository = async(repository) => {
         setRepositoryId(repository.id)
         localStorage.setItem("repository",repository.id)
-        await props.history.push("/repository/survey")
+        await props.history.push("/repository/overview")
         setShow("hidden")
         // location.reload();
 

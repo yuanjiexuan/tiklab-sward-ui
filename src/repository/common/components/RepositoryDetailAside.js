@@ -75,8 +75,8 @@ const RepositorydeAside = (props) => {
 
     useEffect(() => {
         // 初次进入激活导航菜单
-        if (props.location.pathname.split("/")[4] === "survey") {
-            setSelectKey("survey")
+        if (props.location.pathname.split("/")[3] === "overview") {
+            setSelectKey("overview")
         } else {
             setSelectKey(id)
         }
@@ -110,7 +110,7 @@ const RepositorydeAside = (props) => {
             props.history.push(`/repository/${repositoryId}/doc/${item.id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/repository/${repositoryId}/markdownView/${item.id}`)
+            props.history.push(`/repository/${repositoryId}/markdown/${item.id}`)
         }
     }
 
@@ -239,7 +239,7 @@ const RepositorydeAside = (props) => {
                         props.history.push(`/repository/${repositoryId}/doc/${node.id}`)
                     }
                 } else {
-                    props.history.push(`/repository/${repositoryId}/survey`)
+                    props.history.push(`/repository/${repositoryId}/overview`)
                 }
             })
         }
@@ -255,7 +255,7 @@ const RepositorydeAside = (props) => {
                         props.history.push(`/repository/${repositoryId}/doc/${node.id}`)
                     }
                 } else {
-                    props.history.push(`/repository/${repositoryId}/survey`)
+                    props.history.push(`/repository/${repositoryId}/overview`)
                 }
             })
         }
@@ -532,8 +532,8 @@ const RepositorydeAside = (props) => {
     }
 
     const goSurvey = () => {
-        setSelectKey("survey")
-        props.history.push(`/repository/${repositoryId}/survey`);
+        setSelectKey("overview")
+        props.history.push(`/repository/${repositoryId}/overview`);
 
     }
 
@@ -568,7 +568,7 @@ const RepositorydeAside = (props) => {
                     </div>
 
                     <div
-                        className={`repository-survey ${selectKey === "survey" ? "repository-menu-select" : ""} `}
+                        className={`repository-survey ${selectKey === "overview" ? "repository-menu-select" : ""} `}
                         onClick={() => goSurvey()}
                     >
                         <svg className="icon-18" aria-hidden="true">

@@ -48,7 +48,7 @@ const FirstMenu = (props) => {
     // 系统顶部菜单
     const routers = [
         {
-            to: '/home',
+            to: '/index',
             title: '首页',
             key: 'home',
             icon: 'home-' + theme,

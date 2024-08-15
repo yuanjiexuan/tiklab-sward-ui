@@ -46,10 +46,6 @@ const Header = props => {
                                 </svg>
                         }
                     </div>
-                    {/* <div className='frame-menu-logo' onClick={() => props.history.push("/home")}>
-                    <img src={productWhiteImg.sward} alt={'logo'} className="logo-img" />
-                    <div className='logo-text'>sward</div>
-                </div> */}
                 </div>
 
                 <div className='frame-header-search-wrap'></div>

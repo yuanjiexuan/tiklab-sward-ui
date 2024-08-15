@@ -19,7 +19,7 @@ const SearchModal = (props) => {
             props.history.push(`/repository/${repositoryId}/doc/${id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/repository/${repositoryId}/markdownView/${id}`)
+            props.history.push(`/repository/${repositoryId}/markdown/${id}`)
         }
         sessionStorage.setItem("menuKey", "repository")
 

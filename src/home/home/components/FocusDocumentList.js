@@ -58,7 +58,7 @@ const FocusDocumentList = (props) => {
             props.history.push(`/repository/${item.wikiRepository.id}/doc/${item.id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/repository/${item.wikiRepository.id}/markdownView/${item.id}`)
+            props.history.push(`/repository/${item.wikiRepository.id}/markdown/${item.id}`)
         }
         sessionStorage.setItem("menuKey", "repository")
     }

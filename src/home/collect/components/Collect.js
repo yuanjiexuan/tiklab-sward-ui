@@ -43,7 +43,7 @@ const Collect = (props) => {
         }
         createRecent(params)
         sessionStorage.setItem("menuKey", "repository")
-        props.history.push({ pathname: `/repository/${repository.id}/survey` })
+        props.history.push({ pathname: `/repository/${repository.id}/overview` })
     }
 
     const goFocusDocumentDetail = item => {
@@ -51,7 +51,7 @@ const Collect = (props) => {
             props.history.push(`/repository/${item.wikiRepository.id}/doc/${item.id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/repository/${item.wikiRepository.id}/markdownView/${item.id}`)
+            props.history.push(`/repository/${item.wikiRepository.id}/markdown/${item.id}`)
         }
         sessionStorage.setItem("menuKey", "repository")
     }

@@ -12,7 +12,7 @@ const DynamicListItem = (props) => {
             props.history.push(`/repository/${repositoryId}/doc/${documentId}`)
         }
         if (documentType === "markdown") {
-            props.history.push(`/repository/${repositoryId}/markdownView/${documentId}`)
+            props.history.push(`/repository/${repositoryId}/markdown/${documentId}`)
         }
     }
     const setDom = () => {

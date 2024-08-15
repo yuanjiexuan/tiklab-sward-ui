@@ -58,7 +58,7 @@ const RepositoryChangeModal = (props) => {
         // 切换选中项目，获取项目详情
         searchrepository(id).then(data => {
             if (data.code === 0) {
-                props.history.push(`/repository/${id}/survey`)
+                props.history.push(`/repository/${id}/overview`)
                 // 重置事项id
                 // 关闭切换弹窗
                 setShowMenu(false)

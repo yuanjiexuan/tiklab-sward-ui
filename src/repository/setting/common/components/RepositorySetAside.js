@@ -102,7 +102,7 @@ const RepositorySetAside = (props) => {
     }
 
     const backRepository = () => {
-        props.history.push(`/repository/${repositoryId}/survey`)
+        props.history.push(`/repository/${repositoryId}/overview`)
     }
 
     return (

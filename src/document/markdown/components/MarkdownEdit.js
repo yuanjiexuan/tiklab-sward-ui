@@ -141,7 +141,7 @@ const MarkdownEdit = (props) => {
                 </div>
                 <div className="edit-right">
                     <Button type="primary" className="edit-right-save"  onClick={() => save()}>保存</Button>
-                    <Button className="edit-right-eqit"  onClick={() => props.history.replace(`/repository/${repositoryId}/markdownView/${documentId}`)}>退出</Button>
+                    <Button className="edit-right-eqit"  onClick={() => props.history.replace(`/repository/${repositoryId}/markdown/${documentId}`)}>退出</Button>
                 </div>
             </div>
             <div className="edit-markdown" style={{ height: "calc(100% - 50px)" }}>

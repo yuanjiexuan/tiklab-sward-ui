@@ -81,7 +81,7 @@ const CategoryDetail = (props) => {
             props.history.push(`/repository/${repositoryId}/doc/${item.id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/repository/${repositoryId}/markdownView/${item.id}`)
+            props.history.push(`/repository/${repositoryId}/markdown/${item.id}`)
 
         }
     }

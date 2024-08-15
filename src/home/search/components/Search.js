@@ -65,7 +65,7 @@ const Search = (props) => {
 
 
     const toRepository = (repository) => {
-        props.history.push(`/repository/${repository.id}/survey`)
+        props.history.push(`/repository/${repository.id}/overview`)
         setSearchModal(false)
     }
     const toWorkItem = (id, repository) => {

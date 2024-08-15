@@ -159,7 +159,7 @@ const RepositoryList = (props) => {
         }
         createRecent(params)
 
-        props.history.push({ pathname: `/repository/${repository.id}/survey` })
+        props.history.push({ pathname: `/repository/${repository.id}/overview` })
     }
 
     const handleTableChange = (pagination) => {
@@ -235,7 +235,7 @@ const RepositoryList = (props) => {
         history.push("/repositoryAdd")
     }
     // const goRepositoryDetail = repository => {
-    //     props.history.push(`/repository/${repository.id}/survey`)
+    //     props.history.push(`/repository/${repository.id}/overview`)
     // }
 
     return (

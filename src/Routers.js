@@ -150,10 +150,6 @@ const Routes = [
                     path: "/share/:shareId/markdown/:id",
                     component: ShareMarkdown,
                 },
-                {
-                    path: "/share/:shareId/markdownView/:id",
-                    component: ShareMarkdown,
-                },
                 
         ]
     },
@@ -164,7 +160,7 @@ const Routes = [
     },
     {
         path: "/",
-        component: () => <Redirect to="/home" />,
+        component: () => <Redirect to="/index" />,
         exact: true,
     },
    
@@ -367,7 +363,7 @@ const Routes = [
         component: Index,
         routes: [
             {
-                path: "/home",
+                path: "/index",
                 exact: true,
                 component: Home,
                 key: 'home'
@@ -413,7 +409,7 @@ const Routes = [
                         component: ProjectNoAccessPage
                     },
                     {
-                        path: "/repository/:repositoryId/survey",
+                        path: "/repository/:repositoryId/overview",
                         component: Survey
                     },
                     {
@@ -432,20 +428,16 @@ const Routes = [
                         path: "/repository/:repositoryId/docEdit/:id",
                         component: DocumentEdit
                     },
-
                     {
-                        path: "/repository/:repositoryId/docEdit/:id",
-                        component: DocumentEdit
+                        path: "/repository/:repositoryId/markdown/:id",
+                        component: MarkdownDocumentView
                     },
 
                     {
                         path: "/repository/:repositoryId/markdownEdit/:id",
                         component: MarkdownDocumentEdit
                     },
-                    {
-                        path: "/repository/:repositoryId/markdownView/:id",
-                        component: MarkdownDocumentView
-                    },
+                    
                     {
                         path: "/repository/:repositoryId/folder/:id",
                         component: LogDetail

@@ -155,7 +155,7 @@ const SetAside = (props) => {
     }
 
     const backProject = () => {
-        props.history.push(`/home`)
+        props.history.push(`/index`)
         sessionStorage.setItem("menuKey", "home")
     }
 

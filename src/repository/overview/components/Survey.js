@@ -4,7 +4,7 @@ import { withRouter } from "react-router";
 import { observer } from "mobx-react";
 import Button from "../../../common/button/button";
 import UserIcon from "../../../common/UserIcon/UserIcon";
-import "./survey.scss";
+import "./Survey.scss";
 import { getUser } from "thoughtware-core-ui";
 import SurveyStore from "../store/SurveyStore";
 import CategoryStore from "../../common/store/CategoryStore";
@@ -74,7 +74,7 @@ const Survey = (props) => {
             props.history.push(`/repository/${document.wikiRepository.id}/doc/${document.id}`)
         }
         if (document.documentType === "markdown") {
-            props.history.push(`/repository/${document.wikiRepository.id}/markdownView/${document.id}`)
+            props.history.push(`/repository/${document.wikiRepository.id}/markdown/${document.id}`)
         }
         if (document.type === "category") {
             props.history.push(`/repository/${document.wikiRepository.id}/folder/${document.id}`)
@@ -103,7 +103,7 @@ const Survey = (props) => {
             props.history.push(`/repository/${item.wikiRepository.id}/doc/${item.id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/repository/${item.wikiRepository.id}/markdownView/${item.id}`)
+            props.history.push(`/repository/${item.wikiRepository.id}/markdown/${item.id}`)
         }
         // sessionStorage.setItem("menuKey", "repository")
     }
