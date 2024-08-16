@@ -59,7 +59,7 @@ const DocumentExamine = (props) => {
                     setValue(data.data.details)
                 } else {
                     setValue()
-                    props.history.push(`/repository/${repositoryId}/docEdit/${documentId}`)
+                    props.history.push(`/repository/${repositoryId}/doc/${documentId}/edit`)
                 }
                 const document = data.data;
                 const node = document.node;
@@ -165,7 +165,7 @@ const DocumentExamine = (props) => {
                                 </svg>
                         }
                         {
-                            value && <Button className = "document-action-edit" onClick={() => props.history.push(`/repository/${repositoryId}/docEdit/${documentId}`)}>编辑</Button>
+                            value && <Button className = "document-action-edit" onClick={() => props.history.push(`/repository/${repositoryId}/doc/${documentId}/edit`)}>编辑</Button>
                         }
                         <Button  className = "document-action-share" onClick={() => setShareVisible(true)}>分享</Button>
 

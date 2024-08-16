@@ -306,6 +306,9 @@ const RepositoryList = (props) => {
                             rowKey={record => record.id}
                             onChange={handleTableChange}
                             pagination={false}
+                            scroll={{
+                                x: "100%"
+                            }}
                         />
                     </div>
                 </div>

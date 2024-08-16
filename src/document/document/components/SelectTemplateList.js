@@ -58,7 +58,7 @@ const SelectTemplateList = (props) => {
             >
                 <Layout style={{
                     position: 'relative',
-                    height: "calc(100vh - 200px)"
+                    height: "calc(100% - 200px)"
                 }}>
                     <Sider
                         style={{

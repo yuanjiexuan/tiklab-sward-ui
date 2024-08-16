@@ -5,12 +5,12 @@
     .document-examine-content {
         display: flex;
         justify-content: space-between;
-        height: calc(100vh - 49px);
+        height: calc(100% - 49px);
         padding-top: 10px;
     }
 
     .document-examine-row {
-        height: calc(100vh - 170px);
+        height: 100%;
         overflow: auto;
         flex: 1;
     }
@@ -29,12 +29,14 @@
                 line-height: 25px;
                 font-weight: 600;
                 font-size: 16px;
+                white-space: nowrap;
             }
             .examine-title-date {
                 height: 25px;
                 line-height: 25px;
                 font-size: 11px;
                 color: #666;
+                white-space: nowrap;
             }
         }
 

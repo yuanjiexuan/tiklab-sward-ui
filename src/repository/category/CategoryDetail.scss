@@ -1,6 +1,6 @@
 .log-detail {
     background-color: #fff;
-    height: 100vh;
+    height: 100%;
     overflow: auto;
     .log-detail-content {
         padding: 20px;
@@ -62,6 +62,7 @@
             cursor: pointer;
             height: 32px;
             line-height: 32px;
+            white-space: nowrap;
         }
     }
     .log-child:not(:last-child) {

@@ -422,19 +422,22 @@ const Routes = [
                     },
                     {
                         path: "/repository/:repositoryId/doc/:id",
+                        exact: true,
                         component: DocumnetExamine
                     },
                     {
-                        path: "/repository/:repositoryId/docEdit/:id",
+                        path: "/repository/:repositoryId/doc/:id/edit",
+                        exact: true,
                         component: DocumentEdit
                     },
                     {
                         path: "/repository/:repositoryId/markdown/:id",
-                        component: MarkdownDocumentView
+                        component: MarkdownDocumentView,
+                        exact: true
                     },
 
                     {
-                        path: "/repository/:repositoryId/markdownEdit/:id",
+                        path: "/repository/:repositoryId/markdown/:id/edit",
                         component: MarkdownDocumentEdit
                     },
                     

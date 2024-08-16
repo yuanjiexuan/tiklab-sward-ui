@@ -70,6 +70,12 @@
 .ant-modal-title {
 	font-weight: 600;
 }
+.ant-table-cell {
+    white-space: nowrap;
+}
+.ant-table-measure-row {
+    display: none !important;
+}
 .icon {
     width: 12px; 
     height: 12px;

@@ -1,5 +1,5 @@
 .repository-row {
-    height: 100vh;
+    height: 100%;
     overflow: auto;
 }
 .repository {
@@ -140,6 +140,7 @@
             height: 50px;
             line-height: 50px;
             margin-right: 20px;
+            white-space: nowrap;
         }
 
         .repository-tab:last-child {
