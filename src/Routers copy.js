@@ -466,7 +466,7 @@ const Routes = [
                 exact: true
             },
             {
-                path: "/setting/logList",
+                path: "/setting/log",
                 component: LogList,
                 exact: true
             },

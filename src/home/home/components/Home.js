@@ -97,7 +97,7 @@ const Home = (props) => {
                                 </div>
                                 :
                                 <div className="repository-box-empty">
-                                    <Empty image={nodata} description="暂时没有查看过知识库~" />
+                                    <Empty description="暂时没有查看过知识库~" />
                                 </div>
 
 
@@ -145,7 +145,7 @@ const Home = (props) => {
                                     </div>
                                 })
                                     :
-                                    <Empty image={nodata} description="暂时没有数据~" />
+                                    <Empty description="暂时没有数据~" />
                             }
                         </div>
 

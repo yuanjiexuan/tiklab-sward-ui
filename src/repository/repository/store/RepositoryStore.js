@@ -122,6 +122,7 @@ export class RepositoryStore {
         }
         return data;
     }
+
     @action
     getFocusRepositoryList = async (value) => {
         const data = await Service("/repository/findFocusRepositoryList", value);
@@ -146,6 +147,11 @@ export class RepositoryStore {
     @action
     findIconList = async (params) => {
         const data = await Service("/icon/findIconList", params)
+        return data;
+    }
+    @action 
+    findRepositoryNum = async(params) => {
+        const data = await Service("/repository/findRepositoryNum", params)
         return data;
     }
 

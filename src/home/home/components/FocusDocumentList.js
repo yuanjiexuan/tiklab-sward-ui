@@ -125,7 +125,7 @@ const FocusDocumentList = (props) => {
                                 </div>
                             })
                                 :
-                                <Empty image={nodata} description="暂时没有数据~" />
+                                <Empty description="暂时没有数据~" />
                         }
                     </div>
                     {

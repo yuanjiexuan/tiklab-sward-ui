@@ -284,7 +284,7 @@ const Comment = (props) => {
                         }
                     </>
                         :
-                        <Empty image={nodata} description="暂时没有评价~" />
+                        <Empty description="暂时没有评价~" />
                 }
 
 

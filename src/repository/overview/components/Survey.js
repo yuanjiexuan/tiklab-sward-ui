@@ -208,7 +208,7 @@ const Survey = (props) => {
                                 }
                             </div>
                             :
-                            <Empty image={nodata} description="暂时没有查看过文档~" />
+                            <Empty description="暂时没有查看过文档~" />
                         }
                     </div>
 
@@ -224,7 +224,7 @@ const Survey = (props) => {
                         </div>
                         <div className="dynamic-list">
                             {
-                                logList && logList.length > 0 ? <DyncmicTimeAxis logList={logList} /> : <Empty image={nodata} description="暂时没有动态~" />
+                                logList && logList.length > 0 ? <DyncmicTimeAxis logList={logList} /> : <Empty description="暂时没有动态~" />
                             }
                         </div>
                     </div>

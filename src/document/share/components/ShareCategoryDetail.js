@@ -101,7 +101,7 @@ const ShareCategoryDetail = (props) => {
                                 </div>
                             })
                                 :
-                                <Empty image={nodata} description="暂时没有内容~" />
+                                <Empty description="暂时没有内容~" />
                         }
                     </div>
 

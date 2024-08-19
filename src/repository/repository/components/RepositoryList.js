@@ -16,16 +16,18 @@ import { nodata } from "../../../assets/image";
 const RepositoryList = (props) => {
     const { findRepositoryList, createRecent,
         repositoryList, findRecentRepositoryList, createRepositoryFocus,
-        findFocusRepositoryList, getFocusRepositoryList, deleteRepositoryFocusByCondition, activeTabs, setActiveTabs } = RepositoryStore;
+        findFocusRepositoryList, getFocusRepositoryList, deleteRepositoryFocusByCondition, 
+        activeTabs, setActiveTabs, findRepositoryNum } = RepositoryStore;
     const userId = getUser().userId;
     const tenant = getUser().tenant;
     const [focusRepositoryList, setFocusRepositoryList] = useState([])
     const [recentRepositoryDocumentList, setRecentRepositoryDocumentList] = useState([]);
-
+    const [num, setNum] = useState()
     const repositoryTab = [
         {
             title: '所有知识库',
             key: '1',
+            tabName: "all",
             icon: "project"
         },
         // {
@@ -36,11 +38,13 @@ const RepositoryList = (props) => {
         {
             title: '我收藏的',
             key: '3',
+            tabName: "focus",
             icon: "programconcern"
         },
         {
             title: '我创建的',
             key: '4',
+            tabName: "create",
             icon: "programbuild"
         }
     ]
@@ -62,7 +66,12 @@ const RepositoryList = (props) => {
             }
 
         })
-
+        findRepositoryNum({ masterId: userId}).then(res=> {
+            if(res.code === 0){
+                setNum(res.data)
+            
+            }
+        })
         return
     }, [])
 
@@ -172,9 +181,6 @@ const RepositoryList = (props) => {
             case "1":
                 findRepositoryList({ name: value })
                 break;
-            case "2":
-                findRecentRepositoryList({ master: userId, name: value })
-                break;
             case "3":
                 findFocusRepositoryList({ masterId: userId, name: value })
                 break;
@@ -277,7 +283,7 @@ const RepositoryList = (props) => {
 
                                 :
 
-                                <Empty image={nodata} description="暂时没有查看过知识库~" />
+                                <Empty description="暂时没有查看过知识库~" />
                         }
 
                     </div>
@@ -292,11 +298,12 @@ const RepositoryList = (props) => {
                                             onClick={() => selectTabs(item.key)}
                                         >
                                             {item.title}
+                                            <span className="repository-tab-num">{num && num[item.tabName]}</span>
                                         </div>
                                     })
                                 }
                             </div>
-                            <InputSearch onChange={(value) => onSearch(value)} placeholder={"知识库名称"} />
+                            <InputSearch onChange={(value) => onSearch(value)} placeholder={"搜索知识库"} />
                         </div>
                     </div>
                     <div className="repository-table-box">

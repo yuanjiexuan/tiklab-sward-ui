@@ -100,7 +100,7 @@ const setDevRouter = [
         children: [
             {
                 title: '操作日志',
-                id: '/setting/logList',
+                id: '/setting/log',
                 code: 10 - 1,
             },
             {
@@ -330,7 +330,7 @@ const setPrdRouter = [
         children: [
             {
                 title: '操作日志',
-                id: '/setting/logList',
+                id: '/setting/log',
                 code: 10 - 1,
             },
             {

@@ -125,7 +125,7 @@ const SearchModal = (props) => {
                         }
                     </>
                         :
-                        <Empty image={nodata} description="暂时没有数据~" />
+                        <Empty description="暂时没有数据~" />
                 }
             </div>
             :
@@ -151,7 +151,7 @@ const SearchModal = (props) => {
                         }
                     </>
                         :
-                        <Empty image={nodata} description="暂时没有数据~" />
+                        <Empty description="暂时没有数据~" />
                 }
             </div>
             }

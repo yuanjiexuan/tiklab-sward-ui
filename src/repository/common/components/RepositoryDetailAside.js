@@ -543,13 +543,13 @@ const RepositorydeAside = (props) => {
                 <div className='repository-aside'>
                     <div className="repository-title title">
                         <div className="repository-title-left">
-                            <div className="repository-title-left-icon">
+                            {/* <div className="repository-title-left-icon">
                                 <ImgComponent
                                     src={repository?.iconUrl}
                                     alt=""
                                     className="icon-24"
                                 />
-                            </div>
+                            </div> */}
 
                             <div className="repository-title-center">
                                 <div className="name">{repository?.name}</div>

@@ -1,98 +1,96 @@
 .collect-row {
     height: 100%;
-    background-color: var(--thoughtware-gray-800);
     padding: var(--thoughtware-padding);
     overflow: auto;
-    .collect-repository {
-        padding: var(--thoughtware-padding);
-        margin-bottom: 15px;
-        border-radius: 4px;
-        background: #fff;
-        .repository-title {
-            font-size: 14px;
-            font-weight: var(--thoughtware-font-weight-bold);
-        }
-        .repository-box {
-            display: flex;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-            gap: 15px;
-            padding: 10px 0;
-            overflow: hidden;
-            height: 124px;
-            .ant-empty {
-                width: 100%;
-            }
-        }
-        .repository-item {
-            flex: 1;
-            padding: 15px;
-            box-sizing: content-box;
-            flex-shrink: 0;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: var(--thoughtware-gray-600);
-            box-sizing: border-box;
-            border-bottom: 2px solid var(--thoughtware-gray-600);
-            min-width: 200px;
-            max-width: 260px;
-            .item-title {
-                margin-bottom: 10px;
-                font-weight: var(--thoughtware-font-weight-bold);
-                display: inline-flex;
-                align-items: center;
-                font-size: 16px;
-                .project-icon {
-                    width: 30px;
-                    height: 30px;
-                    margin-right: 10px;
-                }
-                span {
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    max-width: 140px;
+    // .collect-repository {
+    //     padding: var(--thoughtware-padding);
+    //     margin-bottom: 15px;
+    //     border-radius: 4px;
+    //     background: #fff;
+    //     .repository-title {
+    //         font-size: 14px;
+    //         font-weight: var(--thoughtware-font-weight-bold);
+    //     }
+    //     .repository-box {
+    //         display: flex;
+    //         justify-content: flex-start;
+    //         flex-wrap: wrap;
+    //         gap: 15px;
+    //         padding: 10px 0;
+    //         overflow: hidden;
+    //         height: 124px;
+    //         .ant-empty {
+    //             width: 100%;
+    //         }
+    //     }
+    //     .repository-item {
+    //         flex: 1;
+    //         padding: 15px;
+    //         box-sizing: content-box;
+    //         flex-shrink: 0;
+    //         border-radius: 4px;
+    //         cursor: pointer;
+    //         background-color: var(--thoughtware-gray-600);
+    //         box-sizing: border-box;
+    //         border-bottom: 2px solid var(--thoughtware-gray-600);
+    //         min-width: 200px;
+    //         max-width: 260px;
+    //         .item-title {
+    //             margin-bottom: 10px;
+    //             font-weight: var(--thoughtware-font-weight-bold);
+    //             display: inline-flex;
+    //             align-items: center;
+    //             font-size: 16px;
+    //             .project-icon {
+    //                 width: 30px;
+    //                 height: 30px;
+    //                 margin-right: 10px;
+    //             }
+    //             span {
+    //                 text-overflow: ellipsis;
+    //                 white-space: nowrap;
+    //                 overflow: hidden;
+    //                 max-width: 140px;
   
-                }
-                .item-icon {
-                    width: 20px;
-                    height: 20px;
-                    margin-right: 10px; 
-                }
-            }
-            .item-work {
-                display: flex;
-                gap: 20px;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                overflow: hidden;
-            }
-            .process-work, .end-work{
-                font-size: 12px;
-                display: inline-flex;
-                width: 100%;
-                justify-content: space-between;
-                height: 30px;
-                line-height: 30px;
-            }
-            .icon {
-                width: 40px;
-                height: 40px;
-            }
+    //             }
+    //             .item-icon {
+    //                 width: 20px;
+    //                 height: 20px;
+    //                 margin-right: 10px; 
+    //             }
+    //         }
+    //         .item-work {
+    //             display: flex;
+    //             gap: 20px;
+    //             text-overflow: ellipsis;
+    //             white-space: nowrap;
+    //             overflow: hidden;
+    //         }
+    //         .process-work, .end-work{
+    //             font-size: 12px;
+    //             display: inline-flex;
+    //             width: 100%;
+    //             justify-content: space-between;
+    //             height: 30px;
+    //             line-height: 30px;
+    //         }
+    //         .icon {
+    //             width: 40px;
+    //             height: 40px;
+    //         }
 
-            .title {
-                margin-top: 10px;
-                font-size: 18px;
-                font-weight: 600;
-            }
-        }
-        .repository-item:hover {
-            border-radius: 4px 4px 0 0;
-            border-bottom: 2px solid var(--thoughtware-blue);
-        }
-    }
+    //         .title {
+    //             margin-top: 10px;
+    //             font-size: 18px;
+    //             font-weight: 600;
+    //         }
+    //     }
+    //     .repository-item:hover {
+    //         border-radius: 4px 4px 0 0;
+    //         border-bottom: 2px solid var(--thoughtware-blue);
+    //     }
+    // }
     .home-document {
-        padding: var(--thoughtware-padding);
         background: #fff;
         border-radius: 4px;
         .document-box-title {
@@ -100,6 +98,7 @@
             font-weight: var(--thoughtware-font-weight-bold);
             display: flex;
             justify-content: space-between;
+            font-size: 16px;
             .more:hover{
                 text-decoration:underline;
             }
@@ -165,8 +164,5 @@
             }
         }
        
-    }
-    .focus-document {
-        margin-top: 15px;
     }
 }

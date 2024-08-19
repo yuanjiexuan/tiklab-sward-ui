@@ -175,6 +175,7 @@
         "react-router-dom": "^5.2.0",
         "rollup": "^2.79.1",
         "thoughtware-core-ui": "^1.0.2",
+        "thoughtware-eam-cloud-ui": "^1.0.1",
         "thoughtware-eam-ui": "^1.0.2",
         "thoughtware-flow-ui": "^1.0.2",
         "thoughtware-licence-cloud-ui": "^1.0.0",
@@ -182,6 +183,7 @@
         "thoughtware-markdown-ui": "^1.0.0",
         "thoughtware-message-ui": "^1.0.3",
         "thoughtware-privilege-ui": "^1.0.2",
+        "thoughtware-security-cloud-ui": "^1.0.0",
         "thoughtware-security-ui": "^1.0.2",
         "thoughtware-slate-ui": "^1.0.2",
         "thoughtware-user-ui": "^1.0.2"

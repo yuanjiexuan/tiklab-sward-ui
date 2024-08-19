@@ -116,7 +116,7 @@ const SettingHome = (props) => {
                     title: '操作日志',
                     key: "logList",
                     noShowNum: true,
-                    path: '/setting/logList',
+                    path: '/setting/log',
                 },
                 {
                     title: '备份与恢复',

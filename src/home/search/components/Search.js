@@ -180,7 +180,7 @@ const Search = (props) => {
 
                                     </Fragment>
                                         :
-                                        <Empty image={nodata} description="暂时没有数据~" />
+                                        <Empty description="暂时没有数据~" />
                                 }
                             </div>
                                 :
@@ -211,7 +211,7 @@ const Search = (props) => {
                                                 </>
 
                                                 :
-                                                <Empty image={nodata} description="暂时没有数据~" />
+                                                <Empty description="暂时没有数据~" />
                                         }
                                     </div>
                                     <div className="sort-box">
@@ -236,7 +236,7 @@ const Search = (props) => {
                                                 }
                                             </>
                                                 :
-                                                <Empty image={nodata} description="暂时没有数据~" />
+                                                <Empty description="暂时没有数据~" />
                                         }
                                     </div>
 

@@ -234,7 +234,7 @@ const DocumentExamine = (props) => {
             </div>
                 :
                 <div className="document-empty">
-                    <Empty image={nodata} description="文档不存在或者已被删除~" />
+                    <Empty description="文档不存在或者已被删除~" />
                 </div>
 
         }

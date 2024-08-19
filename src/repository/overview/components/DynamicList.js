@@ -52,7 +52,7 @@ const DynamicList = (props) => {
 
                     <div className="dynamic-list">
                         {
-                            logList && logList.length > 0 ? <DyncmicTimeAxis logList={logList} /> : <Empty image={nodata} description="暂时没有动态~" />
+                            logList && logList.length > 0 ? <DyncmicTimeAxis logList={logList} /> : <Empty description="暂时没有动态~" />
                         }
                     </div>
 

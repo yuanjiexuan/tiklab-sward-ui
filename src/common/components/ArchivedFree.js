@@ -6,17 +6,14 @@ import nodeArchived from "../../assets/images/nodeArchived.png";
 import nodeRecycle from "../../assets/images/nodeRecycle.png";
 import repositoryArchived from "../../assets/images/repositoryArchived.png";
 import repositoryRecycle from "../../assets/images/repositoryRecycle.png";
+import {applySubscription} from "thoughtware-core-ui"
 // import Button from "../../common/button/Button";
 const ArchivedFree = (props) => {
     const { archivedFreeVisable, setArchivedFreeVisable } = props;
     const [imgUrl, setImgUrl] = useState(nodeArchived);
     const [activeImage, setActiveImage] = useState("nodeArchived");
     const goBuy = () => {
-        if(version === "cloud"){
-            window.open("https://work.thoughtware.cn/#/enterprise/application/sward")
-        }else {
-            window.open("https://thoughtware.cn/account/subscribe/apply/sward")
-        }
+        applySubscription("sward")
     }
     const list = [
         {

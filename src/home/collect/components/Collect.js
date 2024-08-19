@@ -5,9 +5,12 @@ import { getUser } from "thoughtware-core-ui";
 import CollectStore from "../store/CollectStore";
 import ImgComponent from "../../../common/imgComponent/ImgComponent";
 import { nodata } from "../../../assets/image";
+import InputSearch from "../../../common/input/inputSearch";
+import { useDebounce } from "../../../common/utils/debounce";
+import PaginationCommon from "../../../common/page/Page";
 
 const Collect = (props) => {
-    const { findDocumentFocusPage, findFocusRepositoryList, createRecent } = CollectStore;
+    const { findDocumentFocusPage, findFocusRepositoryList, createRecent, documentCondition } = CollectStore;
     const userId = getUser().userId;
 
     const [focusDocumentList, setFocusDocumentList] = useState([]);
@@ -56,51 +59,41 @@ const Collect = (props) => {
         sessionStorage.setItem("menuKey", "repository")
     }
 
+    const onSearch = useDebounce(value => {
+        const data = {
+            name: value
+        }
+        findDocumentFocusPage(data).then(res => {
+            if (res.code === 0) {
+                setFocusDocumentList(res.data.dataList)
+            }
 
+        })
+    }, [500]);
+
+    const onPageChange = (currentPage) => {
+        const data = {
+            pageParam: {
+                ...documentCondition.pageParam,
+                currentPage: currentPage,
+
+            }
+        }
+        findDocumentFocusPage(data).then(res => {
+            if (res.code === 0) {
+                setFocusDocumentList(res.data.dataList)
+            }
+
+        })
+    }
     return (
         <Row className="collect-row">
-            <Col xl={{ span: 18, offset: 3 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }} className="home-col">
-
-                <div className="collect-repository">
-                    <div className="repository-title">收藏知识库</div>
-                    {
-                        focusRepositoryList.length > 0 ?
-                            <div className="repository-box">
-                                {
-                                    focusRepositoryList.map(item => {
-                                        return <div className="repository-item" key={item.id}
-                                            onClick={() => goRepositoryDetail(item)}
-                                        >
-                                            <div className="item-title">
-                                                <ImgComponent
-                                                    src={item.iconUrl}
-                                                    alt=""
-                                                    className="list-img"
-                                                />
-
-                                                <span>{item.name}</span>
-                                            </div>
-                                            <div className="item-work">
-                                                <div className="process-work"><span style={{ color: "#999" }}>文档</span><span>{item.documentNum}篇</span></div>
-                                                <div className="end-work"><span style={{ color: "#999" }}>目录</span><span>{item.categoryNum}个</span></div>
-                                            </div>
-                                        </div>
-                                    })
-                                }
-                            </div>
-                            :
-
-                            <Empty image={nodata} description="没有收藏过知识库~" />
-
-                    }
-                </div>
+            <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 14, offset: 5 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }} className="home-col">
                 <div className="home-document focus-document">
                     <div className="document-box-title">
                         <span className="name">收藏文档</span>
-                        <div className="more" onClick={() => { props.history.push(`/focusDocumentList`) }}>
-                            <svg aria-hidden="true" className="svg-icon">
-                                <use xlinkHref="#icon-rightjump"></use>
-                            </svg>
+                        <div className="document-focus-search">
+                            <InputSearch onChange={(value) => onSearch(value)} placeholder={"搜索文档"} />
                         </div>
                     </div>
                     <div>
@@ -137,9 +130,18 @@ const Collect = (props) => {
                                 </div>
                             })
                                 :
-                                <Empty image={nodata} description="暂时没有数据~" />
+                                <Empty description="暂时没有数据~" />
                         }
+
                     </div>
+                    <PaginationCommon
+                        currentPage={documentCondition.pageParam.currentPage}
+                        changePage={(currentPage) => onPageChange(currentPage)}
+                        totalPage={documentCondition.pageParam.totalPage}
+                        total={documentCondition.pageParam.total}
+                        refresh={() => onPageChange(1)}
+                        showRefresh={true}
+                    />
                 </div>
             </Col>
         </Row>
