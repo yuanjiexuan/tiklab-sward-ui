@@ -8,7 +8,7 @@ import { getUser } from "thoughtware-core-ui";
 
 const AddDropDown = (props) => {
     const [form] = Form.useForm();
-    const { category, categoryStore, isButton } = props;
+    const { category, categoryStore, isButton, button } = props;
     const repositoryId = props.match.params.repositoryId;
     const userId = getUser().userId;
     const treePath = category ?
@@ -76,7 +76,7 @@ const AddDropDown = (props) => {
                 parent: category ? {
                     id: category ? category.id : null,
                     treePath: category ? category.treepath : null
-                }: null
+                } : null
             }
         }
         if (value.key === "document") {
@@ -84,7 +84,7 @@ const AddDropDown = (props) => {
         }
         if (value.key === "markdown") {
             params.node.documentType = "markdown";
-            params.details = JSON.stringify( [
+            params.details = JSON.stringify([
                 {
                     type: 'paragraph',
                     children: [
@@ -116,8 +116,8 @@ const AddDropDown = (props) => {
 
     }
     return (
-        <div onClick={(event)=> event.stopPropagation()} className="category-add"> 
-            {
+        <div onClick={(event) => event.stopPropagation()} className="category-add">
+            {/* {
                 isButton ? <Dropdown overlay={() => addMenu()} placement="bottomLeft">
                     <div className="top-add-botton">添加</div>
                 </Dropdown>
@@ -127,9 +127,27 @@ const AddDropDown = (props) => {
                             <use xlinkHref="#icon-plusBlue"></use>
                         </svg>
                     </Dropdown>
+            } */}
+            {
+                button === "icon-gray" && <Dropdown overlay={() => addMenu()} placement="bottomLeft">
+                    <svg className="icon-18" aria-hidden="true">
+                        <use xlinkHref="#icon-plusBlue"></use>
+                    </svg>
+                </Dropdown>
+            }
+            {
+                button === "text" && <Dropdown overlay={() => addMenu()} placement="bottomLeft">
+                    <div className="top-add-botton">添加</div>
+                </Dropdown>
             }
 
-
+            {
+                button === "icon-blue" && <Dropdown overlay={() => addMenu()} placement="bottomLeft">
+                    <svg className="icon-18" aria-hidden="true">
+                        <use xlinkHref="#icon-add-blue"></use>
+                    </svg>
+                </Dropdown>
+            }
             <CategoryAdd
                 setAddModalVisible={setAddModalVisible}
                 addModalVisible={addModalVisible}

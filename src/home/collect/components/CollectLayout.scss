@@ -1,0 +1,16 @@
+.collect-layout {
+    height: 100%;
+    background: #fff;
+    .collect-layout-right {
+        height: 100%;
+        background: #fff;
+    }
+}
+.collect-empty {
+    height: 100%;
+    background: #fff;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

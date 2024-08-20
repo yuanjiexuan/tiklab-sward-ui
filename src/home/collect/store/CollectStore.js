@@ -15,9 +15,9 @@ export class CollectStore {
         }
     }
     @action
-    findDocumentFocusPage = async(value) => {
+    findDocumentFocusList = async(value) => {
         Object.assign(this.documentCondition, value)
-        const data = await Service("/documentFocus/findDocumentFocusPage", this.documentCondition);
+        const data = await Service("/documentFocus/findDocumentFocusList", this.documentCondition);
         if(data.code === 0){
             this.focusDocumentList = data.data.dataList;
             this.documentCondition.pageParam.totalPage = data.data.totalPage;

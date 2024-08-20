@@ -165,7 +165,7 @@ const Survey = (props) => {
                                 </div>
 
                                 <div className="top-right">
-                                    <AddDropDown category={null} isButton={true} />
+                                    <AddDropDown category={null} isButton={true} button = "text" />
                                     <Button>分享</Button>
                                 </div>
                             </div>

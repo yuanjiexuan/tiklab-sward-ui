@@ -41,7 +41,7 @@ const DocumentEdit = (props) => {
     const [templateVisible, setTemplateVisible] = useState(false);
     const [templateList, setTemplateList] = useState()
     const imgUrlArray = [weekly, weeklyNomal, todoWork, projectPlan, projectOperation]
-
+    const path = props.location.pathname.split("/")[1];
     useEffect(() => {
         findDocumentTemplateList().then(data => {
             if (data.code === 0) {
@@ -160,23 +160,27 @@ const DocumentEdit = (props) => {
         updateDocument(data).then(res => {
             if (res.code === 0) {
                 setValue(item.details)
-                // props.history.push(`/repository/${repositoryId}/docEdit/${documentId}`)
             }
         })
     }
 
     const goExamine = () => {
-        props.history.push(`/repository/${repositoryId}/doc/${documentId}`)
+        if(path === "repository"){
+            props.history.push(`/repository/${repositoryId}/doc/${documentId}`)
+        }
+        if(path === "collect"){
+            props.history.push(`/collect/doc/${documentId}`)
+        }
     }
     return (
         <div className="documnet-edit">
             <div className="edit-top">
-                <div className="edit-title" id="examine-title">
-                    <div className="edit-title-top">
+                <div className="edit-title" >
+                    <div className="edit-title-top" id="examine-title">
                         {docInfo.name}
                     </div>
                     <div className="edit-title-date">
-                      更新日期：{docInfo.updateTime}
+                      更新日期：{docInfo.updateTime ? docInfo.updateTime : docInfo.createTime}
                     </div>
                 </div>
                 <div className="edit-right">

@@ -40,7 +40,8 @@ const DocumentExamine = (props) => {
     let [commentNum, setCommentNum] = useState()
     const [value, setValue] = useState()
     const [markdownValue, setMarkdownValue] = useState();
-
+    const path = props.location.pathname.split("/")[1];
+    
     useEffect(() => {
         setDocumentTitle()
         setValue()
@@ -145,6 +146,15 @@ const DocumentExamine = (props) => {
         })
     }
 
+    const goEdit = () => {
+        if(path === "repository"){
+            props.history.push(`/repository/${repositoryId}/doc/${documentId}/edit`)
+        }
+        if(path === "collect"){
+            props.history.push(`/collect/doc/${documentId}/edit`)
+        }
+    }
+
     return (<Provider {...store}>
         <div className="document-markdown-examine">
             {
@@ -174,7 +184,7 @@ const DocumentExamine = (props) => {
                             </svg>
                     }
                     {
-                        value && <Button className="document-action-edit" onClick={() => props.history.push(`/repository/${repositoryId}/markdown/${documentId}/edit`)}>编辑</Button>
+                        value && <Button className="document-action-edit" onClick={() => goEdit()}>编辑</Button>
                     }
                     <Button className="document-action-share" onClick={() => setShareVisible(true)}>分享</Button>
 

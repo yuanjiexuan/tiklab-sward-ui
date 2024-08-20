@@ -16,7 +16,9 @@ const Home = AsyncComponent(() => import('./home/home/components/Home.js'))
 const ProjectNotFound = AsyncComponent(() => import("./setting/common/components/ProjectNotFond.js"))
 
 // 收藏
-const Collect = AsyncComponent(() => import("./home/collect/components/Collect"))
+const Collect = AsyncComponent(() => import("./home/collect/components/CollectAside.js"))
+const CollectLayout = AsyncComponent(() => import("./home/collect/components/CollectLayout.js"))
+const CollectEmpty  = AsyncComponent(() => import("./home/collect/components/CollectEmpty.js"))
 
 const NoFoundPage = AsyncComponent(() => import('./login/NoFoundPage.js'));
 const NoAccessPage = AsyncComponent(() => import('./login/SystemNoAccessPage.js'));
@@ -496,10 +498,36 @@ const Routes = [
             },
             {
                 path: "/collect",
-                exact: true,
-                component: Collect,
-                key: 'collect'
+                component: CollectLayout,
+                key: 'collect',
+                routes: [
+                    {
+                        path: "/collect/doc/:id",
+                        exact: true,
+                        component: DocumnetExamine
+                    },
+                    {
+                        path: "/collect/doc/:id/edit",
+                        exact: true,
+                        component: DocumentEdit
+                    },
+                    {
+                        path: "/collect/markdown/:id",
+                        component: MarkdownDocumentView,
+                        exact: true
+                    },
+
+                    {
+                        path: "/collect/markdown/:id/edit",
+                        component: MarkdownDocumentEdit
+                    },
+                ]
             },
+            {  path: "/collectEmpty",
+                component: CollectEmpty,
+                key: 'collect',
+                
+            }
             
         ]
     },

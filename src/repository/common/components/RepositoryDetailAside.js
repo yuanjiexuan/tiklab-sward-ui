@@ -40,7 +40,6 @@ const RepositorydeAside = (props) => {
     // 当前选中目录id
     const id = props.location.pathname.split("/")[4];
     const [selectKey, setSelectKey] = useState(id);
-    const [changeRepositoryVisible, setChangeRepositoryVisible] = useState(null)
     const repositoryId = props.match.params.repositoryId;
     const [isHover, setIsHover] = useState(false)
     const [requsetedCategory, setRequsetedCategory] = useState([])
@@ -485,7 +484,7 @@ const RepositorydeAside = (props) => {
             > {item.name}</div>
             <div className={`${isHover === item.id ? "icon-show" : "icon-hidden"} icon-action`}>
                 {/* <div className="icon-action"> */}
-                <AddDropDown category={item} />
+                <AddDropDown category={item} button="icon-gray" />
                 <Dropdown overlay={() => editMenu(item, index)} placement="bottomLeft">
                     <div className="category-add">
                         <svg className="icon-18" aria-hidden="true">
@@ -543,65 +542,32 @@ const RepositorydeAside = (props) => {
                 <div className='repository-aside'>
                     <div className="repository-title title">
                         <div className="repository-title-left">
-                            {/* <div className="repository-title-left-icon">
-                                <ImgComponent
-                                    src={repository?.iconUrl}
-                                    alt=""
-                                    className="icon-24"
-                                />
-                            </div> */}
-
-                            <div className="repository-title-center">
-                                <div className="name">{repository?.name}</div>
-                                <div className="type">{repository?.limits === "1" ? "私密知识库" : "公共知识库"}</div>
+                            {repository?.name}
+                        </div>
+                        <AddDropDown category={null} button="icon-blue" />
+                    </div>
+                    <div className="repository-aside-action">
+                        <div className="repository-aside-action-left">
+                            <div className="repository-action-item">
+                                <svg className="icon-16" aria-hidden="true" onClick={() => goSurvey()}>
+                                    <use xlinkHref="#icon-home"></use>
+                                </svg>
+                            </div>
+                            <div className="repository-action-item">
+                                <svg className="img-icon" aria-hidden="true"  onClick={() => props.history.push(`/repositorySet/${repositoryId}/basicInfo`)}>
+                                    <use xlinkHref="#icon-set"></use>
+                                </svg>
+                                {/* <svg className="icon-16" aria-hidden="true" onClick={() => setShowSearchModal(true)}>
+                                <use xlinkHref="#icon-search-default"></use>
+                            </svg> */}
                             </div>
                         </div>
-                        <div className="repository-toggleCollapsed">
-                            <RepositoryChangeModal
-                                searchrepository={searchrepository}
-                                repositorylist={repositorylist}
-                                changeRepositoryVisible={changeRepositoryVisible}
-                                setChangeRepositoryVisible={setChangeRepositoryVisible}
-                                repository={repository}
-                            />
-                        </div>
-                    </div>
-
-                    <div
-                        className={`repository-survey ${selectKey === "overview" ? "repository-menu-select" : ""} `}
-                        onClick={() => goSurvey()}
-                    >
-                        <svg className="icon-18" aria-hidden="true">
-                            <use xlinkHref="#icon-home"></use>
-                        </svg>
-                        概况
-                    </div>
-                    <div className="repository-menu-firstmenu"
-                        onClick={() => setShowSearchModal(true)}
-                        style={{ cursor: "pointer" }}
-                    >
-                        <div className="repository-menu-firstmenu-left">
-                            <svg className="icon-18" aria-hidden="true">
+                        <div className="repository-action-item">
+                            <svg className="icon-16" aria-hidden="true" onClick={() => setShowSearchModal(true)}>
                                 <use xlinkHref="#icon-search-default"></use>
                             </svg>
-                            搜索
                         </div>
 
-                    </div>
-                    <div className="repository-menu-firstmenu"
-                        onMouseOver={() => setIsHover(0)}
-                        onMouseLeave={() => setIsHover(null)}
-                    >
-                        <div className="repository-menu-firstmenu-left">
-                            <svg className="icon-18" aria-hidden="true">
-                                <use xlinkHref="#icon-repository"></use>
-                            </svg>
-
-                            <span>目录</span>
-                        </div>
-                        <div className="repository-menu-firstmenu-right">
-                            <AddDropDown category={null} />
-                        </div>
                     </div>
                     <div className="repository-menu">
                         <Tree
@@ -619,12 +585,12 @@ const RepositorydeAside = (props) => {
                             }
                         </Tree>
                     </div>
-                    <div className="repository-setting-menu" onClick={() => props.history.push(`/repositorySet/${repositoryId}/basicInfo`)}>
+                    {/* <div className="repository-setting-menu" onClick={() => props.history.push(`/repositorySet/${repositoryId}/basicInfo`)}>
                         <svg className="img-icon" aria-hidden="true">
                             <use xlinkHref="#icon-set"></use>
                         </svg>
                         设置
-                    </div>
+                    </div> */}
                 </div>
             </Sider>
             <MoveLogList

@@ -104,7 +104,7 @@ const CategoryDetail = (props) => {
                                     </div>
 
                                 </div>
-                                <AddDropDown category={logDetail} isButton={true} />
+                                <AddDropDown category={logDetail} button = "text" isButton={true} />
                             </div>
                         </Fragment>
                     }

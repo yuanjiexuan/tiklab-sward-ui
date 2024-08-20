@@ -24,6 +24,8 @@ const MarkdownEdit = (props) => {
     const documentId = props.match.params.id;
     const repositoryId = props.match.params.repositoryId;
     const [value, setValue] = useState();
+    const path = props.location.pathname.split("/")[1];
+
     useEffect(() => {
         setValue()
         findDocument(documentId).then((data) => {
@@ -47,7 +49,12 @@ const MarkdownEdit = (props) => {
                 }
                 const node = data.data.node;
                 setDocumentTitle(node.name)
-                setDocumentDate(node.updateTime)
+                if (node.updateTime) {
+                    setDocumentDate(node.updateTime)
+                } else {
+                    setDocumentDate(node.createTime)
+                }
+
             }
         })
         return;
@@ -118,7 +125,14 @@ const MarkdownEdit = (props) => {
         setIsFocus(true)
     }
 
-
+    const goExamine = () => {
+        if (path === "repository") {
+            props.history.push(`/repository/${repositoryId}/doc/${documentId}`)
+        }
+        if (path === "collect") {
+            props.history.push(`/collect/doc/${documentId}`)
+        }
+    }
     return (
         <div className="document-markdown-edit">
             <div className="edit-top">
@@ -140,8 +154,8 @@ const MarkdownEdit = (props) => {
                     </div>
                 </div>
                 <div className="edit-right">
-                    <Button type="primary" className="edit-right-save"  onClick={() => save()}>保存</Button>
-                    <Button className="edit-right-eqit"  onClick={() => props.history.replace(`/repository/${repositoryId}/markdown/${documentId}`)}>退出</Button>
+                    <Button type="primary" className="edit-right-save" onClick={() => save()}>保存</Button>
+                    <Button className="edit-right-eqit" onClick={() => goExamine()}>退出</Button>
                 </div>
             </div>
             <div className="edit-markdown" style={{ height: "calc(100% - 50px)" }}>
