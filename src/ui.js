@@ -18,6 +18,7 @@ import Layout from "./home/home/components/Layout";
 import ArchivedFree from "./common/components/ArchivedFree";
 import HeaderCe from "./home/home/components/HeaderCe";
 import Logo from "./home/home/components/Logo";
+import RepositoryDoc from "./repository/document/components/RepositoryDoc";
 export {
     wikiRoutes,
     store,
@@ -29,5 +30,6 @@ export {
     ArchivedFree,
     FirstMenu,
     HeaderCe,
-    Logo
+    Logo,
+    RepositoryDoc
 }

@@ -5,25 +5,21 @@ import SearchStore from "../store/Search";
 import { observer } from "mobx-react";
 import { useDebounce, useThrottle } from "../../../common/utils/debounce";
 import { getUser } from "thoughtware-core-ui";
-import { Empty, Modal } from "antd";
+import { Empty, Modal, Spin } from "antd";
 import { withRouter } from "react-router";
 import ImgComponent from "../../../common/imgComponent/ImgComponent";
 import { nodata } from "../../../assets/image";
 const Search = (props) => {
     const { isShowText, theme } = props;
 
-    const { getSearch, searchDocumentList, searchWikiList, getSearchSore, setKeyWord, findDocumentRecentList,
+    const { getSearch, searchDocumentList, searchWikiList, findDocumentRecentList,
         findRecentRepositoryList } = SearchStore;
     const [searchModal, setSearchModal] = useState(false);
-
-    const [show, setShow] = useState(false);
     const [isSeach, setIsSeach] = useState(false);
-    const dropDown = useRef();
     const userId = getUser().id;
-    const tenant = getUser().tenant;
-    const inputRef = useRef();
-    const [showLong, setShowLong] = useState(false)
     const searchBox = useRef();
+    const [repositoryloading, setRepositoryloading] = useState(true)
+    const [docloading, setDocloading] = useState(true)
     const findRecent = () => {
         const recentParams = {
             masterId: userId,
@@ -33,8 +29,18 @@ const Search = (props) => {
                 orderType: "asc"
             }]
         }
-        findDocumentRecentList(recentParams)
-        findRecentRepositoryList({ model: "repository" })
+        setDocloading(true)
+        setRepositoryloading(true)
+        findDocumentRecentList(recentParams).then(res => {
+            if (res.code === 0) {
+                setDocloading(false)
+            }
+        })
+        findRecentRepositoryList({ model: "repository" }).then(res => {
+            if (res.code === 0) {
+                setRepositoryloading(false)
+            }
+        })
 
     }
 
@@ -68,10 +74,16 @@ const Search = (props) => {
         props.history.push(`/repository/${repository.id}/overview`)
         setSearchModal(false)
     }
-    const toWorkItem = (id, repository) => {
+    const toWorkItem = (node) => {
 
         // localStorage.setItem("repository", repository.id)
-        props.history.push(`/repository/${repository.id}/doc/${id}`)
+        if (node.documentType === "document") {
+            props.history.push(`/repository/${node.wikiRepository.id}/doc/rich/${node.id}`)
+        }
+        if (node.documentType === "markdown") {
+            props.history.push(`/repository/${node.wikiRepository.id}/doc/markdown/${node.id}`)
+        }
+        // props.history.push(`/repository/${repository.id}/doc/rich/${id}`)
         setSearchModal(false)
     }
 
@@ -90,10 +102,11 @@ const Search = (props) => {
                     </div>
 
                     :
-                    <div className="first-menu-link-item" data-title-right="搜索" onClick={() => setSearchModal(true)}>
+                    <div className="first-menu-link-item" onClick={() => setSearchModal(true)}>
                         <svg className="icon-18" aria-hidden="true">
                             <use xlinkHref={`#icon-search-${theme}`} ></use>
                         </svg>
+                        <div>搜索</div>
                     </div>
 
             }
@@ -162,7 +175,7 @@ const Search = (props) => {
                                                 {
                                                     searchDocumentList.map((documentItem) => {
                                                         return <div className="item-box" key={documentItem.id}>
-                                                            <div className="item-one" onClick={() => toWorkItem(documentItem.node.id, documentItem.node.wikiRepository)}>
+                                                            <div className="item-one" onClick={() => toWorkItem(documentItem.node)}>
                                                                 <svg className="img-icon" aria-hidden="true">
                                                                     <use xlinkHref="#icon-file"></use>
                                                                 </svg>
@@ -187,57 +200,72 @@ const Search = (props) => {
                                 <div className="search-result-box">
                                     <div className="sort-box">
                                         <div className="sort-title">常用知识库</div>
-                                        {
-                                            searchWikiList.length > 0 ?
-                                                <>
+                                        <Spin wrapperClassName="search-doc-spin" spinning={repositoryloading} tip="加载中..." >
+                                            {
+                                                searchWikiList.length > 0 ?
+                                                    <>
+                                                        {
+                                                            searchWikiList.map((wikiItem) => {
+                                                                return <div className="item-box" key={wikiItem.id}>
+                                                                    <div className="item-one" onClick={() => toRepository(wikiItem)}>
+                                                                        <ImgComponent
+                                                                            src={wikiItem.iconUrl}
+                                                                            alt=""
+                                                                        />
+                                                                        <span>{wikiItem.name}</span>
+                                                                        <div className="item-desc">
+                                                                            {wikiItem.createTime}
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                            })
+                                                        }
+                                                    </>
+
+                                                    :
+                                                    <>
+                                                        {
+                                                            !repositoryloading && <Empty description="暂时没有数据~" />
+                                                        }
+                                                    </>
+
+                                            }
+                                        </Spin>
+
+                                    </div>
+                                    <div className="sort-box">
+                                        <div className="sort-title">最近查看文档</div>
+                                        <Spin wrapperClassName="search-repository-spin"  spinning={repositoryloading} tip="加载中..." >
+                                            {
+                                                searchDocumentList.length > 0 ? <>
                                                     {
-                                                        searchWikiList.map((wikiItem) => {
-                                                            return <div className="item-box" key={wikiItem.id}>
-                                                                <div className="item-one" onClick={() => toRepository(wikiItem)}>
-                                                                    <ImgComponent
-                                                                        src={wikiItem.iconUrl}
-                                                                        alt=""
-                                                                    />
-                                                                    <span>{wikiItem.name}</span>
+                                                        searchDocumentList.map((documentItem) => {
+                                                            return <div className="item-box" key={documentItem.id}>
+                                                                <div className="item-one" onClick={() => toWorkItem(documentItem.node)}>
+                                                                    <svg className="img-icon" aria-hidden="true">
+                                                                        <use xlinkHref="#icon-file"></use>
+                                                                    </svg>
+                                                                    <span>{documentItem.name}</span>
                                                                     <div className="item-desc">
-                                                                        {wikiItem.createTime}
+                                                                        {documentItem.wikiRepository?.name}
                                                                     </div>
                                                                 </div>
-
 
                                                             </div>
                                                         })
                                                     }
                                                 </>
+                                                    :
+                                                    <>
+                                                        {
+                                                            !docloading && <Empty description="暂时没有数据~" />
+                                                        }
+                                                    </>
+                                            }
+                                        </Spin>
 
-                                                :
-                                                <Empty description="暂时没有数据~" />
-                                        }
-                                    </div>
-                                    <div className="sort-box">
-                                        <div className="sort-title">最近查看文档</div>
-                                        {
-                                            searchDocumentList.length > 0 ? <>
-                                                {
-                                                    searchDocumentList.map((documentItem) => {
-                                                        return <div className="item-box" key={documentItem.id}>
-                                                            <div className="item-one" onClick={() => toWorkItem(documentItem.modelId, documentItem.wikiRepository)}>
-                                                                <svg className="img-icon" aria-hidden="true">
-                                                                    <use xlinkHref="#icon-file"></use>
-                                                                </svg>
-                                                                <span>{documentItem.name}</span>
-                                                                <div className="item-desc">
-                                                                    {documentItem.wikiRepository?.name}
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    })
-                                                }
-                                            </>
-                                                :
-                                                <Empty description="暂时没有数据~" />
-                                        }
                                     </div>
 
                                 </div>

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Drawer, Tabs, Badge, Avatar, } from 'antd';
+import { Drawer, Tabs, Badge, Avatar, Empty, } from 'antd';
 import { observer } from "mobx-react";
 import { MessageOutlined } from '@ant-design/icons';
 import "./MessageList.scss"
@@ -21,12 +21,12 @@ const MessageList = (props) => {
         findMessageDispatchItemPage({ page: 1, status: currenTab })
     }
 
-    useEffect(() => {
-        window.addEventListener("mousedown", closeModal, false);
-        return () => {
-            window.removeEventListener("mousedown", closeModal, false);
-        }
-    },[])
+    // useEffect(() => {
+    //     window.addEventListener("mousedown", closeModal, false);
+    //     return () => {
+    //         window.removeEventListener("mousedown", closeModal, false);
+    //     }
+    // },[])
 
     const closeModal = (e) => {
         if (!messageRef.current) {
@@ -103,11 +103,11 @@ const MessageList = (props) => {
                 className={`frame-header-drawer ${isShowText ? "message-drawer-expend" : "message-drawer-inpend"} `}
             >
                 <div className="message-content">
-                    <Tabs onChange={onChange} size = "small" activeKey = {currenTab}>
+                    <Tabs onChange={onChange} size = "small" activeKey = {currenTab} className="message-tab">
                         <Tabs.TabPane tab="未读" key="0">
                             <div className="message-box">
                                 {
-                                    messageList && messageList.length > 0 && messageList.map(item => {
+                                    messageList && messageList.length > 0 ? messageList.map(item => {
                                         return <div className="message-list" key={item.id} >
                                             <div
                                                 dangerouslySetInnerHTML={{ __html: item.content }}
@@ -117,6 +117,8 @@ const MessageList = (props) => {
                                             <div className={`message-status ${item.status === 0 ? "status-unread" : "status-read"}`}></div>
                                         </div>
                                     })
+                                    :
+                                    <Empty description = "暂无消息" />
                                 }
                                 {
                                     messageTotal > 1 && 
@@ -129,7 +131,7 @@ const MessageList = (props) => {
                         <Tabs.TabPane tab="已读" key="1">
                             <div className="message-box">
                                 {
-                                    messageList && messageList.length > 0 && messageList.map(item => {
+                                    messageList && messageList.length > 0 ? messageList.map(item => {
                                         return <div className="message-list" key={item.id} >
                                             <div
                                                 dangerouslySetInnerHTML={{ __html: item.content }}
@@ -140,6 +142,8 @@ const MessageList = (props) => {
                                             <div className={`message-status ${item.status === 1 ? "status-read" : "status-unread"}`}></div>
                                         </div>
                                     })
+                                    :
+                                    <Empty description = "暂无消息" />
                                 }
                                 { messageTotal > 1 && 
                                     (isMessageReachBottom ? 

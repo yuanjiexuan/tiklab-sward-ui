@@ -13,9 +13,9 @@ import { Modal, Select, Form, Input } from 'antd';
 import { appendNodeInTree } from '../../../common/utils/treeDataAction';
 
 const CategoryAdd = (props) => {
-    const { treePath, addModalVisible, setAddModalVisible, category, form, userList, categoryStore } = props
+    const { treePath, addModalVisible, setAddModalVisible, category, form, userList, repositoryDetailStore } = props
     const { addRepositoryCatalogue, setRepositoryCatalogueList,
-        repositoryCatalogueList, expandedTree, setExpandedTree, findCategory } = categoryStore;
+        repositoryCatalogueList, expandedTree, setExpandedTree, findCategory } = repositoryDetailStore;
     const repositoryId = props.match.params.repositoryId;
 
     const isExpandedTree = (key) => {
@@ -63,7 +63,7 @@ const CategoryAdd = (props) => {
                     if (category?.id) {
                         setOpenOrClose(category.id)
                     }
-                    props.history.push(`/repository/${repositoryId}/folder/${data.data}`)
+                    props.history.push(`/repository/${repositoryId}/doc/folder/${data.data}`)
                     form.resetFields()
                 }
 
@@ -119,4 +119,4 @@ const CategoryAdd = (props) => {
     )
 }
 
-export default inject("categoryStore")(observer(CategoryAdd));
+export default inject("repositoryDetailStore")(observer(CategoryAdd));

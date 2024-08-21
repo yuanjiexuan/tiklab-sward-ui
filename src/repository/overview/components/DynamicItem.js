@@ -9,10 +9,10 @@ const DynamicListItem = (props) => {
         documentName, oldValue, newValue, documentType } = data;
     const goDynamicDetail = () => {
         if (documentType === "document") {
-            props.history.push(`/repository/${repositoryId}/doc/${documentId}`)
+            props.history.push(`/repository/${repositoryId}/doc/rich/${documentId}`)
         }
         if (documentType === "markdown") {
-            props.history.push(`/repository/${repositoryId}/markdown/${documentId}`)
+            props.history.push(`/repository/${repositoryId}/doc/markdown/${documentId}`)
         }
     }
     const setDom = () => {

@@ -47,7 +47,9 @@ const DocumentDetail = (props)=>{
 		updateDocument(data).then(res => {
 			if (res.code === 0) {
 				message.success("保存成功")
-			}
+			}else {
+                message.error("保存失败")
+            }
 		})
     }
     return (<Provider {...store}>

@@ -85,6 +85,9 @@
     .search-result-box {
         max-height: calc(100% - 250px);
         overflow: auto;
+        .search-doc-spin {
+            min-height: 150px;
+        }
     }
     .sort-box {
         padding: 0 10px;

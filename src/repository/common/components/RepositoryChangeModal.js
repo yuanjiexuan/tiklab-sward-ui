@@ -1,38 +1,45 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./RepositoryChangeModal.scss";
 import { withRouter } from "react-router";
-import RepositoryStore from "../../repository/store/RepositoryStore";
+import RepositoryDetailStore from "../store/RepositoryDetailStore";
 import { observer } from "mobx-react";
 import { getUser } from "thoughtware-core-ui";
 import ImgComponent from "../../../common/imgComponent/ImgComponent";
+import { Tooltip } from "antd";
 
 const RepositoryChangeModal = (props) => {
-    const { searchrepository, repository } = props;
-    // const showRepositoryList = repositorylist.length > 5 ? repositorylist.slice(0, 5) : repositorylist;
+    const {isShowText, theme} = props;
     const [showMenu, setShowMenu] = useState(false);
     const [selectRepository, setSelectRepository] = useState(false)
-    const { findRecentRepositoryList, getAllRepositorylist, allRepositorylist } = RepositoryStore;
-    const [showRepositoryList, setShowRepositoryList] = useState()
+    const { findRecentRepositoryList, getAllRepositorylist, allRepositorylist, searchRepository } = RepositoryDetailStore;
+    const [showRepositoryList, setShowRepositoryList] = useState();
+    const [repository, setRepository] = useState()
     const userId = getUser().useId;
     const modelRef = useRef()
     const setButton = useRef()
-
+    const repositoryId = props.match.params.repositoryId;
     const showMoreMenu = () => {
         setShowMenu(!showMenu)
         const params = {
             master: userId,
-            repositoryId: repository?.id
+            repositoryId: repositoryId
         }
         getAllRepositorylist()
         findRecentRepositoryList(params).then(res => {
             if (res.code === 0) {
                 setShowRepositoryList(res.data.slice(0, 5))
             }
-
         })
-        // modelRef.current.style.left = setButton.current.clientWidth
+        modelRef.current.style.left = setButton.current.clientWidth
     }
 
+    useEffect(()=> {
+        searchRepository(repositoryId).then(res=> {
+            if(res.code === 0){
+                setRepository(res.data)
+            }
+        })
+    }, [])
 
     useEffect(() => {
         window.addEventListener("mousedown", closeModal, false);
@@ -56,7 +63,7 @@ const RepositoryChangeModal = (props) => {
      */
     const selectRepositoryId = (id) => {
         // 切换选中项目，获取项目详情
-        searchrepository(id).then(data => {
+        searchRepository(id).then(data => {
             if (data.code === 0) {
                 props.history.push(`/repository/${id}/overview`)
                 // 重置事项id
@@ -79,15 +86,45 @@ const RepositoryChangeModal = (props) => {
     return (
         <div className="change-repository">
             <div ref={setButton}>
-                <div className='repository-title-icon' onClick={showMoreMenu} >
-                    <div className={`repository-toggleCollapsed`}>
-                        <svg className="img-25" aria-hidden="true">
-                            <use xlinkHref="#icon-moreTree"></use>
-                        </svg>
+                {
+                    isShowText ? <div className="repository-title title" onClick={showMoreMenu}>
+                        <ImgComponent
+                            src={repository?.iconUrl}
+                            className="icon-24"
+                            alt=""
+                        />
+                        <div className={`repository-text `} >
+                            <div className='name'>
+                                {repository?.limits}
+                            </div>
+                            <div className='type'>
+                                {repository?.projectType?.name}
+                            </div>
+                        </div>
+                        <div className={`repository-toggleCollapsed`}>
+                            <svg className="icon-15" aria-hidden="true">
+                                <use xlinkHref={`${theme === "default" ? "#icon-down-gray" : "#icon-down-white"}`}></use>
+                            </svg>
+                        </div>
                     </div>
-                </div>
+                    :
+                    <Tooltip placement="right" title={repository?.name}>
+                        <div className='repository-title-icon' onClick={showMoreMenu} >
+                            <ImgComponent
+                                src={repository?.iconUrl}
+                                title={repository?.name}
+                                // alt={repository?.projectName}
+                                className="icon-32"
+                            />
+                            <div className={`repository-toggleCollapsed`}>
+                                <svg className="icon-15" aria-hidden="true">
+                                    <use xlinkHref={`${theme === "default" ? "#icon-down-gray" : "#icon-down-white"}`}></use>
+                                </svg>
+                            </div>
+                        </div>
+                    </Tooltip>
+                }
             </div>
-
             <div className={`change-repository-box ${showMenu ? "menu-show" : "menu-hidden"}`}
                 ref={modelRef}
             >

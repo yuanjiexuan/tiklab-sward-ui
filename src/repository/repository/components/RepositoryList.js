@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from "react";
-import { Table, Space, Row, Col, Empty } from 'antd';
+import { Table, Space, Row, Col, Empty, Spin } from 'antd';
 import { observer, inject } from "mobx-react";
 import { withRouter } from "react-router-dom";
 import { getUser } from "thoughtware-core-ui";
@@ -12,7 +12,6 @@ import RepositoryStore from "../store/RepositoryStore";
 import { useDebounce } from "../../../common/utils/debounce";
 import UserIcon from "../../../common/UserIcon/UserIcon";
 import ImgComponent from "../../../common/imgComponent/ImgComponent";
-import { nodata } from "../../../assets/image";
 const RepositoryList = (props) => {
     const { findRepositoryList, createRecent,
         repositoryList, findRecentRepositoryList, createRepositoryFocus,
@@ -22,7 +21,8 @@ const RepositoryList = (props) => {
     const tenant = getUser().tenant;
     const [focusRepositoryList, setFocusRepositoryList] = useState([])
     const [recentRepositoryDocumentList, setRecentRepositoryDocumentList] = useState([]);
-    const [num, setNum] = useState()
+    const [num, setNum] = useState();
+    const [recentDocLoading, setRecentDocLoading] = useState(true);
     const repositoryTab = [
         {
             title: '所有知识库',
@@ -30,11 +30,7 @@ const RepositoryList = (props) => {
             tabName: "all",
             icon: "project"
         },
-        // {
-        //     title: '我最近浏览的',
-        //     key: '2',
-        //     icon: "programrencent"
-        // },
+       
         {
             title: '我收藏的',
             key: '3',
@@ -60,11 +56,12 @@ const RepositoryList = (props) => {
                 orderType: "desc"
             }]
         }
+        setRecentDocLoading(true)
         findRecentRepositoryList(recentRepositoryParams).then(res => {
             if (res.code === 0) {
                 setRecentRepositoryDocumentList(res.data)
             }
-
+            setRecentDocLoading(false)
         })
         findRepositoryNum({ masterId: userId}).then(res=> {
             if(res.code === 0){
@@ -256,6 +253,7 @@ const RepositoryList = (props) => {
                     </Breadcumb>
                     <div className="recent-repository">
                         <div className="repository-title">常用知识库</div>
+                        <Spin wrapperClassName="repository-spin" spinning={recentDocLoading} tip="加载中..." >
                         {
                             recentRepositoryDocumentList.length > 0 ?
                                 <div className="repository-box">{
@@ -282,9 +280,15 @@ const RepositoryList = (props) => {
                                 </div>
 
                                 :
-
-                                <Empty description="暂时没有查看过知识库~" />
+                                <>
+                                {
+                                    !recentDocLoading &&  <Empty description="暂时没有查看过知识库~" />
+                                }
+                                </>
+                               
                         }
+                        </Spin>
+                       
 
                     </div>
                     <div className="repository-tabs-search">

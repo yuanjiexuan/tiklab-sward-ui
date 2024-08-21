@@ -14,7 +14,7 @@ import "./documentEdit.scss";
 import { EditorBigContent, EditorBig } from "thoughtware-slate-ui";
 import Button from "../../../common/button/button";
 import DocumentStore from "../store/DocumentStore";
-import CategoryStore from "../../../repository/common/store/CategoryStore";
+import RepositoryDetailStore from "../../../repository/common/store/RepositoryDetailStore";
 import "thoughtware-slate-ui/es/thoughtware-slate.css";
 import { getUser } from "thoughtware-core-ui";
 import { useDebounce } from "../../../common/utils/debounce";
@@ -29,7 +29,7 @@ import projectOperation from "../../../assets/images/projectOperation.png";
 const DocumentEdit = (props) => {
     const { relationWorkStore, documentStore } = props;
     const { findDocument, updateDocument, findDocumentTemplateList } = DocumentStore;
-    const { documentTitle, setDocumentTitle, repositoryCatalogueList } = CategoryStore
+    const { documentTitle, setDocumentTitle, repositoryCatalogueList } = RepositoryDetailStore
     const documentId = props.match.params.id;
     const repositoryId = props.match.params.repositoryId;
     const [docInfo, setDocInfo] = useState({ name: "", likenumInt: "", commentNumber: "", master: { name: "" } });
@@ -91,6 +91,8 @@ const DocumentEdit = (props) => {
         updateDocument(data).then(res => {
             if (res.code === 0) {
                 message.success("保存成功")
+            }else {
+                message.error("保存失败")
             }
         })
     }
@@ -121,6 +123,8 @@ const DocumentEdit = (props) => {
                 document.getElementById("examine-title").innerHTML = value.target.value;
                 document.getElementById("file-" + documentId).innerHTML = value.target.value;
                 updateNodeName(repositoryCatalogueList, documentId, value.target.value)
+            }else {
+                message.error("保存失败")
             }
         })
     }
@@ -160,13 +164,15 @@ const DocumentEdit = (props) => {
         updateDocument(data).then(res => {
             if (res.code === 0) {
                 setValue(item.details)
+            }else {
+                message.error("保存失败")
             }
         })
     }
 
     const goExamine = () => {
         if(path === "repository"){
-            props.history.push(`/repository/${repositoryId}/doc/${documentId}`)
+            props.history.push(`/repository/${repositoryId}/doc/rich/${documentId}`)
         }
         if(path === "collect"){
             props.history.push(`/collect/doc/${documentId}`)

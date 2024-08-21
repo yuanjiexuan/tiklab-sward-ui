@@ -8,7 +8,7 @@
  */
 import { Service } from "../../../common/utils/requset";
 import { observable, action, makeObservable} from "mobx";
-export class CategoryStore {
+export class RepositoryDetailStore {
     // 知识库id
     @observable repositoryCatalogue = [];
     @observable expandedTree = [];
@@ -16,6 +16,7 @@ export class CategoryStore {
     @observable repositoryCatalogueList = [];
     @observable documentTitle = "";
     @observable categoryTitle = ""
+    @observable allRepositorylist = [];
 
     @action
     setDocumentTitle = (value) => {
@@ -143,6 +144,32 @@ export class CategoryStore {
         const data = await Service("/search/searchRepositoryDocument", value);
         return data;
     }
+
+    @action
+    findRecentRepositoryList = async (value) => {
+        const data = await Service("/repository/findRecentRepositoryList", value);
+        return data;
+    }
+
+
+    @action
+    getAllRepositorylist = async () => {
+        const data = await Service("/repository/findRepositoryListByUser", {});
+        if (data.code === 0) {
+            this.allRepositorylist = data.data;
+            // this.repositoryList = data.data;
+        }
+        return data;
+    }
+
+    @action
+    searchRepository = async (values) => {
+        const params = new FormData()
+        params.append("id", values)
+
+        const data = await Service("/repository/findRepository", params);
+        return data;
+    }
 }
 
-export default new CategoryStore();
+export default new RepositoryDetailStore();

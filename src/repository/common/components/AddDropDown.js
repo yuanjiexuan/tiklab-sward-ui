@@ -8,7 +8,7 @@ import { getUser } from "thoughtware-core-ui";
 
 const AddDropDown = (props) => {
     const [form] = Form.useForm();
-    const { category, categoryStore, isButton, button } = props;
+    const { category, repositoryDetailStore, isButton, button } = props;
     const repositoryId = props.match.params.repositoryId;
     const userId = getUser().userId;
     const treePath = category ?
@@ -18,7 +18,7 @@ const AddDropDown = (props) => {
     const [catalogue, setCatalogue] = useState()
     const [contentValue, setContentValue] = useState()
     const { repositoryCatalogueList, setRepositoryCatalogueList,
-        createDocument, findDmUserList, findDocument } = categoryStore;
+        createDocument, findDmUserList, findDocument } = repositoryDetailStore;
 
     const addMenu = () => {
         return <Menu onClick={(value) => selectAddType(value)}>
@@ -103,10 +103,10 @@ const AddDropDown = (props) => {
                         setRepositoryCatalogueList([...list])
                     })
                     if (value.key === "document") {
-                        props.history.push(`/repository/${repositoryId}/doc/${data.data}/edit`)
+                        props.history.push(`/repository/${repositoryId}/doc/rich/${data.data}/edit`)
                     }
                     if (value.key === "markdown") {
-                        props.history.push(`/repository/${repositoryId}/markdown/${data.data}/edit`)
+                        props.history.push(`/repository/${repositoryId}/doc/markdown/${data.data}/edit`)
                     }
 
                 }
@@ -164,4 +164,4 @@ const AddDropDown = (props) => {
     )
 }
 
-export default withRouter(inject("categoryStore")(observer(AddDropDown)));
+export default withRouter(inject("repositoryDetailStore")(observer(AddDropDown)));

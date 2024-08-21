@@ -14,43 +14,20 @@ import { renderRoutes } from "react-router-config";
 import {observer, inject, Provider} from "mobx-react";
 import {getUser} from "thoughtware-core-ui";
 import RepositoryStore from "../../repository/store/RepositoryStore";
-import CategoryStore from "../store/CategoryStore";
+import RepositoryDetailStore from "../store/RepositoryDetailStore";
 const RepositoryDetail = (props)=>{
     const {NodeRecycleModal, NodeArchivedModal} = props;
+    const [isShowText, SetIsShowText ] = useState(false)
     // 解析props
     const {systemRoleStore,route} = props;
     const store = {
-        categoryStore: CategoryStore
+        repositoryDetailStore: RepositoryDetailStore
     }
-    const {searchrepository, findRepositoryList, repositorylist} = RepositoryStore;
-    const repositoryId = props.match.params.repositoryId;
-    const [repository, setRepository] = useState();
-
-    useEffect(() => {
-        searchrepository(repositoryId).then((res)=> {
-            console.log(res)
-            localStorage.setItem("repository", JSON.stringify(res.data));
-            const isPublish = res.data?.projectLimits === "0" ? true : false
-            systemRoleStore.getInitProjectPermissions(getUser().userId, res.data.id, isPublish)
-            setRepository(res.data)
-        })
-
-        //获取知识库列表
-        findRepositoryList({})
-
-        // systemRoleStore.getInitProjectPermissions(getUser().userId, localStorage.getItem("repositoryId"))
-        return 
-    }, [repositoryId])
-
-
     return (<Provider {...store}>
         <Layout className="repositorydetail">
             <RepositorydeAside 
-                repository={repository}
-                repositorylist={repositorylist} 
-                searchrepository = {searchrepository} 
-                NodeRecycleModal = {NodeRecycleModal}
-                NodeArchivedModal = {NodeArchivedModal}
+                isShowText = {isShowText}
+                SetIsShowText = {SetIsShowText}
                 {...props}
             />
             <Layout className="repositorydetail-content">

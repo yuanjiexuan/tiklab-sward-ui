@@ -5,6 +5,7 @@ import { withRouter } from "react-router";
 import Logo from "./Logo";
 import FirstMenuButtom from "./FirstMenuButtom";
 import useLocalStorageListener from "../../../common/utils/useLocalStorageListener";
+import Search from "../../search/components/Search";
 const { Sider } = Layout;
 const FirstMenu = (props) => {
     const [isShowText, setIsShowText] = useState(false)
@@ -74,13 +75,14 @@ const FirstMenu = (props) => {
             key: 'collect',
             icon: 'focus-' + theme,
             actionIcon: setActiveIcon("focus-")
-        },
-        {
-            to: version=== "cloud" ?  '/setting/log' : '/setting/version',
-            title: '设置',
-            icon: 'set-' + theme,
-            actionIcon: setActiveIcon("set-")
         }
+        // ,
+        // {
+        //     to: version=== "cloud" ?  '/setting/log' : '/setting/version',
+        //     title: '设置',
+        //     icon: 'set-' + theme,
+        //     actionIcon: setActiveIcon("set-")
+        // }
     ]
 
 
@@ -142,6 +144,7 @@ const FirstMenu = (props) => {
 
                         })
                     }
+                    <Search isShowText={isShowText} theme={theme} />
                 </div>
             )
         }

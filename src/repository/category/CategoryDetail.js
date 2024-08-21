@@ -12,16 +12,15 @@ import "./categoryDetail.scss"
 import { observer, inject, Provider } from "mobx-react";
 import CategoryAdd from "../common/components/CategoryAdd"
 import { getUser } from "thoughtware-core-ui";
-import CategoryStore from "../common/store/CategoryStore";
+import RepositoryDetailStore from "../common/store/RepositoryDetailStore";
 import AddDropDown from "../common/components/AddDropDown";
-import { nodata } from "../../assets/image";
 const CategoryDetail = (props) => {
     const store = {
-        categoryStore: CategoryStore
+        repositoryDetailStore: RepositoryDetailStore
     }
     const { findCategory, findNodeList, setRepositoryCatalogueList, createRecent,
         setCategoryTitle, categoryTitle
-    } = CategoryStore
+    } = RepositoryDetailStore
     const categoryId = props.match.params.id;
     const [logList, setLogList] = useState();
     const [logDetail, setLogDetail] = useState();
@@ -75,13 +74,13 @@ const CategoryDetail = (props) => {
         setSelectKey(item.id)
         if (item.type === "category") {
             localStorage.setItem("categoryId", item.id);
-            props.history.push(`/repository/${repositoryId}/folder/${item.id}`)
+            props.history.push(`/repository/${repositoryId}/doc/folder/${item.id}`)
         }
         if (item.documentType === "document") {
-            props.history.push(`/repository/${repositoryId}/doc/${item.id}`)
+            props.history.push(`/repository/${repositoryId}/doc/rich/${item.id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/repository/${repositoryId}/markdown/${item.id}`)
+            props.history.push(`/repository/${repositoryId}/doc/markdown/${item.id}`)
 
         }
     }

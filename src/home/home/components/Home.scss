@@ -17,6 +17,9 @@
         .repository-title {
             font-weight: var(--thoughtware-font-weight-bold);
         }
+        .repository-spin {
+            height: 124px;
+        }
         .repository-box {
             display: flex;
             align-items: center;
@@ -118,7 +121,9 @@
                 align-items: center;
             }
         }
-
+        .document-spin {
+            height: 300px;
+        }
         .document-list-item {
             display: flex;
             justify-content: space-between;

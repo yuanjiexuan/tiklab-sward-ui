@@ -27,48 +27,48 @@ const RepositorySetAside = (props) => {
         {
             title: '知识库信息',
             icon: 'survey',
-            key: `/repositorySet/${repositoryId}/basicInfo`,
+            key: `/repository/${repositoryId}/set/basicInfo`,
             encoded: "Survey",
             iseEnhance: false
         },
         {
             title: '成员',
             icon: 'survey',
-            key: `/repositorySet/${repositoryId}/user`,
+            key: `/repository/${repositoryId}/set/user`,
             encoded: "User",
             iseEnhance: false
         },
         {
             title: '权限',
             icon: 'survey',
-            key: `/repositorySet/${repositoryId}/domainRole`,
+            key: `/repository/${repositoryId}/set/domainRole`,
             encoded: "Privilege",
             iseEnhance: false
         },
         {
             title: '消息',
             icon: 'survey',
-            key: `/repositorySet/${repositoryId}/messagenotice`,
+            key: `/repository/${repositoryId}/set/messagenotice`,
             encoded: "message",
             iseEnhance: false
         },
         {
             title: '归档',
             icon: 'archived',
-            key: `/repositorySet/${repositoryId}/archivedNode`,
+            key: `/repository/${repositoryId}/set/archivedNode`,
             encoded: "archived",
             iseEnhance: true
         },
         {
             title: '回收站',
             icon: 'recycleBin',
-            key: `/repositorySet/${repositoryId}/recycleBin`,
+            key: `/repository/${repositoryId}/set/recycleBin`,
             encoded: "recycleBin",
             iseEnhance: true
         }
     ];
     // 当前选中路由
-    const [selectKey, setSelectKey] = useState(`/repositorySet/${repositoryId}/basicInfo`);
+    const [selectKey, setSelectKey] = useState(`/repository/${repositoryId}/set/basicInfo`);
 
     // 菜单是否折叠
     const [isShowText, SetIsShowText] = useState(true)

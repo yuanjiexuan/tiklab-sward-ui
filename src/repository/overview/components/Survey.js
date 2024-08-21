@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Row, Col, Form, Dropdown, Menu, Empty } from 'antd';
+import { Row, Col, Form, Dropdown, Menu, Empty, Spin } from 'antd';
 import { withRouter } from "react-router";
 import { observer } from "mobx-react";
 import Button from "../../../common/button/button";
@@ -7,16 +7,15 @@ import UserIcon from "../../../common/UserIcon/UserIcon";
 import "./Survey.scss";
 import { getUser } from "thoughtware-core-ui";
 import SurveyStore from "../store/SurveyStore";
-import CategoryStore from "../../common/store/CategoryStore";
+import RepositoryDetailStore from "../../common/store/RepositoryDetailStore";
 import AddDropDown from "../../common/components/AddDropDown";
 import DyncmicTimeAxis from "./DyncmicTimeAxis";
 import ImgComponent from "../../../common/imgComponent/ImgComponent";
-import { nodata } from "../../../assets/image";
 const Survey = (props) => {
     const { findRepository, findLogpage, logList, findUserList, findDocumentRecentList,
         findCategoryListTreeById, findDocumentFocusPage, opLogCondition } = SurveyStore;
 
-    const { expandedTree, setExpandedTree, repositoryCatalogueList } = CategoryStore;
+    const { expandedTree, setExpandedTree, repositoryCatalogueList } = RepositoryDetailStore;
 
     const [repositoryInfo, setRepositoryInfo] = useState();
     const repositoryId = props.match.params.repositoryId
@@ -25,6 +24,8 @@ const Survey = (props) => {
     const [userList, setUserList] = useState();
     const userId = getUser().userId;
     const tenant = getUser().tenant;
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         findLogpage({ data: { repositoryId: repositoryId }, pageParam: { ...opLogCondition.pageParam, pageSize: 10 } })
 
@@ -42,9 +43,11 @@ const Survey = (props) => {
                 orderType: "desc"
             }]
         }
+        setLoading(true)
         findDocumentRecentList(recentParams).then(res => {
             if (res.code === 0) {
                 setRecentViewDocumentList([...res.data])
+                setLoading(false)
             }
 
         })
@@ -71,13 +74,13 @@ const Survey = (props) => {
 
     const goDocumentDetail = document => {
         if (document.documentType === "document") {
-            props.history.push(`/repository/${document.wikiRepository.id}/doc/${document.id}`)
+            props.history.push(`/repository/${document.wikiRepository.id}/doc/rich/${document.id}`)
         }
         if (document.documentType === "markdown") {
-            props.history.push(`/repository/${document.wikiRepository.id}/markdown/${document.id}`)
+            props.history.push(`/repository/${document.wikiRepository.id}/doc/markdown/${document.id}`)
         }
         if (document.type === "category") {
-            props.history.push(`/repository/${document.wikiRepository.id}/folder/${document.id}`)
+            props.history.push(`/repository/${document.wikiRepository.id}/doc/folder/${document.id}`)
         }
         const params = {
             id: document.id,
@@ -98,23 +101,6 @@ const Survey = (props) => {
         })
     }
 
-    const goFocusDocumentDetail = item => {
-        if (item.documentType === "document") {
-            props.history.push(`/repository/${item.wikiRepository.id}/doc/${item.id}`)
-        }
-        if (item.documentType === "markdown") {
-            props.history.push(`/repository/${item.wikiRepository.id}/markdown/${item.id}`)
-        }
-        // sessionStorage.setItem("menuKey", "repository")
-    }
-
-    /**
-     * 跳转到日志详情
-     * @param {地址} url 
-     */
-    const goOpLogDetail = (url) => {
-        window.location.href = url
-    }
 
     return (
         <Row className="repository-survey-row">
@@ -176,6 +162,7 @@ const Survey = (props) => {
                         <div className="document-box-title">
                             <span className="name">常用文档</span>
                         </div>
+                        <Spin wrapperClassName="document-spin" spinning={loading} tip="加载中..." >
                         {
                             recentViewDocumentList.length > 0 ? <div>
                                 {
@@ -208,8 +195,15 @@ const Survey = (props) => {
                                 }
                             </div>
                             :
-                            <Empty description="暂时没有查看过文档~" />
+                            <>
+                            {
+                                !loading &&  <Empty description="暂时没有查看过文档~" />
+                            }
+                            </>
+                           
                         }
+                        </Spin>
+                        
                     </div>
 
 

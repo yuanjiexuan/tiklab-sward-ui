@@ -14,9 +14,9 @@ import { withRouter } from 'react-router';
 import { updataTreeSort, findNodeById, appendNodeInTree } from '../../../common/utils/treeDataAction';
 
 const MoveLogList = (props) => {
-    const { moveLogListVisible, setMoveLogListVisible, moveItem, categoryStore,
+    const { moveLogListVisible, setMoveLogListVisible, moveItem, repositoryDetailStore,
         updateDocumentSort, updateCategorySort } = props;
-    const { findNodePageTree } = categoryStore
+    const { findNodePageTree } = repositoryDetailStore;
     const [selectKey, setSelectKey] = useState()
     const repositoryId = props.match.params.repositoryId;
     const parentItem = moveItem?.type === "category" ? moveItem?.parentWikiCategory : moveItem?.wikiCategory
@@ -171,4 +171,4 @@ const MoveLogList = (props) => {
         </Modal>
     )
 }
-export default withRouter(inject("categoryStore")(observer(MoveLogList)));
+export default withRouter(inject("repositoryDetailStore")(observer(MoveLogList)));

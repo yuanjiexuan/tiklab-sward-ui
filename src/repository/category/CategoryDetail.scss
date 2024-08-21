@@ -70,7 +70,9 @@
     }
     .log-child {
         border-bottom: 1px solid #f0f0f0;
-        
+        .ant-empty {
+            padding: 10px 0;
+        }
         &-list {
             display: flex;
             align-items: center;

@@ -1,25 +1,59 @@
 .change-repository {
     position: relative;
 
+    .repository-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5px;
+        padding: 15px 12px;
+        // color: #000;
+        font-weight: 600;
+        cursor: pointer;
+        .repository-text {
+            min-width: 0;
+            flex: 1;
+            .name {
+                height: 40px;
+                line-height: 40px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .type {
+                font-size: 12px;
+                font-weight: normal;
+                
+            }
+        }
+
+        span {
+            width: 100px;
+            height: 100%;
+            overflow: hidden;
+
+            i {
+                margin-right: 10px;
+            }
+        }
+
+        .repository-aside-icon {
+            width: 15px;
+            height: 15px;
+        }
+    }
+
     .repository-title-icon {
         display: flex;
         width: 100%;
         align-items: center;
+        padding: 15px 21px;
         cursor: pointer;
         .repository-aside-icon {
             width: 15px;
             height: 15px;
         }
-        .repository-toggleCollapsed:hover {
-            background-color: #edf0f5;
-            border-radius: 5px;
-        }
     }
-
-    .title {
-        border-bottom: 1px solid #f0f2f5;
-    }
-
     .change-repository-botton {
         height: 40px;
         line-height: 40px;
@@ -28,12 +62,13 @@
     }
     .change-repository-box {
         position: absolute;
-        top: 25;
+        top: 0;
         z-index: 100;
         width: 300px;
         border-radius: 4px;
         background: #fff;
         box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+        color: #000000;
         .change-repository-head {
             height: 40px;
             line-height: 40px;

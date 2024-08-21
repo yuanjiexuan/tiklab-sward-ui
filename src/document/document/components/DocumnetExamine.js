@@ -8,7 +8,7 @@
  */
 import React, { useEffect, useState } from "react";
 import { Provider, inject, observer } from "mobx-react";
-import {  Row, Col, message, Empty } from 'antd';
+import { Row, Col, message, Empty, Spin } from 'antd';
 import { PreviewEditor, EditorCategory } from "thoughtware-slate-ui";
 import "thoughtware-slate-ui/es/thoughtware-slate.css";
 import "./documentExamine.scss"
@@ -17,13 +17,12 @@ import { getUser } from "thoughtware-core-ui";
 import Comment from "./Comment";
 import CommentShare from "../store/CommentStore";
 import DocumentStore from "../store/DocumentStore";
-import CategoryStore from "../../../repository/common/store/CategoryStore";
+import RepositoryDetailStore from "../../../repository/common/store/RepositoryDetailStore";
 import Button from "../../../common/button/button";
-import { nodata } from "../../../assets/image";
 
 const DocumentExamine = (props) => {
     const { relationWorkStore } = props;
-    const { documentTitle, setDocumentTitle } = CategoryStore;
+    const { documentTitle, setDocumentTitle } = RepositoryDetailStore;
     const [documentDate, setDocumentDate] = useState();
     const path = props.location.pathname.split("/")[1];
     const store = {
@@ -46,10 +45,11 @@ const DocumentExamine = (props) => {
     let [likeNum, setLikeNum] = useState()
     let [commentNum, setCommentNum] = useState()
     const [value, setValue] = useState()
-
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         setDocumentTitle()
         setValue()
+        setLoading(true)
         findDocument(documentId).then((data) => {
             if (data.code === 0) {
                 if (!data.data) {
@@ -60,10 +60,10 @@ const DocumentExamine = (props) => {
                     setValue(data.data.details)
                 } else {
                     setValue()
-                    if(path === "repository"){
-                        props.history.push(`/repository/${repositoryId}/doc/${documentId}/edit`)
+                    if (path === "repository") {
+                        props.history.push(`/repository/${repositoryId}/doc/rich/${documentId}/edit`)
                     }
-                    if(path === "collect"){
+                    if (path === "collect") {
                         props.history.push(`/collect/doc/${documentId}/edit`)
                     }
                 }
@@ -76,7 +76,9 @@ const DocumentExamine = (props) => {
                 setFocus(document.focus)
                 setLikeNum(document.likenumInt)
                 setCommentNum(document.commentNumber)
+                
             }
+            setLoading(false)
         })
         return;
     }, [documentId])
@@ -144,79 +146,80 @@ const DocumentExamine = (props) => {
     }
 
     const goEdit = () => {
-        if(path === "repository"){
-            props.history.push(`/repository/${repositoryId}/doc/${documentId}/edit`)
+        if (path === "repository") {
+            props.history.push(`/repository/${repositoryId}/doc/rich/${documentId}/edit`)
         }
-        if(path === "collect"){
+        if (path === "collect") {
             props.history.push(`/collect/doc/${documentId}/edit`)
         }
     }
 
     return (<Provider {...store}>
-        {
-            docInfo ? <div className="document-examine">
-                {
-                    showComment && <Comment documentId={documentId} setShowComment={setShowComment} commentNum={commentNum} setCommentNum={setCommentNum} />
-                }
-                <div className="examine-top">
-                    <div className="examine-title" id="examine-title">
+        <Spin wrapperClassName="document-examine-spin" spinning={loading} tip="加载中..." >
+            {
+                docInfo ? <div className="document-examine">
+                    {
+                        showComment && <Comment documentId={documentId} setShowComment={setShowComment} commentNum={commentNum} setCommentNum={setCommentNum} />
+                    }
+                    <div className="examine-top">
+                        <div className="examine-title" id="examine-title">
 
-                        <div className="examine-title-top">
-                            {documentTitle}
+                            <div className="examine-title-top">
+                                {documentTitle}
+                            </div>
+                            <div className="examine-title-date">
+                                更新日期：{documentDate}
+                            </div>
                         </div>
-                        <div className="examine-title-date">
-                            更新日期：{documentDate}
+                        <div className="document-action">
+
+                            {
+                                focus ? <svg className="right-icon" aria-hidden="true" onClick={() => deleteFocus()}>
+                                    <use xlinkHref="#icon-collectioned"></use>
+                                </svg>
+                                    :
+                                    <svg className="right-icon" aria-hidden="true" onClick={() => createFocus()}>
+                                        <use xlinkHref="#icon-collection"></use>
+                                    </svg>
+                            }
+                            {
+                                value && <Button className="document-action-edit" onClick={() => goEdit()}>编辑</Button>
+                            }
+                            <Button className="document-action-share" onClick={() => setShareVisible(true)}>分享</Button>
+
                         </div>
                     </div>
-                    <div className="document-action">
-                        
-                        {
-                            focus ? <svg className="right-icon" aria-hidden="true" onClick={() => deleteFocus()}>
-                                <use xlinkHref="#icon-collectioned"></use>
-                            </svg>
-                                :
-                                <svg className="right-icon" aria-hidden="true" onClick={() => createFocus()}>
-                                    <use xlinkHref="#icon-collection"></use>
-                                </svg>
-                        }
-                        {
-                            value && <Button className = "document-action-edit" onClick={() => goEdit()}>编辑</Button>
-                        }
-                        <Button  className = "document-action-share" onClick={() => setShareVisible(true)}>分享</Button>
-
-                    </div>
-                </div>
-                {
-                    value && <>
-                        <div className="document-examine-content">
-                            <Row className="document-examine-row">
-                                <Col xl={{ span: 18, offset: 3 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }}>
-                                    <div className="document-previeweditor">
-                                        <PreviewEditor value={value} relationWorkStore={relationWorkStore} base_url={upload_url} tenant={tenant} />
-                                    </div>
-                                </Col>
-                            </Row>
-                        </div>
-                        <div className="comment-box">
-                            <div className="comment-box-item top-item">
-                                <svg className="midden-icon" aria-hidden="true" onClick={() => setShowComment(!showComment)}>
-                                    <use xlinkHref="#icon-comment"></use>
-                                </svg>
-                                <div className="commnet-num">{commentNum}</div>
+                    {
+                        value && <>
+                            <div className="document-examine-content">
+                                <Row className="document-examine-row">
+                                    <Col xl={{ span: 18, offset: 3 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }}>
+                                        <div className="document-previeweditor">
+                                            <PreviewEditor value={value} relationWorkStore={relationWorkStore} base_url={upload_url} tenant={tenant} />
+                                        </div>
+                                    </Col>
+                                </Row>
                             </div>
-                            <div className="comment-box-item">
-                                <span className="comment-item" onClick={addDocLike}>
-                                    {
-                                        like ? <svg className="midden-icon" aria-hidden="true">
-                                            <use xlinkHref="#icon-zan"></use>
-                                        </svg> : <svg className="midden-icon" aria-hidden="true">
-                                            <use xlinkHref="#icon-dianzan"></use>
-                                        </svg>
-                                    }
-                                </span>
-                                <div className="commnet-num" style={{ top: "37px" }}>{likeNum}</div>
-                            </div>
-                            {/* <div className="comment-box-item">
+                            <div className="comment-box">
+                                <div className="comment-box-item top-item">
+                                    <svg className="midden-icon" aria-hidden="true" onClick={() => setShowComment(!showComment)}>
+                                        <use xlinkHref="#icon-comment"></use>
+                                    </svg>
+                                    <div className="commnet-num">{commentNum}</div>
+                                </div>
+                                <div className="comment-box-item">
+                                    <span className="comment-item" onClick={addDocLike}>
+                                        {
+                                            like ? <svg className="midden-icon" aria-hidden="true">
+                                                <use xlinkHref="#icon-zan"></use>
+                                            </svg> : <svg className="midden-icon" aria-hidden="true">
+                                                <use xlinkHref="#icon-dianzan"></use>
+                                            </svg>
+                                        }
+                                    </span>
+                                    <div className="commnet-num" style={{ top: "37px" }}>{likeNum}</div>
+                                </div>
+                                {/* <div className="comment-box-item">
                             <span className="comment-item" onClick={() => setShowCategory(true)}>
                                 {
                                     like ? <svg className="midden-icon" aria-hidden="true">
@@ -228,31 +231,33 @@ const DocumentExamine = (props) => {
                             </span>
                             <div className="commnet-num" style={{ top: "37px" }}>{likeNum}</div>
                         </div> */}
+                            </div>
+                        </>
+                    }
+                    {
+                        showCategory && <div className="category-box">
+                            <EditorCategory newValue={JSON.parse(value)} setShowCategory={setShowCategory} />
                         </div>
-                    </>
-                }
-                {
-                    showCategory && <div className="category-box">
-                        <EditorCategory newValue={JSON.parse(value)} setShowCategory={setShowCategory} />
-                    </div>
-                }
+                    }
 
-                <ShareModal
-                    documentIds={[documentId]}
-                    shareVisible={shareVisible}
-                    setShareVisible={setShareVisible}
-                    docInfo={docInfo}
-                    createShare={createShare}
-                    updateShare={updateShare}
-                    type={"document"}
-                />
-            </div>
-                :
-                <div className="document-empty">
-                    <Empty description="文档不存在或者已被删除~" />
+                    <ShareModal
+                        documentIds={[documentId]}
+                        shareVisible={shareVisible}
+                        setShareVisible={setShareVisible}
+                        docInfo={docInfo}
+                        createShare={createShare}
+                        updateShare={updateShare}
+                        type={"document"}
+                    />
                 </div>
+                    :
+                    <div className="document-empty">
+                       {!loading && <Empty description="文档不存在或者已被删除~" />} 
+                    </div>
 
-        }
+            }
+        </Spin>
+
 
     </Provider>
 

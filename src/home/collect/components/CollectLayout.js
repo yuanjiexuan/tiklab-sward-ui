@@ -7,7 +7,7 @@
  * @LastEditTime: 2021-08-30 15:06:15
  */
 import React, { useState, useEffect } from "react";
-import { Empty, Layout } from 'antd';
+import { Empty, Layout, Spin } from 'antd';
 import "./CollectLayout.scss";
 import { renderRoutes } from "react-router-config";
 import { observer, inject, Provider } from "mobx-react";
@@ -22,10 +22,13 @@ const CollectLayout = (props) => {
     const [selectKey, setSelectKey] = useState(id);
     const userId = getUser().userId;
     const id = props.location.pathname.split("/")[3];
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const data = {
             masterId: userId
         }
+        setLoading(true)
         findDocumentFocusList(data).then(res => {
             if (res.code === 0) {
                 console.log(res)
@@ -40,36 +43,40 @@ const CollectLayout = (props) => {
                         props.history.push(`/collect/markdown/${document.id}`)
                     }
                 }
+                
             }
-
+            setLoading(false)
         })
 
         return
     }, [])
 
     return (<>
-        {
-            focusDocumentList?.length > 0 ?
-                <Layout className="collect-layout">
+        <Spin wrapperClassName="collect-spin" spinning={loading} tip="加载中..." >
+            {
+                focusDocumentList?.length > 0 ?
+                    <Layout className="collect-layout">
 
-                    <CollectAside
-                        focusDocumentList={focusDocumentList}
-                        selectKey={selectKey}
-                        setSelectKey={setSelectKey}
-                        {...props}
-                    />
-                    <Layout className="collect-layout-right">
-                        {renderRoutes(route.routes)}
+                        <CollectAside
+                            focusDocumentList={focusDocumentList}
+                            selectKey={selectKey}
+                            setSelectKey={setSelectKey}
+                            {...props}
+                        />
+                        <Layout className="collect-layout-right">
+                            {renderRoutes(route.routes)}
+                        </Layout>
+
+
                     </Layout>
+                    :
+                    <div className="collect-empty">
+                        {!loading && <Empty description="暂无收藏文档" />}
+                    </div>
 
+            }
+        </Spin>
 
-                </Layout>
-                :
-                <div className="collect-empty">
-                    <Empty description="暂无收藏文档" />
-                </div>
-
-        }
     </>
 
 

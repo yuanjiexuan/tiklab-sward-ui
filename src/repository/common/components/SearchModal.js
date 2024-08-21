@@ -7,21 +7,21 @@ import { inject, observer } from 'mobx-react';
 import { useDebounce } from '../../../common/utils/debounce';
 import { nodata } from '../../../assets/image';
 const SearchModal = (props) => {
-    const { showSearchModal, setShowSearchModal, repositoryId, categoryStore } = props;
-    const {findRecentList, searchRepositoryDocument} = categoryStore;
+    const { showSearchModal, setShowSearchModal, repositoryId, repositoryDetailStore } = props;
+    const {findRecentList, searchRepositoryDocument} = repositoryDetailStore;
     const [recentDocumentList, setRecentDocumentList] = useState([]);
     const [searchDocumentList, setSearchDocumentList] = useState([])
     const [isSearch, setIsSeach] = useState(false)
     const userId = getUser().userId;
     
-    const toWorkItem = (id) => {
+    const toWorkItem = (item) => {
         if (item.documentType === "document") {
-            props.history.push(`/repository/${repositoryId}/doc/${id}`)
+            props.history.push(`/repository/${repositoryId}/doc/rich/${item.id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/repository/${repositoryId}/markdown/${id}`)
+            props.history.push(`/repository/${repositoryId}/doc/markdown/${item.id}`)
         }
-        sessionStorage.setItem("menuKey", "repository")
+        setShowSearchModal(false)
 
     }
 
@@ -110,7 +110,7 @@ const SearchModal = (props) => {
                         {
                             recentDocumentList.map((documentItem) => {
                                 return <div className="item-box" key={documentItem.id}>
-                                    <div className="item-one" onClick={() => toWorkItem(documentItem.modelId)}>
+                                    <div className="item-one" onClick={() => toWorkItem(documentItem.node)}>
                                         <svg className="img-icon" aria-hidden="true">
                                             <use xlinkHref="#icon-file"></use>
                                         </svg>
@@ -136,13 +136,13 @@ const SearchModal = (props) => {
                         {
                             searchDocumentList.map((documentItem) => {
                                 return <div className="item-box" key={documentItem.id}>
-                                    <div className="item-one" onClick={() => toWorkItem(documentItem.modelId)}>
+                                    <div className="item-one" onClick={() => toWorkItem(documentItem.node)}>
                                         <svg className="img-icon" aria-hidden="true">
                                             <use xlinkHref="#icon-file"></use>
                                         </svg>
-                                        <span>{documentItem.name}</span>
+                                        <span>{documentItem.node.name}</span>
                                         <div className="item-desc">
-                                            {documentItem.wikiRepository?.name}
+                                            {documentItem.node.wikiRepository?.name}
                                         </div>
                                     </div>
 
@@ -160,4 +160,4 @@ const SearchModal = (props) => {
     )
 }
 
-export default withRouter(inject("categoryStore")(observer(SearchModal)));
+export default withRouter(inject("repositoryDetailStore")(observer(SearchModal)));
