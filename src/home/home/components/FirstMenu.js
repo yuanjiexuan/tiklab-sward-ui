@@ -68,13 +68,6 @@ const FirstMenu = (props) => {
             key: 'repository',
             icon: 'repository-' + theme,
             actionIcon: setActiveIcon("repository-")
-        },
-        {
-            to: '/collect',
-            title: '收藏',
-            key: 'collect',
-            icon: 'focus-' + theme,
-            actionIcon: setActiveIcon("focus-")
         }
         // ,
         // {

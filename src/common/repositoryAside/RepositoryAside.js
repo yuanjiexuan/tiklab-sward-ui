@@ -100,26 +100,7 @@ const RepositoryAside = (props) => {
         setTheme(theme)
         return name;
     }
-    const setIcon = (item) => {
-        let iconName = `#icon-${item.icon}`;
-
-        switch (theme) {
-            case "black":
-                iconName = `#icon-${item.whiteIcon}`;
-                break;
-            case "default":
-                iconName = `#icon-${item.icon}`;
-                break;
-            case "blue":
-                iconName = `#icon-${item.whiteIcon}`;
-                break;
-            default:
-                iconName = `#icon-${item.icon}`;
-                break;
-
-        }
-        return iconName;
-    }
+  
     return (
         <Fragment>
             <Sider trigger={null} collapsible collapsed={!isShowText} collapsedWidth="75" width="200"

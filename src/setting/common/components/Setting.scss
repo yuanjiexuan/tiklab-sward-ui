@@ -67,6 +67,7 @@
         .orga-aside-item-left {
             display: inline-flex;
             align-items: center;
+            gap: 5px;
         }
 
         .orga-aside-li {
@@ -83,7 +84,6 @@
 
         .orga-aside-select {
             background-color: var(--thoughtware-gray-400);
-            border-left: 3px solid var(--thoughtware-gray-400);
         }
     }
 

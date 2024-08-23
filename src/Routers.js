@@ -40,8 +40,8 @@ const RepositoryAdd = AsyncComponent(() => import('./repository/repository/compo
 const DocumentEdit = AsyncComponent(() => import("./document/document/components/DocumentEdit.js"))
 const DocumnetExamine = AsyncComponent(() => import("./document/document/components/DocumnetExamine.js"))
 
-const MarkdownDocumentEdit = AsyncComponent(() => import("./document/markdown/components/markdownEdit.js"))
-const MarkdownDocumentView = AsyncComponent(() => import("./document/markdown/components/markdownView.js"))
+const MarkdownDocumentEdit = AsyncComponent(() => import("./document/markdown/components/MarkdownEdit.js"))
+const MarkdownDocumentView = AsyncComponent(() => import("./document/markdown/components/MarkdownView.js"))
 
 const RepositorySet = AsyncComponent(() => import("./repository/setting/common/components/RepositorySet.js"))
 const RepositoryDomainRole = AsyncComponent(() => import('./repository/user/RepositoryDomainRole.js'))
@@ -407,7 +407,32 @@ const Routes = [
                     },
                 ]
             },
-            
+            {
+                path: "/repository/:repositoryId/collect",
+                component: CollectLayout,
+                key: 'collect',
+                routes: [
+                    {
+                        path: "/repository/:repositoryId/collect/rich/:id",
+                        exact: true,
+                        component: DocumnetExamine
+                    },
+                    {
+                        path: "/repository/:repositoryId/collect/rich/:id/edit",
+                        exact: true,
+                        component: DocumentEdit
+                    },
+                    {
+                        path: "/repository/:repositoryId/collect/markdown/:id",
+                        component: MarkdownDocumentView,
+                        exact: true
+                    },
+                    {
+                        path: "/repository/:repositoryId/collect/markdown/:id/edit",
+                        component: MarkdownDocumentEdit
+                    },
+                ]
+            },
             // {
             //     path: "/repositorySet/:repositoryId",
             //     component: RepositorySet,

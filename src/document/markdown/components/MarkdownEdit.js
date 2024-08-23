@@ -24,7 +24,7 @@ const MarkdownEdit = (props) => {
     const documentId = props.match.params.id;
     const repositoryId = props.match.params.repositoryId;
     const [value, setValue] = useState();
-    const path = props.location.pathname.split("/")[1];
+    const path = props.location.pathname.split("/")[3];
 
     useEffect(() => {
         setValue()
@@ -132,11 +132,11 @@ const MarkdownEdit = (props) => {
     }
 
     const goExamine = () => {
-        if (path === "repository") {
+        if (path === "doc") {
             props.history.push(`/repository/${repositoryId}/doc/markdown/${documentId}`)
         }
         if (path === "collect") {
-            props.history.push(`/collect/doc/${documentId}`)
+            props.history.push(`/repository/${repositoryId}/collect/markdown/${documentId}`)
         }
     }
     return (

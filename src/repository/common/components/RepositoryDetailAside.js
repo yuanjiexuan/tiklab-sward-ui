@@ -42,7 +42,14 @@ const ProjectDetailAside = (props) => {
             key: "doc",
             encoded: "doc"
         },
-      
+        {   
+            title: '收藏',
+            icon: 'focus-' + theme,
+            defaultIcon: "focus-default",
+            id: `/repository/${repositoryId}/collect`,
+            key: 'collect',
+            encoded: "doc"
+        }
     ];
 
 

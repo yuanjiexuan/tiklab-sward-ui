@@ -2,25 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./Collect.scss";
 import { Col, Empty, Layout, Row } from "antd";
 
-import CollectStore from "../store/CollectStore";
-import { useDebounce } from "../../../common/utils/debounce";
 import "./CollectAside.scss"
 const { Sider } = Layout;
 const CollectAside = (props) => {
     const {focusDocumentList, selectKey, setSelectKey } = props;
-    const { findDocumentFocusList, createRecent, documentCondition } = CollectStore;
-   
-    
-    
-
-
+    const repositoryId = props.match.params.repositoryId;
 
     const goFocusDocumentDetail = item => {
         if (item.documentType === "document") {
-            props.history.push(`/collect/doc/${item.id}`)
+            props.history.push(`/repository/${repositoryId}/collect/rich/${item.id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/collect/markdown/${item.id}`)
+            props.history.push(`/repository/${repositoryId}/collect/markdown/${item.id}`)
         }
         setSelectKey(item.id)
     }

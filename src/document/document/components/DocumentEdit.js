@@ -12,10 +12,11 @@ import { observer, inject } from "mobx-react";
 import { withRouter } from "react-router-dom";
 import "./documentEdit.scss";
 import { EditorBigContent, EditorBig } from "thoughtware-slate-ui";
+import "thoughtware-slate-ui/es/thoughtware-slate.css";
 import Button from "../../../common/button/button";
 import DocumentStore from "../store/DocumentStore";
 import RepositoryDetailStore from "../../../repository/common/store/RepositoryDetailStore";
-import "thoughtware-slate-ui/es/thoughtware-slate.css";
+
 import { getUser } from "thoughtware-core-ui";
 import { useDebounce } from "../../../common/utils/debounce";
 import { updateNodeName } from "../../../common/utils/treeDataAction";
@@ -41,7 +42,7 @@ const DocumentEdit = (props) => {
     const [templateVisible, setTemplateVisible] = useState(false);
     const [templateList, setTemplateList] = useState()
     const imgUrlArray = [weekly, weeklyNomal, todoWork, projectPlan, projectOperation]
-    const path = props.location.pathname.split("/")[1];
+    const path = props.location.pathname.split("/")[3];
     useEffect(() => {
         findDocumentTemplateList().then(data => {
             if (data.code === 0) {
@@ -171,11 +172,11 @@ const DocumentEdit = (props) => {
     }
 
     const goExamine = () => {
-        if(path === "repository"){
+        if(path === "doc"){
             props.history.push(`/repository/${repositoryId}/doc/rich/${documentId}`)
         }
         if(path === "collect"){
-            props.history.push(`/collect/doc/${documentId}`)
+            props.history.push(`/repository/${repositoryId}/collect/rich/${documentId}`)
         }
     }
     return (

@@ -24,7 +24,7 @@ const DocumentExamine = (props) => {
     const { relationWorkStore } = props;
     const { documentTitle, setDocumentTitle } = RepositoryDetailStore;
     const [documentDate, setDocumentDate] = useState();
-    const path = props.location.pathname.split("/")[1];
+    const path = props.location.pathname.split("/")[3];
     const store = {
         documentStore: DocumentStore
     }
@@ -60,11 +60,11 @@ const DocumentExamine = (props) => {
                     setValue(data.data.details)
                 } else {
                     setValue()
-                    if (path === "repository") {
+                    if (path === "doc") {
                         props.history.push(`/repository/${repositoryId}/doc/rich/${documentId}/edit`)
                     }
                     if (path === "collect") {
-                        props.history.push(`/collect/doc/${documentId}/edit`)
+                        props.history.push(`/repository/${repositoryId}/collect/rich/${documentId}/edit`)
                     }
                 }
                 const document = data.data;
@@ -146,11 +146,11 @@ const DocumentExamine = (props) => {
     }
 
     const goEdit = () => {
-        if (path === "repository") {
+        if (path === "doc") {
             props.history.push(`/repository/${repositoryId}/doc/rich/${documentId}/edit`)
         }
         if (path === "collect") {
-            props.history.push(`/collect/doc/${documentId}/edit`)
+            props.history.push(`/repository/${repositoryId}/collect/rich/${documentId}/edit`)
         }
     }
 

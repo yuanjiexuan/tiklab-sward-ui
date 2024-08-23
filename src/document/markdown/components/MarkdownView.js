@@ -40,7 +40,7 @@ const DocumentExamine = (props) => {
     let [commentNum, setCommentNum] = useState()
     const [value, setValue] = useState()
     const [markdownValue, setMarkdownValue] = useState();
-    const path = props.location.pathname.split("/")[1];
+    const path = props.location.pathname.split("/")[3];
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         setDocumentTitle()
@@ -150,11 +150,11 @@ const DocumentExamine = (props) => {
     }
 
     const goEdit = () => {
-        if (path === "repository") {
+        if (path === "doc") {
             props.history.push(`/repository/${repositoryId}/doc/markdown/${documentId}/edit`)
         }
         if (path === "collect") {
-            props.history.push(`/collect/doc/${documentId}/edit`)
+            props.history.push(`/repository/${repositoryId}/collect/markdown/${documentId}/edit`)
         }
     }
 

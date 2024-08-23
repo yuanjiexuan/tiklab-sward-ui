@@ -99,7 +99,7 @@ const CategoryDetail = (props) => {
                                     </svg>
                                     <div className="title-name">
                                         <div className="name">{categoryTitle}</div>
-                                        <div className="master">{logDetail.master.name}</div>
+                                        <div className="master">{logDetail.master.nickname}</div>
                                     </div>
 
                                 </div>

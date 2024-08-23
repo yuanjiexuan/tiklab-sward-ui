@@ -72,7 +72,7 @@ const SetAside = (props) => {
                 >
                     <span className="orga-aside-item-left">
                         {
-                            data.icon && <svg className="menu-icon" aria-hidden="true">
+                            data.icon && <svg className="icon-15" aria-hidden="true">
                                 <use xlinkHref={`#icon-${data.icon}`}></use>
                             </svg>
                         }
@@ -81,7 +81,7 @@ const SetAside = (props) => {
                     </span>
                     {
                         (data.islink && !authType) && <div className="orga-aside-item-icon">
-                            <svg className="img-icon-16" aria-hidden="true">
+                            <svg className="icon-15" aria-hidden="true">
                                 <use xlinkHref={`#icon-outside`}></use>
                             </svg>
                         </div>
@@ -122,7 +122,7 @@ const SetAside = (props) => {
 
                         {
                             item.icon && <span to={item.id} className="orga-aside-item-left">
-                                <svg className="menu-icon" aria-hidden="true">
+                                <svg className="icon-15" aria-hidden="true">
                                     <use xlinkHref={`#icon-${item.icon}`}></use>
                                 </svg>
                                 <span className="orga-aside-title">{item.title}</span>
@@ -165,7 +165,7 @@ const SetAside = (props) => {
                 <ul style={{ padding: 0 }} key="0" className="orga-aside-top">
                     <div className="orga-aside-name">设置</div>
                     <div className="orga-aside-back" onClick={() => backProject()}>
-                        <svg className="svg-icon" aria-hidden="true" >
+                        <svg className="icon-15" aria-hidden="true" >
                             <use xlinkHref="#icon-home-default"></use>
                         </svg>
                         返回首页

@@ -3,8 +3,6 @@ import "./Collect.scss";
 import { Col, Empty, Row } from "antd";
 import { getUser } from "thoughtware-core-ui";
 import CollectStore from "../store/CollectStore";
-import ImgComponent from "../../../common/imgComponent/ImgComponent";
-import { nodata } from "../../../assets/image";
 import InputSearch from "../../../common/input/inputSearch";
 import { useDebounce } from "../../../common/utils/debounce";
 import PaginationCommon from "../../../common/page/Page";
@@ -12,7 +10,7 @@ import PaginationCommon from "../../../common/page/Page";
 const Collect = (props) => {
     const { findDocumentFocusPage, findFocusRepositoryList, createRecent, documentCondition } = CollectStore;
     const userId = getUser().userId;
-
+    const repositoryId = props.match.params.repositoryId;
     const [focusDocumentList, setFocusDocumentList] = useState([]);
     const [focusRepositoryList, setFocusRepositoryList] = useState([]);
 
@@ -36,25 +34,14 @@ const Collect = (props) => {
         return
     }, [])
 
-    const goRepositoryDetail = (repository) => {
-        const params = {
-            name: repository.name,
-            model: "repository",
-            modelId: repository.id,
-            master: { id: userId },
-            wikiRepository: { id: repository.id }
-        }
-        createRecent(params)
-        sessionStorage.setItem("menuKey", "repository")
-        props.history.push({ pathname: `/repository/${repository.id}/overview` })
-    }
+
 
     const goFocusDocumentDetail = item => {
         if (item.documentType === "document") {
-            props.history.push(`/repository/${item.wikiRepository.id}/doc/${item.id}`)
+            props.history.push(`/repository/${item.wikiRepository.id}/collect/doc/${item.id}`)
         }
         if (item.documentType === "markdown") {
-            props.history.push(`/repository/${item.wikiRepository.id}/markdown/${item.id}`)
+            props.history.push(`/repository/${item.wikiRepository.id}/collect/markdown/${item.id}`)
         }
         sessionStorage.setItem("menuKey", "repository")
     }

@@ -65,9 +65,10 @@ const RepositoryDocList = (props) => {
             dimensions: [1, 2]
         }
         findNodePageTree(data).then((data) => {
-            setRepositoryCatalogueList(data.data)
+            setRepositoryCatalogueList([...data.data])
             if (data.data.length > 0 && !id) {
                 const item = data.data[0];
+                console.log("repositoryCatalogueList",repositoryCatalogueList)
                 goDetail(item)
             }
             setLoading(false)
@@ -93,10 +94,10 @@ const RepositoryDocList = (props) => {
         event.preventDefault()
         event.stopPropagation();
         event.nativeEvent.stopImmediatePropagation()
-        goDetail(item)
+        goDetail(item, "click")
     }
 
-    const goDetail = (item) => {
+    const goDetail = (item, action) => {
         const params = {
             name: item.name,
             model: item.type,
@@ -105,13 +106,14 @@ const RepositoryDocList = (props) => {
             wikiRepository: { id: repositoryId }
         }
         createRecent(params)
-        if (item.type === "category") {
-            findCategoryChildren(item.id, item.type)
-        }
 
         if (item.type === "category") {
+            if(action === "click"){
+                findCategoryChildren(item.id, item.type)
+                setOpenClickCategory(item.id)
+            }
             localStorage.setItem("categoryId", item.id);
-            setOpenClickCategory(item.id)
+            
             props.history.push(`/repository/${repositoryId}/doc/folder/${item.id}`)
         }
         if (item.documentType === "document") {
@@ -138,6 +140,7 @@ const RepositoryDocList = (props) => {
                         if (data.code === 0) {
                             const list = appendNodeInTree(id, repositoryCatalogueList, data.data, "overview")
                             setRepositoryCatalogueList([...list])
+                            console.log(list)
                             setRequsetedCategory(requsetedCategory.concat(id))
                         }
                     })
@@ -570,7 +573,7 @@ const RepositoryDocList = (props) => {
 
                         <div className="repository-menu">
                             {
-                                repositoryCatalogueList?.length > 0   ? <Tree
+                                repositoryCatalogueList?.length > 0  ? <Tree
                                     draggable
                                     showIcon
                                     rootStyle="repository-menu-tree"

@@ -23,10 +23,12 @@ const CollectLayout = (props) => {
     const userId = getUser().userId;
     const id = props.location.pathname.split("/")[3];
     const [loading, setLoading] = useState(true);
-
+    const repositoryId = props.match.params.repositoryId;
+    
     useEffect(() => {
         const data = {
-            masterId: userId
+            masterId: userId,
+            repositoryId: repositoryId
         }
         setLoading(true)
         findDocumentFocusList(data).then(res => {
@@ -37,10 +39,10 @@ const CollectLayout = (props) => {
                     const document = res.data[0]?.node;
                     setSelectKey(document.id);
                     if (document.documentType === "document") {
-                        props.history.push(`/collect/doc/${document.id}`)
+                        props.history.push(`/repository/${repositoryId}/collect/rich/${document.id}`)
                     }
                     if (document.documentType === "markdown") {
-                        props.history.push(`/collect/markdown/${document.id}`)
+                        props.history.push(`/repository/${repositoryId}/collect/markdown/${document.id}`)
                     }
                 }
                 
