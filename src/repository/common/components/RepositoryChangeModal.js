@@ -116,11 +116,11 @@ const RepositoryChangeModal = (props) => {
                                 // alt={repository?.projectName}
                                 className="icon-32"
                             />
-                            <div className={`repository-toggleCollapsed`}>
+                            {/* <div className={`repository-toggleCollapsed`}>
                                 <svg className="icon-15" aria-hidden="true">
                                     <use xlinkHref={`${theme === "default" ? "#icon-down-gray" : "#icon-down-white"}`}></use>
                                 </svg>
-                            </div>
+                            </div> */}
                         </div>
                     </Tooltip>
                 }

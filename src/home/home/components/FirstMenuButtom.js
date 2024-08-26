@@ -1,7 +1,6 @@
 import React, { Component, useState } from "react";
 import { AppLink, AvatarLink, HelpLink } from 'thoughtware-licence-ui';
 import { AppLink as AppLinkCloud, AvatarLink as AvatarLinkCloud, HelpLink as HelpLinkCloud } from 'thoughtware-licence-cloud-ui';
-import Search from "../../search/components/Search";
 import MessageList from "./MessageList";
 import UserIcon from "../../../common/UserIcon/UserIcon"
 import "./FirstMenuButtom.scss"
@@ -49,7 +48,7 @@ const FirstMenuButtom = (props) => {
                             iconComponent={
                                 <div className="first-menu-text-item">
                                     <UserIcon name={nickname} />
-                                    <div>个人中心</div>
+                                    <div>{nickname}</div>
                                 </div>
                             }
                             {...props}
@@ -86,7 +85,7 @@ const FirstMenuButtom = (props) => {
                         <AvatarLinkCloud
                             changeTheme={changeTheme}
                             iconComponent={
-                                <div className="first-menu-link-item" data-title-right="个人中心">
+                                <div className="first-menu-link-item" data-title-right={nickname}>
                                     <UserIcon name={nickname} />
                                 </div>
                             }
@@ -132,7 +131,7 @@ const FirstMenuButtom = (props) => {
                                     iconComponent={
                                         <div className="first-menu-text-item">
                                             <UserIcon name={nickname} />
-                                            <div>个人中心</div>
+                                            <div>{nickname}</div>
                                         </div>
                                     }
                                     {...props}
@@ -169,7 +168,7 @@ const FirstMenuButtom = (props) => {
                                 <AvatarLink
                                     changeTheme={changeTheme}
                                     iconComponent={
-                                        <div className="first-menu-link-item" data-title-right="个人中心">
+                                        <div className="first-menu-link-item" data-title-right={nickname}>
                                             <UserIcon name={nickname} />
                                         </div>
                                     }

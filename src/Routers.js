@@ -25,7 +25,7 @@ const NoAccessPage = AsyncComponent(() => import('./login/SystemNoAccessPage.js'
 const ProjectNoAccessPage = AsyncComponent(() => import('./login/ProjectNoAccessPage.js'));
 const ExcludeProductUserContent = AsyncComponent(() => import('./login/ExcludeProductUserPage.js'))
 
-const Index = AsyncComponent(() => import('./home/home/components/Layout.js'))
+const Index = AsyncComponent(() => import('./home/home/components/LayoutCe.js'))
 const RepositoryDetail = AsyncComponent(() => import('./repository/common/components/RepositoryLayout.js'))
 const Survey = AsyncComponent(() => import('./repository/overview/components/Survey.js'))
 const DynamicList = AsyncComponent(() => import("./repository/overview/components/DynamicList.js"))

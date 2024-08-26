@@ -187,7 +187,7 @@ const ShareModal = (props) => {
             <div style={{textAlign: "right"}}>
                 <Button onClick={()=>copy()} >复制</Button>
             </div>
-            <div className="share-title">
+            {/* <div className="share-title">
                 分享到：
             </div>
             <div className="share-box">
@@ -221,7 +221,7 @@ const ShareModal = (props) => {
                     </svg>
                     <span className="share-name">微博</span>
                 </div>
-            </div>
+            </div> */}
         </Modal>
     )
 }

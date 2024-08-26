@@ -449,12 +449,12 @@ const RepositoryDocList = (props) => {
             onMouseLeave={(event) => { event.stopPropagation(), setIsHover(null) }}
         >
             {
-                item.documentType === "document" && <svg className="icon-18" aria-hidden="true">
+                item.documentType === "document" && <svg className="icon-15" aria-hidden="true">
                     <use xlinkHref="#icon-file"></use>
                 </svg>
             }
             {
-                item.documentType === "markdown" && <svg className="icon-18" aria-hidden="true">
+                item.documentType === "markdown" && <svg className="icon-15" aria-hidden="true">
                     <use xlinkHref="#icon-minmap"></use>
                 </svg>
             }
@@ -491,7 +491,7 @@ const RepositoryDocList = (props) => {
             onMouseOver={(event) => { event.stopPropagation(), setIsHover(item.id) }}
             onMouseLeave={(event) => { event.stopPropagation(), setIsHover(null) }}
         >
-            <svg className="icon-18" aria-hidden="true">
+            <svg className="icon-15" aria-hidden="true">
                 <use xlinkHref="#icon-folder"></use>
             </svg>
             <div className={`${isRename === item.id ? "repository-input" : "repository-view"}`}
@@ -562,11 +562,11 @@ const RepositoryDocList = (props) => {
                         </div>
                         <div className="repository-search" onClick={() => setShowSearchModal(true)}>
                             {/* <div className="repository-search-input"> */}
-                            <svg className="svg-icon" aria-hidden="true">
+                            <svg className="icon-13" aria-hidden="true">
                                 <use xlinkHref="#icon-search"></use>
                             </svg>
                             <span>
-                                搜索文档
+                                搜索
                             </span>
                             {/* </div> */}
                         </div>

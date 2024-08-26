@@ -7,7 +7,7 @@
         position: fixed;
 
         .repository-aside {
-            background-color: var(--thoughtware-gray-600);
+            background-color: #fff;
             border-right: 1px solid #f0f2f5;
             height: 100%;
             width: 270px;
@@ -43,8 +43,8 @@
             }
 
             .repository-search {
-                margin: 0 10px 10px;
-                background-color: #fff;
+                margin: 0 10px;
+                background-color: #f6f7f8;
                 display: flex;
                 align-items: center;
                 gap: 10px;
@@ -68,8 +68,10 @@
             display: flex;
             align-items: center;
             border-radius: 4px;
+            padding: 0 !important;
+            margin-bottom: 5px;
             .ant-tree-switcher {
-                padding: 10px 0;
+                padding: 8px 0;
 
                 .ant-tree-switcher-icon {
                     padding: 5px 0;
@@ -94,11 +96,11 @@
         }
 
         .repository-menu-node:hover {
-            background-color: #EDF0F5;
+            background-color: #f6f7f8;
         }
 
         .repository-menu-select {
-            background-color: #EDF0F5;
+            background-color: #f6f7f8;
         }
 
        
@@ -111,13 +113,13 @@
             background-color: #fff;
             padding: 10px;
             .repository-menu-submenu {
-                height: 40px;
+                height: 36px;
                 display: flex;
-                line-height: 40px;
+                line-height: 36px;
                 width: 100%;
                 align-items: center;
                 // justify-content: space-between;
-                padding: 10px 10px 10px 0;
+                padding-right: 10px;
                 gap: 5px;
 
                 .img-icon {

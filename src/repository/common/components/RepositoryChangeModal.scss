@@ -6,7 +6,7 @@
         align-items: center;
         justify-content: space-between;
         gap: 5px;
-        padding: 15px 12px;
+        padding: 15px;
         // color: #000;
         font-weight: 600;
         cursor: pointer;
@@ -14,8 +14,6 @@
             min-width: 0;
             flex: 1;
             .name {
-                height: 40px;
-                line-height: 40px;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;

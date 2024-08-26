@@ -1,12 +1,13 @@
-
 .document-markdown-edit {
     background-color: #fff;
     height: 100%;
+
     .edit-top {
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0 20px;
+
         .edit-title {
             padding-top: 10px;
 
@@ -17,6 +18,7 @@
                 font-size: 16px;
                 outline: none;
             }
+
             .edit-title-date {
                 height: 25px;
                 line-height: 25px;
@@ -24,9 +26,11 @@
                 color: #666;
             }
         }
+
         .edit-title-top:hover {
             background-color: #fff;
         }
+
         // .edit-title:focus-visible {
         //     outline: 0;
         //     border: 2px solid var(--thoughtware-blue);
@@ -39,48 +43,59 @@
             background-color: #fff;
             // border: 1px solid var(--thoughtware-blue);
         }
+
         .document-edit {
             display: flex;
             align-items: center;
         }
+
         .inline {
             border-left: 2px solid #f0f0f0;
             height: 20px;
             width: 1px;
             margin-right: 20px;
         }
-        
+
     }
+
     .edit-markdown {
         height: calc(100% - 60px);
+
         .markdown-content {
             height: calc(100% - 50px);
         }
+
         .markdown-edit {
             overflow: auto;
         }
+
         .markdown-view {
             overflow: auto;
         }
+
         .markdown-edit {
             overflow-y: auto;
             overflow-x: hidden;
         }
+
         .markdown-editor-nav-bar {
             background-color: var(--thoughtware-gray-600);
             border-bottom: 0;
         }
     }
+
     .edit-big {
         background-color: #F7F9FE;
         padding-left: 13px;
+
         .edit-big-toolbar {
             border-bottom: 0;
             justify-content: flex-start;
-            
+
 
         }
     }
+
     .edit-right {
         display: flex;
         justify-content: space-between;
@@ -91,26 +106,39 @@
             background: #0d66e4ad;
             color: #fff;
             font-weight: normal;
+            height: 25px;
+            line-height: 25px;
+            font-size: 12px;
+            padding: 5px 10px;
         }
+
         .edit-right-eqit {
             background: #f0f2f5;
             font-weight: normal;
+            height: 25px;
+            line-height: 25px;
+            font-size: 12px;
+            padding: 5px 10px;
         }
+
         .icon-svg {
             width: 20px;
             height: 20px;
             margin-right: 20px;
         }
+
         .right-icon {
             width: 20px;
             height: 20px;
         }
     }
+
     .document-examine-content {
         margin-top: 10px;
         height: calc(100% - 120px);
         overflow: auto;
     }
+
     .document-title-input {
         margin: 20px 0;
         height: 50px;

@@ -125,13 +125,11 @@ const RepositoryAside = (props) => {
                                     :
                                     <div className={`project-menu-submenu-icon`}
                                         onClick={() => backProject()}
+                                        data-title-right={backName}
                                     >
-                                        <svg className="svg-icon" aria-hidden="true">
+                                        <svg className="icon-24" aria-hidden="true">
                                             <use xlinkHref={`#icon-home-${theme}`}></use>
                                         </svg>
-                                        <span>
-                                            {backName}
-                                        </span>
                                     </div>
                             }
                         </div>

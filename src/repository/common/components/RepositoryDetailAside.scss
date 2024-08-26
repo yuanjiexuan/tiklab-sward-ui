@@ -8,7 +8,7 @@
 
         .repository-aside {
             background-color: #f6f7f8;
-            border-right: 1px solid #f0f2f5;
+            border-right: 1px solid #eaeaea;
             height: 100%;
             width: 270px;
 
@@ -81,7 +81,7 @@
         .repository-menu-node {
             display: flex;
             align-items: center;
-
+            padding: 0 !important;
             .ant-tree-switcher {
                 padding: 10px 0;
 

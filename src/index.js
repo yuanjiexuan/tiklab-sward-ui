@@ -23,6 +23,7 @@ import "./assets/index";
 import { privilegeStores } from "thoughtware-privilege-ui/es/store";
 import zhCN from 'antd/es/locale/zh_CN';
 import { ConfigProvider } from 'antd';
+import { useVersion } from "thoughtware-eam-ui/es/utils";
 enableAxios()
 const Index = observer(() => {
     const { i18n } = useTranslation();
@@ -32,7 +33,7 @@ const Index = observer(() => {
         ...store
     }
 
-    
+    useVersion()
     return (
         <Provider {...allStore}>
             <ConfigProvider locale={zhCN}>

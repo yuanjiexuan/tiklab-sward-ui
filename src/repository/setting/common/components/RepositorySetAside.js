@@ -110,9 +110,9 @@ const RepositorySetAside = (props) => {
             <Sider trigger={null} collapsible collapsed={!isShowText} collapsedWidth="50" width="200">
                 <div className={`repository-set-aside ${isShowText ? "" : "repository-icon"}`}>
                     <div className="repository-set-title">
-                        <svg className="menu-icon" aria-hidden="true" onClick={() => backRepository()}>
+                        {/* <svg className="menu-icon" aria-hidden="true" onClick={() => backRepository()}>
                             <use xlinkHref="#icon-backrepository"></use>
-                        </svg>
+                        </svg> */}
                         <span className={`${isShowText ? "" : "repository-notext"}`} style={{ marginRight: "20px" }}>
                             设置
                         </span>

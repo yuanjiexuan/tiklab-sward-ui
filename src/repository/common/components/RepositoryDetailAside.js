@@ -48,7 +48,7 @@ const ProjectDetailAside = (props) => {
             defaultIcon: "focus-default",
             id: `/repository/${repositoryId}/collect`,
             key: 'collect',
-            encoded: "doc"
+            encoded: "focus"
         }
     ];
 
