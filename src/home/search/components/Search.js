@@ -58,9 +58,17 @@ const Search = (props) => {
 
     // 防抖
     const search = useDebounce((value) => {
+
         const keyWord = value.target.value;
         if (keyWord) {
-            getSearch(value.target.value)
+            setDocloading(true)
+            setRepositoryloading(true)
+            getSearch(value.target.value).then(res => {
+                if (res.code === 0) {
+                    setDocloading(false)
+                    setRepositoryloading(false)
+                }
+            })
             setIsSeach(true)
         } else {
             findRecent()
@@ -132,8 +140,6 @@ const Search = (props) => {
                             <input
                                 className={`search-input`}
                                 onChange={changeValue}
-                                // onFocus={showBox}
-                                // ref={inputRef}
                                 placeholder="搜索文档，知识库"
 
                             />
@@ -156,9 +162,9 @@ const Search = (props) => {
                                                                     src={wikiItem.iconUrl}
                                                                     alt=""
                                                                 />
-                                                                <span>{wikiItem.name}</span>
+                                                                <span>{wikiItem?.name}</span>
                                                                 <div className="item-desc">
-                                                                    {wikiItem.createTime}
+                                                                    {wikiItem?.createTime}
                                                                 </div>
                                                             </div>
 
@@ -193,7 +199,13 @@ const Search = (props) => {
 
                                     </Fragment>
                                         :
-                                        <Empty description="暂时没有数据~" />
+                                        <>
+                                            {
+                                                !docloading && <Empty description="暂时没有数据~" />
+                                            }
+                                        </>
+
+
                                 }
                             </div>
                                 :
@@ -237,7 +249,7 @@ const Search = (props) => {
                                     </div>
                                     <div className="sort-box">
                                         <div className="sort-title">最近查看文档</div>
-                                        <Spin wrapperClassName="search-repository-spin"  spinning={repositoryloading} tip="加载中..." >
+                                        <Spin wrapperClassName="search-repository-spin" spinning={repositoryloading} tip="加载中..." >
                                             {
                                                 searchDocumentList.length > 0 ? <>
                                                     {

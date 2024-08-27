@@ -12,7 +12,7 @@ import AddDropDown from "../../common/components/AddDropDown";
 import DyncmicTimeAxis from "./DyncmicTimeAxis";
 import ImgComponent from "../../../common/imgComponent/ImgComponent";
 const Survey = (props) => {
-    const { findRepository, findLogpage, logList, findUserList, findDocumentRecentList,
+    const { findRepository, findLogpage, logList, findUserList, findRecentList,
         findCategoryListTreeById, findDocumentFocusPage, opLogCondition } = SurveyStore;
 
     const { expandedTree, setExpandedTree, repositoryCatalogueList } = RepositoryDetailStore;
@@ -44,7 +44,7 @@ const Survey = (props) => {
             }]
         }
         setLoading(true)
-        findDocumentRecentList(recentParams).then(res => {
+        findRecentList(recentParams).then(res => {
             if (res.code === 0) {
                 setRecentViewDocumentList([...res.data])
                 setLoading(false)
@@ -151,7 +151,7 @@ const Survey = (props) => {
                                 </div>
 
                                 <div className="top-right">
-                                    <AddDropDown category={null} isButton={true} button = "text" />
+                                    <AddDropDown category={null} isButton={true} button="text" />
                                     <Button>分享</Button>
                                 </div>
                             </div>
@@ -163,47 +163,50 @@ const Survey = (props) => {
                             <span className="name">常用文档</span>
                         </div>
                         <Spin wrapperClassName="document-spin" spinning={loading} tip="加载中..." >
-                        {
-                            recentViewDocumentList.length > 0 ? <div>
-                                {
-                                    recentViewDocumentList && recentViewDocumentList.map((item) => {
-                                        return <div className="document-list-item" key={item.id} >
-                                            <div className='document-item-left'>
-                                                <div>
-                                                    {
-                                                        item.documentType === "markdown" &&
-                                                        <svg className="document-icon" aria-hidden="true">
-                                                            <use xlinkHref="#icon-minmap"></use>
-                                                        </svg>
-                                                    }
-                                                    {
-                                                        item.documentType === "document" &&
-                                                        <svg className="document-icon" aria-hidden="true">
-                                                            <use xlinkHref="#icon-file"></use>
-                                                        </svg>
-                                                    }
-                                                </div>
-
-                                                <div className='document-item-text'>
-                                                    <div className='document-title' onClick={() => goDocumentDetail(item)}>{item.name}</div>
-                                                    <div className='document-master'>{item.master.nickname}</div>
-                                                </div>
-                                            </div>
-                                            <div >{item.updateTime?.slice(0, 10)}</div>
-                                        </div>
-                                    })
-                                }
-                            </div>
-                            :
-                            <>
                             {
-                                !loading &&  <Empty description="暂时没有查看过文档~" />
+                                recentViewDocumentList.length > 0 ? <div>
+                                    {
+                                        recentViewDocumentList && recentViewDocumentList.map((item, index) => {
+                                            if (index < 10) {
+                                                return <div className="document-list-item" key={item.id} >
+                                                    <div className='document-item-left'>
+                                                        <div>
+                                                            {
+                                                                item.node.documentType === "markdown" &&
+                                                                <svg className="document-icon" aria-hidden="true">
+                                                                    <use xlinkHref="#icon-minmap"></use>
+                                                                </svg>
+                                                            }
+                                                            {
+                                                                item.node.documentType === "document" &&
+                                                                <svg className="document-icon" aria-hidden="true">
+                                                                    <use xlinkHref="#icon-file"></use>
+                                                                </svg>
+                                                            }
+                                                        </div>
+
+                                                        <div className='document-item-text'>
+                                                            <div className='document-title' onClick={() => goDocumentDetail(item)}>{item.name}</div>
+                                                            <div className='document-master'>{item.master.nickname}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div >{item?.recentTime?.slice(0, 10)}</div>
+                                                </div>
+                                            }
+
+                                        })
+                                    }
+                                </div>
+                                    :
+                                    <>
+                                        {
+                                            !loading && <Empty description="暂时没有查看过文档~" />
+                                        }
+                                    </>
+
                             }
-                            </>
-                           
-                        }
                         </Spin>
-                        
+
                     </div>
 
 

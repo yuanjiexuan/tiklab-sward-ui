@@ -13,7 +13,6 @@ import "./Setting.scss"
 import { renderRoutes } from "react-router-config";
 import { SystemNav } from "thoughtware-privilege-ui";
 import { setDevRouter, setPrdRouter } from "./SetRouter";
-import HeaderCe from "../../../home/home/components/HeaderCe";
 import { inject, observer } from 'mobx-react';
 import { getUser } from 'thoughtware-core-ui';
 const { Sider, Content } = Layout;

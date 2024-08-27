@@ -6,16 +6,22 @@ import React from "react";
 import setImageUrl from "../utils/setImageUrl";
 
 const ImgComponent = (props) => {
-    const {src, alt, className, title, style, isRemote} = props;
-    const url = version === "cloud" ? `/images/${src}`: `/images/${src}`
+    const { src, alt, className, title, style, isRemote } = props;
+    // const url = version === "cloud" ? `/images/${src}`: `/images/${src}`;
+    const url = isRemote ? setImageUrl(src) : `/images/${src}`
     return (
-        <img
-            src={isRemote ? setImageUrl(src) : url}
-            alt={alt}
-            className={className}
-            title = {title}
-            style = {style}
-    />
+        <>
+            {
+                url && <img
+                    src={url}
+                    alt={alt}
+                    className={className}
+                    title={title}
+                    style={style}
+                />
+            }
+        </>
+
     )
 }
 

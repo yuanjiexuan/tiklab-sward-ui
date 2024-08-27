@@ -31,6 +31,8 @@ class SearchStore{
         }else {
             params.append('keyword', null ); 
         }
+        this.searchWikiList = [];
+        this.searchDocumentList = [];
         const data = await Service("/search/searchForTop",params);
         if(data.code=== 0){
             this.searchWikiList = data.data.wiki;

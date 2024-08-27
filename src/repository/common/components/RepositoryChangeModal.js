@@ -8,7 +8,7 @@ import ImgComponent from "../../../common/imgComponent/ImgComponent";
 import { Tooltip } from "antd";
 
 const RepositoryChangeModal = (props) => {
-    const {isShowText, theme} = props;
+    const { isShowText, theme } = props;
     const [showMenu, setShowMenu] = useState(false);
     const [selectRepository, setSelectRepository] = useState(false)
     const { findRecentRepositoryList, getAllRepositorylist, allRepositorylist, searchRepository } = RepositoryDetailStore;
@@ -33,9 +33,9 @@ const RepositoryChangeModal = (props) => {
         modelRef.current.style.left = setButton.current.clientWidth
     }
 
-    useEffect(()=> {
-        searchRepository(repositoryId).then(res=> {
-            if(res.code === 0){
+    useEffect(() => {
+        searchRepository(repositoryId).then(res => {
+            if (res.code === 0) {
                 setRepository(res.data)
             }
         })
@@ -88,11 +88,14 @@ const RepositoryChangeModal = (props) => {
             <div ref={setButton}>
                 {
                     isShowText ? <div className="repository-title title" onClick={showMoreMenu}>
-                        <ImgComponent
-                            src={repository?.iconUrl}
-                            className="icon-24"
-                            alt=""
-                        />
+                        {
+                            repository?.iconUrl && <ImgComponent
+                                src={repository?.iconUrl}
+                                className="icon-24"
+                                alt=""
+                            />
+                        }
+
                         <div className={`repository-text `} >
                             <div className='name'>
                                 {repository?.limits}
@@ -107,22 +110,25 @@ const RepositoryChangeModal = (props) => {
                             </svg>
                         </div>
                     </div>
-                    :
-                    <Tooltip placement="right" title={repository?.name}>
-                        <div className='repository-title-icon' onClick={showMoreMenu} >
-                            <ImgComponent
-                                src={repository?.iconUrl}
-                                title={repository?.name}
-                                // alt={repository?.projectName}
-                                className="icon-32"
-                            />
-                            {/* <div className={`repository-toggleCollapsed`}>
+                        :
+                        <Tooltip placement="right" title={repository?.name}>
+                            <div className='repository-title-icon' onClick={showMoreMenu} >
+                                {
+                                    repository?.iconUrl && <ImgComponent
+                                        src={repository?.iconUrl}
+                                        title={repository?.name}
+                                        // alt={repository?.projectName}
+                                        className="icon-32"
+                                    />
+                                }
+
+                                {/* <div className={`repository-toggleCollapsed`}>
                                 <svg className="icon-15" aria-hidden="true">
                                     <use xlinkHref={`${theme === "default" ? "#icon-down-gray" : "#icon-down-white"}`}></use>
                                 </svg>
                             </div> */}
-                        </div>
-                    </Tooltip>
+                            </div>
+                        </Tooltip>
                 }
             </div>
             <div className={`change-repository-box ${showMenu ? "menu-show" : "menu-hidden"}`}

@@ -2,8 +2,16 @@ import { action, observable } from "mobx";
 import {Service} from "../../../common/utils/requset";
 export class SettingHomeStore {
     @observable
-    selectKey = "/setting/version"
+    selectKey = "";
+
+    @observable
+    expandedTree = []
     
+    @action
+    setExpandedTree = (value) => {
+        this.expandedTree = value;
+    }
+
     @action
     setSelectKey = (key) => {
         this.selectKey = key;

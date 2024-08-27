@@ -19,6 +19,8 @@ import ArchivedFree from "./common/components/ArchivedFree";
 import HeaderCe from "./home/home/components/HeaderCe";
 import Logo from "./home/home/components/Logo";
 import RepositoryDoc from "./repository/document/components/RepositoryDoc";
+import SettingHomeStore from "./setting/home/store/SettingHomeStore";
+import SettingHome from "./setting/home/components/SettingHome";
 export {
     wikiRoutes,
     store,
@@ -31,5 +33,7 @@ export {
     FirstMenu,
     HeaderCe,
     Logo,
-    RepositoryDoc
+    RepositoryDoc, 
+    SettingHomeStore,
+    SettingHome
 }

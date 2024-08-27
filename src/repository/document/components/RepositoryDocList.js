@@ -568,7 +568,6 @@ const RepositoryDocList = (props) => {
                             <span>
                                 搜索
                             </span>
-                            {/* </div> */}
                         </div>
 
                         <div className="repository-menu">

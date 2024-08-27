@@ -15,6 +15,15 @@ const setDevRouter = [
         purviewCode: "orga",
         code: 1,
         children: [
+            
+            {
+                title: '用户',
+                id: '/setting/user',
+                easId: '/user/user',
+                purviewCode: "user",
+                islink: true,
+                code: 1 - 2,
+            },
             {
                 title: "部门",
                 id: '/setting/orga',
@@ -23,14 +32,6 @@ const setDevRouter = [
                 islink: true,
                 code: 1 - 1,
 
-            },
-            {
-                title: '用户',
-                id: '/setting/user',
-                easId: '/user/user',
-                purviewCode: "user",
-                islink: true,
-                code: 1 - 2,
             },
             {
                 title: '用户组',
@@ -245,6 +246,15 @@ const setPrdRouter = [
         purviewCode: "orga",
         code: 1,
         children: [
+            
+            {
+                title: '用户',
+                id: '/setting/user',
+                easId: '/user/user',
+                purviewCode: "user",
+                islink: true,
+                code: 1 - 2,
+            },
             {
                 title: "部门",
                 id: '/setting/orga',
@@ -253,14 +263,6 @@ const setPrdRouter = [
                 islink: true,
                 code: 1 - 1,
 
-            },
-            {
-                title: '用户',
-                id: '/setting/user',
-                easId: '/user/user',
-                purviewCode: "user",
-                islink: true,
-                code: 1 - 2,
             },
             {
                 title: '用户组',

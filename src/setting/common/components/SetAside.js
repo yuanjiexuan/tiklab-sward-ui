@@ -15,10 +15,9 @@ import SettingHomeStore from "../../home/store/SettingHomeStore"
 import { observer } from 'mobx-react';
 import { getVersionInfo } from 'thoughtware-core-ui';
 import ArchivedFree from '../../../common/components/ArchivedFree';
-import Logo from "../../../home/home/components/Logo";
 const SetAside = (props) => {
     // 无子级菜单处理
-    const { selectKey, setSelectKey } = SettingHomeStore;
+    const { selectKey, setSelectKey, expandedTree, setExpandedTree } = SettingHomeStore;
 
     const [router, setRouterMenu] = useState(setDevRouter);
     const authType = JSON.parse(localStorage.getItem("authConfig"))?.authType;
@@ -98,8 +97,6 @@ const SetAside = (props) => {
         )
     }
 
-    // 树的展开与闭合
-    const [expandedTree, setExpandedTree] = useState([])
 
     const isExpandedTree = (key) => {
         return expandedTree.some(item => item === key)
@@ -163,7 +160,7 @@ const SetAside = (props) => {
         <Fragment>
             <div className="orga-aside">
                 <ul style={{ padding: 0 }} key="0" className="orga-aside-top">
-                    <div className="orga-aside-name">设置</div>
+                    <div className="orga-aside-name" onClick={()=> props.history.push("/setting/home")}>设置</div>
                     <div className="orga-aside-back" onClick={() => backProject()}>
                         <svg className="icon-15" aria-hidden="true" >
                             <use xlinkHref="#icon-home-default"></use>

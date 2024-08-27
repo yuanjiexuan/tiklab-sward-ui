@@ -31,6 +31,11 @@ const CollectLayout = (props) => {
             repositoryId: repositoryId
         }
         setLoading(true)
+        findList();
+        return
+    }, [])
+
+    const findList = (data) => {
         findDocumentFocusList(data).then(res => {
             if (res.code === 0) {
                 console.log(res)
@@ -49,9 +54,7 @@ const CollectLayout = (props) => {
             }
             setLoading(false)
         })
-
-        return
-    }, [])
+    }
 
     return (<>
         <Spin wrapperClassName="collect-spin" spinning={loading} tip="加载中..." >
@@ -63,6 +66,7 @@ const CollectLayout = (props) => {
                             focusDocumentList={focusDocumentList}
                             selectKey={selectKey}
                             setSelectKey={setSelectKey}
+                            findList = {findList}
                             {...props}
                         />
                         <Layout className="collect-layout-right">

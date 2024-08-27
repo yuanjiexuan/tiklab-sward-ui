@@ -4,7 +4,16 @@
 
 .collect-doc-aside {
     padding-top: 10px;
-
+    .collect-doc-search {
+        margin: 0 10px 10px;
+        background: #fff;
+        border-radius: 4px;
+        .search-input {
+            background: #fff;
+            border: 0;
+            width: 100%;
+        }
+    }
     .collect-doc-title {
         height: 40px;
         line-height: 40px;

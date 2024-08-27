@@ -145,7 +145,7 @@ const Home = (props) => {
                                             {item.master.nickname}
                                         </div>
 
-                                        <div className="document-time">{item.recentTime}</div>
+                                        <div className="document-time">{item.recentTime ? item.recentTime : item.recentTime}</div>
                                     </div>
                                 })
                                     :

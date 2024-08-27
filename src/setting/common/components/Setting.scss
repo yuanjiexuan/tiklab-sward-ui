@@ -21,7 +21,7 @@
             height: 40px;
             line-height: 40px;
             padding: 0 20px;
-            border-bottom: 1px solid #eaeaea;
+        border-bottom: 1px solid #d7d7d7;
             cursor: pointer;
             gap: 5px;
         }
@@ -36,6 +36,10 @@
             padding: 0 20px;
             font-weight: 600;
             font-size: 16px;
+            cursor: pointer;
+        }
+        .orga-aside-name:hover {
+            background-color: var(--thoughtware-gray-400);
         }
         // padding-top: 20px;
         .orga-aside-top {
