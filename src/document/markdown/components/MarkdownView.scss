@@ -120,6 +120,12 @@
 
 
 }
+.document-markdown-empty {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
 .more-box {
     right: -20px;
     top: 5;

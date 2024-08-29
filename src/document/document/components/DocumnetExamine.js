@@ -46,36 +46,37 @@ const DocumentExamine = (props) => {
     let [commentNum, setCommentNum] = useState()
     const [value, setValue] = useState()
     const [loading, setLoading] = useState(true);
+    const [document, setDocument] = useState()
+
     useEffect(() => {
         setDocumentTitle()
         setValue()
         setLoading(true)
         findDocument(documentId).then((data) => {
             if (data.code === 0) {
-                if (!data.data) {
-                    setDocInfo(node)
-                    return
-                }
-                if (data.data.details) {
-                    setValue(data.data.details)
-                } else {
-                    setValue()
-                    if (path === "doc") {
-                        props.history.push(`/repository/${repositoryId}/doc/rich/${documentId}/edit`)
-                    }
-                    if (path === "collect") {
-                        props.history.push(`/repository/${repositoryId}/collect/rich/${documentId}/edit`)
-                    }
-                }
                 const document = data.data;
-                const node = document.node;
-                setDocInfo(node)
-                setDocumentTitle(node.name)
-                setDocumentDate(node.updateTime)
-                setLike(document.like)
-                setFocus(document.focus)
-                setLikeNum(document.likenumInt)
-                setCommentNum(document.commentNumber)
+                setDocument(document)
+                if(document){
+                    if (data.data?.details) {
+                        setValue(data.data.details)
+                    } else {
+                        setValue()
+                        if (path === "doc") {
+                            props.history.push(`/repository/${repositoryId}/doc/rich/${documentId}/edit`)
+                        }
+                        if (path === "collect") {
+                            props.history.push(`/repository/${repositoryId}/collect/rich/${documentId}/edit`)
+                        }
+                    }
+                    const node = document.node;
+                    setDocInfo(node)
+                    setDocumentTitle(node.name)
+                    setDocumentDate(node.updateTime)
+                    setLike(document.like)
+                    setFocus(document.focus)
+                    setLikeNum(document.likenumInt)
+                    setCommentNum(document.commentNumber)
+                }
                 
             }
             setLoading(false)
@@ -157,7 +158,7 @@ const DocumentExamine = (props) => {
     return (<Provider {...store}>
         <Spin wrapperClassName="document-examine-spin" spinning={loading} tip="加载中..." >
             {
-                docInfo ? <div className="document-examine">
+                document ? <div className="document-examine">
                     {
                         showComment && <Comment documentId={documentId} setShowComment={setShowComment} commentNum={commentNum} setCommentNum={setCommentNum} />
                     }

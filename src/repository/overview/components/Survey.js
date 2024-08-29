@@ -186,7 +186,7 @@ const Survey = (props) => {
                                                         </div>
 
                                                         <div className='document-item-text'>
-                                                            <div className='document-title' onClick={() => goDocumentDetail(item)}>{item.name}</div>
+                                                            <div className='document-title' onClick={() => goDocumentDetail(item.node)}>{item.name}</div>
                                                             <div className='document-master'>{item.master.nickname}</div>
                                                         </div>
                                                     </div>

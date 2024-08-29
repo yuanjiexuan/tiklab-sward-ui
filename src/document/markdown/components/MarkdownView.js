@@ -8,7 +8,7 @@
  */
 import React, { useEffect, useState } from "react";
 import { Provider, inject, observer } from "mobx-react";
-import { Row, Col, Dropdown, message, Spin } from 'antd';
+import { Row, Col, Dropdown, message, Spin, Empty } from 'antd';
 import Button from "../../../common/button/button";
 import { MarkdownView } from "thoughtware-markdown-ui";
 import "thoughtware-markdown-ui/es/thoughtware-markdown.css";
@@ -40,6 +40,7 @@ const DocumentExamine = (props) => {
     let [commentNum, setCommentNum] = useState()
     const [value, setValue] = useState()
     const [markdownValue, setMarkdownValue] = useState();
+    const [document, setDocument] = useState()
     const path = props.location.pathname.split("/")[3];
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -48,7 +49,7 @@ const DocumentExamine = (props) => {
         setLoading(true)
         findDocument(documentId).then((data) => {
             if (data.code === 0) {
-                if (data.data.details) {
+                if (data.data?.details) {
                     const value = data.data.details
                     setValue(JSON.parse(value))
                     setMarkdownValue(data.data.detailText)
@@ -56,15 +57,19 @@ const DocumentExamine = (props) => {
                     setValue()
                 }
                 const document = data.data;
-                const node = document.node;
-                setDocInfo(node)
-                setDocumentTitle(node.name)
-                setDocumentDate(node.updateTime)
-                setLike(document.like)
-                setFocus(document.focus)
-                setLikeNum(document.likenumInt)
-                setCommentNum(document.commentNumber)
-                
+                setDocument(document)
+                if (document) {
+                    const node = document.node;
+                    setDocInfo(node)
+                    setDocumentTitle(node.name)
+                    setDocumentDate(node.updateTime)
+                    setLike(document.like)
+                    setFocus(document.focus)
+                    setLikeNum(document.likenumInt)
+                    setCommentNum(document.commentNumber)
+                }
+
+
             }
             setLoading(false)
         })
@@ -160,89 +165,84 @@ const DocumentExamine = (props) => {
 
     return (<Provider {...store}>
         <Spin wrapperClassName="document-markdown-spin" spinning={loading} tip="加载中..." >
-            <div className="document-markdown-examine">
-                {
-                    showComment && <Comment documentId={documentId} setShowComment={setShowComment} commentNum={commentNum} setCommentNum={setCommentNum} />
-                }
+            {
+                document ? <div className="document-markdown-examine">
+                    {
+                        showComment && <Comment documentId={documentId} setShowComment={setShowComment} commentNum={commentNum} setCommentNum={setCommentNum} />
+                    }
 
-                <div className="examine-top">
-                    <div className="examine-title" id="examine-title">
+                    <div className="examine-top">
+                        <div className="examine-title" id="examine-title">
 
-                        <div className="examine-title-top">
-                            {documentTitle}
+                            <div className="examine-title-top">
+                                {documentTitle}
+                            </div>
+                            <div className="examine-title-date">
+                                更新日期：{documentDate}
+                            </div>
                         </div>
-                        <div className="examine-title-date">
-                            更新日期：{documentDate}
-                        </div>
-                    </div>
-                    <div className="document-edit">
+                        <div className="document-edit">
 
-
-                        {
-                            focus ? <svg className="right-icon" aria-hidden="true" onClick={() => deleteFocus()}>
-                                <use xlinkHref="#icon-collectioned"></use>
-                            </svg>
-                                :
-                                <svg className="right-icon" aria-hidden="true" onClick={() => createFocus()}>
-                                    <use xlinkHref="#icon-collection"></use>
-                                </svg>
-                        }
-                        {
-                            value && <Button className="document-action-edit" onClick={() => goEdit()}>编辑</Button>
-                        }
-                        <Button className="document-action-share" onClick={() => setShareVisible(true)}>分享</Button>
-
-
-                        {/* <Dropdown
-                        overlay={moreMenu}
-                        placement="bottomLeft"
-                        trigger="click"
-                    >
-                        <svg className="right-icon" aria-hidden="true">
-                            <use xlinkHref="#icon-point"></use>
-                        </svg>
-                    </Dropdown> */}
-
-                    </div>
-                </div>
-                {
-                    value ? <div className="document-examine-content">
-                        <Row className="document-examine-row">
-                            <Col xl={{ span: 18, offset: 3 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }}>
-                                <div className="document-previeweditor">
-                                    <MarkdownView value={value} base_url={upload_url} tenant={tenant} />
-                                </div>
-                            </Col>
-                        </Row>
-
-                    </div>
-                        :
-                        <> </>
-                }
-                <div className="comment-box">
-                    <div className="comment-box-item top-item">
-                        <svg className="midden-icon" aria-hidden="true" onClick={() => setShowComment(!showComment)}>
-                            <use xlinkHref="#icon-comment"></use>
-                        </svg>
-                        <div className="commnet-num">{commentNum}</div>
-                    </div>
-                    <div className="comment-box-item">
-                        <span className="comment-item" onClick={addDocLike}>
                             {
-                                like ? <svg className="midden-icon" aria-hidden="true">
-                                    <use xlinkHref="#icon-zan"></use>
-                                </svg> : <svg className="midden-icon" aria-hidden="true">
-                                    <use xlinkHref="#icon-dianzan"></use>
+                                focus ? <svg className="right-icon" aria-hidden="true" onClick={() => deleteFocus()}>
+                                    <use xlinkHref="#icon-collectioned"></use>
                                 </svg>
+                                    :
+                                    <svg className="right-icon" aria-hidden="true" onClick={() => createFocus()}>
+                                        <use xlinkHref="#icon-collection"></use>
+                                    </svg>
                             }
-                        </span>
-                        <div className="commnet-num" style={{ top: "37px" }}>{likeNum}</div>
+                            {
+                                value && <Button className="document-action-edit" onClick={() => goEdit()}>编辑</Button>
+                            }
+                            <Button className="document-action-share" onClick={() => setShareVisible(true)}>分享</Button>
+                        </div>
+                    </div>
+                    {
+                        value ? <div className="document-examine-content">
+                            <Row className="document-examine-row">
+                                <Col xl={{ span: 18, offset: 3 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }}>
+                                    <div className="document-previeweditor">
+                                        <MarkdownView value={value} base_url={upload_url} tenant={tenant} />
+                                    </div>
+                                </Col>
+                            </Row>
+
+                        </div>
+                            :
+                            <> </>
+                    }
+                    <div className="comment-box">
+                        <div className="comment-box-item top-item">
+                            <svg className="midden-icon" aria-hidden="true" onClick={() => setShowComment(!showComment)}>
+                                <use xlinkHref="#icon-comment"></use>
+                            </svg>
+                            <div className="commnet-num">{commentNum}</div>
+                        </div>
+                        <div className="comment-box-item">
+                            <span className="comment-item" onClick={addDocLike}>
+                                {
+                                    like ? <svg className="midden-icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-zan"></use>
+                                    </svg> : <svg className="midden-icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-dianzan"></use>
+                                    </svg>
+                                }
+                            </span>
+                            <div className="commnet-num" style={{ top: "37px" }}>{likeNum}</div>
+                        </div>
+
                     </div>
 
+                    <ShareModal documentIds={[documentId]} shareVisible={shareVisible} setShareVisible={setShareVisible} docInfo={docInfo} createShare={createShare} updateShare={updateShare} />
                 </div>
+                    :
+                    <div className="document-markdown-empty">
+                        <Empty description="文档已被删除或者不存在" />
+                    </div>
 
-                <ShareModal documentIds={[documentId]} shareVisible={shareVisible} setShareVisible={setShareVisible} docInfo={docInfo} createShare={createShare} updateShare={updateShare} />
-            </div>
+            }
+
         </Spin>
 
     </Provider>
