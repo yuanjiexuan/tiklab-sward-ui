@@ -4,8 +4,8 @@ import SettingHomeStore from "../store/SettingHomeStore";
 import { applyJump, disableFunction, applySubscription, getUser, getVersionInfo } from "thoughtware-core-ui";
 import versionStore from "thoughtware-licence-ui/es/version/VersionStore";
 // import overviewStore from "../../../pipeline/overview/store/OverviewStore";
-import vipLight from '../../../assets/images/vip-one.png';
-import vipDark from '../../../assets/images/vip-two.png';
+import vipDark from '../../../assets/images/vip-one.png';
+import  vipLight from '../../../assets/images/vip-two.png';
 import "./SettingHome.scss";
 import moment from "moment";
 import {
@@ -120,7 +120,7 @@ const SettingHome = props => {
                     parentUrl: '/setting/orga',
                     icon: <UserOutlined />,
                     islink: true,
-                    num: count?.orga || 0
+                    num: count?.user || 0
                 },
                 {
                     title: "部门",
@@ -128,7 +128,7 @@ const SettingHome = props => {
                     islink: true,
                     parentUrl: '/setting/orga',
                     icon: <ApartmentOutlined />,
-                    num: count?.user
+                    num: count?.orga
                 },
 
                 {
@@ -249,6 +249,15 @@ const SettingHome = props => {
         props.history.push(`/setting/productAuth`)
     }
 
+    const showProductInfo = () =>{
+        return{
+            expired:getVersionInfo()?.expired,
+            time: licence?.issuedTime,
+            authUser: count.applyAuth,
+            userNum: licence?.userNum||0
+        }
+    }
+    
     return (
         <Row className='setting-home'>
             <Col
@@ -301,12 +310,12 @@ const SettingHome = props => {
                         </>
                             :
                             <>
-                                <div className='home-licence-box'>
+                               <div className='home-licence-box'>
                                     <div className='home-licence'>
                                         <div className='home-licence-item'>
                                             <div className='home-licence-item-level'>
                                                 <div className='licence-level-img'>
-                                                    <img src={count?.version ? vipDark : vipLight} alt={''} />
+                                                    <img src={disableFunction() ? vipDark : vipLight } alt={''} />
                                                 </div>
                                                 <div>
                                                     <div>
@@ -319,7 +328,7 @@ const SettingHome = props => {
                                                     <div className='licence-level-applyAuth'>
                                                         <span className='licence-level-applyAuth-title'>授权人数：</span>
                                                         <span className='licence-level-info licence-level-click' onClick={()=> goAuth()}>
-                                                            {count?.applyAuthNumber || 0} / {count?.version ? "不限制" : licence?.userNum > 0 ? licence.userNum + '人' : "不限制"}
+                                                        {showProductInfo()?.authUser } / {showProductInfo()?.expired ? "不限制" : showProductInfo()?.userNum > 0 ? showProductInfo().userNum+'人' : "不限制"}
                                                         </span>
                                                     </div>
                                                 </div>
