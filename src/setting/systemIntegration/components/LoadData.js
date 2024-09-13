@@ -9,7 +9,7 @@
 import React from "react";
 import { Upload, message, Row, Col } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import "./JiraLoadData.scss";
+import "./LoadData.scss";
 import Breadcumb from "../../../common/breadcrumb/Breadcrumb";
 import Button from "../../../common/button/button";
 import { getUser } from 'thoughtware-core-ui';
@@ -17,7 +17,7 @@ const LoadData = props => {
     const ticket = getUser().ticket;
     const uploadProps = {
         name: 'uploadFile',
-        action: `${upload_url}/importDate/importJireDate`,
+        action: `${upload_url}/importData/importConfluenceData`,
         headers: {
             authorization: 'authorization-text',
         },
@@ -41,10 +41,10 @@ const LoadData = props => {
             <Col lg={{ span: 24 }} xxl={{ span: "18", offset: "3" }}>
                 <div className="load">
                     <Breadcumb
-                        firstText="jira集成"
+                        firstText="Confluence集成"
                     />
                     <div className="load-jira">
-                        <div>从本地文件导入Jira数据</div>
+                        <div>从本地文件导入Confluence数据</div>
                         <div className="load-box">
                             上传附件：
                             <Upload {...uploadProps}>

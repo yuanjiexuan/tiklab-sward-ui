@@ -62,7 +62,6 @@ const ShareMarkdown = AsyncComponent(() => import("./document/share/components/S
 const PassWord = AsyncComponent(() => import('./document/share/components/PassWord.js'))
 
 const SettingHome = AsyncComponent(() => import('./setting/home/components/SettingHome.js'))
-const LoadData = AsyncComponent(() => import('./setting/loadData/LoadData.js'))
 // 消息
 const SystemMessageSendType = AsyncComponent(() => import('./setting/message/SystemMessageSendType.js'))
 const SystemMessageType = AsyncComponent(() => import('./setting/message/SystemMessageType.js'))
@@ -89,7 +88,7 @@ const ProjectSystemUserGroup = AsyncComponent(() => import("./setting/user/Proje
 const ProjectVirtualRoleList = AsyncComponent(() => import("./setting/user/ProjectVirtualRoleList.js"))
 // 系统集成
 const UrlData = AsyncComponent(() => import('./setting/systemIntegration/components/UrlData.js'));
-
+const LoadData = AsyncComponent(() => import('./setting/systemIntegration/components/LoadData.js'));
 //工时
 const TaskListContent = AsyncComponent(() => import('./setting/todo/TaskList.js'))
 const TodoTempListContent = AsyncComponent(() => import('./setting/todo/TodoTempList.js'))

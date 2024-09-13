@@ -116,7 +116,7 @@ const RepositoryAside = (props) => {
                                         onClick={() => backProject()}
                                     >
                                         <svg className="icon-18" aria-hidden="true">
-                                            <use xlinkHref={`#icon-home-${theme}`}></use>
+                                            <use xlinkHref={`#icon-backhome-${theme}`}></use>
                                         </svg>
                                         <span>
                                             {backName}
@@ -127,8 +127,8 @@ const RepositoryAside = (props) => {
                                         onClick={() => backProject()}
                                         data-title-right={backName}
                                     >
-                                        <svg className="icon-32" aria-hidden="true">
-                                            <use xlinkHref={`#icon-home-${theme}`}></use>
+                                        <svg className="icon-24" aria-hidden="true">
+                                            <use xlinkHref={`#icon-backhome-${theme}`}></use>
                                         </svg>
                                     </div>
                             }

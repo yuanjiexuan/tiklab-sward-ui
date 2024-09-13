@@ -134,6 +134,7 @@ module.exports = {
             template: path.resolve(__dirname, './public/index.template.html'),
             hash: false,
             filename: 'index.html',
+            favicon: "./src/assets/images/sward.png",
             inject: 'body',
             minify: {
                 collapseWhitespace: true,

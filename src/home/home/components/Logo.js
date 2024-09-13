@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router";
-import { productImg, productFrameImg } from "thoughtware-core-ui";
+import { productImg, productWhiteImg } from "thoughtware-core-ui";
 import "./Logo.scss";
 
 const Logo = (props) => {
@@ -12,12 +12,12 @@ const Logo = (props) => {
     return <>
         {
             isShowText ? <div className='sward-logo-text' onClick={() => goHomePage()}>
-                <img src={ theme === "default" ? productImg.sward :  productFrameImg.sward} alt={'logo'} className="logo-img" />
+                <img src={ theme === "default" ? productImg.sward :  productWhiteImg.sward} alt={'logo'} className="logo-img" />
                 <div className='logo-text' >sward</div>
             </div>
                 :
                 <div className='sward-logo' onClick={() => goHomePage()}>
-                    <img src={theme === "default" ? productImg.sward :  productFrameImg.sward} alt={'logo'} className="logo-img" />
+                    <img src={theme === "default" ? productImg.sward :  productWhiteImg.sward} alt={'logo'} className="logo-img" />
                 </div>
         }
     </>
