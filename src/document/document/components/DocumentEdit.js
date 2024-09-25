@@ -136,7 +136,9 @@ const DocumentEdit = (props) => {
         if (valueObject.length > 1) {
             isEmpty = false;
         }
-
+        if(!(valueObject instanceof Array)){
+            isEmpty = false;
+        }
         if (valueObject.length === 1) {
             if (valueObject[0].type === "paragraph") {
                 if (valueObject[0].children[0].text === "") {

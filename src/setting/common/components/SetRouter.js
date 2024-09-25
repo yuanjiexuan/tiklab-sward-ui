@@ -325,6 +325,11 @@ const setPrdRouter = [
                 title: '地址配置',
                 id: '/setting/urlData',
                 code: 9 - 1,
+            },
+            {
+                title: 'Confluence导入',
+                id: '/setting/loadData',
+                code: 9-2,
             }
         ]
     },

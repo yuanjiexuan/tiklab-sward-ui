@@ -31,6 +31,11 @@ export class UrlDataStore {
         const data = await Service("/systemUrl/deleteSystemUrl", value);
         return data;
     }
+    @action
+    findCfInputSchedule = async () => {
+        const data = await Service("/importData/findCfInputSchedule");
+        return data;
+    }
 }
 
 export default new UrlDataStore();

@@ -11,6 +11,7 @@ import AsyncComponent from './common/lazy/SyncComponent.js'
 import { Redirect } from "react-router-dom";
 
 const Login = AsyncComponent(() => import('./login/Login.js'))
+const LoginRpw = AsyncComponent(() => import('./login/LoginRpwContent.js'))
 const Logout = AsyncComponent(() => import('./login/Logout.js'))
 const Home = AsyncComponent(() => import('./home/home/components/Home.js'))
 const ProjectNotFound = AsyncComponent(() => import("./setting/common/components/ProjectNotFond.js"))
@@ -109,6 +110,11 @@ const Routes = [
         path: "/login",
         exact: true,
         component: Login,
+    },
+    {
+        component: LoginRpw,
+        exact:true,
+        path: '/loginRpw'
     },
     {
         path: "/logout",

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-generic datetime="2024-09-12 02:36:24">
+  <object class="Page" package="com.atlassian.confluence.pages">
+    <id name="id">98391</id>
+    <property name="hibernateVersion">63</property>
+    <property name="title"><![CDATA[sward产品需求]]></property>
+    <property name="lowerTitle"><![CDATA[sward产品需求]]></property>
+    <collection name="bodyContents" class="java.util.Collection">
+      <element class="BodyContent" package="com.atlassian.confluence.core">
+        <id name="id">163868</id>
+      </element>
+    </collection>
+    <collection name="outgoingLinks" class="java.util.Collection">
+      <element class="OutgoingLink" package="com.atlassian.confluence.links">
+        <id name="id">1409189</id>
+      </element>
+      <element class="OutgoingLink" package="com.atlassian.confluence.links">
+        <id name="id">1409190</id>
+      </element>
+      <element class="OutgoingLink" package="com.atlassian.confluence.links">
+        <id name="id">1409191</id>
+      </element>
+      <element class="OutgoingLink" package="com.atlassian.confluence.links">
+        <id name="id">1409192</id>
+      </element>
+      <element class="OutgoingLink" package="com.atlassian.confluence.links">
+        <id name="id">1409193</id>
+      </element>
+    </collection>
+    <collection name="contentProperties" class="java.util.Collection">
+      <element class="ContentProperty" package="com.atlassian.confluence.content">
+        <id name="id">262370</id>
+      </element>
+      <element class="ContentProperty" package="com.atlassian.confluence.content">
+        <id name="id">262369</id>
+      </element>
+      <element class="ContentProperty" package="com.atlassian.confluence.content">
+        <id name="id">262414</id>
+      </element>
+      <element class="ContentProperty" package="com.atlassian.confluence.content">
+        <id name="id">262415</id>
+      </element>
+      <element class="ContentProperty" package="com.atlassian.confluence.content">
+        <id name="id">262416</id>
+      </element>
+      <element class="ContentProperty" package="com.atlassian.confluence.content">
+        <id name="id">1310722</id>
+      </element>
+    </collection>
+    <property name="version">1</property>
+    <property name="creator" class="ConfluenceUserImpl" package="com.atlassian.confluence.user">
+      <id name="key"><![CDATA[ff80808191e42e6e0191e42f49ac0000]]></id>
+    </property>
+    <property name="creationDate">2024-09-12 01:29:01.439</property>
+    <property name="lastModifier" class="ConfluenceUserImpl" package="com.atlassian.confluence.user">
+      <id name="key"><![CDATA[ff80808191e42e6e0191e42f49ac0000]]></id>
+    </property>
+    <property name="lastModificationDate">2024-09-17 22:52:21.307</property>
+    <property name="versionComment"><![CDATA[]]></property>
+    <property name="originalVersion" class="Page" package="com.atlassian.confluence.pages">
+      <id name="id">98389</id>
+    </property>
+    <property name="contentStatus"><![CDATA[draft]]></property>
+    <property name="space" class="Space" package="com.atlassian.confluence.spaces">
+      <id name="id">131074</id>
+    </property>
+    <property name="position"/>
+  </object>
+
+  <object class="BodyContent" package="com.atlassian.confluence.core">
+    <id name="id">163868</id>
+	  <property name="body"><![CDATA[<p class="auto-cursor-target"><span class="text_Bjt2N" style="color: rgb(51,51,51);">马斯洛的需求层次结构是</span><span class="text_Bjt2N" style="color: rgb(51,51,51);"><a class="innerLink_vQ1LX" href="https://baike.baidu.com/item/%E5%BF%83%E7%90%86%E5%AD%A6/6215?fromModule=lemma_inlink" style="text-decoration: none;">心理学</a></span><span class="text_Bjt2N" style="color: rgb(51,51,51);">中的激励理论，包括人类需求的五级模型，通常被描绘成金字塔内的等级。从层次结构的底部向上，需求分别为：生理（食物和衣服），安全（工作保障），</span><span class="text_Bjt2N" style="color: rgb(51,51,51);"><a class="innerLink_vQ1LX" href="https://baike.baidu.com/item/%E7%A4%BE%E4%BA%A4%E9%9C%80%E8%A6%81/4860615?fromModule=lemma_inlink" style="text-decoration: none;">社交需要</a></span><span class="text_Bjt2N" style="color: rgb(51,51,51);">（友谊），尊重和</span><span class="text_Bjt2N" style="color: rgb(51,51,51);"><a class="innerLink_vQ1LX" href="https://baike.baidu.com/item/%E8%87%AA%E6%88%91%E5%AE%9E%E7%8E%B0/157610?fromModule=lemma_inlink" style="text-decoration: none;">自我实现</a></span><span class="text_Bjt2N" style="color: rgb(51,51,51);">。这种五阶段模式可分为不足需求和增长需求。前四个级别通常称为缺陷需求（D需求），而最高级别称为增长需求（B需求）。1943年</span><span class="text_Bjt2N" style="color: rgb(51,51,51);"><a class="innerLink_vQ1LX" href="https://baike.baidu.com/item/%E9%A9%AC%E6%96%AF%E6%B4%9B/342885?fromModule=lemma_inlink" style="text-decoration: none;">马斯洛</a></span><span class="text_Bjt2N" style="color: rgb(51,51,51);">指出，人们需要动力实现某些需要，有些需求优先于其他需求。</span></p>]]></property>
+	  <property name="content" class="Page" package="com.atlassian.confluence.pages">
+      <id name="id">98391</id>
+    </property>
+    <property name="bodyType">2</property>
+  </object>
+</hibernate-generic>

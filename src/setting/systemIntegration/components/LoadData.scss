@@ -1,18 +1,32 @@
 .load {
-    padding: 10px;
+    padding: var(--thoughtware-padding);
 }
 .load-jira {
-    padding: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #DEEBFF;
 }
 .load-box {
-    background-color: #DEEBFF;
-    width: 100%;
-    height: 80px;
-    border-radius: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    flex-direction: row;
+    width: 100%;
+    border-radius: 4px;
+    margin: 15px 0;
+}
+.load-precess {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 10px;
+    .load-precess-text {
+        padding-top: 5px;
+        .load-precess-name {
+            font-weight: 600;
+        }
+    }
 }
 .load-progress {
     width: 80%;
