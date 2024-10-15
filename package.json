@@ -1,6 +1,6 @@
 {
     "name": "tiklab-sward-ui",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "description": "tiklab repository",
     "main": "es/src/ui.js",
     "module": "es/index.js",
@@ -52,7 +52,7 @@
         "axios": "^0.21.0",
         "tiklab-security-ui": "^1.0.3",
         "tiklab-slate-ui": "^1.0.2",
-        "tiklab-markdown-ui": "^1.0.0",
+        "tiklab-markdown-ui": "^1.0.1",
         "tiklab-privilege-ui": "^1.0.3",
         "slate": "^0.100.0",
         "slate-history": "^0.100.0",
