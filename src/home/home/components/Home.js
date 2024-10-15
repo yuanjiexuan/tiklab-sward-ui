@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import "./home.scss";
 import { Row, Col, Empty, Pagination, Spin } from 'antd';
 import { observer } from 'mobx-react';
-import { getUser } from 'thoughtware-core-ui';
+import { getUser } from 'tiklab-core-ui';
 import HomeStore from "../store/HomeStore";
 import UserIcon from '../../../common/UserIcon/UserIcon';
 import ImgComponent from '../../../common/imgComponent/ImgComponent';

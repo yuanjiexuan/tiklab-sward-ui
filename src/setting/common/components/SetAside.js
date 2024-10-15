@@ -10,10 +10,10 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { withRouter } from "react-router-dom";
 import { setDevRouter, setPrdRouter } from "./SetRouter";
-import { PrivilegeButton } from "thoughtware-privilege-ui";
+import { PrivilegeButton } from "tiklab-privilege-ui";
 import SettingHomeStore from "../../home/store/SettingHomeStore"
 import { observer } from 'mobx-react';
-import { getVersionInfo } from 'thoughtware-core-ui';
+import { getVersionInfo } from 'tiklab-core-ui';
 import ArchivedFree from '../../../common/components/ArchivedFree';
 const SetAside = (props) => {
     // 无子级菜单处理

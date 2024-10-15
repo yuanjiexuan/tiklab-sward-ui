@@ -3,7 +3,7 @@
     overflow: auto;
 }
 .repository {
-    padding: var(--thoughtware-padding-item);
+    padding: var(--tiklab-padding-item);
     
     .recent-repository {
         margin-bottom: 15px;
@@ -27,19 +27,19 @@
 
         .repository-item {
             flex: 1;
-            padding: var(--thoughtware-padding);
+            padding: var(--tiklab-padding);
             box-sizing: content-box;
             flex-shrink: 0;
             border-radius: 4px;
             cursor: pointer;
-            background-color: var(--thoughtware-gray-600);
+            background-color: var(--tiklab-gray-600);
             box-sizing: border-box;
-            border-bottom: 2px solid var(--thoughtware-gray-600);
+            border-bottom: 2px solid var(--tiklab-gray-600);
             min-width: 200px;
             max-width: 260px;
             .item-title {
                 margin-bottom: 10px;
-                font-weight: var(--thoughtware-font-weight-bold);
+                font-weight: var(--tiklab-font-weight-bold);
                 display: inline-flex;
                 align-items: center;
                 font-size: 16px;
@@ -96,7 +96,7 @@
 
         .repository-item:hover {
             border-radius: 4px 4px 0 0;
-            border-bottom: 2px solid var(--thoughtware-blue);
+            border-bottom: 2px solid var(--tiklab-blue);
         }
     }
 
@@ -117,7 +117,7 @@
 
         .active-tabs {
             color: #000;
-            border-bottom: 2px solid var(--thoughtware-blue);
+            border-bottom: 2px solid var(--tiklab-blue);
         }
 
         .filter-search {
@@ -135,7 +135,7 @@
         line-height: 50px;
 
         .repository-tab {
-            font-size: var(--thoughtware-font-13);
+            font-size: var(--tiklab-font-13);
             cursor: pointer;
             height: 50px;
             line-height: 50px;
@@ -166,12 +166,12 @@
                 line-height: 25px;
             }
             .repository-name:hover {
-                color: var(--thoughtware-blue);
+                color: var(--tiklab-blue);
             }
             .repository-master {
                 font-size: 12px;
                 line-height: 25px;
-                color: var(--thoughtware-gray-500);
+                color: var(--tiklab-gray-500);
             }
         }
     }

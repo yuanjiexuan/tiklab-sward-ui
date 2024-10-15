@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 import Button from "../../../common/button/button";
 import UserIcon from "../../../common/UserIcon/UserIcon";
 import "./Survey.scss";
-import { getUser } from "thoughtware-core-ui";
+import { getUser } from "tiklab-core-ui";
 import SurveyStore from "../store/SurveyStore";
 import RepositoryDetailStore from "../../common/store/RepositoryDetailStore";
 import AddDropDown from "../../common/components/AddDropDown";

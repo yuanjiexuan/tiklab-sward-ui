@@ -63,7 +63,7 @@
                     padding: 2px;
                 }
                 .repository-action-item:hover {
-                    background-color: var(--thoughtware-gray-400);
+                    background-color: var(--tiklab-gray-400);
                 }
             }
 
@@ -75,7 +75,7 @@
         }
 
         .ant-tree {
-            background-color: var(--thoughtware-gray-600);
+            background-color: var(--tiklab-gray-600);
         }
 
         .repository-menu-node {
@@ -136,7 +136,7 @@
         //         background: #E3e8f0;
         //     }
 
-        //     // background-color: var(--thoughtware-gray-600);
+        //     // background-color: var(--tiklab-gray-600);
         //     .repository-menu-firstmenu-left {
         //         display: flex;
         //         align-items: center;
@@ -230,12 +230,12 @@
 
         .repository-menu::-webkit-scrollbar-thumb {
             border-radius: 5px;
-            background: var(--thoughtware-gray-400);
+            background: var(--tiklab-gray-400);
         }
 
         .repository-menu::-webkit-scrollbar-track {
             border-radius: 0;
-            background: var(--thoughtware-gray-600);
+            background: var(--tiklab-gray-600);
         }
 
         // .repository-setting-menu {
@@ -251,7 +251,7 @@
         // }
 
         // .repository-setting-menu:hover {
-        //     color: var(--thoughtware-blue);
+        //     color: var(--tiklab-blue);
         // }
 
         // .hidden-menu {
@@ -307,9 +307,9 @@
     display: none;
 }
 
-.repository-icon {
-    width: 50px;
-}
+// .repository-icon {
+//     width: 50px;
+// }
 
 .content-add-menu {
     display: flex;

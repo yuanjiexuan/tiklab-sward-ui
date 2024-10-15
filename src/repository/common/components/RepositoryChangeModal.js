@@ -3,7 +3,7 @@ import "./RepositoryChangeModal.scss";
 import { withRouter } from "react-router";
 import RepositoryDetailStore from "../store/RepositoryDetailStore";
 import { observer } from "mobx-react";
-import { getUser } from "thoughtware-core-ui";
+import { getUser } from "tiklab-core-ui";
 import ImgComponent from "../../../common/imgComponent/ImgComponent";
 import { Tooltip } from "antd";
 

@@ -57,31 +57,31 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 90,
                     reuseExistingChunk: true
                 },
-                thoughtwareUserUI: {
-                    name: 'chunk-thoughtware-user-ui',
+                tiklabUserUI: {
+                    name: 'chunk-tiklab-user-ui',
                     chunks: 'all',
-                    test: /[\\/]node_modules[\\/]thoughtware-user-ui[\\/]/,
+                    test: /[\\/]node_modules[\\/]tiklab-user-ui[\\/]/,
                     priority: 50,
                     reuseExistingChunk: true
                 },
-                thoughtwareCoreUI: {
-                    name: 'chunk-thoughtware-core-ui',
+                tiklabCoreUI: {
+                    name: 'chunk-tiklab-core-ui',
                     chunks: 'all',
-                    test: /[\\/]node_modules[\\/]thoughtware-core-ui[\\/]/,
+                    test: /[\\/]node_modules[\\/]tiklab-core-ui[\\/]/,
                     priority: 50,
                     reuseExistingChunk: true
                 },
-                thoughtwareMessageUI: {
-                    name: 'chunk-thoughtware-message-ui',
+                tiklabMessageUI: {
+                    name: 'chunk-tiklab-message-ui',
                     chunks: 'all',
-                    test: /[\\/]node_modules[\\/]thoughtware-message-ui[\\/]/,
+                    test: /[\\/]node_modules[\\/]tiklab-message-ui[\\/]/,
                     priority: 80,
                     reuseExistingChunk: true
                 },
-                thoughtwareEamUI: {
-                    name: 'chunk-thoughtware-eam-ui',
+                tiklabEamUI: {
+                    name: 'chunk-tiklab-eam-ui',
                     chunks: 'all',
-                    test: /[\\/]node_modules[\\/]thoughtware-eam-ui[\\/]/,
+                    test: /[\\/]node_modules[\\/]tiklab-eam-ui[\\/]/,
                     priority: 50,
                     reuseExistingChunk: true
                 },

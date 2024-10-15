@@ -176,12 +176,12 @@
 
         .repository-menu::-webkit-scrollbar-thumb {
             border-radius: 5px;
-            background: var(--thoughtware-gray-400);
+            background: var(--tiklab-gray-400);
         }
 
         .repository-menu::-webkit-scrollbar-track {
             border-radius: 0;
-            background: var(--thoughtware-gray-600);
+            background: var(--tiklab-gray-600);
         }
         .category-add {
             border-radius: 5px;
@@ -224,9 +224,6 @@
     display: none;
 }
 
-.repository-icon {
-    width: 50px;
-}
 
 .content-add-menu {
     display: flex;

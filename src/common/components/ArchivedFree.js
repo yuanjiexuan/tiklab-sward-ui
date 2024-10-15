@@ -6,7 +6,7 @@ import nodeArchived from "../../assets/images/nodeArchived.png";
 import nodeRecycle from "../../assets/images/nodeRecycle.png";
 import repositoryArchived from "../../assets/images/repositoryArchived.png";
 import repositoryRecycle from "../../assets/images/repositoryRecycle.png";
-import {applySubscription} from "thoughtware-core-ui"
+import {applySubscription} from "tiklab-core-ui"
 // import Button from "../../common/button/Button";
 const ArchivedFree = (props) => {
     const { archivedFreeVisable, setArchivedFreeVisable } = props;

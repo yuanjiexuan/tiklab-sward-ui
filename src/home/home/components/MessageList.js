@@ -97,7 +97,7 @@ const MessageList = (props) => {
                 closable={true}
                 onClose={onClose}
                 visible={open}
-                mask={false}
+                mask={true}
                 destroyOnClose={true}
                 width={375}
                 className={`frame-header-drawer ${isShowText ? "message-drawer-expend" : "message-drawer-inpend"} `}

@@ -7,7 +7,7 @@
  * @LastEditTime: 2022-04-11 10:41:38
  */
 import React from "react";
-import { NotFound } from "thoughtware-privilege-ui"
+import { NotFound } from "tiklab-privilege-ui"
 import { inject, observer } from "mobx-react";
 const VailProductUserPage = (props) => {
     return (

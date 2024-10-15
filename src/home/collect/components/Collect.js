@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Collect.scss";
 import { Col, Empty, Row } from "antd";
-import { getUser } from "thoughtware-core-ui";
+import { getUser } from "tiklab-core-ui";
 import CollectStore from "../store/CollectStore";
 import InputSearch from "../../../common/input/inputSearch";
 import { useDebounce } from "../../../common/utils/debounce";

@@ -9,10 +9,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { withRouter } from "react-router-dom";
 import "./MarkdownEdit.scss";
-import { Markdown } from "thoughtware-markdown-ui";
+import { Markdown } from "tiklab-markdown-ui";
 import Button from "../../../common/button/button";
 import MarkdownStore from "../store/MarkdownStore";
-import "thoughtware-markdown-ui/es/thoughtware-markdown.css";
+import "tiklab-markdown-ui/es/tiklab-markdown.css";
 import RepositoryDetailStore from "../../../repository/common/store/RepositoryDetailStore";
 import { Node } from "slate";
 import { message } from "antd";

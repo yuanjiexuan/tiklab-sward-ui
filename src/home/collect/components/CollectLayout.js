@@ -13,7 +13,7 @@ import { renderRoutes } from "react-router-config";
 import { observer, inject, Provider } from "mobx-react";
 import CollectAside from "./CollectAside";
 import CollectStore from "../store/CollectStore";
-import { getUser } from "thoughtware-core-ui";
+import { getUser } from "tiklab-core-ui";
 
 const CollectLayout = (props) => {
     const { route } = props;

@@ -13,7 +13,7 @@ const path = require('path');
 const baseWebpackConfig = require('./webpack.base');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const TerserPlugin  = require('terser-webpack-plugin');
-const PORT = 3004;
+const PORT = 3040;
 
 module.exports = merge(baseWebpackConfig, {
     devtool: 'source-map',

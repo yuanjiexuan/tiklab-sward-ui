@@ -1,7 +1,7 @@
 import { Empty, Input, Modal } from 'antd';
 import React, { Fragment, useState, useEffect, useId, useRef } from 'react';
 import "./SearchModal.scss";
-import { getUser } from 'thoughtware-core-ui';
+import { getUser } from 'tiklab-core-ui';
 import { withRouter } from 'react-router';
 import { inject, observer } from 'mobx-react';
 import { useDebounce } from '../../../common/utils/debounce';

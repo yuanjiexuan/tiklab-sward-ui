@@ -12,7 +12,7 @@ import { withRouter } from "react-router-dom";
 import { Layout, Button } from "antd";
 
 import { useTranslation } from 'react-i18next';
-import { getVersionInfo } from 'thoughtware-core-ui';
+import { getVersionInfo } from 'tiklab-core-ui';
 import ArchivedFree from '../../../../common/components/ArchivedFree';
 
 const { Sider } = Layout;

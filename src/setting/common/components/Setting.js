@@ -11,10 +11,10 @@ import { Layout } from 'antd';
 import SetAside from "./SetAside";
 import "./Setting.scss"
 import { renderRoutes } from "react-router-config";
-import { SystemNav } from "thoughtware-privilege-ui";
+import { SystemNav } from "tiklab-privilege-ui";
 import { setDevRouter, setPrdRouter } from "./SetRouter";
 import { inject, observer } from 'mobx-react';
-import { getUser } from 'thoughtware-core-ui';
+import { getUser } from 'tiklab-core-ui';
 const { Sider, Content } = Layout;
 const Setting = (props) => {
     const {systemRoleStore} = props;

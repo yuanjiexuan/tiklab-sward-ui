@@ -5,7 +5,7 @@ import Button from "../../../common/button/button";
 import { useState } from "react";
 import { withRouter } from "react-router";
 import { inject, observer } from "mobx-react";
-import { getUser } from "thoughtware-core-ui";
+import { getUser } from "tiklab-core-ui";
 import ImgComponent from "../../../common/imgComponent/ImgComponent";
 const { TextArea } = Input;
 

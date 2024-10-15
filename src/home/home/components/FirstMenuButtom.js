@@ -1,10 +1,10 @@
 import React, { Component, useState } from "react";
-import { AppLink, AvatarLink, HelpLink } from 'thoughtware-licence-ui';
-import { AppLink as AppLinkCloud, AvatarLink as AvatarLinkCloud, HelpLink as HelpLinkCloud } from 'thoughtware-licence-cloud-ui';
+import { AppLink, AvatarLink, HelpLink } from 'tiklab-licence-ui';
+import { AppLink as AppLinkCloud, AvatarLink as AvatarLinkCloud, HelpLink as HelpLinkCloud } from 'tiklab-licence-cloud-ui';
 import MessageList from "./MessageList";
 import UserIcon from "../../../common/UserIcon/UserIcon"
 import "./FirstMenuButtom.scss"
-import { getUser } from "thoughtware-core-ui";
+import { getUser } from "tiklab-core-ui";
 import SetingMenu from "./SetingMenu";
 const FirstMenuButtom = (props) => {
     const { isShowText, SetIsShowText, theme, changeTheme } = props;

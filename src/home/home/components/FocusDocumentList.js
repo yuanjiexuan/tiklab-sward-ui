@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Breadcumb from "../../../common/breadcrumb/breadcrumb";
 import { inject, observer } from "mobx-react";
-import { getUser } from "thoughtware-core-ui";
+import { getUser } from "tiklab-core-ui";
 import { Row, Col, Empty, Pagination } from "antd";
 import "./FocusDocumentList.scss";
 import HomeStore from "../store/HomeStore";

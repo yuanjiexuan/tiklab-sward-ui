@@ -11,7 +11,7 @@ import { Dropdown, Form, Menu, Row, Col, Empty } from 'antd';
 import "./categoryDetail.scss"
 import { observer, inject, Provider } from "mobx-react";
 import CategoryAdd from "../common/components/CategoryAdd"
-import { getUser } from "thoughtware-core-ui";
+import { getUser } from "tiklab-core-ui";
 import RepositoryDetailStore from "../common/store/RepositoryDetailStore";
 import AddDropDown from "../common/components/AddDropDown";
 const CategoryDetail = (props) => {

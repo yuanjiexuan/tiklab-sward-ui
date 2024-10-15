@@ -1,5 +1,5 @@
 import { observable, action} from "mobx";
-import { getUser } from 'thoughtware-core-ui';
+import { getUser } from 'tiklab-core-ui';
 import { Service } from "../../../common/utils/requset";
 class HomeStore {
     @observable currentLink = "home";

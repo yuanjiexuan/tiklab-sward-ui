@@ -5,17 +5,17 @@
         height: 100%;
     }
     .home-col {
-        padding: var(--thoughtware-padding);
+        padding: var(--tiklab-padding);
     }
     .home-content {
-        padding: var(--thoughtware-padding);
+        padding: var(--tiklab-padding);
     }
     .home-repository {
         margin-bottom: 20px;
         border-radius: 4px;
         background: #fff;
         .repository-title {
-            font-weight: var(--thoughtware-font-weight-bold);
+            font-weight: var(--tiklab-font-weight-bold);
         }
         .repository-spin {
             height: 124px;
@@ -39,14 +39,14 @@
             flex-shrink: 0;
             border-radius: 4px;
             cursor: pointer;
-            background-color: var(--thoughtware-gray-600);
+            background-color: var(--tiklab-gray-600);
             box-sizing: border-box;
-            border-bottom: 2px solid var(--thoughtware-gray-600);
+            border-bottom: 2px solid var(--tiklab-gray-600);
             min-width: 200px;
             max-width: 260px;
             .item-title {
                 margin-bottom: 10px;
-                font-weight: var(--thoughtware-font-weight-bold);
+                font-weight: var(--tiklab-font-weight-bold);
                 display: inline-flex;
                 align-items: center;
                 font-size: 16px;
@@ -96,7 +96,7 @@
         }
         .repository-item:hover {
             border-radius: 4px 4px 0 0;
-            border-bottom: 2px solid var(--thoughtware-blue);
+            border-bottom: 2px solid var(--tiklab-blue);
         }
     }
 
@@ -107,14 +107,14 @@
             width: 100%;
             height: 40px;
             line-height: 40px;
-            font-weight: var(--thoughtware-font-weight-bold);
+            font-weight: var(--tiklab-font-weight-bold);
             display: flex;
             justify-content: space-between;
             .more:hover{
                 text-decoration:underline;
             }
             .more {
-                color: var(--thoughtware-blue);
+                color: var(--tiklab-blue);
                 margin-left: 10px;
                 cursor: pointer;
                 display: flex;
@@ -156,11 +156,11 @@
                     }
                     .document-title:hover {
                         cursor: pointer;
-                        color: var(--thoughtware-blue);
+                        color: var(--tiklab-blue);
                     }
                     .document-master {
                         font-size: 12px;
-                        color: var(--thoughtware-gray-500);
+                        color: var(--tiklab-gray-500);
                     }
                 }
             }

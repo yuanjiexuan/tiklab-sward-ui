@@ -13,17 +13,17 @@ import Routes from './Routers';
 import { renderRoutes } from "react-router-config";
 import { Provider } from 'mobx-react';
 import { store } from "./stores"
-import { orgStores } from "thoughtware-user-ui/es/store";
-import { getUser, enableAxios } from 'thoughtware-core-ui'
+import { orgStores } from "tiklab-user-ui/es/store";
+import { getUser, enableAxios } from 'tiklab-core-ui'
 import './common/language/i18n';
 import "./index.scss";
 import { observer } from "mobx-react"
 import { useTranslation } from 'react-i18next';
 import "./assets/index";
-import { privilegeStores } from "thoughtware-privilege-ui/es/store";
+import { privilegeStores } from "tiklab-privilege-ui/es/store";
 import zhCN from 'antd/es/locale/zh_CN';
 import { ConfigProvider } from 'antd';
-import { useVersion } from "thoughtware-eam-ui/es/utils";
+import { useVersion } from "tiklab-eam-ui/es/utils";
 enableAxios()
 const Index = observer(() => {
     const { i18n } = useTranslation();

@@ -14,7 +14,7 @@ import { Menu, Dropdown, Layout, Form, Tree, message, Modal, Input, Empty, Spin 
 import { useTranslation } from 'react-i18next';
 import ShareListModal from "../../../document/share/components/ShareListModal"
 import MoveLogList from "../../common/components/MoveLogList"
-import { getUser, getVersionInfo } from 'thoughtware-core-ui';
+import { getUser, getVersionInfo } from 'tiklab-core-ui';
 import "./RepositoryDocList.scss"
 import {
     appendNodeInTree, removeNodeAndSort,

@@ -3,7 +3,7 @@ import "./SettingHome.scss";
 import { Row, Col } from "antd";
 import SettingHomeStore from "../store/SettingHomeStore"
 import { observer } from "mobx-react";
-import { getVersionInfo } from "thoughtware-core-ui";
+import { getVersionInfo } from "tiklab-core-ui";
 import ArchivedFree from "../../../common/components/ArchivedFree";
 
 const SettingHome = (props) => {

@@ -14,7 +14,7 @@ import "./Layout.scss";
 
 import { Provider } from 'mobx-react';
 import HomeStore from "../store/HomeStore";
-import { AppLink, AvatarLink, HelpLink } from 'thoughtware-licence-ui';
+import { AppLink, AvatarLink, HelpLink } from 'tiklab-licence-ui';
 import FirstMenu from './FirstMenu';
 const Layout = (props) => {
     const store = {

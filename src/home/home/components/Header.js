@@ -8,11 +8,11 @@
  */
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router';
-import { getUser } from 'thoughtware-core-ui';
+import { getUser } from 'tiklab-core-ui';
 import { observer, inject, Provider } from "mobx-react";
 import Search from "../../search/components/Search";
 import MessageList from "./MessageList";
-import { productImg, productWhiteImg } from "thoughtware-core-ui";
+import { productImg, productWhiteImg } from "tiklab-core-ui";
 import "./Header.scss";
 import ProjectFeature from '../../../setting/version/ProjectFeature';
 import HomeStore from '../store/HomeStore';

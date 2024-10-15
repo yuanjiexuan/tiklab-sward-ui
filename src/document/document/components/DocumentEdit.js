@@ -11,13 +11,13 @@ import { Row, Col, Input, message } from 'antd';
 import { observer, inject } from "mobx-react";
 import { withRouter } from "react-router-dom";
 import "./documentEdit.scss";
-import { EditorBigContent, EditorBig } from "thoughtware-slate-ui";
-import "thoughtware-slate-ui/es/thoughtware-slate.css";
+import { EditorBigContent, EditorBig } from "tiklab-slate-ui";
+import "tiklab-slate-ui/es/tiklab-slate.css";
 import Button from "../../../common/button/button";
 import DocumentStore from "../store/DocumentStore";
 import RepositoryDetailStore from "../../../repository/common/store/RepositoryDetailStore";
 
-import { getUser } from "thoughtware-core-ui";
+import { getUser } from "tiklab-core-ui";
 import { useDebounce } from "../../../common/utils/debounce";
 import { updateNodeName } from "../../../common/utils/treeDataAction";
 import SelectTemplateList from "./SelectTemplateList";
