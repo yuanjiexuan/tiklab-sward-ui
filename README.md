@@ -63,7 +63,7 @@ sward社区主要通过问题、讨论和拉取请求在 GitHub 上进行交流�
 
 ## sward 生态
 * [sward 网站](https://tiklab.net)- Tiklab sward 官方网站
-* [sward 示例](https://demo.tiklab.net/sward)-Tiklab sward 官方网站
+* [sward 示例](https://demo.tiklab.net/sward)-Tiklab sward 试用
 * [sward 文档](https://doc.tiklab.net/document/8d0d0cc33ccb)- 使用文档
 
  ### 语言
