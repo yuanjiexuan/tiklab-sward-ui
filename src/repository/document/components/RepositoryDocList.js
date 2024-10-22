@@ -239,40 +239,50 @@ const RepositoryDocList = (props) => {
     const deleteDocumentOrCategory = (item, type, id) => {
         if (type === "category") {
             deleteNode(item.id).then(res => {
-                const node = removeNodeInTree(repositoryCatalogueList, null, id)
-                console.log(node)
-                if (node) {
-                    if (node.type === "category") {
-                        props.history.push(`/repository/${repositoryId}/doc/folder/${node.id}`)
+                if(res.code === 0){
+                    const node = removeNodeInTree(repositoryCatalogueList, null, id)
+                    console.log(node)
+                    if (node) {
+                        if (node.type === "category") {
+                            props.history.push(`/repository/${repositoryId}/doc/folder/${node.id}`)
+                        }
+                        if (node.documentType === "document") {
+                            props.history.push(`/repository/${repositoryId}/doc/rich/${node.id}`)
+                        }
+                        if (node.documentType === "markdown") {
+                            props.history.push(`/repository/${repositoryId}/doc/markdown/${node.id}`)
+                        }
+                    } else {
+                        props.history.push(`/repository/${repositoryId}/overview`)
                     }
-                    if (node.documentType === "document") {
-                        props.history.push(`/repository/${repositoryId}/doc/rich/${node.id}`)
-                    }
-                    if (node.documentType === "markdown") {
-                        props.history.push(`/repository/${repositoryId}/doc/markdown/${node.id}`)
-                    }
-                } else {
-                    props.history.push(`/repository/${repositoryId}/overview`)
+                }else {
+                    message.error("删除失败")
                 }
+               
             })
         }
         if (type === "document") {
             deleteNode(item.id).then(res => {
-                const node = removeNodeInTree(repositoryCatalogueList, null, id)
-                console.log(node)
-                if (node) {
-                    if (node.type === "category") {
-                        props.history.push(`/repository/${repositoryId}/doc/folder/${node.id}`)
+                if(res.code === 0){
+                    const node = removeNodeInTree(repositoryCatalogueList, null, id)
+                    console.log(node)
+                    if (node) {
+                        if (node.type === "category") {
+                            props.history.push(`/repository/${repositoryId}/doc/folder/${node.id}`)
+                        }
+                        if (node.documentType === "document") {
+                            props.history.push(`/repository/${repositoryId}/doc/rich/${node.id}`)
+                        }
+                        if (node.documentType === "markdown") {
+                            props.history.push(`/repository/${repositoryId}/doc/markdown/${node.id}`)
+                        }
+                    } else {
+                        props.history.push(`/repository/${repositoryId}/overview`)
                     }
-                    if (node.documentType === "document") {
-                        props.history.push(`/repository/${repositoryId}/doc/rich/${node.id}`)
-                    }
-                    if (node.documentType === "markdown") {
-                        props.history.push(`/repository/${repositoryId}/doc/markdown/${node.id}`)
-                    }
-                } else {
-                    props.history.push(`/repository/${repositoryId}/overview`)
+                }else {
+                    message.error("删除失败")
                 }
+               
             })
         }
     }

@@ -66,7 +66,6 @@ const RepositoryList = (props) => {
         findRepositoryNum({ masterId: userId}).then(res=> {
             if(res.code === 0){
                 setNum(res.data)
-            
             }
         })
         return
@@ -187,6 +186,11 @@ const RepositoryList = (props) => {
             default:
                 break;
         }
+        findRepositoryNum({ masterId: userId, name: value}).then(res=> {
+            if(res.code === 0){
+                setNum(res.data)
+            }
+        })
     }, [500]);
 
     const selectTabs = (key) => {
@@ -214,6 +218,8 @@ const RepositoryList = (props) => {
             if (res.code === 0) {
                 focusRepositoryList.push(id)
                 setFocusRepositoryList([...focusRepositoryList])
+                num.focus = num.focus + 1;
+                setNum({...num})
             }
         })
     }
@@ -230,6 +236,8 @@ const RepositoryList = (props) => {
                     focusRepositoryList.splice(index, 1);
                 }
                 setFocusRepositoryList([...focusRepositoryList])
+                num.focus = num.focus - 1;
+                setNum({...num})
             }
         })
     }

@@ -15,7 +15,7 @@ const LoginRpw = AsyncComponent(() => import('./login/LoginRpwContent.js'))
 const Logout = AsyncComponent(() => import('./login/Logout.js'))
 const Home = AsyncComponent(() => import('./home/home/components/Home.js'))
 const ProjectNotFound = AsyncComponent(() => import("./setting/common/components/ProjectNotFond.js"))
-
+const SysExceptionContent = AsyncComponent(() => import("./login/SysExceptionContent.js"))
 // 收藏
 const Collect = AsyncComponent(() => import("./home/collect/components/CollectAside.js"))
 const CollectLayout = AsyncComponent(() => import("./home/collect/components/CollectLayout.js"))
@@ -135,6 +135,11 @@ const Routes = [
         exact: true,
         path: '/noaccess',
         component: NoAccessPage,
+    },
+    {
+        path:"/500",
+        exact:true,
+        component:SysExceptionContent,
     },
     {
         path: "/share/:shareId",

@@ -7,7 +7,7 @@
  * @LastEditTime: 2021-09-13 13:13:00
  */
 import React, { useEffect, useState, useRef } from "react";
-import { Row, Col, Input, message } from 'antd';
+import { Row, Col, Input, message, Empty } from 'antd';
 import { observer, inject } from "mobx-react";
 import { withRouter } from "react-router-dom";
 import "./documentEdit.scss";
@@ -92,7 +92,7 @@ const DocumentEdit = (props) => {
         updateDocument(data).then(res => {
             if (res.code === 0) {
                 message.success("保存成功")
-            }else {
+            } else {
                 message.error("保存失败")
             }
         })
@@ -124,7 +124,7 @@ const DocumentEdit = (props) => {
                 document.getElementById("examine-title").innerHTML = value.target.value;
                 document.getElementById("file-" + documentId).innerHTML = value.target.value;
                 updateNodeName(repositoryCatalogueList, documentId, value.target.value)
-            }else {
+            } else {
                 message.error("保存失败")
             }
         })
@@ -136,7 +136,7 @@ const DocumentEdit = (props) => {
         if (valueObject.length > 1) {
             isEmpty = false;
         }
-        if(!(valueObject instanceof Array)){
+        if (!(valueObject instanceof Array)) {
             isEmpty = false;
         }
         if (valueObject.length === 1) {
@@ -167,112 +167,121 @@ const DocumentEdit = (props) => {
         updateDocument(data).then(res => {
             if (res.code === 0) {
                 setValue(item.details)
-            }else {
+            } else {
                 message.error("保存失败")
             }
         })
     }
 
     const goExamine = () => {
-        if(path === "doc"){
+        if (path === "doc") {
             props.history.push(`/repository/${repositoryId}/doc/rich/${documentId}`)
         }
-        if(path === "collect"){
+        if (path === "collect") {
             props.history.push(`/repository/${repositoryId}/collect/rich/${documentId}`)
         }
     }
-    return (
-        <div className="documnet-edit">
-            <div className="edit-top">
-                <div className="edit-title" >
-                    <div className="edit-title-top" id="examine-title">
-                        {docInfo.name}
+    return (<>
+        {
+            docInfo?.recycle === "0" ? <div className="documnet-edit">
+                <div className="edit-top">
+                    <div className="edit-title" >
+                        <div className="edit-title-top" id="examine-title">
+                            {docInfo.name}
+                        </div>
+                        <div className="edit-title-date">
+                            更新日期：{docInfo.updateTime ? docInfo.updateTime : docInfo.createTime}
+                        </div>
                     </div>
-                    <div className="edit-title-date">
-                      更新日期：{docInfo.updateTime ? docInfo.updateTime : docInfo.createTime}
+                    <div className="edit-right">
+                        <Button type="primary" className="edit-right-save" onClick={() => save()}>保存</Button>
+                        <Button className="edit-right-eqit" onClick={() => goExamine()}>退出</Button>
                     </div>
                 </div>
-                <div className="edit-right">
-                    <Button type="primary" className="edit-right-save" onClick={() => save()}>保存</Button>
-                    <Button  className="edit-right-eqit" onClick={() => goExamine()}>退出</Button>
-                </div>
-            </div>
-            <div style={{ height: "calc(100% - 60px)" }}>
-                {
-                    value && <EditorBig
-                        value={value}
-                        onChange={value => updataDesc(value)}
-                        relationWorkStore={relationWorkStore}
-                        base_url={upload_url}
-                        ticket={ticket}
-                        tenant={tenant}
-                    >
-                        <>
-                            <Row className="document-examine-content">
-                                <Col xl={{ span: 18, offset: 3 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }}>
-                                    <div className="document-title">
-                                        <Input
-                                            className="document-title-input"
-                                            bordered={false}
-                                            onChange={(value) => setDocumentTitle(value.target.value)}
-                                            value={documentTitle}
-                                            onPressEnter={(value) => changeTitle(value)}
-                                            onBlur={(value) => changeTitle(value)}
-                                        />
-                                    </div>
-                                    <div ref={editRef}>
-                                        <EditorBigContent
-                                            value={value}
-                                            relationWorkStore={relationWorkStore}
+                <div style={{ height: "calc(100% - 60px)" }}>
+                    {
+                        value && <EditorBig
+                            value={value}
+                            onChange={value => updataDesc(value)}
+                            relationWorkStore={relationWorkStore}
+                            base_url={upload_url}
+                            ticket={ticket}
+                            tenant={tenant}
+                        >
+                            <>
+                                <Row className="document-examine-content">
+                                    <Col xl={{ span: 18, offset: 3 }} lg={{ span: 18, offset: 3 }} md={{ span: 20, offset: 2 }}>
+                                        <div className="document-title">
+                                            <Input
+                                                className="document-title-input"
+                                                bordered={false}
+                                                onChange={(value) => setDocumentTitle(value.target.value)}
+                                                value={documentTitle}
+                                                onPressEnter={(value) => changeTitle(value)}
+                                                onBlur={(value) => changeTitle(value)}
+                                            />
+                                        </div>
+                                        <div ref={editRef}>
+                                            <EditorBigContent
+                                                value={value}
+                                                relationWorkStore={relationWorkStore}
 
-                                        />
-                                    </div>
-                                    {
-                                        valueIsEmpty &&
-                                        <div className="template-select">
-                                            <div className="template-title">推荐模版</div>
-                                            <div className="template-list">
-                                                {
-                                                    templateList && templateList.map((item, index) => {
-                                                        return <div className="template-box" key={index} onClick={() => selectTemplate(item)}>
-                                                            <img
-                                                                src={imgUrlArray[index]}
-                                                                alt=""
-                                                                className="template-image"
-                                                            />
-                                                            <div className="template-name">{item.name}</div>
-                                                        </div>
-                                                    })
-                                                }
-                                                <div className="template-box" key={0} onClick={() => setTemplateVisible(true)}>
-                                                    <img
-                                                        src={Template}
-                                                        alt=""
-                                                        className="template-image"
-                                                    />
-                                                    <div className="template-name">更多模版</div>
+                                            />
+                                        </div>
+                                        {
+                                            valueIsEmpty &&
+                                            <div className="template-select">
+                                                <div className="template-title">推荐模版</div>
+                                                <div className="template-list">
+                                                    {
+                                                        templateList && templateList.map((item, index) => {
+                                                            return <div className="template-box" key={index} onClick={() => selectTemplate(item)}>
+                                                                <img
+                                                                    src={imgUrlArray[index]}
+                                                                    alt=""
+                                                                    className="template-image"
+                                                                />
+                                                                <div className="template-name">{item.name}</div>
+                                                            </div>
+                                                        })
+                                                    }
+                                                    <div className="template-box" key={0} onClick={() => setTemplateVisible(true)}>
+                                                        <img
+                                                            src={Template}
+                                                            alt=""
+                                                            className="template-image"
+                                                        />
+                                                        <div className="template-name">更多模版</div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    }
+                                        }
 
-                                </Col>
-                            </Row>
-                        </>
-                    </EditorBig>
-                }
+                                    </Col>
+                                </Row>
+                            </>
+                        </EditorBig>
+                    }
+                </div>
+
+                <SelectTemplateList
+                    documentId={documentId}
+                    setTemplateVisible={setTemplateVisible}
+                    templateVisible={templateVisible}
+                    documentStore={DocumentStore}
+                    selectTemplate={selectTemplate}
+                    {...props}
+                />
+
             </div>
+                :
+                <div className="document-empty">
+                   <Empty description="文档已被移动到回收站，请去回收站恢复再查看" />
+                </div>
 
-            <SelectTemplateList
-                documentId={documentId}
-                setTemplateVisible={setTemplateVisible}
-                templateVisible={templateVisible}
-                documentStore={DocumentStore}
-                selectTemplate={selectTemplate}
-                {...props}
-            />
+        }
+    </>
 
-        </div>
     )
 }
 export default withRouter(inject("relationWorkStore")(observer(DocumentEdit)));

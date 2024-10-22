@@ -15,12 +15,13 @@ import MarkdownStore from "../store/MarkdownStore";
 import "tiklab-markdown-ui/es/tiklab-markdown.css";
 import RepositoryDetailStore from "../../../repository/common/store/RepositoryDetailStore";
 import { Node } from "slate";
-import { message } from "antd";
+import { Empty, message } from "antd";
 import { useDebounce } from "../../../common/utils/debounce";
 const MarkdownEdit = (props) => {
     const { findDocument, updateDocument } = MarkdownStore;
     const { documentTitle, setDocumentTitle } = RepositoryDetailStore;
-    const [documentDate, setDocumentDate] = useState()
+    const [documentDate, setDocumentDate] = useState();
+    const [docInfo, setDocInfo] = useState();
     const documentId = props.match.params.id;
     const repositoryId = props.match.params.repositoryId;
     const [value, setValue] = useState();
@@ -31,7 +32,6 @@ const MarkdownEdit = (props) => {
         findDocument(documentId).then((data) => {
             if (data.code === 0) {
                 if (data.data.details) {
-
                     const value = data.data.details;
                     setValue(JSON.parse(value))
                 } else {
@@ -48,13 +48,13 @@ const MarkdownEdit = (props) => {
                     ])
                 }
                 const node = data.data.node;
+                setDocInfo(node)
                 setDocumentTitle(node.name)
                 if (node.updateTime) {
                     setDocumentDate(node.updateTime)
                 } else {
                     setDocumentDate(node.createTime)
                 }
-
             }
         })
         return;
@@ -81,9 +81,9 @@ const MarkdownEdit = (props) => {
         }
         updateDocument(data).then(res => {
             if (type === "click") {
-                if(res.code === 0 ){
+                if (res.code === 0) {
                     message.success("保存成功")
-                }else {
+                } else {
                     message.error("保存失败")
                 }
             }
@@ -110,7 +110,7 @@ const MarkdownEdit = (props) => {
                 console.log(res.code)
                 document.getElementById("examine-title").innerHTML = value.target.innerText;
                 document.getElementById("file-" + documentId).innerHTML = value.target.innerText
-            }else {
+            } else {
                 message.error("保存失败")
             }
         })
@@ -139,8 +139,9 @@ const MarkdownEdit = (props) => {
             props.history.push(`/repository/${repositoryId}/collect/markdown/${documentId}`)
         }
     }
-    return (
-        <div className="document-markdown-edit">
+    return <>
+    {
+        docInfo?.recycle === "0" ? <div className="document-markdown-edit">
             <div className="edit-top">
                 <div className={`edit-title`}>
 
@@ -169,11 +170,14 @@ const MarkdownEdit = (props) => {
                     value && <Markdown value={value} setValue={setValue} onChange={(value) => changeEdit(value)} />
                 }
             </div>
-
-
-
-
         </div>
-    )
+          :
+          <div className="document-markdown-empty">
+               <Empty description="文档已被移动到回收站，请去回收站恢复再查看" />
+          </div>
+    }
+      
+    </>
+
 }
 export default withRouter(MarkdownEdit);
