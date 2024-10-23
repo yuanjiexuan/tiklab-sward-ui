@@ -12,9 +12,8 @@ import RepositorydeAside from "./RepositoryDetailAside";
 import "../components/RepositoryLayout.scss";
 import { renderRoutes } from "react-router-config";
 import {observer, inject, Provider} from "mobx-react";
-import {getUser} from "tiklab-core-ui";
-import RepositoryStore from "../../repository/store/RepositoryStore";
 import RepositoryDetailStore from "../store/RepositoryDetailStore";
+import { UserVerify } from "tiklab-user-extension-ui";
 const RepositoryDetail = (props)=>{
     const {NodeRecycleModal, NodeArchivedModal} = props;
     const [isShowText, SetIsShowText ] = useState(false)
@@ -40,4 +39,4 @@ const RepositoryDetail = (props)=>{
     )
     
 }
-export default inject("systemRoleStore")(observer(RepositoryDetail));
+export default inject("systemRoleStore")(UserVerify(observer(RepositoryDetail),"/noAuth", "sward"));
