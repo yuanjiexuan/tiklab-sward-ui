@@ -145,6 +145,13 @@ export class RepositoryDetailStore {
         return data;
     }
 
+    // 临时搜索方法
+    @action
+    findNodeList = async(value) => {
+        const data = await Service("/node/findNodeList", value);
+        return data;
+    }
+
     @action
     findRecentRepositoryList = async (value) => {
         const data = await Service("/repository/findRecentRepositoryList", value);

@@ -12,7 +12,7 @@ import { nodata } from "../../../assets/image";
 const Search = (props) => {
     const { isShowText, theme } = props;
 
-    const { getSearch, searchDocumentList, searchWikiList, findDocumentRecentList,
+    const { getSearch, findRepositoryListByUser, findNodeList, searchDocumentList, searchWikiList, findDocumentRecentList,
         findRecentRepositoryList } = SearchStore;
     const [searchModal, setSearchModal] = useState(false);
     const [isSeach, setIsSeach] = useState(false);
@@ -63,12 +63,24 @@ const Search = (props) => {
         if (keyWord) {
             setDocloading(true)
             setRepositoryloading(true)
-            getSearch(value.target.value).then(res => {
+            findRepositoryListByUser({name: value.target.value}).then(res => {
                 if (res.code === 0) {
-                    setDocloading(false)
+                    // setDocloading(false)
                     setRepositoryloading(false)
                 }
             })
+            findNodeList({name: value.target.value, type: "document"}).then(res => {
+                if (res.code === 0) {
+                    // setDocloading(false)
+                    setDocloading(false)
+                }
+            })
+            // getSearch(value.target.value).then(res => {
+            //     if (res.code === 0) {
+            //         setDocloading(false)
+            //         setRepositoryloading(false)
+            //     }
+            // })
             setIsSeach(true)
         } else {
             findRecent()
@@ -179,15 +191,15 @@ const Search = (props) => {
                                             searchDocumentList.length > 0 && <div className="sort-box">
                                                 <div className="sort-title">文档</div>
                                                 {
-                                                    searchDocumentList.map((documentItem) => {
-                                                        return <div className="item-box" key={documentItem.id}>
-                                                            <div className="item-one" onClick={() => toWorkItem(documentItem.node)}>
+                                                    searchDocumentList.map((node) => {
+                                                        return <div className="item-box" key={node.id}>
+                                                            <div className="item-one" onClick={() => toWorkItem(node)}>
                                                                 <svg className="img-icon" aria-hidden="true">
                                                                     <use xlinkHref="#icon-file"></use>
                                                                 </svg>
-                                                                <span>{documentItem.node.name}</span>
+                                                                <span>{node.name}</span>
                                                                 <div className="item-desc">
-                                                                    {documentItem.node.wikiRepository.name}
+                                                                    {node.wikiRepository.name}
                                                                 </div>
                                                             </div>
 

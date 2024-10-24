@@ -8,7 +8,7 @@ import { useDebounce } from '../../../common/utils/debounce';
 import { nodata } from '../../../assets/image';
 const SearchModal = (props) => {
     const { showSearchModal, setShowSearchModal, repositoryId, repositoryDetailStore } = props;
-    const {findRecentList, searchRepositoryDocument} = repositoryDetailStore;
+    const {findRecentList, searchRepositoryDocument, findNodeList} = repositoryDetailStore;
     const [recentDocumentList, setRecentDocumentList] = useState([]);
     const [searchDocumentList, setSearchDocumentList] = useState([])
     const [isSearch, setIsSeach] = useState(false)
@@ -52,12 +52,18 @@ const SearchModal = (props) => {
                 repositoryId: repositoryId,
                 name: keyWord
             }
-            searchRepositoryDocument(param).then(res => {
+            findNodeList(param).then(res => {
                 console.log(res)
                 if(res.code === 0){
                     setSearchDocumentList(res.data)
                 }
             })
+            // searchRepositoryDocument(param).then(res => {
+            //     console.log(res)
+            //     if(res.code === 0){
+            //         setSearchDocumentList(res.data)
+            //     }
+            // })
         }else {
             setIsSeach(false)
         }
@@ -133,16 +139,17 @@ const SearchModal = (props) => {
                 <div className="search-result-title">搜索结果</div>
                 {
                     searchDocumentList.length > 0 ? <>
+                    
                         {
-                            searchDocumentList.map((documentItem) => {
-                                return <div className="item-box" key={documentItem.id}>
-                                    <div className="item-one" onClick={() => toWorkItem(documentItem.node)}>
+                            searchDocumentList.map((node) => {
+                                return <div className="item-box" key={node.id}>
+                                    <div className="item-one" onClick={() => toWorkItem(node)}>
                                         <svg className="img-icon" aria-hidden="true">
                                             <use xlinkHref="#icon-file"></use>
                                         </svg>
-                                        <span>{documentItem.node.name}</span>
+                                        <span>{node.name}</span>
                                         <div className="item-desc">
-                                            {documentItem.node.wikiRepository?.name}
+                                            {node.wikiRepository?.name}
                                         </div>
                                     </div>
 

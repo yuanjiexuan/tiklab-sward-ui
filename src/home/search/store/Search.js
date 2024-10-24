@@ -23,6 +23,7 @@ class SearchStore{
     setKeyWord = (value) => {
         this.keyword = value
     }
+
     @action
     getSearch = async(value) => {
         const params = new FormData();
@@ -38,6 +39,21 @@ class SearchStore{
             this.searchWikiList = data.data.wiki;
             this.searchDocumentList = data.data.document;
         }
+        return data;
+    }
+
+    // 临时替代
+    @action
+    findNodeList = async(value) => {
+        const data = await Service("/node/findNodeList", value);
+        this.searchDocumentList = data.data;
+        return data;
+    }
+
+    @action
+    findRepositoryListByUser = async(value) => {
+        const data = await Service("/repository/findRepositoryListByUser", value);
+        this.searchWikiList = data.data;
         return data;
     }
 
