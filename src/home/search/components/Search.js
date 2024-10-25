@@ -24,6 +24,8 @@ const Search = (props) => {
         const recentParams = {
             masterId: userId,
             model: "document",
+            recycle: "0",
+            status: "nomal",
             orderParams: [{
                 name: "recentTime",
                 orderType: "asc"

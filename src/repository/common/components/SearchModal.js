@@ -30,6 +30,8 @@ const SearchModal = (props) => {
             masterId: userId,
             model: "document",
             repositoryId: repositoryId,
+            recycle: "0",
+            status: "nomal",
             orderParams: [{
                 name: "recentTime",
                 orderType: "desc"
