@@ -140,7 +140,6 @@ const ShareModal = (props) => {
 
     // 复制
     const copy = () => {
-        
         const link = document.getElementById("link")
         if (document.body.createTextRange) {
             let range = document.body.createTextRange();

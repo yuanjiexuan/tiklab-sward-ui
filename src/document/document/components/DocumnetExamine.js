@@ -245,6 +245,7 @@ const DocumentExamine = (props) => {
 
                             <ShareModal
                                 documentIds={[documentId]}
+                                nodeIds = {[documentId]}
                                 shareVisible={shareVisible}
                                 setShareVisible={setShareVisible}
                                 docInfo={docInfo}
