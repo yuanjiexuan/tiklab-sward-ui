@@ -199,7 +199,7 @@ sward 做到了也没简洁，上手容易，安装配置简单。使用备份�
 * 启动
 
     ```
-    1. git clone <仓库地址>
+    1. git clone https://github.com/tiklab-project/tiklab-sward-ui.git
     2. cd tiklab-sward-ui
     3. npm install
     4. npm run start
