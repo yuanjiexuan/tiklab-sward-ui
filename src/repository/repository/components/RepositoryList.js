@@ -82,6 +82,8 @@ const RepositoryList = (props) => {
             }
         })
     }
+
+    
     const columns = [
         {
             title: "知识库名称",
